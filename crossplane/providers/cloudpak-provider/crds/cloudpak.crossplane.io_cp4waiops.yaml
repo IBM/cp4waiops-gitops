@@ -4,7 +4,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.4.1
   creationTimestamp: null
-  name: dependencies.cloudpak.crossplane.io
+  name: cp4waiops.cloudpak.crossplane.io
 spec:
   group: cloudpak.crossplane.io
   names:
@@ -12,10 +12,10 @@ spec:
     - crossplane
     - managed
     - cloudpak
-    kind: Dependency
-    listKind: DependencyList
-    plural: dependencies
-    singular: dependency
+    kind: Cp4waiops
+    listKind: Cp4waiopsList
+    plural: cp4waiops
+    singular: cp4waiops
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -31,9 +31,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Dependency describes all dependencies for installing aiops .
-          Please replace `PROVIDER-NAME` with your actual provider name, like `aws`,
-          `azure`, `gcp`, `alibaba`
+        description: Cp4waiops describes all steps for installing aiops . Please replace
+          `PROVIDER-NAME` with your actual provider name, like `aws`, `azure`, `gcp`,
+          `alibaba`
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -62,13 +62,82 @@ spec:
               forProvider:
                 description: MyTypeParameters are the configurable fields of a MyType.
                 properties:
-                  aiopschannel:
-                    type: string
-                  image:
-                    type: string
+                  catalogsource:
+                    properties:
+                      channel:
+                        type: string
+                      image:
+                        type: string
+                    required:
+                    - channel
+                    - image
+                    type: object
+                  installParams:
+                    properties:
+                      imagePullSecret:
+                        type: string
+                      license:
+                        properties:
+                          accept:
+                            type: boolean
+                        required:
+                        - accept
+                        type: object
+                      namespace:
+                        type: string
+                      pakModules:
+                        items:
+                          properties:
+                            config:
+                              description: Config is the set of configurations for
+                                the operators in the module
+                              items:
+                                description: Config is the configuration of the specific
+                                  operator in the module
+                                properties:
+                                  enabled:
+                                    description: Enabled is the installation mode
+                                      of the operator
+                                    type: boolean
+                                  name:
+                                    description: Name is the name of the Operator
+                                      Config
+                                    type: string
+                                  spec:
+                                    additionalProperties:
+                                      type: object
+                                    description: Spec is the spec overrides to be
+                                      passed into the operator
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              type: array
+                            enabled:
+                              type: boolean
+                            name:
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        type: array
+                      size:
+                        type: string
+                      storageClass:
+                        type: string
+                      storageClassLargeBlock:
+                        type: string
+                    required:
+                    - imagePullSecret
+                    - license
+                    - namespace
+                    - size
+                    - storageClass
+                    - storageClassLargeBlock
+                    type: object
                 required:
-                - aiopschannel
-                - image
+                - catalogsource
+                - installParams
                 type: object
               providerConfigRef:
                 description: ProviderConfigReference specifies how the provider that

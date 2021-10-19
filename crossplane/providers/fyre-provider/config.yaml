@@ -1,0 +1,11 @@
+apiVersion: fyre.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: fyre-providerconfig
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: fyre-account-secret
+      key: credentials

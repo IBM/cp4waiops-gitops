@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crossplane-provider-cloudpak
+  namespace: upbound-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: provider-cloudpak
+  template:
+    metadata:
+      name: provider-cloudpak
+      namespace: upbound-system 
+      labels: 
+        app: provider-cloudpak
+    spec:
+      containers:
+      - image: quay.io/hjwilson19560/provider-cloudpak:latest
+        name: provider-cloudpak
+      serviceAccount: crossplane
+      serviceAccountName: crossplane
+

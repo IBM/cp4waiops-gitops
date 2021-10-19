@@ -4,7 +4,7 @@ metadata:
   name: instana
 spec:
   forProvider:
-    instanaVersion: 205-2
+    instanaVersion: 209-1
     nfsServerHost: in-kind-instana-db.fyre.ibm.com
     settingsConfigmap:
       name: instana-settings

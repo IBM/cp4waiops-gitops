@@ -1,11 +1,11 @@
-apiVersion: fyre.crossplane.io/v1alpha1
+apiVersion: instana.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
-  name: fyre-providerconfig
+  name: instana-provider-config 
 spec:
   credentials:
     source: Secret
     secretRef:
       namespace: crossplane-system
-      name: fyre-account-secret
+      name: k8s-kubeconfig 
       key: credentials

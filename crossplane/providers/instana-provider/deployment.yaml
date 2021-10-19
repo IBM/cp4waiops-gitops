@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: crossplane-provider-instana
-  namespace: crossplane-system
+  namespace: upbound-system
 spec:
   replicas: 1
   selector:

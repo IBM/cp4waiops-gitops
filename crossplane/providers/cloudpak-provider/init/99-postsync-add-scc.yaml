@@ -4,7 +4,7 @@ metadata:
   name: add-scc-policy
   annotations:
     argocd.argoproj.io/hook: PostSync
-  namespace: crossplane-system
+  namespace: upbound-system
 spec:
   template:
     spec:

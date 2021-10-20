@@ -30,3 +30,4 @@ spec:
 
               exit "${result}"
       restartPolicy: Never
+      serviceAccountName: crossplane

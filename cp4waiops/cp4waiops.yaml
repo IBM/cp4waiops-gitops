@@ -1,0 +1,32 @@
+apiVersion: cloudpak.crossplane.io/v1alpha1
+kind: Cp4waiops
+metadata:
+  name: cp4waiops
+spec:
+  forProvider:
+    catalogsource:
+      image: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
+      channel: v3.1
+    installParams:
+      imagePullSecret: ibm-entitlement-key
+      namespace: cp4waiops
+      license: 
+        accept: true
+      pakModules:
+        - name: aiManager
+          enabled: true
+        - name: aiopsFoundation
+          enabled: true
+        - name: applicationManager
+          enabled: true
+          config: 
+          - name: noi-operator
+            spec: 
+              noi:
+                persistence:
+                  storageClassDB2: rook-cephfs
+      size: small
+      storageClass: rook-cephfs
+      storageClassLargeBlock: rook-cephfs
+  providerConfigRef:
+    name: openshift-cluster-provider-config 

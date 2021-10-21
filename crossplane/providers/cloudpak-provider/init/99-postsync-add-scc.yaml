@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: add-scc-policy
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+  namespace: upbound-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: scc-policy
+          image: quay.io/openshift/origin-cli:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eo pipefail
+              set -x
+              result=0
+              oc adm policy add-scc-to-user anyuid -z default -n crossplane-system
+              result=$?
+
+              exit "${result}"
+      restartPolicy: Never
+      serviceAccountName: crossplane

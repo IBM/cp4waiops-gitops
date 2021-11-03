@@ -1,0 +1,11 @@
+---
+spec:
+  kubeConfigSecretNS: crossplane-system
+  kubeConfigSecretName: openshift-cluster-kubeconfig
+  providerConfigRef: openshift-cluster-provider-config 
+  cp4waiops_namespace: cp4waiops
+  imageCatalog: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
+  channel: v3.1
+  imagePullSecret: image-pull-secret
+  storageClass: rook-cephfs
+  storageClassLargeBlock: rook-cephfs

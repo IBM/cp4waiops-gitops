@@ -5,12 +5,21 @@
 - [Deploy cloudpak - incluster](#deploy-cloudpak---incluster)
   - [Prerequisite](#prerequisite)
     - [Platform Requirements](#platform-requirements)
-    - [Config Gitops and Crossplane Provider on OCP](#config-gitops-and-crossplane-provider-on-ocp)
+  - [Install Infra (Crossplane and Crossplane Instana Provider)](#install-infra-crossplane-and-crossplane-instana-provider)
+    - [Login to openshift and grant argocd enough permissions**](#login-to-openshift-and-grant-argo-cd-enough-permissions)
+    - [Login to Argo CD](#login-to-argo-cd)
+    - [Install CP4WAIOPS Provider](#install-cp4waiops-provider)
+    - [Verify Crossplane Provider](#verify-crossplane-provider)
+      - [CLI Verify](#cli-verify)
+      - [UI Verify](#ui-verify)
     - [Storage consideration](#storage-consideration)
   - [Deploy Cloud Paks](#deploy-cloud-paks)
     - [Create a secret storing your entitlement key:](#create-a-secret-storing-your-entitlement-key)
     - [Create a secret storing target ocp cluster kubeconfig :](#create-a-secret-storing-target-ocp-cluster-kubeconfig-)
     - [Create a ArgoCD application for installing cp4waiops in-cluster](#create-a-argocd-application-for-installing-cp4waiops-in-cluster)
+  - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
+      - [CLI Verify](#cli-verify-1)
+      - [UI Verify](#ui-verify-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -24,9 +33,9 @@
 - Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub
 - Install crossplane operator(Upbound Universal Crossplane (UXP)) in ocp operator-hub
 
-### Config Gitops and Crossplane Provider on OCP
+## Install Infra (Crossplane and Crossplane CP4WAIOps Provider)
 
-**Login to openshift and grant argocd enough permissions**
+### Login to openshift and grant argocd enough permissions**
 
 ```yaml
 kind: ClusterRoleBinding
@@ -35,7 +44,7 @@ metadata:
   name: argocd-admin
 subjects:
   - kind: ServiceAccount
-    name: argocd-cluster-argocd-application-controller
+    name: openshift-gitops-argocd-application-controller
     namespace: openshift-gitops
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -43,30 +52,20 @@ roleRef:
   name: cluster-admin
 ```
 
-**Login to ArgoCD**
-
+### Login to ArgoCD
 
 Login ArgoCD entrance
-![Login entrance](https://github.com/cloud-pak-gitops/cp4waiops-gitops/blob/master/images/ArgoCD-Interface.png)   
+![Login entrance](./docs/images/ArgoCD-Interface.png)   
 
 Login Username/Password
 ```
 Username: admin  
-Password: Please copy the Data value of secret "argocd-cluster-cluster" in namespace "openshift-gitops"
+Password: Please copy the Data value of secret "openshift-gitops-cluster" in namespace "openshift-gitops"
 ```
-![Secret data](https://github.com/cloud-pak-gitops/cp4waiops-gitops/blob/master/images/login-argocd-user-pass.png) 
+![Secret data](./docs/images/login-argocd-user-pass.png) 
 
-**Install CP4WAIOPS Provider**
-Connect git repo   
-Choose "Repositories" in "settings", then choose connect way, such as "Connect repo using HTTPS".  
-Fill in like below, then choose "connect".     
-```
-Type: git
-Repository URL: REPO URL value
-Usename: Git username
-Password: Git token
-```
-![Connect repo](https://github.com/cloud-pak-gitops/cp4waiops-gitops/blob/master/images/argocd-connect-repo.png)   
+### Install CP4WAIOPS Provider
+
 Create application.  
 Choose "New App" in "Applications".  
 Fill in like below, then choose "create". 
@@ -80,14 +79,28 @@ SYNC POLICY: Automatic
 SOURCE
 REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
 Target version: HEAD
-path: crossplane
+path: config/argocd-apps/infra
 
 DESTINATION
 Cluster URL: https://kubernetes.default.svc
 Namespace: upbound-system
-DIRECTORY
-DIRECTORY RECURSE: tick it
+
+HELM
+metadata.argocd_app_namespace: openshift-gitops
+metadata.cp4waiops_provider_namespace: upbound-system
+metadata.crossplane_namespace: upbound-system
+repoURL: https://github.com/cloud-pak-gitops/instana-gitops
 ```
+
+### Verify Crossplane Provider
+
+#### CLI Verify
+
+TODO
+
+#### UI Verify
+
+TODO
 
 ### Storage consideration 
 
@@ -111,7 +124,6 @@ DIRECTORY
 DIRECTORY RECURSE: tick it
 ```
 
-
 ## Deploy Cloud Paks
 
 ### Create a secret storing your entitlement key:
@@ -134,7 +146,6 @@ kubectl create secret generic openshift-cluster-kubeconfig --from-file=credentia
 ### Create a ArgoCD application for installing cp4waiops in-cluster
 
 ```
-
 GENERAL
 Application Name: anyname(like "cp4waiops")
 Project: default
@@ -143,11 +154,30 @@ SYNC POLICY: Automatic
 SOURCE
 REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
 Target version: HEAD
-path: cp4waiops-in-cluster
+path: config/cp4waiops
 
 DESTINATION
 Cluster URL: https://kubernetes.default.svc
 Namespace: upbound-system
-DIRECTORY
-DIRECTORY RECURSE: tick it
+
+HELM
+spec.cp4waiops_namespace: cp4waiops
+spec.channel: v3.1
+spec.imageCatalog: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
+spec.imagePullSecret: image-pull-secret
+spec.kubeConfigSecretName: openshift-cluster-kubeconfig
+spec.kubeConfigSecretNS: crossplane-system
+spec.providerConfigRef: openshift-cluster-provider-config 
+spec.storageClass: rook-cephfs
+spec.storageClassLargeBlock: rook-cephfs
 ```
+
+## Verify Cloud Paks Installation
+
+### CLI Verify
+
+TODO
+
+### UI Verify
+
+TODO

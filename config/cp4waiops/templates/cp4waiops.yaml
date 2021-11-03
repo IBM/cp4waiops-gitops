@@ -5,11 +5,11 @@ metadata:
 spec:
   forProvider:
     catalogsource:
-      image: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
-      channel: v3.1
+      image: {{.Values.spec.imageCatalog}}
+      channel: {{.Values.spec.channel}}
     installParams:
-      imagePullSecret: ibm-entitlement-key
-      namespace: cp4waiops
+      imagePullSecret: {{.Values.spec.imagePullSecret}}
+      namespace: {{.Values.spec.cp4waiops_namespace}}
       license: 
         accept: true
       pakModules:
@@ -26,7 +26,7 @@ spec:
                 persistence:
                   storageClassDB2: rook-cephfs
       size: small
-      storageClass: rook-cephfs
-      storageClassLargeBlock: rook-cephfs
+      storageClass: {{.Values.spec.storageClass}}
+      storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   providerConfigRef:
-    name: openshift-cluster-provider-config 
+    name: {{.Values.spec.providerConfigRef}}

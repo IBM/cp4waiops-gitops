@@ -10,7 +10,7 @@ metadata:
     chart: crossplane-1.2.1
     heritage: Helm
     release: crossplane
-  name: crossplane-jian
+  name: upbound-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -19,4 +19,3 @@ subjects:
 - kind: ServiceAccount
   name: crossplane
   namespace: upbound-system
-

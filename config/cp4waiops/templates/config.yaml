@@ -1,12 +1,12 @@
 apiVersion: cloudpak.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
-  name: openshift-cluster-provider-config
+  name: {{.Values.spec.providerConfigRef}}
 spec:
   credentials:
     source: Secret
     secretRef:
-      namespace: crossplane-system
-      name: openshift-cluster-kubeconfig
+      namespace: {{.Values.spec.kubeConfigSecretNS}}
+      name: {{.Values.spec.kubeConfigSecretName}}
       key: credentials
 

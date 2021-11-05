@@ -1,0 +1,6 @@
+---
+repoURL: https://github.com/cloud-pak-gitops/cp4waiops-gitops
+metadata:
+  argocd_app_namespace: openshift-gitops
+  crossplane_namespace: upbound-system
+  cp4waiops_provider_namespace: upbound-system

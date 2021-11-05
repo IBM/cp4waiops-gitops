@@ -5,7 +5,7 @@
 - [Deploy cloudpak - incluster](#deploy-cloudpak---incluster)
   - [Prerequisite](#prerequisite)
     - [Platform Requirements](#platform-requirements)
-  - [Install Infra (Crossplane and Crossplane Instana Provider)](#install-infra-crossplane-and-crossplane-instana-provider)
+  - [Install Infra (Crossplane and Crossplane CP4WAIOps Provider)](#install-infra-crossplane-and-crossplane-cp4waiops-provider)
     - [Login to openshift and grant argocd enough permissions**](#login-to-openshift-and-grant-argo-cd-enough-permissions)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Install CP4WAIOPS Provider](#install-cp4waiops-provider)
@@ -91,18 +91,53 @@ HELM
 metadata.argocd_app_namespace: openshift-gitops
 metadata.cp4waiops_provider_namespace: upbound-system
 metadata.crossplane_namespace: upbound-system
-repoURL: https://github.com/cloud-pak-gitops/instana-gitops
+repoURL: https://github.com/cloud-pak-gitops/cp4waiops-gitops
 ```
 
 ### Verify Crossplane Provider
 
-#### CLI Verify
+After cp4waiops provider was deployed, you can run the command as follows to check:
 
-TODO
+```
+kubectl get po -n upbound-system
+kubectl get application -A
+```
+
+In this tutorial, the output of the above command is as follows:
+
+```console
+# kubectl get po -n upbound-system
+NAME                                            READY   STATUS      RESTARTS   AGE
+add-scc-policy-2wgw7                            0/1     Completed   0          98m
+crossplane-5d88f96479-jdnf2                     1/1     Running     2          4h14m
+crossplane-provider-cloudpak-57cf9bb7c8-5l852   1/1     Running     0          98m
+crossplane-rbac-manager-58c6656768-4cgr5        1/1     Running     2          4h14m
+upbound-bootstrapper-67d458bf85-kkgq9           1/1     Running     0          4h14m
+xgql-7b65998b88-p6shn                           1/1     Running     2          4h14m
+```
+```console
+# kubectl get application -A
+NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS
+openshift-gitops   ceph                      Synced        Healthy
+openshift-gitops   crossplane-provider       Synced        Healthy
+openshift-gitops   crossplane-provider-app   Synced        Healthy
+```
 
 #### UI Verify
 
-TODO
+From Argo CD UI, you will be able to see there are two applications as follows:
+
+- There are two applications, one is `crossplane-provider` and another is `crossplane-provider-app`. The `crossplane-provider` bring up the `crossplane-provider-app` via the [app-of-apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern).
+
+![all apps](images/ocp-crossplane-provider.png)
+
+- This is the deatail of app `crossplane-provider`, and the following picture describes the [app-of-apps pattern](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern).
+
+![app of apps](images/ocp-crossplane-provider-detail.png)
+
+- The following picture is the detail of the `crossplane-provider-app`, you can see all of the resources for this app.
+![cp4waiops provider](images/ocp-crossplane-provider-app-detail.png)
+
 
 ### Storage consideration 
 
@@ -178,8 +213,34 @@ spec.storageClassLargeBlock: rook-cephfs
 
 ### CLI Verify
 
-TODO
+After instana instance was deployed, you can run the command as follows to check:
 
-### UI Verify
+```
+kubectl get application -A
+```
 
-TODO
+In this tutorial, the output of the above command is as follows:
+
+```console
+# kubectl get application -A
+NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS
+openshift-gitops   ceph                      Synced        Healthy
+openshift-gitops   cp4waiops                 Synced        Healthy
+openshift-gitops   crossplane-provider       Synced        Healthy
+openshift-gitops   crossplane-provider-app   Synced        Healthy
+```
+
+Wait a while and check if all pods under namespace `cp4waiops` and are running well without any crash.
+
+```
+kubectl get pod -n cp4waiops
+```
+
+#### UI Verify
+
+From Argo CD UI, you will be able to see there are another application added as follows:
+
+![cp4waiops apps](images/ocp-cp4waiops.png)
+
+- The following picture is the detail of the `cp4waiops`, you can see all of the resources for this app.
+![cp4waiops](images/ocp-cp4waiops-detail.png)

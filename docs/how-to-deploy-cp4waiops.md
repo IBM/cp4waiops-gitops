@@ -55,14 +55,16 @@ roleRef:
 ### Login to ArgoCD
 
 Login ArgoCD entrance
-![Login entrance](./docs/images/ArgoCD-Interface.png)   
+
+![Login entrance](./images/ArgoCD-Interface.png)   
 
 Login Username/Password
 ```
 Username: admin  
 Password: Please copy the Data value of secret "openshift-gitops-cluster" in namespace "openshift-gitops"
 ```
-![Secret data](./docs/images/login-argocd-user-pass.png) 
+
+![Secret data](./images/login-argocd-user-pass.png) 
 
 ### Install CP4WAIOPS Provider
 

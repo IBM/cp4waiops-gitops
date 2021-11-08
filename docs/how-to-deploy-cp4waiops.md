@@ -18,8 +18,9 @@
     - [Create a secret storing target ocp cluster kubeconfig :](#create-a-secret-storing-target-ocp-cluster-kubeconfig-)
     - [Create a ArgoCD application for installing cp4waiops in-cluster](#create-a-argocd-application-for-installing-cp4waiops-in-cluster)
   - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
-      - [CLI Verify](#cli-verify-1)
-      - [UI Verify](#ui-verify-1)
+    - [CLI Verify](#cli-verify-1)
+    - [UI Verify](#ui-verify-1)
+  - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -201,7 +202,7 @@ HELM
 spec.cp4waiops_namespace: cp4waiops
 spec.channel: v3.1
 spec.imageCatalog: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
-spec.imagePullSecret: image-pull-secret
+spec.imagePullSecret: ibm-entitlement-key
 spec.kubeConfigSecretName: openshift-cluster-kubeconfig
 spec.kubeConfigSecretNS: crossplane-system
 spec.providerConfigRef: openshift-cluster-provider-config 
@@ -236,7 +237,7 @@ Wait a while and check if all pods under namespace `cp4waiops` and are running w
 kubectl get pod -n cp4waiops
 ```
 
-#### UI Verify
+### UI Verify
 
 From Argo CD UI, you will be able to see there are another application added as follows:
 
@@ -244,3 +245,13 @@ From Argo CD UI, you will be able to see there are another application added as 
 
 - The following picture is the detail of the `cp4waiops`, you can see all of the resources for this app.
 ![cp4waiops](images/ocp-cp4waiops-detail.png)
+
+## Access CP4WAIOps UI
+
+After you successfully install IBM Cloud Pak for Watson AIOps, check [CP4WAIOPS-KC](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-installing-online-offline#console) to get the URL for accessing the IBM Cloud Pak for Watson AIOps console, username and password.
+
+![w](images/waiops-login.png)
+
+After click `Log In`, you will be navigated to the CP4WAIOps UI as follows.
+
+![w](images/waiops-dashbord.png)

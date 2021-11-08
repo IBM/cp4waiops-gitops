@@ -16,7 +16,7 @@ This repo is about using either use OpenShift GitOps or Kubernetes GitOps model 
 ## Supported CP4WAIOPS Versions
 
 - [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0)
-- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0)
+- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0)
 
 ## Tutorial
 

@@ -2,41 +2,38 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy cloudpak - incluster](#deploy-cloudpak---incluster)
+- [Deploy Cloud Pak for Watson AIOps with OpenShift GitOps](#deploy-cloud-pak-for-watson-aiops-with-openshift-gitops)
   - [Prerequisite](#prerequisite)
-    - [Platform Requirements](#platform-requirements)
-  - [Install Infra (Crossplane and Crossplane CP4WAIOps Provider)](#install-infra-crossplane-and-crossplane-cp4waiops-provider)
-    - [Login to openshift and grant argocd enough permissions**](#login-to-openshift-and-grant-argo-cd-enough-permissions)
+  - [Install Infra (Crossplane CP4WAIOPS Provider)](#install-infra-crossplane-cp4waiops-provider)
+    - [Grant Argo CD Enough Permissions](#grant-argo-cd-enough-permissions)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Install CP4WAIOPS Provider](#install-cp4waiops-provider)
     - [Verify Crossplane Provider](#verify-crossplane-provider)
       - [CLI Verify](#cli-verify)
       - [UI Verify](#ui-verify)
-    - [Storage consideration](#storage-consideration)
+  - [Storage Consideration](#storage-consideration)
   - [Deploy Cloud Paks](#deploy-cloud-paks)
     - [Create a secret storing your entitlement key:](#create-a-secret-storing-your-entitlement-key)
     - [Create a secret storing target ocp cluster kubeconfig :](#create-a-secret-storing-target-ocp-cluster-kubeconfig-)
     - [Create a ArgoCD application for installing cp4waiops in-cluster](#create-a-argocd-application-for-installing-cp4waiops-in-cluster)
-  - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
-    - [CLI Verify](#cli-verify-1)
-    - [UI Verify](#ui-verify-1)
-  - [Access CP4WAIOps UI](#access-cp4waiops-ui)
+    - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
+      - [CLI Verify](#cli-verify-1)
+      - [UI Verify](#ui-verify-1)
+    - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy cloudpak - incluster
+# Deploy Cloud Pak for Watson AIOps with OpenShift GitOps
 
 ## Prerequisite
-
-### Platform Requirements
 
 - OCP 4.6 + 
 - Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub
 - Install crossplane operator(Upbound Universal Crossplane (UXP)) in ocp operator-hub
 
-## Install Infra (Crossplane and Crossplane CP4WAIOps Provider)
+## Install Infra (Crossplane CP4WAIOPS Provider)
 
-### Login to openshift and grant argocd enough permissions**
+### Grant Argo CD Enough Permissions
 
 ```yaml
 kind: ClusterRoleBinding
@@ -53,7 +50,7 @@ roleRef:
   name: cluster-admin
 ```
 
-### Login to ArgoCD
+### Login to Argo CD
 
 Login ArgoCD entrance
 
@@ -96,6 +93,8 @@ repoURL: https://github.com/cloud-pak-gitops/cp4waiops-gitops
 ```
 
 ### Verify Crossplane Provider
+
+#### CLI Verify
 
 After cp4waiops provider was deployed, you can run the command as follows to check:
 
@@ -140,7 +139,7 @@ From Argo CD UI, you will be able to see there are two applications as follows:
 ![cp4waiops provider](images/ocp-crossplane-provider-app-detail.png)
 
 
-### Storage consideration 
+## Storage Consideration
 
 It depends where the OCP comes from , if you're using fyre , then could create gitops application
 
@@ -210,9 +209,9 @@ spec.storageClass: rook-cephfs
 spec.storageClassLargeBlock: rook-cephfs
 ```
 
-## Verify Cloud Paks Installation
+### Verify Cloud Paks Installation
 
-### CLI Verify
+#### CLI Verify
 
 After instana instance was deployed, you can run the command as follows to check:
 
@@ -237,7 +236,7 @@ Wait a while and check if all pods under namespace `cp4waiops` and are running w
 kubectl get pod -n cp4waiops
 ```
 
-### UI Verify
+#### UI Verify
 
 From Argo CD UI, you will be able to see there are another application added as follows:
 
@@ -246,7 +245,7 @@ From Argo CD UI, you will be able to see there are another application added as 
 - The following picture is the detail of the `cp4waiops`, you can see all of the resources for this app.
 ![cp4waiops](images/ocp-cp4waiops-detail.png)
 
-## Access CP4WAIOps UI
+### Access CP4WAIOps UI
 
 After you successfully install IBM Cloud Pak for Watson AIOps, check [CP4WAIOPS-KC](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-installing-online-offline#console) to get the URL for accessing the IBM Cloud Pak for Watson AIOps console, username and password.
 

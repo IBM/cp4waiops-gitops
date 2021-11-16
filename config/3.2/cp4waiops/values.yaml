@@ -1,0 +1,9 @@
+---
+spec:
+  cp4waiops_namespace: cp4waiops
+  imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  channel: v3.2
+  dockerUsername: cp
+  dockerPassword: password
+  storageClass: rook-cephfs
+  storageClassLargeBlock: rook-cephfs

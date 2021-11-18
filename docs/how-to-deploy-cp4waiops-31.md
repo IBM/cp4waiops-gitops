@@ -79,7 +79,7 @@ SYNC POLICY: Automatic
 SOURCE
 REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
 Target version: HEAD
-path: config/argocd-apps/infra
+path: config/3.1/argocd-apps/infra
 
 DESTINATION
 Cluster URL: https://kubernetes.default.svc
@@ -191,7 +191,7 @@ SYNC POLICY: Automatic
 SOURCE
 REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
 Target version: HEAD
-path: config/cp4waiops
+path: config/3.1/cp4waiops
 
 DESTINATION
 Cluster URL: https://kubernetes.default.svc

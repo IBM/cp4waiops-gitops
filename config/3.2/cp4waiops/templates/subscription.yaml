@@ -1,0 +1,13 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-aiops-orchestrator
+  namespace: {{.Values.spec.cp4waiops_namespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "110"
+spec:
+  channel: {{.Values.spec.channel}}
+  installPlanApproval: Automatic
+  name: ibm-aiops-orchestrator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace

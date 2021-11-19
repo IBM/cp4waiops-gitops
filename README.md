@@ -22,4 +22,5 @@ This repo is about using either use OpenShift GitOps or Kubernetes GitOps model 
 
 Please refer to the following tutorial to decide how you want to deploy your Instana Cluster:
 
-- [Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops.md)
+- [3.1: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
+- [3.2: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)

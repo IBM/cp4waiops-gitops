@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:
-  size: large
+  size: {{.Values.spec.size}}
   storageClass: {{.Values.spec.storageClass}}
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   imagePullSecret: ibm-entitlement-key

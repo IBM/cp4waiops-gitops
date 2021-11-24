@@ -24,3 +24,9 @@ Please refer to the following tutorial to decide how you want to deploy your Ins
 
 - [3.1: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
 - [3.2: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
+
+## Customization Install
+
+Making changes to this repository requires a working knowledge of Argo CD administration and configuration. A change entails forking the repository, modifying it, installing the changes on a target cluster to validate them.
+
+Navigate to the [Customization Install](./docs/customization-install.md) page for the details.

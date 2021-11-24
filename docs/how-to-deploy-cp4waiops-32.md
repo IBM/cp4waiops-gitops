@@ -5,9 +5,14 @@
 - [Deploy Cloud Pak for Watson AIOps with OpenShift GitOps](#deploy-cloud-pak-for-watson-aiops-with-openshift-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOPS](#install-cp4waiops)
-    - [Login to Argo CD](#login-to-argo-cd)
-    - [Storage Consideration](#storage-consideration)
-    - [Create a ArgoCD application for installing cp4waiops in-cluster](#create-a-argocd-application-for-installing-cp4waiops-in-cluster)
+    - [Option 1: Using the OCP console](#option-1-using-the-ocp-console)
+      - [1. Login to Argo CD](#1-login-to-argo-cd)
+      - [2. Storage Consideration](#2-storage-consideration)
+      - [3. Create a ArgoCD application for installing cp4waiops in-cluster](#3-create-a-argocd-application-for-installing-cp4waiops-in-cluster)
+    - [Option 2: Using a terminal](#option-2-using-a-terminal)
+      - [1. Login to the Argo CD server](#1-login-to-the-argo-cd-server)
+      - [2. Storage Consideration](#2-storage-consideration-1)
+      - [3. Create a ArgoCD application for installing cp4waiops in-cluster](#3-create-a-argocd-application-for-installing-cp4waiops-in-cluster-1)
     - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
       - [CLI Verify](#cli-verify)
       - [UI Verify](#ui-verify)
@@ -24,7 +29,9 @@
 
 ## Install CP4WAIOPS
 
-### Login to Argo CD
+### Option 1: Using the OCP console
+
+#### 1. Login to Argo CD
 
 Login ArgoCD entrance
 
@@ -38,7 +45,7 @@ Password: Please copy the Data value of secret "openshift-gitops-cluster" in nam
 
 ![Secret data](./images/login-argocd-user-pass.png) 
 
-### Storage Consideration
+#### 2. Storage Consideration
 
 It depends where the OCP comes from , if you're using fyre , then could create gitops application
 
@@ -60,7 +67,7 @@ DIRECTORY
 DIRECTORY RECURSE: tick it
 ```
 
-### Create a ArgoCD application for installing cp4waiops in-cluster
+#### 3. Create a ArgoCD application for installing cp4waiops in-cluster
 
 ```
 GENERAL
@@ -81,6 +88,7 @@ HELM
 spec.cp4waiops_namespace: cp4waiops
 spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
 spec.channel: v3.2
+spec.size: small
 spec.dockerUsername: cp
 spec.dockerPassword: <entitlement-key>
 spec.storageClass: rook-cephfs
@@ -91,6 +99,68 @@ Where:
 
 - <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
+### Option 2: Using a terminal
+
+#### 1. Login to the Argo CD server
+
+   ```sh
+   # OCP 4.7+
+   argo_route=openshift-gitops-server
+   argo_secret=openshift-gitops-cluster
+   sa_account=openshift-gitops-argocd-application-controller
+
+   argo_pwd=$(oc get secret ${argo_secret} \
+               -n openshift-gitops \
+               -o jsonpath='{.data.admin\.password}' | base64 -d ; echo ) \
+   && argo_url=$(oc get route ${argo_route} \
+                  -n openshift-gitops \
+                  -o jsonpath='{.spec.host}') \
+   && argocd login "${argo_url}" \
+         --username admin \
+         --password "${argo_pwd}" \
+         --insecure
+   ```
+
+#### 2. Storage Consideration
+
+It depends where the OCP comes from , if you're using fyre , then could create gitops application
+
+  ```sh
+  argocd app create ceph \
+        --sync-policy automatic \
+        --project default \
+        --repo https://github.com/cloud-pak-gitops/cp4waiops-gitops.git \
+        --path ceph \
+        --revision HEAD \
+        --dest-namespace rook-ceph \
+        --dest-server https://kubernetes.default.svc \
+        --directory-recurse
+  ```
+
+#### 3. Create a ArgoCD application for installing cp4waiops in-cluster
+
+  ```sh
+  argocd app create cp4waiops \
+        --sync-policy automatic \
+        --project default \
+        --repo https://github.com/cloud-pak-gitops/cp4waiops-gitops.git \
+        --path config/3.2/cp4waiops \
+        --revision HEAD \
+        --dest-namespace cp4waiops \
+        --dest-server https://kubernetes.default.svc \
+        --helm-set spec.cp4waiops_namespace=cp4waiops \
+        --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
+        --helm-set spec.channel=v3.2 \
+        --helm-set spec.dockerUsername=cp \
+        --helm-set spec.dockerPassword= <entitlement-key> \
+        --helm-set spec.storageClass=rook-cephfs \
+        --helm-set spec.storageClassLargeBlock=rook-cephfs \
+        --helm-set spec.size=small
+  ```
+
+Where:
+
+- <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
 ### Verify Cloud Paks Installation
 

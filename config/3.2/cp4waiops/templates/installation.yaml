@@ -16,6 +16,6 @@ spec:
   - name: aiopsFoundation
     enabled: true
   - name: applicationManager
-    enabled: true
+    enabled: false
   - name: aiManager
-    enabled: true
+    enabled: false

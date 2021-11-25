@@ -1,18 +1,26 @@
-## Customization Install
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-Making changes to this repository requires a working knowledge of Argo CD administration and configuration. A change entails forking the repository, modifying it, installing the changes on a target cluster to validate them.
+- [Advanced Install for Customers](#advanced-install-for-customers)
 
-## Set up a local environment
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-1. Fork this repository.
+# Advanced Install for Customers
 
-1. Modify the files under config/3.2/cp4waiops according to your needs.
+The major use cases for the customer use GitOps is that you may want to use Github to trace and audit the changes, the following tutorial is how to fork the repo and use your own GitHub repos to deploy Cloud Pak for Watson AIOps.
 
-1. Follow the [installation instructions](docs/how-to-deploy-cp4waiops-32.md) to install the Cloud Pak in a target cluster.
+The major steps of advanced install include the following:
 
-1. In the ArgoCD application creation section, change the "repoURL" field to match the URL of your repository, set the "TARGET REVISION" field to match the repository's branch where you are making changes.
+- Fork this repo to the account that you want to use
 
-1. You can also use a terminal to make the changes to the application, using the Argo CD CLI:
+- Modify the parameters in `config/3.2/cp4waiops/values.yaml` based on your requirement
+
+- Follow the [installation instructions](docs/how-to-deploy-cp4waiops-32.md) to install the Cloud Pak in a target cluster.
+
+  - In the Argo CD application creation section, change the `repoURL` field to match the URL of your repo, set the `TARGET REVISION` field to match the repo's branch where you are making changes.
+
+  - You can also use a terminal to make the changes to the application, using the Argo CD CLI:
 
     ```sh
     argocd app create <app-name> \
@@ -33,7 +41,7 @@ Making changes to this repository requires a working knowledge of Argo CD admini
             --helm-set spec.size=small
     ```
 
-    For instance, assuming you cloned this repo into https://github.com/mytest/cp4waiops-gitops, and you wanted to make changes in a branch named `new-feature`, you would run the command like this:
+    - For example, assuming you cloned this repo into https://github.com/mytest/cp4waiops-gitops, and you wanted to make changes in a branch named `new-feature`, you would run the command like this:
 
     ```sh
     argocd app create cp4waiops \
@@ -54,4 +62,4 @@ Making changes to this repository requires a working knowledge of Argo CD admini
             --helm-set spec.size=small
     ```
 
-Observe whether the created application meets your expectations.
+- Observe whether the created application meets your expectations.

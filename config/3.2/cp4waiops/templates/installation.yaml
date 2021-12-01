@@ -14,8 +14,8 @@ spec:
     accept: true
   pakModules:
   - name: aiopsFoundation
-    enabled: false
+    enabled: true
   - name: applicationManager
-    enabled: false
+    enabled: true
   - name: aiManager
-    enabled: false
+    enabled: true

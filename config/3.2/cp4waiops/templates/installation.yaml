@@ -19,3 +19,4 @@ spec:
     enabled: true
   - name: aiManager
     enabled: true
+

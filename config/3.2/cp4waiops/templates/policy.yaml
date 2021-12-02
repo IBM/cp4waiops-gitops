@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/sync-wave: "50"
-  namespace: openshift-gitops
+  namespace: {{.Values.spec.cp4waiops_namespace}}
 spec:
   template:
     spec:
@@ -57,5 +57,5 @@ spec:
               fi
 
       restartPolicy: Never
-      serviceAccountName: openshift-gitops-argocd-application-controller
+      serviceAccountName: openshift-argocd-admin
   backoffLimit: 1

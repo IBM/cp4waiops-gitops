@@ -1,0 +1,559 @@
+{{- if .Values.spec.eventManager.enabled }}
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+    operatorframework.io/installed-alongside-24c12318dee1f612: cp4waiops/noi.v1.3.2
+  labels:
+    operators.coreos.com/noi.cp4waiops: ""
+  name: nois.noi.ibm.com
+spec:
+  conversion:
+    strategy: None
+  group: noi.ibm.com
+  names:
+    kind: NOI
+    listKind: NOIList
+    plural: nois
+    singular: noi
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: 'NOI is the Schema for the nois API. Documentation For additional
+          details regarding install parameters check: http://ibm.biz/install_noi_icp.
+          License By installing this product you accept the license terms http://ibm.biz/noi-1632-license.'
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: NOISpec defines the desired state of NOI
+            properties:
+              advanced:
+                description: Advanced properties
+                properties:
+                  antiAffinity:
+                    description: To prevent primary and backup server pods from being
+                      installed on the same worker node, select this option.
+                    type: boolean
+                  imagePullPolicy:
+                    description: The default pull policy is IfNotPresent, which causes
+                      the Kubelet to skip pulling an image that already exists.
+                    type: string
+                  imagePullRepository:
+                    description: Docker registry that all component images are pulled
+                      from
+                    type: string
+                type: object
+              backupRestore:
+                description: BackupRestore property
+                properties:
+                  enableAnalyticsBackups:
+                    type: boolean
+                type: object
+              clusterDomain:
+                description: 'Use the fully qualified domain name (FQDN) to specify
+                  the cluster domain: apps.<clustername>.*.*.com'
+                type: string
+              deploymentType:
+                description: Deployment type (trial or production)
+                type: string
+              entitlementSecret:
+                description: Entitlment secret to pull images
+                type: string
+              helmValuesASM:
+                description: "*  To be used as an attribute of your Go Spec object
+                  \ Example  type NOISpec struct {    SystemStatus string  `json:\"systemStatus,omitempty\"`
+                  \   AppVersion   string  `json:\"appVersion,omitempty\"`    HelmValues
+                  \  hdmtypes.HelmValuesType     `json:\"helmValues,omitempty\"` }
+                  \ This will allow your custom resource to have a  helmValues object
+                  that mimics your helm values file  Example custom resource apiVersion:
+                  noi.netcool.ibm.com/v1beta1 kind: NOI metadata:   name: firstinstall
+                  \n spec:   appVersion: 1.0.0   helmValues:     global:       license:
+                  \"accept\"       openshift:         enabled true         clusterName:
+                  \"xyz\"       environmentSize: \"size0\"    webgui       testAttribute:
+                  \"abc\" will be loaded into go memory as    interface can be any
+                  type. In our case it will eitehr be string or another map of string
+                  to interface \n    map(string->interface)        \"global\" ->  map(string->interface)
+                  \                      \"license\"        -> \"accept\" (string)
+                  \                      \"openshift\"      -> map(string->interface)
+                  \                                              \"enabled\" -> \"true\"
+                  (string)                                               \"clusterName\"->\"xyz\"
+                  (string)                       \"environmentSize\"-> \"size0\" (string)
+                  \        \"webgui\" ->  map(string->interface)                         \"testAttribute\"
+                  \       -> \"abc\" (string)   These values are then available to
+                  The GO templating will be
+                  reslved to \"accept\""
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              helmValuesCEM:
+                description: "*  To be used as an attribute of your Go Spec object
+                  \ Example  type NOISpec struct {    SystemStatus string  `json:\"systemStatus,omitempty\"`
+                  \   AppVersion   string  `json:\"appVersion,omitempty\"`    HelmValues
+                  \  hdmtypes.HelmValuesType     `json:\"helmValues,omitempty\"` }
+                  \ This will allow your custom resource to have a  helmValues object
+                  that mimics your helm values file  Example custom resource apiVersion:
+                  noi.netcool.ibm.com/v1beta1 kind: NOI metadata:   name: firstinstall
+                  \n spec:   appVersion: 1.0.0   helmValues:     global:       license:
+                  \"accept\"       openshift:         enabled true         clusterName:
+                  \"xyz\"       environmentSize: \"size0\"    webgui       testAttribute:
+                  \"abc\" will be loaded into go memory as    interface can be any
+                  type. In our case it will eitehr be string or another map of string
+                  to interface \n    map(string->interface)        \"global\" ->  map(string->interface)
+                  \                      \"license\"        -> \"accept\" (string)
+                  \                      \"openshift\"      -> map(string->interface)
+                  \                                              \"enabled\" -> \"true\"
+                  (string)                                               \"clusterName\"->\"xyz\"
+                  (string)                       \"environmentSize\"-> \"size0\" (string)
+                  \        \"webgui\" ->  map(string->interface)                         \"testAttribute\"
+                  \       -> \"abc\" (string)   These values are then available to
+                  The GO templating will be
+                  reslved to \"accept\""
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              helmValuesNOI:
+                description: Add additional helm values that aren't shown within the
+                  porcelain
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              ingress:
+                description: '[DEPRECATED] Ingress properties'
+                properties:
+                  class:
+                    type: string
+                  enabled:
+                    type: boolean
+                  prefix:
+                    type: string
+                type: object
+              integrations:
+                description: Integration properties
+                properties:
+                  humio:
+                    description: Humio properties
+                    properties:
+                      repository:
+                        description: To enable Humio search integrations, provide
+                          the Humio Repository for your Humio instance
+                        type: string
+                      url:
+                        description: To enable Humio search integrations, provide
+                          the Humio Base URL of your Humio instance (on-prem/cloud)
+                        type: string
+                    type: object
+                required:
+                - humio
+                type: object
+              ldap:
+                description: LDAP properties
+                properties:
+                  baseDN:
+                    description: Configure the LDAP base entry by specifying the base
+                      distinguished name (DN).
+                    type: string
+                  bindDN:
+                    description: Configure LDAP bind user identity by specifying the
+                      bind distinguished name (bind DN).
+                    type: string
+                  groupFilter:
+                    description: LDAP Group Filter
+                    type: string
+                  mode:
+                    description: Choose (standalone) for a built-in LDAP server or
+                      (proxy) and connect to an external organization LDAP server.
+                      See http://ibm.biz/install_noi_icp.
+                    type: string
+                  port:
+                    description: Configure the port of your organization's LDAP server.
+                    type: string
+                  serverType:
+                    description: LDAP Server Type. Set to CUSTOM form non Active Directory
+                      servers. Set to AD for Active Directory
+                    type: string
+                  sslPort:
+                    description: Configure the SSL port of your organization's LDAP
+                      server.
+                    type: string
+                  storageClass:
+                    description: LDAP Storage class
+                    type: string
+                  storageSize:
+                    description: LDAP Storage size
+                    type: string
+                  suffix:
+                    description: Configure the top entry in the LDAP directory information
+                      tree (DIT).
+                    type: string
+                  url:
+                    description: Configure the URL of your organization's LDAP server.
+                    type: string
+                  userFilter:
+                    description: LDAP User Filter
+                    type: string
+                type: object
+              license:
+                description: License properties
+                properties:
+                  accept:
+                    description: 'I have read and accept the license: https://ibm.biz/noi-1632-license'
+                    type: boolean
+                required:
+                - accept
+                type: object
+              persistence:
+                description: Persistence properties
+                properties:
+                  enabled:
+                    description: Enable persistence storage
+                    type: boolean
+                  storageClassCassandraBackup:
+                    description: Storage class Cassandra Backup
+                    type: string
+                  storageClassCassandraData:
+                    description: Storage class Cassandra Data
+                    type: string
+                  storageClassCouchdb:
+                    description: Couchdb Storage class
+                    type: string
+                  storageClassElastic:
+                    description: Storage class Elasticsearch
+                    type: string
+                  storageClassImpactGUI:
+                    description: Impact GUI Storage class
+                    type: string
+                  storageClassImpactServer:
+                    description: Impact Server Storage class
+                    type: string
+                  storageClassKafka:
+                    description: Storage class Kafka
+                    type: string
+                  storageClassNCOBackup:
+                    description: NCOBackup Storage class
+                    type: string
+                  storageClassNCOPrimary:
+                    description: NCO Primary Storage class
+                    type: string
+                  storageClassZookeeper:
+                    description: Storage class Zookeeper
+                    type: string
+                  storageSizeCassandraBackup:
+                    description: Storage size Cassandra Backup
+                    type: string
+                  storageSizeCassandraData:
+                    description: Storage size Cassandra Data
+                    type: string
+                  storageSizeCouchdb:
+                    description: Couchdb Storage size
+                    type: string
+                  storageSizeElastic:
+                    description: Storage size Elasticsearch
+                    type: string
+                  storageSizeImpactGUI:
+                    description: Impact GUI Storage size
+                    type: string
+                  storageSizeImpactServer:
+                    description: Impact Server Storage size
+                    type: string
+                  storageSizeKafka:
+                    description: Storage size Kafka
+                    type: string
+                  storageSizeNCOBackup:
+                    description: NCOBackup Storage size
+                    type: string
+                  storageSizeNCOPrimary:
+                    description: NCO Primary Storage size
+                    type: string
+                  storageSizeZookeeper:
+                    description: Storage size Zookeeper
+                    type: string
+                type: object
+              serviceContinuity:
+                description: ServiceContinuity (DR) properties
+                properties:
+                  continuousAnalyticsCorrelation:
+                    type: boolean
+                  isBackupDeployment:
+                    type: boolean
+                type: object
+              topology:
+                description: Topology properties
+                properties:
+                  appDisco:
+                    description: Application Discovery
+                    properties:
+                      certSecret:
+                        description: Application Discovery Certificate Secret  (If
+                          Application Discovery is enabled)
+                        type: string
+                      db2archuser:
+                        description: Application Discovery DB2 Archive user  (If Application
+                          Discovery is enabled)
+                        type: string
+                      db2database:
+                        description: Application Discovery DB2 Database name  (If
+                          Application Discovery is enabled)
+                        type: string
+                      db2user:
+                        description: Application Discovery DB2 user (If Application
+                          Discovery is enabled)
+                        type: string
+                      dbport:
+                        description: Application Discovery  DB2 Port (If Application
+                          Discovery is enabled)
+                        type: string
+                      dbsecret:
+                        description: Application Discovery  DB2 secret (If Application
+                          Discovery is enabled)
+                        type: string
+                      dburl:
+                        description: Application Discovery DB2 host to connect (If
+                          Application Discovery is enabled)
+                        type: string
+                      enabled:
+                        description: Enable Application Discovery  and Application
+                          Discovery  Observer
+                        type: boolean
+                      scaleDS:
+                        description: Application Discovery Scaling for Discovery Server  (If
+                          Application Discovery is enabled)
+                        type: string
+                      scaleSSS:
+                        description: Application Discovery Scaling for Secondary Storage
+                          Server  (If Application Discovery is enabled)
+                        type: string
+                      secure:
+                        description: Application Discovery  Secure DB connection (If
+                          Application Discovery is enabled)
+                        type: boolean
+                      tlsSecret:
+                        description: Application Discovery TLS Secret  (If Application
+                          Discovery is enabled)
+                        type: string
+                    type: object
+                  iafCartridgeRequirementsName:
+                    description: IAF CartridgeRequirements Instance Name for connection
+                      to IAF ElasticSearch
+                    type: string
+                  netDisco:
+                    description: Enable Network Discovery and Network Discovery Observer
+                    type: boolean
+                  observers:
+                    description: Topology Observers
+                    properties:
+                      alm:
+                        description: ' Enable ALM Topology Observer'
+                        type: boolean
+                      ansibleawx:
+                        description: ' Enable  Ansible AWX Topology Observer'
+                        type: boolean
+                      appdynamics:
+                        description: ' Enable  AppDynamics Topology Observer'
+                        type: boolean
+                      aws:
+                        description: ' Enable  AWS Topology Observer'
+                        type: boolean
+                      azure:
+                        description: ' Enable  Azure Topology Observer'
+                        type: boolean
+                      bigcloudfabric:
+                        description: Enable BigCloud Fabric Topology Observer
+                        type: boolean
+                      bigfixinventory:
+                        description: Enable BigFixInventory Topology Observer
+                        type: boolean
+                      cienablueplanet:
+                        description: Enable CienaBluePlanet Topology Observer
+                        type: boolean
+                      ciscoaci:
+                        description: Enable CiscoAci Topology Observer
+                        type: boolean
+                      contrail:
+                        description: Enable Contrail Topology Observer
+                        type: boolean
+                      dns:
+                        description: Enable DNS Topology Observer
+                        type: boolean
+                      docker:
+                        description: Enable Docker Topology Observer
+                        type: boolean
+                      dynatrace:
+                        description: Enable Dynatrace Topology Observer
+                        type: boolean
+                      file:
+                        description: Enable File Topology Observer
+                        type: boolean
+                      googlecloud:
+                        description: Enable  GoogleCloud Topology Observer
+                        type: boolean
+                      hpnfvd:
+                        description: Enable HPNFVD Topology Observer
+                        type: boolean
+                      ibmcloud:
+                        description: Enable IBMCloud Topology Observer
+                        type: boolean
+                      itnm:
+                        description: Enable ITNM Topology Observer
+                        type: boolean
+                      jenkins:
+                        description: Enable Jenkins Topology Observer
+                        type: boolean
+                      junipercso:
+                        description: Enable JuniperCSO Topology Observer
+                        type: boolean
+                      kubernetes:
+                        description: Enable Kubernetes Topology Observer
+                        type: boolean
+                      newrelic:
+                        description: Enable NewRelic Topology Observer
+                        type: boolean
+                      openstack:
+                        description: Enable OpenStack Topology Observer
+                        type: boolean
+                      rancher:
+                        description: Enable Rancher Topology Observer
+                        type: boolean
+                      rest:
+                        description: Enable Rest Topology Observer
+                        type: boolean
+                      servicenow:
+                        description: Enable ServiceNow Topology Observer
+                        type: boolean
+                      taddm:
+                        description: Enable TADDM Topology Observer
+                        type: boolean
+                      vmvcenter:
+                        description: Enable VMVcenter Topology Observer
+                        type: boolean
+                      vmwarensx:
+                        description: Enable VMWareNSX Topology Observer
+                        type: boolean
+                      zabbix:
+                        description: Enable Zabbix Topology Observer
+                        type: boolean
+                    type: object
+                  storageClassCassandraBackupTopology:
+                    description: '[DEPRECATED] Storage class Cassandra Backup. Production
+                      Only'
+                    type: string
+                  storageClassCassandraDataTopology:
+                    description: '[DEPRECATED] Storage class Cassandra Data. Production
+                      Only'
+                    type: string
+                  storageClassElasticTopology:
+                    description: Storage class Elasticsearch. Production Only
+                    type: string
+                  storageClassFileObserver:
+                    description: File Observer Storage class. Production Only
+                    type: string
+                  storageSizeCassandraBackupTopology:
+                    description: '[DEPRECATED] Storage size Cassandra Backup. Production
+                      Only'
+                    type: string
+                  storageSizeCassandraDataTopology:
+                    description: '[DEPRECATED] Storage size Cassandra Data. Production
+                      Only'
+                    type: string
+                  storageSizeElasticTopology:
+                    description: Storage size Elasticsearch. Production Only
+                    type: string
+                  storageSizeFileObserver:
+                    description: File Observer Storage size. Production Only
+                    type: string
+                type: object
+              version:
+                description: Version
+                type: string
+              zen:
+                description: The Zen options
+                properties:
+                  deploy:
+                    description: Flag to deploy our own cpd in the same namespace
+                      as aimanager
+                    type: boolean
+                  ignoreReady:
+                    description: Flag to deploy zen customization even if not in ready
+                      state
+                    type: boolean
+                  instanceId:
+                    description: ID of Zen Service Instance
+                    type: string
+                  serviceInstanceName:
+                    default: iaf-zen-cpdservice
+                    description: Name of the ZenService Instance object
+                    type: string
+                  serviceNamespace:
+                    default: ""
+                    description: Namespace of the ZenService Instance
+                    type: string
+                  storage:
+                    description: The Zen storage options
+                    properties:
+                      storageClassName:
+                        description: The StorageClassName
+                        type: string
+                    type: object
+                type: object
+            required:
+            - entitlementSecret
+            - license
+            - version
+            type: object
+          status:
+            description: NOIStatus contains observed state of the installed full Cloud
+              deployment
+            properties:
+              managedResources:
+                description: Resources Managed By NOI
+                items:
+                  type: string
+                type: array
+              message:
+                description: Information on current status of Netcool Operations Insight
+                type: string
+              phase:
+                description: Current phase of installed full Cloud deployment.
+                type: string
+              versions:
+                description: Information on versions for Netcool Operations Insight
+                properties:
+                  available:
+                    description: Available properties
+                    properties:
+                      versions:
+                        description: Possible available versions for Netcool Operations
+                          Insight
+                        items:
+                          type: string
+                        type: array
+                    required:
+                    - versions
+                    type: object
+                  reconciled:
+                    description: Current version of the reconciled instance
+                    type: string
+                required:
+                - available
+                - reconciled
+                type: object
+            required:
+            - phase
+            - versions
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+{{- end }}

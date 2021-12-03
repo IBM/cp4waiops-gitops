@@ -1,3 +1,4 @@
+{{- if .Values.spec.aiManager.enabled }}
 apiVersion: orchestrator.aiops.ibm.com/v1alpha1
 kind: Installation
 metadata:
@@ -6,7 +7,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:
-  size: {{.Values.spec.size}}
+  size: {{.Values.spec.aiManager.size}}
   storageClass: {{.Values.spec.storageClass}}
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   imagePullSecret: ibm-entitlement-key
@@ -21,3 +22,4 @@ spec:
     enabled: true
   - name: connection
     enabled: true
+{{- end }}

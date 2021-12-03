@@ -19,3 +19,5 @@ spec:
     enabled: true
   - name: aiManager
     enabled: true
+  - name: connection
+    enabled: true

@@ -6,13 +6,15 @@
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOPS](#install-cp4waiops)
     - [Option 1: Using the OCP console](#option-1-using-the-ocp-console)
-      - [1. Login to Argo CD](#1-login-to-argo-cd)
-      - [2. Storage Consideration](#2-storage-consideration)
-      - [3. Create a ArgoCD application for installing cp4waiops in-cluster](#3-create-a-argocd-application-for-installing-cp4waiops-in-cluster)
+      - [1. Grant Argo CD Enough Permissions](#1-grant-argo-cd-enough-permissions)
+      - [2. Login to Argo CD](#2-login-to-argo-cd)
+      - [3. Storage Consideration](#3-storage-consideration)
+      - [4. Create a ArgoCD application for installing cp4waiops in-cluster](#4-create-a-argocd-application-for-installing-cp4waiops-in-cluster)
     - [Option 2: Using a terminal](#option-2-using-a-terminal)
-      - [1. Login to the Argo CD server](#1-login-to-the-argo-cd-server)
-      - [2. Storage Consideration](#2-storage-consideration-1)
-      - [3. Create a ArgoCD application for installing cp4waiops in-cluster](#3-create-a-argocd-application-for-installing-cp4waiops-in-cluster-1)
+      - [1. Grant Argo CD Enough Permissions](#1-grant-argo-cd-enough-permissions-1)
+      - [2. Login to the Argo CD server](#2-login-to-the-argo-cd-server)
+      - [3. Storage Consideration](#3-storage-consideration-1)
+      - [4. Create a ArgoCD application for installing cp4waiops in-cluster](#4-create-a-argocd-application-for-installing-cp4waiops-in-cluster-1)
     - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
       - [CLI Verify](#cli-verify)
       - [UI Verify](#ui-verify)
@@ -31,7 +33,28 @@
 
 ### Option 1: Using the OCP console
 
-#### 1. Login to Argo CD
+#### 1. Grant Argo CD Enough Permissions
+
+From the Red Hat OpenShift OLM UI, go to **User Management** > **RoleBindings** > **Create binding**.
+
+Use the Form view to configure the properties for the **ClusterRoleBinding**, and select the Create button.
+
+```
+Binding type: Cluster-wide role binding (ClusterRoleBinding)
+
+RoleBinding
+Name: argocd-admin
+
+Role
+Role Name: cluster-name
+
+Subject
+ServiceAccount:  tick it
+Subject namespace: openshift-gitops
+Subject name: openshift-gitops-argocd-application-controller
+```
+
+#### 2. Login to Argo CD
 
 Login ArgoCD entrance
 
@@ -45,7 +68,7 @@ Password: Please copy the Data value of secret "openshift-gitops-cluster" in nam
 
 ![Secret data](./images/login-argocd-user-pass.png) 
 
-#### 2. Storage Consideration
+#### 3. Storage Consideration
 
 It depends where the OCP comes from , if you're using fyre , then could create gitops application
 
@@ -67,7 +90,7 @@ DIRECTORY
 DIRECTORY RECURSE: tick it
 ```
 
-#### 3. Create a ArgoCD application for installing cp4waiops in-cluster
+#### 4. Create a ArgoCD application for installing cp4waiops in-cluster
 
 ```
 GENERAL
@@ -101,7 +124,24 @@ Where:
 
 ### Option 2: Using a terminal
 
-#### 1. Login to the Argo CD server
+#### 1. Grant Argo CD Enough Permissions
+
+```yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: argocd-admin
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+```
+
+#### 2. Login to the Argo CD server
 
    ```sh
    # OCP 4.7+
@@ -121,7 +161,7 @@ Where:
          --insecure
    ```
 
-#### 2. Storage Consideration
+#### 3. Storage Consideration
 
 It depends where the OCP comes from , if you're using fyre , then could create gitops application
 
@@ -137,7 +177,7 @@ It depends where the OCP comes from , if you're using fyre , then could create g
         --directory-recurse
   ```
 
-#### 3. Create a ArgoCD application for installing cp4waiops in-cluster
+#### 4. Create a ArgoCD application for installing cp4waiops in-cluster
 
   ```sh
   argocd app create cp4waiops \

@@ -1,4 +1,4 @@
----
+{{- if or .Values.spec.eventManagerGateway.enabled .Values.spec.aiManager.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -59,3 +59,4 @@ spec:
       restartPolicy: Never
       serviceAccountName: openshift-argocd-admin
   backoffLimit: 1
+{{- end }}

@@ -46,7 +46,7 @@ RoleBinding
 Name: argocd-admin
 
 Role
-Role Name: cluster-name
+Role Name: cluster-admin
 
 Subject
 ServiceAccount:  tick it

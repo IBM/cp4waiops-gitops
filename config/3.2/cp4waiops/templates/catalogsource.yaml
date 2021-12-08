@@ -1,3 +1,4 @@
+{{- if or .Values.spec.eventManagerGateway.enabled .Values.spec.aiManager.enabled }}
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
@@ -10,3 +11,9 @@ spec:
   publisher: IBM Content
   sourceType: grpc
   image: {{.Values.spec.imageCatalog}}
+  {{- if .Values.spec.eventManagerGateway.enabled }}
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+  {{- end }}
+{{- end }}

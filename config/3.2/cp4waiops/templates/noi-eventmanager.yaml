@@ -1,4 +1,4 @@
-{{- if .Values.spec.eventManager.enabled }}
+{{- if .Values.spec.eventManagerGateway.enabled }}
 apiVersion: noi.ibm.com/v1beta1
 kind: NOI
 metadata:
@@ -82,7 +82,7 @@ spec:
     netDisco: false
   version: 1.6.3.2
   entitlementSecret: ibm-entitlement-key
-  clusterDomain: {{.Values.spec.eventManager.clusterDomain}}
+  clusterDomain: {{.Values.spec.eventManagerGateway.clusterDomain}}
   integrations:
     humio:
       repository: ''
@@ -109,5 +109,5 @@ spec:
     storageSizeImpactGUI: 5Gi
     storageSizeElastic: 75Gi
     storageClassNCOBackup: ''
-  deploymentType: {{.Values.spec.eventManager.deploymentType}}
+  deploymentType: {{.Values.spec.eventManagerGateway.deploymentType}}
 {{- end }}

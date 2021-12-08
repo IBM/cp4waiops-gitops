@@ -1,4 +1,4 @@
-{{- if .Values.spec.eventManager.enabled }}
+{{- if .Values.spec.eventManagerGateway.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

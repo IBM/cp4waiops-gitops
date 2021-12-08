@@ -1,4 +1,4 @@
-{{- if .Values.spec.eventManager.enabled }}
+{{- if .Values.spec.eventManagerGateway.enabled }}
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -7,7 +7,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "110"
 spec:
-  channel: {{.Values.spec.eventManager.channel}}
+  channel: {{.Values.spec.eventManagerGateway.channel}}
   installPlanApproval: Automatic
   name: noi
   source: ibm-operator-catalog

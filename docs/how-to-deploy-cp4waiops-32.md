@@ -66,6 +66,12 @@ Username: admin
 Password: Please copy the Data value of secret "openshift-gitops-cluster" in namespace "openshift-gitops"
 ```
 
+You can use following command to get the password:
+
+```
+oc get secret openshift-gitops-cluster -n openshift-gitops -ojsonpath='{.data.admin\.password}' | base64 -d; echo
+```
+
 ![Secret data](./images/login-argocd-user-pass.png) 
 
 #### 3. Storage Consideration

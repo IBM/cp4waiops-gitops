@@ -1,0 +1,216 @@
+{{- if .Values.spec.aiManager.enabled }}
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    operatorframework.io/installed-alongside-7c93781283fb727f: cp4waiops/ibm-aiops-orchestrator.v3.2.0
+  generation: 1
+  labels:
+    operators.coreos.com/ibm-aiops-orchestrator.cp4waiops: ""
+  name: installations.orchestrator.aiops.ibm.com
+spec:
+  conversion:
+    strategy: None
+  group: orchestrator.aiops.ibm.com
+  names:
+    kind: Installation
+    listKind: InstallationList
+    plural: installations
+    shortNames:
+    - install
+    singular: installation
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.phase
+      name: Phase
+      type: string
+    - jsonPath: .status.licenseacceptance
+      name: License
+      type: string
+    - jsonPath: .status.storageclass
+      name: StorageClass
+      type: string
+    - jsonPath: .status.storageclasslargeblock
+      name: StorageClassLargeBlock
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Leverage advanced, explainable AI to resolve incidents faster,
+          gain visibility into critical workloads, and intelligently manage key application
+          resources. [Learn More](https://ibm.biz/cpwaiops_32x_install).
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: For detailed information about the following settings, see
+              the IBM Documentation at https://ibm.biz/cpwaiops_32x_install
+            properties:
+              automationFoundation:
+                description: AutomationFoundation contains parameters that can be
+                  used to customize how the IBM Automation Foundation objects are
+                  configured.
+                properties:
+                  automationBase:
+                    description: AutomationBase is the name of the IBM Automation
+                      Foundation "AutomationBase" CR instance that the Cloud Pak should
+                      use.  If a name is not specified, and no "AutomationBase" instances
+                      exist in the namespace, the Cloud Pak will attempt to provision
+                      one.
+                    type: string
+                  automationUIConfig:
+                    description: AutomationUIConfig is the name of the IBM Automation
+                      Foundation "AutomationUIConfig" CR instance that the Cloud Pak
+                      should use.  If a name is not specified, and no "AutomationUIConfig"
+                      instances exist in the namespace, the Cloud Pak will attempt
+                      to provision one.
+                    type: string
+                  enabled:
+                    description: The Enabled flag controls whether the Cloud Pak will
+                      register with IBM Automation Foundation. The default value is
+                      'true'.  When the flag is set to 'false', the Cloud Pak will
+                      not create any Automation Foundation objects, including those
+                      referenced in other parts of the AutomationFoundation spec.
+                    type: boolean
+                type: object
+              imagePullSecret:
+                description: Select the image pull secret to use for the Cloud Pak.
+                  If no secret is selected, the global pull secret will be used.
+                type: string
+              installPlanApproval:
+                description: Select Automatic (the default) to start the installation
+                  now. Future updates will be automatically installed as they are
+                  delivered to the channel. Select Manual to review a generated install
+                  plan and then manually approve the installation. This option will
+                  also require you to review and manually approve a generated install
+                  plan for each update.
+                type: string
+              license:
+                description: License acceptance is required to create resources.
+                properties:
+                  accept:
+                    description: I accept the product license after reading it at
+                      https://ibm.biz/cp4waiops-32-license
+                    type: boolean
+                required:
+                - accept
+                type: object
+              pakModules:
+                description: Pak Modules are modular pieces that may be enabled for
+                  deployment
+                items:
+                  description: PakModule is a type of module that may be installed
+                    by the Cloud Pak
+                  properties:
+                    config:
+                      description: Config is the set of configurations for the operators
+                        in the module
+                      items:
+                        description: Config is the configuration of the specific operator
+                          in the module
+                        properties:
+                          enabled:
+                            description: Enabled is the installation mode of the operator
+                            type: boolean
+                          name:
+                            description: Name is the name of the Operator Config
+                            type: string
+                          spec:
+                            additionalProperties:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            description: Spec is the spec overrides to be passed into
+                              the operator
+                            type: object
+                            x-kubernetes-preserve-unknown-fields: true
+                        required:
+                        - name
+                        type: object
+                      type: array
+                    enabled:
+                      description: Enabled is installation mode of the module
+                      type: boolean
+                    name:
+                      description: Name is the name of the module
+                      type: string
+                  required:
+                  - name
+                  type: object
+                type: array
+              size:
+                description: Select a size to determine the amount of virtual resources
+                  requested and the level of high availability support.
+                type: string
+              storageClass:
+                description: Select a file storage class that supports ReadWriteMany
+                  access mode.
+                type: string
+              storageClassLargeBlock:
+                description: Select a storage class with a large block size (for example,
+                  64k).
+                type: string
+            required:
+            - license
+            - storageClass
+            - storageClassLargeBlock
+            type: object
+          status:
+            description: InstallationStatus defines the observed state of Installation
+            properties:
+              componentnamespace:
+                type: string
+              componentstatus:
+                additionalProperties:
+                  description: ComponentPhase describes the phase of each component
+                  type: string
+                type: object
+              failureMessage:
+                type: string
+              failureReason:
+                type: string
+              imagePullSecret:
+                type: string
+              licenseacceptance:
+                description: LicenseAcceptanceStatus describes the status of the license
+                  acceptance
+                type: string
+              locations:
+                properties:
+                  cloudPakUiUrl:
+                    description: Launch the Cloud Pak
+                    type: string
+                  csAdminHubUrl:
+                    description: Manage services and processes
+                    type: string
+                type: object
+              phase:
+                description: InstallationPhase describes the phase of the overall
+                  Installation
+                type: string
+              size:
+                type: string
+              storageclass:
+                type: string
+              storageclasslargeblock:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+{{- end }}

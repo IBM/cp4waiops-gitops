@@ -24,6 +24,7 @@ Please refer to the following tutorial to decide how you want to deploy your Ins
 
 - [3.1: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
 - [3.2: Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
+- [3.2 airgap install: Using OpenShift GitOps](./docs/how-to-deploy-airgap-32.md)
 
 ## Customization Install
 

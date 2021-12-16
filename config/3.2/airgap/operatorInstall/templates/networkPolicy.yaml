@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress-and-ingress
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  namespace: {{.Values.spec.cp4waiops_namespace}}
+spec:
+  egress:
+  - {}
+  ingress:
+  - {}
+  podSelector: {}
+  policyTypes:
+  - Egress
+  - Ingress

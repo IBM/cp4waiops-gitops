@@ -1,0 +1,42 @@
+---
+###################################
+# CP4WAIOps - Common Configs
+###################################
+spec:
+
+  ## cp4waiops_namespace is the project (namespace) that you want to create the AI Manager instance in.
+  ## You must create a custom project (namespace) and not use the default, kube-system,
+  ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
+  ## This is because AI Manager uses Security Context Constraints (SCC), 
+  ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
+  ##
+
+  imageMirror_namespace: image
+
+  localDockerRegistryHost: ""
+  localDockerRegistryPort: ""
+  localDockerRegistryUser: ""
+  localDockerRegistryPassword: ""
+  cpRegistryPassword: ""
+
+  aiManager:
+    ## Enable AI Manager
+    ##
+    enabled: false
+
+    caseName: ibm-cp-waiops
+
+    caseVersion: 1.1.0
+
+    redhatRegistryUser: ""
+    
+    redhatRegistryPassword: ""
+
+  eventManagerGateway:
+    ## Enable Event Manager
+    ##
+    enabled: false
+
+    ## Event Manager Case Name
+    ##
+    caseName: ibm-netcool-prod

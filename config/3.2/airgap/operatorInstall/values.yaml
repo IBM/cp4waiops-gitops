@@ -1,0 +1,74 @@
+---
+###################################
+# CP4WAIOps - Common Configs
+###################################
+spec:
+
+  ## cp4waiops_namespace is the project (namespace) that you want to create the AI Manager instance in.
+  ## You must create a custom project (namespace) and not use the default, kube-system,
+  ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
+  ## This is because AI Manager uses Security Context Constraints (SCC), 
+  ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
+  ##
+  cp4waiops_namespace: cp4waiops
+
+  localDockerRegistryHost: ""
+  localDockerRegistryPort: ""
+  localDockerRegistryUser: ""
+  localDockerRegistryPassword: ""
+  ## storageClass is the storage class that you want to use. 
+  ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
+  ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-cephfs
+  ##
+  storageClass: rook-cephfs
+
+  ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
+  ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
+  storageClassLargeBlock: rook-cephfs
+
+  aiManager:
+    ## Enable AI Manager
+    ##
+    enabled: false
+
+    ## AI Manager Case Name
+    ##
+    caseName: ibm-cp-waiops
+
+    ## AI Manager Case Version
+    ##
+    caseVersion: 1.1.0
+
+    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
+    ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
+    ##
+    channel: v3.2
+
+    ## size is the size that you require for your AI Manager installation. It can be small or large.
+    ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager
+    size: small
+
+  eventManagerGateway:
+    ## Enable Event Manager
+    ##
+    enabled: false
+
+    # eventManagerGateway
+    version: 1.6.3.2
+    ## Event Manager Case Name
+    ##
+    caseName: ibm-netcool-prod
+
+    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
+    ##
+    clusterDomain: apps.clustername.*.*.com.
+
+    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
+    ## For example, if you want to install Evemt Manager 1.5, the channel should be v1.5
+    ##
+    channel: v1.5
+
+    ## Deployment type (trial or production)
+    ## 
+    deploymentType: trial
+

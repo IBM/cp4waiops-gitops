@@ -1,12 +1,12 @@
-{{- if or .Values.spec.eventManagerGateway.enabled .Values.spec.aiManager.enabled }}
+{{- if .Values.spec.eventManagerGateway.enabled }}
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: cp4waiops-operator-group
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.eventManagerGateway.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "110"
 spec:
   targetNamespaces:
-    - {{.Values.spec.cp4waiops_namespace}}
+    - {{.Values.spec.eventManagerGateway.namespace}}
 {{- end }}

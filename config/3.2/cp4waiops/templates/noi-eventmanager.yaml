@@ -3,7 +3,7 @@ apiVersion: noi.ibm.com/v1beta1
 kind: NOI
 metadata:
   name: evtmanager
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.eventManagerGateway.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:

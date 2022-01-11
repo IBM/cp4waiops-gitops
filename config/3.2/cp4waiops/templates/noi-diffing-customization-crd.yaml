@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-diff-crd
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.eventManagerGateway.namespace}}
   labels:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd

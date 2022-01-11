@@ -1,13 +1,13 @@
-{{- if .Values.spec.eventManagerGateway.enabled }}
+{{- if .Values.spec.eventManager.enabled }}
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: noi
-  namespace: {{.Values.spec.eventManagerGateway.namespace}}
+  namespace: {{.Values.spec.eventManager.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "110"
 spec:
-  channel: {{.Values.spec.eventManagerGateway.channel}}
+  channel: {{.Values.spec.eventManager.channel}}
   installPlanApproval: Automatic
   name: noi
   source: ibm-operator-catalog

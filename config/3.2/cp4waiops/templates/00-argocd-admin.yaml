@@ -22,13 +22,13 @@ roleRef:
   name: cluster-admin
 {{- end }}
 
-{{- if .Values.spec.eventManagerGateway.enabled }}
+{{- if .Values.spec.eventManager.enabled }}
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: openshift-argocd-admin-noi
-  namespace: {{.Values.spec.eventManagerGateway.namespace}}
+  namespace: {{.Values.spec.eventManager.namespace}}
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -39,7 +39,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: openshift-argocd-admin-noi
-    namespace: {{.Values.spec.eventManagerGateway.namespace}}
+    namespace: {{.Values.spec.eventManager.namespace}}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

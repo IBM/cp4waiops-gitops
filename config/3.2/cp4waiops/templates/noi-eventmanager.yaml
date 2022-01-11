@@ -1,9 +1,9 @@
-{{- if .Values.spec.eventManagerGateway.enabled }}
+{{- if .Values.spec.eventManager.enabled }}
 apiVersion: noi.ibm.com/v1beta1
 kind: NOI
 metadata:
   name: evtmanager
-  namespace: {{.Values.spec.eventManagerGateway.namespace}}
+  namespace: {{.Values.spec.eventManager.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:
@@ -82,7 +82,7 @@ spec:
     netDisco: false
   version: 1.6.3.2
   entitlementSecret: ibm-entitlement-key
-  clusterDomain: {{.Values.spec.eventManagerGateway.clusterDomain}}
+  clusterDomain: {{.Values.spec.eventManager.clusterDomain}}
   integrations:
     humio:
       repository: ''
@@ -109,5 +109,5 @@ spec:
     storageSizeImpactGUI: 5Gi
     storageSizeElastic: 75Gi
     storageClassNCOBackup: ''
-  deploymentType: {{.Values.spec.eventManagerGateway.deploymentType}}
+  deploymentType: {{.Values.spec.eventManager.deploymentType}}
 {{- end }}

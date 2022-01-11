@@ -53,7 +53,7 @@ spec:
     ##
     namespace: cp4waiops
 
-  eventManagerGateway:
+  eventManager:
     ## Enable Event Manager
     ##
     enabled: false

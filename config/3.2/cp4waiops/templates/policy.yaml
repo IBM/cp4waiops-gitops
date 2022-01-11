@@ -1,4 +1,4 @@
-{{- if or .Values.spec.eventManagerGateway.enabled .Values.spec.aiManager.enabled }}
+{{- if or .Values.spec.eventManager.enabled .Values.spec.aiManager.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -8,8 +8,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "50"
   {{- if .Values.spec.aiManager.enabled }}
   namespace: {{.Values.spec.aiManager.namespace}}
-  {{- else if .Values.spec.eventManagerGateway.enabled }}
-  namespace: {{.Values.spec.eventManagerGateway.namespace}}
+  {{- else if .Values.spec.eventManager.enabled }}
+  namespace: {{.Values.spec.eventManager.namespace}}
   {{- end }}
 spec:
   template:
@@ -63,7 +63,7 @@ spec:
       restartPolicy: Never
       {{- if .Values.spec.aiManager.enabled }}
       serviceAccountName: openshift-argocd-admin-ai
-      {{- else if .Values.spec.eventManagerGateway.enabled }}
+      {{- else if .Values.spec.eventManager.enabled }}
       serviceAccountName: openshift-argocd-admin-noi
       {{- end }}
   backoffLimit: 1

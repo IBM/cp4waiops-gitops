@@ -114,19 +114,27 @@ Cluster URL: https://kubernetes.default.svc
 Namespace: cp4waiops
 
 HELM
-spec.cp4waiops_namespace: cp4waiops
 spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-spec.channel: v3.2
-spec.size: small
 spec.dockerUsername: cp
 spec.dockerPassword: <entitlement-key>
 spec.storageClass: rook-cephfs
 spec.storageClassLargeBlock: rook-cephfs
+spec.aiManager.enabled: true
+spec.aiManager.namespace: cp4waiops
+spec.aiManager.channel: v3.2
+spec.aiManager.size: small
+spec.eventManager.enabled: false
+spec.eventManager.namespace: eventmanager
+spec.eventManager.clusterDomain: apps.clustername.*.*.com
+spec.eventManager.channel: v1.5
+spec.eventManager.deploymentType: trial
 ```
 
 Where:
 
-- <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+
+- `apps.clustername.*.*.com` is the domain name of your OCP cluster
 
 ### Option 2: Using a terminal
 
@@ -194,19 +202,27 @@ It depends where the OCP comes from , if you're using fyre , then could create g
         --revision HEAD \
         --dest-namespace cp4waiops \
         --dest-server https://kubernetes.default.svc \
-        --helm-set spec.cp4waiops_namespace=cp4waiops \
         --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-        --helm-set spec.channel=v3.2 \
         --helm-set spec.dockerUsername=cp \
         --helm-set spec.dockerPassword= <entitlement-key> \
         --helm-set spec.storageClass=rook-cephfs \
         --helm-set spec.storageClassLargeBlock=rook-cephfs \
-        --helm-set spec.size=small
+        --helm-set spec.aiManager.enabled=true \
+        --helm-set spec.aiManager.namespace=cp4waiops \
+        --helm-set spec.aiManager.channel=v3.2 \
+        --helm-set spec.aiManager.size=small \
+        --helm-set spec.eventManager.enabled=false \
+        --helm-set spec.eventManager.namespace=eventmanager \
+        --helm-set spec.eventManager.clusterDomain= <apps.clustername.*.*.com> \
+        --helm-set spec.eventManager.channel=v1.5 \
+        --helm-set spec.eventManager.deploymentType=trial
   ```
 
 Where:
 
-- <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+
+- `apps.clustername.*.*.com` is the domain name of your OCP cluster
 
 ### Verify Cloud Paks Installation
 

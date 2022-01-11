@@ -4,14 +4,6 @@
 ###################################
 spec:
 
-  ## cp4waiops_namespace is the project (namespace) that you want to create the AI Manager instance in.
-  ## You must create a custom project (namespace) and not use the default, kube-system,
-  ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-  ## This is because AI Manager uses Security Context Constraints (SCC), 
-  ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
-  ##
-  cp4waiops_namespace: cp4waiops
-
   localDockerRegistryHost: ""
   localDockerRegistryPort: ""
   localDockerRegistryUser: ""
@@ -29,7 +21,7 @@ spec:
   aiManager:
     ## Enable AI Manager
     ##
-    enabled: false
+    enabled: true
 
     ## AI Manager Case Name
     ##
@@ -48,12 +40,20 @@ spec:
     ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager
     size: small
 
-  eventManagerGateway:
+    ## namespace is the project (namespace) that you want to create the AI Manager instance in.
+    ## You must create a custom project (namespace) and not use the default, kube-system,
+    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
+    ## This is because AI Manager uses Security Context Constraints (SCC), 
+    ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
+    ##
+    namespace: cp4waiops
+
+  eventManager:
     ## Enable Event Manager
     ##
     enabled: false
 
-    # eventManagerGateway
+    # eventManager version
     version: 1.6.3.2
     ## Event Manager Case Name
     ##
@@ -71,4 +71,10 @@ spec:
     ## Deployment type (trial or production)
     ## 
     deploymentType: trial
+
+    ## namespace is the project (namespace) that you want to create the Event Manager instance in.
+    ## You must create a custom project (namespace) and not use the default, kube-system,
+    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
+    ##
+    namespace: eventmanager
 

@@ -1,9 +1,9 @@
-{{- if .Values.spec.eventManagerGateway.enabled }}
+{{- if .Values.spec.eventManager.enabled }}
 apiVersion: noi.ibm.com/v1beta1
 kind: NOI
 metadata:
   name: evtmanager
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.eventManager.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "100"
 spec:
@@ -82,9 +82,9 @@ spec:
       openstack: false
       vmwarensx: false
     netDisco: false
-  version: {{.Values.spec.eventManagerGateway.version}}
+  version: {{.Values.spec.eventManager.version}}
   entitlementSecret: target-registry-secret
-  clusterDomain: {{.Values.spec.eventManagerGateway.clusterDomain}}
+  clusterDomain: {{.Values.spec.eventManager.clusterDomain}}
   integrations:
     humio:
       repository: ''
@@ -111,5 +111,5 @@ spec:
     storageSizeImpactGUI: 5Gi
     storageSizeElastic: 75Gi
     storageClassNCOBackup: ''
-  deploymentType: {{.Values.spec.eventManagerGateway.deploymentType}}
+  deploymentType: {{.Values.spec.eventManager.deploymentType}}
 {{- end }}

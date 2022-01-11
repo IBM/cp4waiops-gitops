@@ -132,13 +132,13 @@ spec.aiManager.caseName: ibm-cp-waiops
 spec.aiManager.caseVersion: 1.1.0
 spec.aiManager.redhatRegistryUser: <redhatRegistryUser>
 spec.aiManager.redhatRegistryPassword: <redhatRegistryPassword>
-spec.eventManagerGateway.enabled: ## set to true if you want to install EvetMangerGateway
-spec.eventManagerGateway.caseName: ibm-netcool-prod
+spec.eventManager.enabled: ## set to true if you want to install EvetManger
+spec.eventManager.caseName: ibm-netcool-prod
 ```
 
 Where:
 
-- <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
 
 Connect your host to your air-gapped environment and connet your OCP to the gitops.
@@ -161,24 +161,25 @@ Cluster URL: <your airgap OCP cluster>
 Namespace: cp4waiops
 
 HELM
-spec.cp4waiops_namespace: cp4waiops
 spec.localDockerRegistryHost: <localDockerRegistryHost>
 spec.localDockerRegistryPort: <localDockerRegistryPort>
 spec.localDockerRegistryUser: <localDockerRegistryUser>
 spec.localDockerRegistryPassword: <localDockerRegistryPassword>
 spec.storageClass: rook-cephfs
 spec.storageClassLargeBlock: rook-cephfs
-spec.aiManager.enabled: false  ## set to true if you want to install AIManager
+spec.aiManager.enabled: true  ## set to true if you want to install AIManager
+spec.aiManager.namespace: ibm-cp-waiops
 spec.aiManager.caseName: ibm-cp-waiops
 spec.aiManager.caseVersion: 1.1.0
 spec.aiManager.channel: v3.2
 spec.aiManager.size: small
-spec.eventManagerGateway.enabled: false ## set to true if you want to install EvetMangerGateway
-spec.eventManagerGateway.version: 1.6.3.2
-spec.eventManagerGateway.caseName: ibm-netcool-prod
-spec.eventManagerGateway.clusterDomain: apps.clustername.*.*.com
-spec.eventManagerGateway.channel: v1.5
-spec.eventManagerGateway.deploymentType: trial
+spec.eventManager.enabled: false ## set to true if you want to install EvetManger
+spec.eventManager.namespace: ibm-cp-waiops
+spec.eventManager.version: 1.6.3.2
+spec.eventManager.caseName: ibm-netcool-prod
+spec.eventManager.clusterDomain: apps.clustername.*.*.com
+spec.eventManager.channel: v1.5
+spec.eventManager.deploymentType: trial
 ```
 
 ### Option 2: Using a terminal
@@ -258,13 +259,13 @@ It depends where the OCP comes from , if you're using fyre , then could create g
         --helm-set spec.aiManager.caseVersion=1.1.0 \
         --helm-set spec.aiManager.redhatRegistryUser=<redhatRegistryUser> \
         --helm-set spec.aiManager.redhatRegistryPassword=<redhatRegistryPassword> \
-        --helm-set spec.eventManagerGateway.enabled=false \
-        --helm-set spec.eventManagerGateway.caseName=ibm-netcool-prod
+        --helm-set spec.eventManager.enabled=false \
+        --helm-set spec.eventManager.caseName=ibm-netcool-prod
   ```
 
 Where:
 
-- <entitlement-key> is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
 
 Connect your host to your air-gapped environment and connet your OCP to the gitops.
@@ -280,24 +281,25 @@ Connect your host to your air-gapped environment and connet your OCP to the gito
         --revision HEAD \
         --dest-namespace cp4waiops \
         --dest-server <your airgap OCP cluster> \
-        --helm-set spec.imageMirror_namespace=cp4waiops \
         --helm-set spec.localDockerRegistryHost=<localDockerRegistryHost> \
         --helm-set spec.localDockerRegistryPort=<localDockerRegistryPort> \
         --helm-set spec.localDockerRegistryUser=<localDockerRegistryUser> \
         --helm-set spec.localDockerRegistryPassword=<localDockerRegistryPassword> \
         --helm-set spec.storageClass=rook-cephfs \
         --helm-set spec.storageClassLargeBlock=rook-cephfs \
-        --helm-set spec.aiManager.enabled=false \
+        --helm-set spec.aiManager.enabled=true \
+        --helm-set spec.aiManager.namespace=cp4waiops \
         --helm-set spec.aiManager.caseName=ibm-cp-waiops \
         --helm-set spec.aiManager.caseVersion=1.1.0 \
         --helm-set spec.aiManager.channel=<redhatRegistryUser> \
         --helm-set spec.aiManager.size=<redhatRegistryPassword> \
-        --helm-set spec.eventManagerGateway.enabled=false \
-        --helm-set spec.eventManagerGateway.caseName=ibm-netcool-prod \
-        --helm-set spec.eventManagerGateway.version=1.6.3.2 \
-        --helm-set spec.eventManagerGateway.clusterDomain=apps.clustername.*.*.com \
-        --helm-set spec.eventManagerGateway.channel=v1.5 \
-        --helm-set spec.eventManagerGateway.deploymentType=trial
+        --helm-set spec.eventManager.enabled=false \
+        --helm-set spec.eventManager.namespace=eventmanager \
+        --helm-set spec.eventManager.caseName=ibm-netcool-prod \
+        --helm-set spec.eventManager.version=1.6.3.2 \
+        --helm-set spec.eventManager.clusterDomain=apps.clustername.*.*.com \
+        --helm-set spec.eventManager.channel=v1.5 \
+        --helm-set spec.eventManager.deploymentType=trial
   ```
 
 ### Verify Cloud Paks Installation

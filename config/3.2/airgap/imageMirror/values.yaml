@@ -4,12 +4,7 @@
 ###################################
 spec:
 
-  ## cp4waiops_namespace is the project (namespace) that you want to create the AI Manager instance in.
-  ## You must create a custom project (namespace) and not use the default, kube-system,
-  ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-  ## This is because AI Manager uses Security Context Constraints (SCC), 
-  ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
-  ##
+  ## imageMirror_namespace is the project (namespace) that you want to mirror image instance in.
 
   imageMirror_namespace: image
 
@@ -32,7 +27,7 @@ spec:
     
     redhatRegistryPassword: ""
 
-  eventManagerGateway:
+  eventManager:
     ## Enable Event Manager
     ##
     enabled: false

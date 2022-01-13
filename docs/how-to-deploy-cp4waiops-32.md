@@ -9,15 +9,15 @@
     - [Login to ArgoCD](#login-to-argocd)
     - [Storage Consideration](#storage-consideration)
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
-    - [Install Cloud Pak for Watson AIOps using GitOps](#install-cloud-pak-for-watson-aiops-using-gitops)
-    - [Verify Cloud Pak for Watson AIOps Installation](#verify-cloud-pak-for-watson-aiops-installation)
+    - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops)
+    - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation)
     - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
-    - [Grant Argo CD Enough Permissions](#grant-argo-cd-enough-permissions)
-    - [Login to the Argo CD server](#login-to-the-argo-cd-server)
+    - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission-1)
+    - [Login to ArgoCD](#login-to-argocd-1)
     - [Storage Consideration](#storage-consideration-1)
-    - [Install Cloud Pak for Watson AIOps using GitOps](#install-cloud-pak-for-watson-aiops-using-gitops-1)
-    - [Verify Cloud Paks Installation](#verify-cloud-paks-installation)
+    - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops-1)
+    - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
     - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -143,7 +143,7 @@ rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Comple
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
 
-### Install Cloud Pak for Watson AIOps using GitOps
+### Install CP4WAIOPS using GitOps
 
 Same as Ceph, you can follow same steps to install Cloud Pak for Watson AIOps using GitOps.
 
@@ -174,7 +174,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
 
 ![w](images/cloudpak-gitops.png)
 
-### Verify Cloud Pak for Watson AIOps Installation
+### Verify CP4WAIOPS Installation
 
 After both Ceph and Cloud Pak for Watson AIOps are ready, you will be able to see those two Apps from Argo CD UI as follows with status as `Healthy and Synced`.
 
@@ -374,7 +374,7 @@ If all pods are running for Cloud Pak for Watson AIOps, you can login to Cloud P
 
 ## Using CLI to Install CP4WAIOPS
 
-### Grant Argo CD Enough Permissions
+### Grant ArgoCD Cluster Admin Permission
 
 ```yaml
 kind: ClusterRoleBinding
@@ -391,7 +391,7 @@ roleRef:
   name: cluster-admin
 ```
 
-### Login to the Argo CD server
+### Login to ArgoCD
 
    ```sh
    # OCP 4.8
@@ -429,7 +429,7 @@ argocd app create ceph \
       --directory-recurse
 ```
 
-### Install Cloud Pak for Watson AIOps using GitOps
+### Install CP4WAIOPS using GitOps
 
 ```sh
 argocd app create cp4waiops \
@@ -462,7 +462,7 @@ NOTE:
 
 - `apps.clustername.*.*.com` is the domain name of your OCP cluster
 
-### Verify Cloud Paks Installation
+### Verify CP4WAIOPS Installation
 
 You can run the command as follows to check:
 

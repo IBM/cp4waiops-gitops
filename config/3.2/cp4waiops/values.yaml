@@ -18,6 +18,7 @@ spec:
   ## Log in to MyIBM Container Software Library: https://myibm.ibm.com/products-services/containerlibrary
   ## Opens in a new tab with the IBMid and password details 
   ## that are associated with the entitled software.
+  ## DO NOT Commit your docker password here, but always specify it in UI or CLI when creating the ArgoCD app.
   ## 
   dockerPassword: password
 

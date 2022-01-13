@@ -1,4 +1,4 @@
-{{- if .Values.spec.eventManagerGateway.enabled }}
+{{- if .Values.spec.eventManager.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -44,7 +44,7 @@ spec:
               mv cloudctl-linux-amd64 /usr/local/bin/cloudctl
               mkdir $HOME/offline
 
-              export CASE_NAME={{.Values.spec.eventManagerGateway.caseName}}
+              export CASE_NAME={{.Values.spec.eventManager.caseName}}
               export CASE_INVENTORY_SETUP=noiOperatorSetup
               export OFFLINEDIR=$HOME/offline
               export CASE_REPO_PATH=https://github.com/IBM/cloud-pak/raw/master/repo/case

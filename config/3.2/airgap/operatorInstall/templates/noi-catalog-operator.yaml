@@ -1,11 +1,11 @@
-{{- if or .Values.spec.eventManagerGateway.enabled }}
+{{- if or .Values.spec.eventManager.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: cloudctl-evemntmanagerinstall-operator
   annotations:
     argocd.argoproj.io/sync-wave: "50"
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.eventManager.namespace}}
 spec:
   template:
     spec:
@@ -34,7 +34,7 @@ spec:
               mv cloudctl-linux-amd64 /usr/local/bin/cloudctl
               mkdir $HOME/offline
 
-              export CASE_NAME={{.Values.spec.eventManagerGateway.caseName}}
+              export CASE_NAME={{.Values.spec.eventManager.caseName}}
               export CASE_INVENTORY_SETUP=noiOperatorSetup
               export OFFLINEDIR=$HOME/offline
               export CASE_REPO_PATH=https://github.com/IBM/cloud-pak/raw/master/repo/case
@@ -47,7 +47,7 @@ spec:
               export CLOUDCTL_CASE_USE_CATALOG_DIGEST=1
 
               export CATALOG_NAMESPACE=openshift-marketplace
-              export NAMESPACE={{.Values.spec.cp4waiops_namespace}}              
+              export NAMESPACE={{.Values.spec.eventManager.namespace}}              
 
               oc patch image.config.openshift.io/cluster --type=merge \
               -p '{"spec":{"registrySources":{"insecureRegistries":["'$LOCAL_DOCKER_REGISTRY'"]}}}' \
@@ -80,6 +80,6 @@ spec:
               rm -rf $OFFLINEDIR
 
       restartPolicy: Never
-      serviceAccountName: openshift-argocd-admin
+      serviceAccountName: openshift-argocd-admin-noi
   backoffLimit: 1
 {{- end }}

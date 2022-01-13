@@ -5,7 +5,7 @@ metadata:
   name: cloudctl-aimanagerinstall-operator
   annotations:
     argocd.argoproj.io/sync-wave: "50"
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.aiManager.namespace}}
 spec:
   template:
     spec:
@@ -48,7 +48,7 @@ spec:
               export LOCAL_DOCKER_REGISTRY_USER={{.Values.spec.localDockerRegistryUser}}
               export LOCAL_DOCKER_REGISTRY_PASSWORD={{.Values.spec.localDockerRegistryPassword}}
               export CATALOG_NAMESPACE=openshift-marketplace
-              export NAMESPACE={{.Values.spec.cp4waiops_namespace}}
+              export NAMESPACE={{.Values.spec.aiManager.namespace}}
               
               oc patch image.config.openshift.io/cluster --type=merge \
               -p '{"spec":{"registrySources":{"insecureRegistries":["'$LOCAL_DOCKER_REGISTRY'"]}}}' \
@@ -80,6 +80,6 @@ spec:
               rm -rf $OFFLINEDIR
 
       restartPolicy: Never
-      serviceAccountName: openshift-argocd-admin
+      serviceAccountName: openshift-argocd-admin-ai
   backoffLimit: 1
 {{- end }}

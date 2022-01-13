@@ -1,10 +1,11 @@
+{{- if .Values.spec.aiManager.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-all-egress-and-ingress
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.aiManager.namespace}}
 spec:
   egress:
   - {}
@@ -14,3 +15,4 @@ spec:
   policyTypes:
   - Egress
   - Ingress
+{{- end }}

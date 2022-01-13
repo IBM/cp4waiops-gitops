@@ -58,6 +58,9 @@ spec:
     ##
     enabled: false
 
+    # eventManager version
+    version: 1.6.3.2
+
     ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
     ##
     clusterDomain: apps.clustername.*.*.com.

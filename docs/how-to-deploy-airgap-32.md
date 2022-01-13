@@ -33,7 +33,7 @@ If your cluster is not connected to the internet, you can complete a production 
 - You must prepare a bastion host that can connect to the internet and to the air-gapped network with access to the Red Hat® OpenShift® Container Platform cluster and the local, intranet Docker registry.
 - Your host must have 120GB storage to hold all of the software that is to be transferred to the local, intranet Docker registry.
 - Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub
-- Local image registry and access
+- Local image registry and access, refer to [how to create a local registry](how-to-create-local-registry.md)
 - OCP 4.8 to install CP4WAIops
 
 ## Install CP4WAIOPS

@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) with GitOps](#deploy-cp4waiops-cloud-pak-for-watson-aiops-with-gitops)
+- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps](#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOPS Using OpenShift Web Console](#install-cp4waiops-using-openshift-web-console)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission)
@@ -22,7 +22,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) with GitOps
+# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps
 
 ## Prerequisite
 

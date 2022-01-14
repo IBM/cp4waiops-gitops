@@ -26,7 +26,7 @@
 
 ## Prerequisite
 
-- NOTE: GitOps is a technical preview feature for CP4WAIOPS, and only support OpenShift 4.8 with CP4WAIOPS 3.2
+- NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
 - Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
 - GitOps, refer to [Installing GitOps Operator in web console](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html)
 

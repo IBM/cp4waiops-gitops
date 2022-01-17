@@ -17,11 +17,15 @@ This repo is about using either OpenShift GitOps or Kubernetes GitOps to deploy 
 - [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0)
 
 ## Tutorial for CP4WAIOPS GitOps
+
 Please refer to the following tutorial to decide how you want to deploy your CP4WAIOPS Cluster:
 - [3.1 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
 - [3.2 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
 - [3.2 Airgap Install: Using OpenShift GitOps](./docs/how-to-deploy-airgap-32.md)
 
+
 ## Advanced Install for CP4WAIOPS GitOps
+
 As a customer, you may want to fork or copy this repo and customize it to your needs, and you can also use Github etc to track all the changes that you have made.
+
 Please navigate to [Advanced Install](./docs/advanced-install.md) page for the details.

@@ -72,7 +72,7 @@ The parameters for Ceph are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
   - Target version: HEAD
   - path: ceph
 - DESTINATION
@@ -154,7 +154,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/cloud-pak-gitops/cp4waiops-gitops
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
   - Target version: HEAD
   - path: config/3.2/cp4waiops
 - DESTINATION
@@ -421,7 +421,7 @@ In this tutorial, we are using Ceph, you can select different storage based on y
 argocd app create ceph \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/cloud-pak-gitops/cp4waiops-gitops.git \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path ceph \
       --revision HEAD \
       --dest-namespace rook-ceph \
@@ -435,7 +435,7 @@ argocd app create ceph \
 argocd app create cp4waiops \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/cloud-pak-gitops/cp4waiops-gitops.git \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/3.2/cp4waiops \
       --revision HEAD \
       --dest-namespace cp4waiops \

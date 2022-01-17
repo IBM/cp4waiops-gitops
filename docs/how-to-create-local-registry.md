@@ -2,26 +2,26 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Creating a multi-arch docker registry](#creating-a-multi-arch-docker-registry)
+- [Creating a Multi-arch Docker Registry](#creating-a-multi-arch-docker-registry)
   - [Prerequisites](#prerequisites)
   - [Procedure](#procedure)
-    - [Install the required packages](#install-the-required-packages)
-    - [Create folders for the registry](#create-folders-for-the-registry)
-    - [Provide a certificate for the registry](#provide-a-certificate-for-the-registry)
-    - [Generate a user name and a password for your registry that uses the bcrpt format](#generate-a-user-name-and-a-password-for-your-registry-that-uses-the-bcrpt-format)
-    - [Create the docker-registry container to host your registry](#create-the-docker-registry-container-to-host-your-registry)
-    - [Open the required ports for your registry](#open-the-required-ports-for-your-registry)
-    - [Add the self-signed certificate to your list of trusted certificates](#add-the-self-signed-certificate-to-your-list-of-trusted-certificates)
-    - [Confirm that the registry is available](#confirm-that-the-registry-is-available)
-  - [Access the docker registry](#access-the-docker-registry)
-    - [Generate the base64-encoded user name and password or token for your mirror registry](#generate-the-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry)
-    - [Prepare the pullsecret content as below :](#prepare-the-pullsecret-content-as-below-)
-    - [Create the imagepullsecret](#create-the-imagepullsecret)
-    - [Handle cert for accessing the docker registry](#handle-cert-for-accessing-the-docker-registry)
+    - [Install Httpd Tools](#install-httpd-tools)
+    - [Create Folders for Docker Registry](#create-folders-for-docker-registry)
+    - [Provide Certificate for Docker Registry](#provide-certificate-for-docker-registry)
+    - [Generate User Name and Password for Docker Registry](#generate-user-name-and-password-for-docker-registry)
+    - [Create docker-registry Container to Host Your Registry](#create-docker-registry-container-to-host-your-registry)
+    - [Open Required Ports for Docker Registry](#open-required-ports-for-docker-registry)
+    - [Add Self-signed Certificate to Your List of Trusted Certificates](#add-self-signed-certificate-to-your-list-of-trusted-certificates)
+    - [Confirm Docker Registry is Available](#confirm-docker-registry-is-available)
+  - [Access Docker Registry](#access-docker-registry)
+    - [Generate base64-encoded User Name and Password or Token for Your Mirror Registry](#generate-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry)
+    - [Prepare Pullsecret Content](#prepare-pullsecret-content)
+    - [Create Imagepullsecret](#create-imagepullsecret)
+    - [Handle Cert for Accessing Docker Registry](#handle-cert-for-accessing-docker-registry)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Creating a multi-arch docker registry 
+# Creating a Multi-arch Docker Registry
 
 ## Prerequisites
 
@@ -30,25 +30,25 @@
 * The registry host can access the internet.
 
 ## Procedure
-### Install the required packages
+### Install Httpd Tools
 
 ```
-# yum -y install docker httpd-tools
+yum -y install docker httpd-tools
 ```
 
-### Create folders for the registry
+### Create Folders for Docker Registry
 
 ```
-# mkdir -p /opt/registry/{auth,certs,data}
+mkdir -p /opt/registry/{auth,certs,data}
 ```
 
-### Provide a certificate for the registry
+### Provide Certificate for Docker Registry
 
 If you do not have an existing, trusted certificate authority, you can generate a self-signed certificate:
 
 ```
 cd /opt/registry/certs
-# openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
 ```
 
 At the prompts, provide the required values for the certificate:
@@ -78,14 +78,14 @@ Enter your email address. For more information, see the req description in the O
 
 **Note**: make sure enter the `hostname` for the common name , that could be resolved to the expect IP address when login docker reigstry
 
-### Generate a user name and a password for your registry that uses the bcrpt format
+### Generate User Name and Password for Docker Registry
 
 ```
 htpasswd -bBc /opt/registry/auth/htpasswd <user_name> <password> 
 ```
 **Note:** you will use this `user_name` `password` to login the docker registry
 
-### Create the docker-registry container to host your registry
+### Create docker-registry Container to Host Your Registry
 
 ```
 docker run --name mirror-registry -p <local_registry_host_port>:5000 \
@@ -102,7 +102,7 @@ docker run --name mirror-registry -p <local_registry_host_port>:5000 \
 ```
 **Note:** For `local_registry_host_port`, specify the port that your docker registry uses to serve content
 
-### Open the required ports for your registry
+### Open Required Ports for Docker Registry
  
 ```
 # firewall-cmd --add-port=<local_registry_host_port>/tcp --zone=internal --permanent 
@@ -110,14 +110,14 @@ docker run --name mirror-registry -p <local_registry_host_port>:5000 \
 # firewall-cmd --reload
 ```
 
-### Add the self-signed certificate to your list of trusted certificates
+### Add Self-signed Certificate to Your List of Trusted Certificates
 
 ```
 cp /opt/registry/certs/domain.crt /etc/pki/ca-trust/source/anchors/
 # update-ca-trust
 ```
 
-### Confirm that the registry is available
+### Confirm Docker Registry is Available
 
 ```
 curl -u <user_name>:<password> -k https://<local_registry_host_name>:<local_registry_host_port>/v2/_catalog 
@@ -125,11 +125,14 @@ curl -u <user_name>:<password> -k https://<local_registry_host_name>:<local_regi
 {"repositories":[]}
 ```
 
-**Note:** For `user_name` and `password` , specify the user name and password for your registry. For `local_registry_host_name`, specify the registry domain name that you specified in your certificate, such as registry.example.com. For `local_registry_host_port`, specify the port that your docker registry uses to serve content
+**Note:**
+- For `user_name` and `password` , specify the user name and password for your registry.
+- For `local_registry_host_name`, specify the registry domain name that you specified in your certificate, such as `registry.example.com`
+- For `local_registry_host_port`, specify the port that your docker registry uses to serve content
 
-## Access the docker registry
+## Access Docker Registry
 
-### Generate the base64-encoded user name and password or token for your mirror registry
+### Generate base64-encoded User Name and Password or Token for Your Mirror Registry
 
 ```
 # echo -n '<user_name>:<password>' | base64 -w0
@@ -139,10 +142,10 @@ YWRtaW46YWRtaW4=
 
 **Note:** For `user_name` and `password`, specify the user name and password that you configured for your registry
 
-### Prepare the pullsecret content as below :
+### Prepare Pullsecret Content
 
-```
-cat config.json
+```console
+# cat config.json
 {
   "auths": {
     "<local_registry_host_name>:<local_registry_host_port>": {
@@ -152,10 +155,12 @@ cat config.json
 }
 ```
 
-**Note:** For `local_registry_host_name`, specify the registry domain name that you specified in your certificate, and for `local_registry_host_port`, specify the port that your docker registry uses to serve content.
-	For `credentials`, specify the base64-encoded user name and password for the docker registry that you generated.
+**Note:**
+- For `local_registry_host_name`, specify the registry domain name that you specified in your certificate.
+- For `local_registry_host_port`, specify the port that your docker registry uses to serve content.
+- For `credentials`, specify the base64-encoded user name and password for the docker registry that you generated.
 	
-### Create the imagepullsecret
+### Create Imagepullsecret
 
 ```
 kubectl create secret generic cp4mcm-pull-secret \
@@ -163,19 +168,18 @@ kubectl create secret generic cp4mcm-pull-secret \
   --type=kubernetes.io/dockerconfigjson 
 ```
 
-**Note:** you need fill in the `config.json` path here
+**Note:** You need fill in the `config.json` path here
 
-### Handle cert for accessing the docker registry
+### Handle Cert for Accessing Docker Registry
 
-* Pure kuberentes
-	* 	Copy the domain.crt file to `/etc/docker/certs.d/<local_registry_host_name>:<local_registry_host_port>/ca.crt` on every kubernetes node . You do not need to restart Docker
-* OCP 4
-	*  Copy the `domain.crt` to cluster and rename it to `ca.crt`
-	*  Create configmap and patch to use the cert 
+- Pure kuberentes
+  - Copy the domain.crt file to `/etc/docker/certs.d/<local_registry_host_name>:<local_registry_host_port>/ca.crt` on every kubernetes node . You do not need to restart Docker
+- OCP 4
+  - Copy the `domain.crt` to cluster and rename it to `ca.crt`
+  - Create configmap and patch to use the cert
 	  
 ```
 # oc create configmap registry-config --from-file=${MIRROR_ADDR_HOSTNAME}..${local_registry_host_port}=$path/ca.crt -n openshift-config
 	
 # oc patch image.config.openshift.io/cluster --patch '{"spec":{"additionalTrustedCA":{"name":"registry-config"}}}' --type=merge
 ```
-

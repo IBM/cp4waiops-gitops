@@ -41,6 +41,7 @@ In this tutorial, we will share some detail for airgap with a Bastion host.
 - Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
 - GitOps, refer to [Installing GitOps Operator in web console](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html)
 - Local image registry and access, refer to [how to create a local registry](how-to-create-local-registry.md)
+- You need to have GitHub Enterprise Edition or Gitlab running in your local network. In this tutorial, we are using `github.com` to simulate.
 
 ## Install CP4WAIOPS Using OpenShift Web Console
 

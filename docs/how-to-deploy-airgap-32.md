@@ -16,8 +16,8 @@
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission-1)
     - [Login to the ArgoCD server](#login-to-the-argocd-server)
-    - [Storage Consideration](#storage-consideration-1)
     - [Mirror Image to Local Registry with GitOps](#mirror-image-to-local-registry-with-gitops-1)
+    - [Storage Consideration](#storage-consideration-1)
     - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops-1)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
     - [Access CP4WAIOps UI](#access-cp4waiops-ui)
@@ -473,23 +473,6 @@ roleRef:
          --insecure
    ```
 
-### Storage Consideration
-
-Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
-
-In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
-
-```sh
-argocd app create ceph \
-      --sync-policy automatic \
-      --project default \
-      --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path ceph \
-      --revision HEAD \
-      --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc \
-      --directory-recurse
-```
 ### Mirror Image to Local Registry with GitOps
 
 ```sh
@@ -521,6 +504,24 @@ NOTE:
 - `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
 Connect your host to your air-gapped environment and connet your OCP to the gitops.
+
+### Storage Consideration
+
+Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
+
+In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
+
+```sh
+argocd app create ceph \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path ceph \
+      --revision HEAD \
+      --dest-namespace rook-ceph \
+      --dest-server https://kubernetes.default.svc \
+      --directory-recurse
+```
 
 ### Install CP4WAIOPS using GitOps
 

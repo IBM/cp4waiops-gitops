@@ -8,6 +8,9 @@
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission)
     - [Login to ArgoCD](#login-to-argocd)
     - [Mirror Image to Local Registry with GitOps](#mirror-image-to-local-registry-with-gitops)
+      - [Bastion host](#bastion-host)
+      - [Portable compute device](#portable-compute-device)
+      - [Portable storage device](#portable-storage-device)
     - [Storage Consideration](#storage-consideration)
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
     - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops)
@@ -75,6 +78,10 @@ In this tutorial, we will share some detail for airgap with a Bastion host.
 
 ### Mirror Image to Local Registry with GitOps
 
+#### Bastion host
+
+Mirror Image to local Registry on Bastion host with GitOps
+
 ```
 - GENERAL
   - Application Name: anyname(like "imagemirror")
@@ -85,7 +92,7 @@ In this tutorial, we will share some detail for airgap with a Bastion host.
   - Target version: HEAD
   - path: config/3.2/airgap/imageMirror
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
+  - Cluster URL: <cluster-url-in-basion-host>
   - Namespace: image
 - HELM
   - spec.imageMirror_namespace: image
@@ -108,6 +115,86 @@ NOTE:
 - `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
 Connect your host to your air-gapped environment and connet your OCP to the gitops.
+
+#### Portable compute device
+
+1. Mirror Image to Portable Registry on Portable compute device with GitOps, https://github.com/IBM/cp4waiops-gitops/blob/main/docs/how-to-deploy-airgap-32.md#mirror-image-to-local-registry-with-gitops
+
+2. Connect your Portable compute device to your air-gapped environment and connet your OCP to the gitops. Mirror Image from Portable Registry on Portable compute device to local Registry with GitOps
+
+```
+- GENERAL
+  - Application Name: anyname(like "imagecopy")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/3.2/airgap/portableImageCopy
+- DESTINATION
+  - Cluster URL: <cluster-url-in-portable-compute-device>
+  - Namespace: imagecopy
+- HELM
+  - spec.imagecopy_namespace: imagecopy
+  - spec.caseName: ibm-cp-waiops
+  - spec.caseVersion: 1.1.0
+  - spec.portableDockerRegistryHost: <portableDockerRegistryHost>
+  - spec.portableDockerRegistryPort: <portableDockerRegistryPort>
+  - spec.portableDockerRegistryUser: <portableDockerRegistryUser>
+  - spec.portableDockerRegistryPassword: <portableDockerRegistryPassword>
+  - spec.localDockerRegistryHost: <localDockerRegistryHost>
+  - spec.localDockerRegistryPort: <localDockerRegistryPort>
+  - spec.localDockerRegistryUser: <localDockerRegistryUser>
+  - spec.localDockerRegistryPassword: <localDockerRegistryPassword>
+```
+
+#### Portable storage device
+
+1. Mirror Image to Portable Registry on external host with GitOps, https://github.com/IBM/cp4waiops-gitops/blob/main/docs/how-to-deploy-airgap-32.md#mirror-image-to-local-registry-with-gitops
+
+2. Archive the offline data (under your portable registry data directory) for transfer
+
+```
+tar -cvzf offline.tgz -C /opt/registry .
+```
+
+3. Copy offline data to local compute device
+
+```
+mkdir -p OFFLINEDIR
+tar -xvf offline.tgz -C OFFLINEDIR
+```
+
+4. On local compute device, set up a registry. Run the local Docker type registry as a container. The registry then points to the Docker file system directory (OFFLINEDIR) that is transferred from the external host
+
+5. Mirror Image from Portable Registry on local compute device to local Registry with GitOps
+
+```
+- GENERAL
+  - Application Name: anyname(like "imagecopy")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/3.2/airgap/portableImageCopy
+- DESTINATION
+  - Cluster URL: <cluster-url-in-local-compute-device>
+  - Namespace: imagecopy
+- HELM
+  - spec.imagecopy_namespace: imagecopy
+  - spec.caseName: ibm-cp-waiops
+  - spec.caseVersion: 1.1.0
+  - spec.portableDockerRegistryHost: <portableDockerRegistryHost>
+  - spec.portableDockerRegistryPort: <portableDockerRegistryPort>
+  - spec.portableDockerRegistryUser: <portableDockerRegistryUser>
+  - spec.portableDockerRegistryPassword: <portableDockerRegistryPassword>
+  - spec.localDockerRegistryHost: <localDockerRegistryHost>
+  - spec.localDockerRegistryPort: <localDockerRegistryPort>
+  - spec.localDockerRegistryUser: <localDockerRegistryUser>
+  - spec.localDockerRegistryPassword: <localDockerRegistryPassword>
+```
+
 ### Storage Consideration
 
 Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
@@ -118,6 +205,7 @@ From ArgoCD UI, click `NEW APP` and input parameters as follows for Ceph and the
 
 The parameters for Ceph are as follows:
 
+```
 - GENERAL
   - Application Name: ceph
   - Project: default
@@ -127,10 +215,11 @@ The parameters for Ceph are as follows:
   - Target version: HEAD
   - path: ceph
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
+  - Cluster URL: <ocp-cluster-url>
   - Namespace: rook-ceph
 - DIRECTORY
   - DIRECTORY RECURSE: check it
+```
 
 ![w](images/ceph-gitops.png)
 
@@ -200,6 +289,7 @@ Same as Ceph, you can follow same steps to install Cloud Pak for Watson AIOps us
 
 The parameters for Cloud Pak for Watson AIOps are as follows:
 
+```
 - GENERAL
   - Application Name: anyname(like "cp4waiops")
   - Project: default
@@ -209,7 +299,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Target version: HEAD
   - path: config/3.2/cp4waiops
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
+  - Cluster URL: <ocp-cluster-url>
   - Namespace: cp4waiops
 - HELM
   - spec.localDockerRegistryHost: <localDockerRegistryHost>
@@ -231,6 +321,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - spec.eventManager.clusterDomain: apps.clustername.*.*.com
   - spec.eventManager.channel: v1.5
   - spec.eventManager.deploymentType: trial
+```
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 

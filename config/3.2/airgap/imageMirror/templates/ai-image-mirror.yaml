@@ -1,0 +1,104 @@
+{{- if .Values.spec.aiManager.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cloudctl-aimanagerimage-mirror
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  namespace: {{.Values.spec.imageMirror_namespace}}
+spec:
+  template:
+    spec:
+      containers:
+        - name: config
+          image: centos:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "800m"
+            limits:
+              memory: "2Gi"
+              cpu: "800m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eo pipefail
+              set -x
+
+              echo y | yum -y install podman
+              echo y | yum install httpd-tools
+              echo y | yum -y install skopeo
+              echo y | yum -y install openssl
+
+              echo y | yum install wget
+              wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.8.3/openshift-client-linux-4.8.3.tar.gz
+              tar -xf openshift-client-linux-4.8.3.tar.gz
+              mv oc /usr/bin/oc
+
+              wget https://github.com/IBM/cloud-pak-cli/releases/latest/download/cloudctl-linux-amd64.tar.gz
+              export CLOUDCTL_LAUNCH_SKIP_PREREQ_CHECK=true
+              tar -xf cloudctl-linux-amd64.tar.gz
+              chmod 755 cloudctl-linux-amd64
+              mv cloudctl-linux-amd64 /usr/local/bin/cloudctl
+              mkdir $HOME/offline
+
+              export CASE_NAME={{.Values.spec.aiManager.caseName}}
+              export CASE_VERSION={{.Values.spec.aiManager.caseVersion}}
+              export CASE_ARCHIVE=$CASE_NAME-$CASE_VERSION.tgz
+              export CASE_INVENTORY_SETUP=cpwaiopsSetup
+              export OFFLINEDIR=$HOME/offline
+              export CASE_REPO_PATH=https://github.com/IBM/cloud-pak/raw/master/repo/case
+              export CASE_LOCAL_PATH=$OFFLINEDIR/$CASE_ARCHIVE
+              export REDHAT_REGISTRY_USER={{.Values.spec.aiManager.redhatRegistryUser}}
+              export REDHAT_REGISTRY_PASSWORD={{.Values.spec.aiManager.redhatRegistryPassword}}
+              export CP_REGISTRY_PASSWORD={{.Values.spec.cpRegistryPassword}}
+
+              export LOCAL_DOCKER_REGISTRY_HOST={{.Values.spec.localDockerRegistryHost}}
+              export LOCAL_DOCKER_REGISTRY_PORT={{.Values.spec.localDockerRegistryPort}}
+              export LOCAL_DOCKER_REGISTRY=$LOCAL_DOCKER_REGISTRY_HOST:$LOCAL_DOCKER_REGISTRY_PORT
+              export LOCAL_DOCKER_REGISTRY_USER={{.Values.spec.localDockerRegistryUser}}
+              export LOCAL_DOCKER_REGISTRY_PASSWORD={{.Values.spec.localDockerRegistryPassword}}
+
+              cloudctl case save \
+              --repo https://github.com/IBM/cloud-pak/raw/master/repo/case \
+              --case $CASE_NAME \
+              --version $CASE_VERSION \
+              --outputdir $HOME/offline
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry registry.redhat.io --user $REDHAT_REGISTRY_USER --pass $REDHAT_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry $LOCAL_DOCKER_REGISTRY --user $LOCAL_DOCKER_REGISTRY_USER --pass $LOCAL_DOCKER_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry registry.access.redhat.com --user $REDHAT_REGISTRY_USER --pass $REDHAT_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry cp.icr.io --user cp --pass $CP_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $CASE_LOCAL_PATH \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action mirror-images \
+                --args "--registry $LOCAL_DOCKER_REGISTRY --inputDir $OFFLINEDIR"
+
+
+      restartPolicy: Never
+      serviceAccountName: openshift-argocd-prepare
+  backoffLimit: 1
+{{- end }}

@@ -1,0 +1,11 @@
+{{- if .Values.spec.eventManager.enabled }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{.Values.spec.eventManager.namespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  finalizers:
+  - kubernetes
+{{- end }}

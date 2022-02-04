@@ -53,30 +53,3 @@ spec:
     ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
     ##
     namespace: cp4waiops
-
-  eventManager:
-    ## Enable Event Manager
-    ##
-    enabled: false
-
-    # eventManager version
-    version: 1.6.3.2
-
-    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
-    ##
-    clusterDomain: apps.clustername.*.*.com.
-
-    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
-    ## For example, if you want to install Evemt Manager 1.5, the channel should be v1.5
-    ##
-    channel: v1.5
-
-    ## Deployment type (trial or production)
-    ## 
-    deploymentType: trial
-
-    ## namespace is the project (namespace) that you want to create the Event Manager instance in.
-    ## You must create a custom project (namespace) and not use the default, kube-system,
-    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-    ##
-    namespace: eventmanager

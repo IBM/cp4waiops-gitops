@@ -1,0 +1,85 @@
+{{- if .Values.spec.aiManager.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cloudctl-aimanagerinstall-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
+  namespace: {{.Values.spec.aiManager.namespace}}
+spec:
+  template:
+    spec:
+      containers:
+        - name: config
+          image: quay.io/openshift/origin-cli:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "800m"
+            limits:
+              memory: "2Gi"
+              cpu: "800m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eo pipefail
+              set -x
+
+              wget https://github.com/IBM/cloud-pak-cli/releases/latest/download/cloudctl-linux-amd64.tar.gz
+              export CLOUDCTL_LAUNCH_SKIP_PREREQ_CHECK=true
+              tar -xf cloudctl-linux-amd64.tar.gz
+              chmod 755 cloudctl-linux-amd64
+              mv cloudctl-linux-amd64 /usr/local/bin/cloudctl
+              mkdir $HOME/offline
+
+              export CASE_NAME={{.Values.spec.aiManager.caseName}}
+              export CASE_VERSION={{.Values.spec.aiManager.caseVersion}}
+              export CASE_ARCHIVE=$CASE_NAME-$CASE_VERSION.tgz
+              export CASE_INVENTORY_SETUP=cpwaiopsSetup
+              export OFFLINEDIR=$HOME/offline
+              export CASE_REPO_PATH=https://github.com/IBM/cloud-pak/raw/master/repo/case
+              export CASE_LOCAL_PATH=$OFFLINEDIR/$CASE_ARCHIVE
+
+              export LOCAL_DOCKER_REGISTRY_HOST={{.Values.spec.localDockerRegistryHost}}
+              export LOCAL_DOCKER_REGISTRY_PORT={{.Values.spec.localDockerRegistryPort}}
+              export LOCAL_DOCKER_REGISTRY=$LOCAL_DOCKER_REGISTRY_HOST:$LOCAL_DOCKER_REGISTRY_PORT
+              export LOCAL_DOCKER_REGISTRY_USER={{.Values.spec.localDockerRegistryUser}}
+              export LOCAL_DOCKER_REGISTRY_PASSWORD={{.Values.spec.localDockerRegistryPassword}}
+              export CATALOG_NAMESPACE=openshift-marketplace
+              export NAMESPACE={{.Values.spec.aiManager.namespace}}
+              
+              oc patch image.config.openshift.io/cluster --type=merge \
+              -p '{"spec":{"registrySources":{"insecureRegistries":["'$LOCAL_DOCKER_REGISTRY'"]}}}' \
+              || {
+                echo "image.config.openshift.io/cluster patch failed."
+                exit
+              }
+
+              cloudctl case save \
+              --repo https://github.com/IBM/cloud-pak/raw/master/repo/case \
+              --case $CASE_NAME \
+              --version $CASE_VERSION \
+              --outputdir $HOME/offline
+
+              cloudctl case launch \
+                --case $CASE_LOCAL_PATH \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action install-catalog \
+                --namespace $CATALOG_NAMESPACE \
+                --args "--registry $LOCAL_DOCKER_REGISTRY --inputDir $OFFLINEDIR"
+
+              cloudctl case launch  \
+                --case $CASE_LOCAL_PATH \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action install-operator \
+                --namespace $NAMESPACE \
+                --args "--channelName '{{.Values.spec.aiManager.channel}}'"
+
+              rm -rf $OFFLINEDIR
+
+      restartPolicy: Never
+      serviceAccountName: openshift-argocd-admin-ai
+  backoffLimit: 1
+{{- end }}

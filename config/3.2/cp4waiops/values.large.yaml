@@ -44,7 +44,7 @@ spec:
 
     ## size is the size that you require for your AI Manager installation. It can be small or large.
     ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager
-    size: small
+    size: large
 
     ## namespace is the project (namespace) that you want to create the AI Manager instance in.
     ## You must create a custom project (namespace) and not use the default, kube-system,

@@ -32,32 +32,10 @@ spec:
   ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
   storageClassLargeBlock: rook-cephfs
 
-  aiManager:
-    ## Enable AI Manager
-    ##
-    enabled: true
-
-    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
-    ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
-    ##
-    channel: v3.2
-
-    ## size is the size that you require for your AI Manager installation. It can be small or large.
-    ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager
-    size: small
-
-    ## namespace is the project (namespace) that you want to create the AI Manager instance in.
-    ## You must create a custom project (namespace) and not use the default, kube-system,
-    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-    ## This is because AI Manager uses Security Context Constraints (SCC), 
-    ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
-    ##
-    namespace: cp4waiops
-
   eventManager:
     ## Enable Event Manager
     ##
-    enabled: false
+    enabled: true
 
     # eventManager version
     version: 1.6.3.2

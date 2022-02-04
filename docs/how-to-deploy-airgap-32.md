@@ -2,11 +2,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps](#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops)
+- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster](#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops-in-airgap-cluster)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOPS Using OpenShift Web Console](#install-cp4waiops-using-openshift-web-console)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission)
     - [Login to ArgoCD](#login-to-argocd)
+    - [Mirror Image to Local Registry with GitOps](#mirror-image-to-local-registry-with-gitops)
     - [Storage Consideration](#storage-consideration)
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
     - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops)
@@ -14,7 +15,8 @@
     - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission-1)
-    - [Login to ArgoCD](#login-to-argocd-1)
+    - [Login to the ArgoCD server](#login-to-the-argocd-server)
+    - [Mirror Image to Local Registry with GitOps](#mirror-image-to-local-registry-with-gitops-1)
     - [Storage Consideration](#storage-consideration-1)
     - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops-1)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
@@ -22,13 +24,26 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps
+# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster
+
+Refer to [here](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline) go get some detail for CP4WAIOPS 3.2 airgap install detail.
+
+There are three airgap models are supported as follows:
+- Bastion host
+- Portable compute device
+- Portable storage device
+
+In this tutorial, we will share some detail for airgap with a Bastion host.
 
 ## Prerequisite
 
 - NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
+- You must prepare a bastion host that can connect to the internet and to the air-gapped network with access to the Red Hat® OpenShift® Container Platform cluster and the local, intranet Docker registry.
+- Your bastion host must have 120GB storage to hold all of the software that is to be transferred to the local, intranet Docker registry.
 - Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
 - GitOps, refer to [Installing GitOps Operator in web console](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html)
+- Local image registry and access, refer to [how to create a local registry](how-to-create-local-registry.md)
+- You need to have GitHub Enterprise Edition or Gitlab running in your local network. In this tutorial, we are using `github.com` to simulate.
 
 ## Install CP4WAIOPS Using OpenShift Web Console
 
@@ -57,6 +72,42 @@
 - GitOps UI will be poped up and you can login with `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
+
+### Mirror Image to Local Registry with GitOps
+
+```
+- GENERAL
+  - Application Name: anyname(like "imagemirror")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/3.2/airgap/imageMirror
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: image
+- HELM
+  - spec.imageMirror_namespace: image
+  - spec.localDockerRegistryHost: <localDockerRegistryHost>
+  - spec.localDockerRegistryPort: <localDockerRegistryPort>
+  - spec.localDockerRegistryUser: <localDockerRegistryUser>
+  - spec.localDockerRegistryPassword: <localDockerRegistryPassword>
+  - spec.cpRegistryPassword: <entitlement-key>
+  - spec.aiManager.enabled: false  ## set to true if you want to install AIManager
+  - spec.aiManager.caseName: ibm-cp-waiops
+  - spec.aiManager.caseVersion: 1.1.0
+  - spec.aiManager.redhatRegistryUser: <redhatRegistryUser>
+  - spec.aiManager.redhatRegistryPassword: <redhatRegistryPassword>
+  - spec.eventManager.enabled: ## set to true if you want to install EvetManger
+  - spec.eventManager.caseName: ibm-netcool-prod
+```
+
+NOTE:
+
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+
+Connect your host to your air-gapped environment and connet your OCP to the gitops.
 ### Storage Consideration
 
 Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
@@ -161,14 +212,25 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: cp4waiops
 - HELM
-  - spec.cp4waiops_namespace: cp4waiops
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.channel: v3.2
-  - spec.size: small
-  - spec.dockerUsername: cp
-  - spec.dockerPassword: <entitlement-key>
+  - spec.localDockerRegistryHost: <localDockerRegistryHost>
+  - spec.localDockerRegistryPort: <localDockerRegistryPort>
+  - spec.localDockerRegistryUser: <localDockerRegistryUser>
+  - spec.localDockerRegistryPassword: <localDockerRegistryPassword>
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
+  - spec.aiManager.enabled: true  ## set to true if you want to install AIManager
+  - spec.aiManager.namespace: ibm-cp-waiops
+  - spec.aiManager.caseName: ibm-cp-waiops
+  - spec.aiManager.caseVersion: 1.1.0
+  - spec.aiManager.channel: v3.2
+  - spec.aiManager.size: small
+  - spec.eventManager.enabled: false ## set to true if you want to install EvetManger
+  - spec.eventManager.namespace: ibm-cp-waiops
+  - spec.eventManager.version: 1.6.3.2
+  - spec.eventManager.caseName: ibm-netcool-prod
+  - spec.eventManager.clusterDomain: apps.clustername.*.*.com
+  - spec.eventManager.channel: v1.5
+  - spec.eventManager.deploymentType: trial
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
@@ -391,7 +453,7 @@ roleRef:
   name: cluster-admin
 ```
 
-### Login to ArgoCD
+### Login to the ArgoCD server
 
    ```sh
    # OCP 4.8
@@ -410,6 +472,38 @@ roleRef:
          --password "${argo_pwd}" \
          --insecure
    ```
+
+### Mirror Image to Local Registry with GitOps
+
+```sh
+argocd app create cp4waiops \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/3.2/airgap/imageMirror \
+      --revision HEAD \
+      --dest-namespace image \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set spec.imageMirror_namespace=image \
+      --helm-set spec.localDockerRegistryHost=<localDockerRegistryHost> \
+      --helm-set spec.localDockerRegistryPort=<localDockerRegistryPort> \
+      --helm-set spec.localDockerRegistryUser=<localDockerRegistryUser> \
+      --helm-set spec.localDockerRegistryPassword=<localDockerRegistryPassword> \
+      --helm-set spec.cpRegistryPassword=<entitlement-key> \
+      --helm-set spec.aiManager.enabled=false \
+      --helm-set spec.aiManager.caseName=ibm-cp-waiops \
+      --helm-set spec.aiManager.caseVersion=1.1.0 \
+      --helm-set spec.aiManager.redhatRegistryUser=<redhatRegistryUser> \
+      --helm-set spec.aiManager.redhatRegistryPassword=<redhatRegistryPassword> \
+      --helm-set spec.eventManager.enabled=false \
+      --helm-set spec.eventManager.caseName=ibm-netcool-prod
+```
+
+NOTE:
+
+- `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
+
+Connect your host to your air-gapped environment and connet your OCP to the gitops.
 
 ### Storage Consideration
 
@@ -439,19 +533,24 @@ argocd app create cp4waiops \
       --path config/3.2/cp4waiops \
       --revision HEAD \
       --dest-namespace cp4waiops \
-      --dest-server https://kubernetes.default.svc \
-      --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set spec.dockerUsername=cp \
-      --helm-set spec.dockerPassword= <entitlement-key> \
+      --dest-server <your airgap OCP cluster> \
+      --helm-set spec.localDockerRegistryHost=<localDockerRegistryHost> \
+      --helm-set spec.localDockerRegistryPort=<localDockerRegistryPort> \
+      --helm-set spec.localDockerRegistryUser=<localDockerRegistryUser> \
+      --helm-set spec.localDockerRegistryPassword=<localDockerRegistryPassword> \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.enabled=true \
       --helm-set spec.aiManager.namespace=cp4waiops \
-      --helm-set spec.aiManager.channel=v3.2 \
-      --helm-set spec.aiManager.size=small \
+      --helm-set spec.aiManager.caseName=ibm-cp-waiops \
+      --helm-set spec.aiManager.caseVersion=1.1.0 \
+      --helm-set spec.aiManager.channel=<redhatRegistryUser> \
+      --helm-set spec.aiManager.size=<redhatRegistryPassword> \
       --helm-set spec.eventManager.enabled=false \
       --helm-set spec.eventManager.namespace=eventmanager \
-      --helm-set spec.eventManager.clusterDomain= <apps.clustername.*.*.com> \
+      --helm-set spec.eventManager.caseName=ibm-netcool-prod \
+      --helm-set spec.eventManager.version=1.6.3.2 \
+      --helm-set spec.eventManager.clusterDomain=apps.clustername.*.*.com \
       --helm-set spec.eventManager.channel=v1.5 \
       --helm-set spec.eventManager.deploymentType=trial
 ```
@@ -474,9 +573,10 @@ In this tutorial, the output of the above command is as follows:
 
 ```console
 # kubectl get application -A
-NAMESPACE          NAME        SYNC STATUS   HEALTH STATUS
-openshift-gitops   ceph        Synced        Healthy
-openshift-gitops   cp4waiops   Synced        Healthy
+NAMESPACE          NAME           SYNC STATUS   HEALTH STATUS
+openshift-gitops   ceph           Synced        Healthy
+openshift-gitops   cp4waiops      Synced        Healthy
+openshift-gitops   mirror-image   Synced        Healthy
 ```
 
 Wait a while and check if all pods under namespace `cp4waiops` and are running well without any crash.

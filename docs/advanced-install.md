@@ -1,26 +1,25 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+# Advanced Install for CP4WAIOPS (Cloud Pak for Watson AIOps)
 
-- [Advanced Install for Customers](#advanced-install-for-customers)
+GitOps is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing OpenShift Container Platform clusters and applications across multi-cluster Kubernetes environments. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+GitOps is a set of practices that use Git pull requests to manage infrastructure and application configurations. In GitOps, the Git repository is the only source of truth for system and application configuration. This Git repository contains a declarative description of the infrastructure you need in your specified environment and contains an automated process to make your environment match the described state. Also, it contains the entire state of the system so that the trail of changes to the system state are visible and auditable. By using GitOps, you resolve the issues of infrastructure and application configuration sprawl.
 
-# Advanced Install for Customers
-
-The major use cases for the customer use GitOps is that you may want to use Github to trace and audit the changes, the following tutorial is how to fork the repo and use your own GitHub repos to deploy Cloud Pak for Watson AIOps.
+This tutorial is mainly for customers who want to have their OWN gitops for CP4WAIOPS and want to host the repo in their own Git Systems.
 
 The major steps of advanced install include the following:
 
-- Fork this repo to the account that you want to use
+- Fork or copy this repo to the Git Account that you want to use
 
 - Modify the parameters in `config/3.2/cp4waiops/values.yaml` based on your requirement
+  - GitOps for CP4WAIOPS is using [Helm Chart](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/) to wrapper all of the YAML templates
+  - With Helm Chart, you can define different [`values.yaml`](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files) for different environments. In this repo, we have another two `values.small.yaml` and `values.large.yaml` for different size clusters, you can also define your own `values.<your own>.yaml` based on your cluster requirement
 
-- Follow the [installation instructions](docs/how-to-deploy-cp4waiops-32.md) to install the Cloud Pak in a target cluster.
+- Follow the [on-line install](how-to-deploy-cp4waiops-32.md) or [airgap install](how-to-deploy-airgap-32.md) to install the Cloud Pak in a target cluster.
+  - It is recommended to follow the [Install CP4WAIOPS Using OpenShift Web Console](how-to-deploy-cp4waiops-32.md#install-cp4waiops-using-openshift-web-console)
 
-  - In the Argo CD application creation section, change the `repoURL` field to match the URL of your repo, set the `TARGET REVISION` field to match the repo's branch where you are making changes.
+  - In the [Install CP4WAIOPS using GitOps](how-to-deploy-cp4waiops-32.md#install-cp4waiops-using-gitops)), change the `repoURL` field to match the URL of your repo, set the `TARGET REVISION` field to match the repo's branch where you are making changes.
 
-  - You can also use a terminal to make the changes to the application, using the Argo CD CLI:
+  - You can also use a terminal to make the changes to the application, using the ArgoCD CLI:
 
     ```sh
     argocd app create <app-name> \
@@ -61,5 +60,3 @@ The major steps of advanced install include the following:
             --helm-set spec.storageClassLargeBlock=rook-cephfs \
             --helm-set spec.size=small
     ```
-
-- Observe whether the created application meets your expectations.

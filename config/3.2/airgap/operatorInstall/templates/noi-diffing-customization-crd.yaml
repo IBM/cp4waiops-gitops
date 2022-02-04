@@ -1,0 +1,15 @@
+{{- if .Values.spec.eventManager.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-diff-noi-crd
+  namespace: {{.Values.spec.eventManager.namespace}}
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition: |
+    jqPathExpressions:
+    - '.spec.versions[]?.schema.openAPIV3Schema.properties.spec.properties.helmValuesASM.description'
+    - '.spec.versions[]?.schema.openAPIV3Schema.properties.spec.properties.helmValuesCEM.description'
+{{- end }}

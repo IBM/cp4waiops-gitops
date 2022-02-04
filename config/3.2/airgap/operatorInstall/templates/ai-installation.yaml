@@ -1,0 +1,31 @@
+{{- if .Values.spec.aiManager.enabled }}
+apiVersion: orchestrator.aiops.ibm.com/v1alpha1
+kind: Installation
+metadata:
+  name: aiops-installation
+  namespace: {{.Values.spec.aiManager.namespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  size: {{.Values.spec.aiManager.size}}
+  storageClass: {{.Values.spec.storageClass}}
+  storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
+  license:
+    accept: true
+  pakModules:
+  - name: aiopsFoundation
+    enabled: true
+  - name: applicationManager
+    enabled: true
+  - name: aiManager
+    enabled: true
+    config:
+    - name: aimanager-operator
+      spec:
+        aimanager:
+          integratorProxy:
+            enabled: true
+            proxyRoute: {{.Values.spec.localDockerRegistryHost}}:{{.Values.spec.localDockerRegistryPort}}
+  - name: connection
+    enabled: true
+{{- end }}

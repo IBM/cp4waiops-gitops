@@ -1,12 +1,13 @@
+{{- if .Values.spec.aiManager.enabled }}
 apiVersion: orchestrator.aiops.ibm.com/v1alpha1
 kind: Installation
 metadata:
   name: aiops-installation
-  namespace: {{.Values.spec.cp4waiops_namespace}}
+  namespace: {{.Values.spec.aiManager.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "120"
 spec:
-  size: {{.Values.spec.size}}
+  size: {{.Values.spec.aiManager.size}}
   storageClass: {{.Values.spec.storageClass}}
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   imagePullSecret: ibm-entitlement-key
@@ -19,3 +20,6 @@ spec:
     enabled: true
   - name: aiManager
     enabled: true
+  - name: connection
+    enabled: true
+{{- end }}

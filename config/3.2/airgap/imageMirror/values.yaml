@@ -1,0 +1,37 @@
+---
+###################################
+# CP4WAIOps - Common Configs
+###################################
+spec:
+
+  ## imageMirror_namespace is the project (namespace) that you want to mirror image instance in.
+
+  imageMirror_namespace: image
+
+  localDockerRegistryHost: ""
+  localDockerRegistryPort: ""
+  localDockerRegistryUser: ""
+  localDockerRegistryPassword: ""
+  cpRegistryPassword: ""
+
+  aiManager:
+    ## Enable AI Manager
+    ##
+    enabled: true
+
+    caseName: ibm-cp-waiops
+
+    caseVersion: 1.1.0
+
+    redhatRegistryUser: ""
+    
+    redhatRegistryPassword: ""
+
+  eventManager:
+    ## Enable Event Manager
+    ##
+    enabled: false
+
+    ## Event Manager Case Name
+    ##
+    caseName: ibm-netcool-prod

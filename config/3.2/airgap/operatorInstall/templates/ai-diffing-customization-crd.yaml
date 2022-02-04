@@ -1,0 +1,15 @@
+{{- if .Values.spec.aiManager.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-diff-ai-crd
+  namespace: {{.Values.spec.aiManager.namespace}}
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  resource.customizations.ignoreDifferences.apiextensions.k8s.io_CustomResourceDefinition: |
+    jqPathExpressions:
+    - '.metadata.annotations'
+    - '.metadata.labels'
+{{- end }}

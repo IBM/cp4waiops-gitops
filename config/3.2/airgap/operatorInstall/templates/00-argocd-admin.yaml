@@ -6,8 +6,8 @@ metadata:
   name: openshift-argocd-admin-ai
   namespace: {{.Values.spec.aiManager.namespace}}
 ---
-apiVersion: v1
-kind: ServiceAccount
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: openshift-argocd-admin-ai
   annotations:

@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: portable-image-copy
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  namespace: {{.Values.spec.imagecopy_namespace}}
+spec:
+  template:
+    spec:
+      containers:
+        - name: config
+          image: centos:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "800m"
+            limits:
+              memory: "2Gi"
+              cpu: "800m"
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eo pipefail
+              set -x
+
+              echo y | yum -y install podman
+              echo y | yum install httpd-tools
+              echo y | yum -y install skopeo
+              echo y | yum -y install openssl
+
+              echo y | yum install wget
+              wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/4.8.3/openshift-client-linux-4.8.3.tar.gz
+              tar -xf openshift-client-linux-4.8.3.tar.gz
+              mv oc /usr/bin/oc
+
+              wget https://github.com/IBM/cloud-pak-cli/releases/latest/download/cloudctl-linux-amd64.tar.gz
+              export CLOUDCTL_LAUNCH_SKIP_PREREQ_CHECK=true
+              tar -xf cloudctl-linux-amd64.tar.gz
+              chmod 755 cloudctl-linux-amd64
+              mv cloudctl-linux-amd64 /usr/local/bin/cloudctl
+              mkdir $HOME/offline
+
+              export CASE_NAME={{.Values.spec.caseName}}
+              export CASE_VERSION={{.Values.spec.caseVersion}}
+              export CASE_ARCHIVE=$CASE_NAME-$CASE_VERSION.tgz
+              export CASE_INVENTORY_SETUP=cpwaiopsSetup
+              export OFFLINEDIR=$HOME/offline
+              export OFFLINEDIR_ARCHIVE=offline.tgz
+              export CASE_REPO_PATH=https://github.com/IBM/cloud-pak/raw/master/repo/case
+              export CASE_LOCAL_PATH=$OFFLINEDIR/$CASE_ARCHIVE
+
+              export PORTABLE_DOCKER_REGISTRY_HOST={{.Values.spec.portableDockerRegistryHost}}
+              export PORTABLE_DOCKER_REGISTRY_PORT={{.Values.spec.portableDockerRegistryPort}}
+              export PORTABLE_DOCKER_REGISTRY=$PORTABLE_DOCKER_REGISTRY_HOST:$PORTABLE_DOCKER_REGISTRY_PORT
+              export PORTABLE_DOCKER_REGISTRY_USER={{.Values.spec.portableDockerRegistryUser}}
+              export PORTABLE_DOCKER_REGISTRY_PASSWORD={{.Values.spec.portableDockerRegistryPassword}}
+              export PORTABLE_DOCKER_REGISTRY_PATH=$OFFLINEDIR/imageregistry
+
+              export LOCAL_DOCKER_REGISTRY_HOST={{.Values.spec.localDockerRegistryHost}}
+              export LOCAL_DOCKER_REGISTRY_PORT={{.Values.spec.localDockerRegistryPort}}
+              export LOCAL_DOCKER_REGISTRY=$LOCAL_DOCKER_REGISTRY_HOST:$LOCAL_DOCKER_REGISTRY_PORT
+              export LOCAL_DOCKER_REGISTRY_USER={{.Values.spec.localDockerRegistryUser}}
+              export LOCAL_DOCKER_REGISTRY_PASSWORD={{.Values.spec.localDockerRegistryPassword}}
+
+              cloudctl case save \
+              --repo https://github.com/IBM/cloud-pak/raw/master/repo/case \
+              --case $CASE_NAME \
+              --version $CASE_VERSION \
+              --outputdir $HOME/offline
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry $LOCAL_DOCKER_REGISTRY --user $LOCAL_DOCKER_REGISTRY_USER --pass $LOCAL_DOCKER_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $OFFLINEDIR/$CASE_ARCHIVE \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action configure-creds-airgap \
+                --args "--registry $PORTABLE_DOCKER_REGISTRY --user $PORTABLE_DOCKER_REGISTRY_USER --pass $PORTABLE_DOCKER_REGISTRY_PASSWORD"
+
+              cloudctl case launch \
+                --case $CASE_LOCAL_PATH \
+                --inventory $CASE_INVENTORY_SETUP \
+                --action mirror-images \
+                --args "--fromRegistry $PORTABLE_DOCKER_REGISTRY --registry $LOCAL_DOCKER_REGISTRY --inputDir $OFFLINEDIR" \
+                --tolerance 1
+  
+      restartPolicy: Never
+      serviceAccountName: openshift-argocd-portable
+  backoffLimit: 1

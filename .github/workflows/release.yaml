@@ -27,6 +27,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config/3.2/cp4waiops'
+          charts_dir: 'config/3.2'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'config/3.2/cp4waiops'
+      - 'config/3.2/**'
 
   workflow_dispatch:
 

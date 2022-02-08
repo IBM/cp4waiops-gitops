@@ -1,0 +1,66 @@
+{{- if eq .Values.spec.storageClass "rook-cephfs" }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: check-aiops-prereqs
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1000"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Name }}-check-aiops-prereqs
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1000"
+rules:
+- apiGroups: ["storage.k8s.io"]
+  resources:
+  - storageclass
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Name }}-check-aiops-prereqs
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1000"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Release.Name }}-check-aiops-prereqs
+subjects:
+- kind: ServiceAccount
+  name: check-aiops-prereqs
+  namespace: {{.Values.spec.aiManager.namespace}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: check-aiops-prereqs
+  annotations:
+    argocd.argoproj.io/sync-wave: "-900"
+spec:
+  template:
+    spec:
+      containers:
+        - name: check-aiops-prereqs
+          image: quay.io/openshift/origin-cli:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -x
+
+              while : ; do
+                if oc get sc -o "jsonpath={.items[*].metadata.annotations['storageclass\.kubernetes\.io/is-default-class']}" | grep -q ^true$; then
+                  echo "INFO: Default storage class available."
+                  exit 0
+                fi
+                echo "INFO: Default storage class not available, waiting."
+                sleep 10
+              done
+      restartPolicy: Never
+      serviceAccountName: check-aiops-prereqs
+  backoffLimit: 10
+{{- end }}

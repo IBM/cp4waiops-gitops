@@ -1,0 +1,23 @@
+---
+###################################
+# CP4WAIOps - Common Configs
+###################################
+spec:
+
+  ## imageMirror_namespace is the project (namespace) that you want to mirror image instance in.
+
+  imagecopy_namespace: image
+
+  caseName: ibm-cp-waiops
+
+  caseVersion: 1.1.0
+
+  localDockerRegistryHost: ""
+  localDockerRegistryPort: ""
+  localDockerRegistryUser: ""
+  localDockerRegistryPassword: ""
+
+  portableDockerRegistryHost: ""
+  portableDockerRegistryPort: ""
+  portableDockerRegistryUser: ""
+  portableDockerRegistryPassword: ""

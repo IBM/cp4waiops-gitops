@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-operator-catalog
+  namespace: openshift-marketplace
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  displayName: ibm-operator-catalog
+  publisher: IBM Content
+  sourceType: grpc
+  image: {{.Values.spec.imageCatalog}}
+  updateStrategy:
+    registryPoll:
+      interval: 45m

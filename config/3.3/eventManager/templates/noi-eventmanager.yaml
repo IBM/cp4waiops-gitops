@@ -80,7 +80,7 @@ spec:
       openstack: false
       vmwarensx: false
     netDisco: false
-  version: {{.Values.spec.eventManagerGateway.version}}
+  version: {{.Values.spec.eventManager.version}}
   entitlementSecret: ibm-entitlement-key
   clusterDomain: {{.Values.spec.eventManager.clusterDomain}}
   integrations:

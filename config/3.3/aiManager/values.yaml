@@ -20,7 +20,7 @@ spec:
   ## that are associated with the entitled software.
   ## DO NOT Commit your docker password here, but always specify it in UI or CLI when creating the ArgoCD app.
   ## 
-  dockerPassword: password
+  dockerPassword: REPLACE_IT
 
   ## storageClass is the storage class that you want to use. 
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 

@@ -20,7 +20,7 @@ spec:
   ## that are associated with the entitled software.
   ## DO NOT Commit your docker password here, but always specify it in UI or CLI when creating the ArgoCD app.
   ## 
-  dockerPassword: password
+  dockerPassword: REPLACE_IT
 
   ## storageClass is the storage class that you want to use. 
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
@@ -33,16 +33,13 @@ spec:
   storageClassLargeBlock: rook-cephfs
 
   eventManager:
-    ## Enable Event Manager
-    ##
-    enabled: false
 
     # eventManager version
     version: 1.6.3.2
 
     ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
     ##
-    clusterDomain: apps.clustername.*.*.com.
+    clusterDomain: apps.clustername.*.*.com
 
     ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
     ## For example, if you want to install Evemt Manager 1.5, the channel should be v1.5
@@ -57,4 +54,4 @@ spec:
     ## You must create a custom project (namespace) and not use the default, kube-system,
     ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
     ##
-    namespace: eventmanager
+    namespace: noi

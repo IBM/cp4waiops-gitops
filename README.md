@@ -21,6 +21,7 @@ This repo is about using either OpenShift GitOps or Kubernetes GitOps to deploy 
 Please refer to the following tutorial to decide how you want to deploy your CP4WAIOPS Cluster:
 - [3.1 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
 - [3.2 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
+- [3.3 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-33.md)
 - [3.2 Airgap Install: Using OpenShift GitOps](./docs/how-to-deploy-airgap-32.md)
 
 

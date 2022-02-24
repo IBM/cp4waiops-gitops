@@ -3,9 +3,10 @@ name: Release Charts
 on:
   push:
     branches:
-      - main
+      - release-3.3
     paths:
-      - 'config/3.2/cp4waiops'
+      - 'config/3.3/aiManager'
+      - 'config/3.3/eventManager'
 
   workflow_dispatch:
 
@@ -23,10 +24,11 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser
+      - name: Run chart-releaser (CP4WAIops 3.3)
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config/3.2/cp4waiops'
+          charts_dir: 'config/3.3'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+

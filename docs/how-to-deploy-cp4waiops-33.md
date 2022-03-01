@@ -2,31 +2,31 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps](#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops)
+- [Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.3 with GitOps](#deploy-cp4waiops-cloud-pak-for-watson-aiops-33-with-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOPS Using OpenShift Web Console](#install-cp4waiops-using-openshift-web-console)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission)
     - [Login to ArgoCD](#login-to-argocd)
     - [Storage Consideration](#storage-consideration)
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
-    - [Install internal build before release (need remove this section after release)](#install-internal-build-before-release-need-remove-this-section-after-release)
-      - [Create global pull secrets](#create-global-pull-secrets)
-      - [Create imagecontentsourcepolicy](#create-imagecontentsourcepolicy)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops)
+    - [Install AIManager and EventManager using GitOps](#install-aimanager-and-eventmanager-using-gitops)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation)
     - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission-1)
     - [Login to ArgoCD](#login-to-argocd-1)
     - [Storage Consideration](#storage-consideration-1)
-    - [Install CP4WAIOPS using GitOps](#install-cp4waiops-using-gitops)
+    - [Install AIManager using GitOps](#install-aimanager-using-gitops-1)
+    - [Install EventManager using GitOps](#install-eventmanager-using-gitops-1)
+    - [Install AIManager and EventManager using GitOps](#install-aimanager-and-eventmanager-using-gitops-1)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
     - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps
+# Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.3 with GitOps
 
 ## Prerequisite
 
@@ -147,45 +147,6 @@ rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Comple
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
 
-### Install internal build before release (need remove this section after release) 
-
-#### Create global pull secrets
-
-* Log in to your OpenShift cluster console, click **Workloads > Secrets**.
-* In the secret list of project **openshift-config**, click three dots button on the right of **pull-secret**
-* Select the **Edit Secret** menu item to show the *Edit Image Pull Secret* page
-![Alt text](img/edit-secret.png?raw=true "Edit Secret") <br>
-* Scroll to the bottom and click **Add Credentials** to add the following entries one by one based on your deployment scenario.
-
-| Registry Server Address | Username | Password | Note |
-|-------------------------|----------|----------|------|
-| docker.io | &lt;Username> | &lt;Password> | Rate limit for docker.io |
-| cp.icr.io | cp or iamapikey | &lt;cloud API Key> | Required for deploying GA builds |
-| cp.stg.icr.io | cp or iamapikey | &lt;cloud API Key> | Required for deploying RC builds |
-| hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com | &lt;Artifactory Username> | &lt;Artifactory API Key> | Required for deploying snapshot builds |
-
-#### Create imagecontentsourcepolicy
-
-Create ImageContentSourcePolicy if you want to intall EventManager internal build.
-
-```yaml
-apiVersion: operator.openshift.io/v1alpha1
-kind: ImageContentSourcePolicy
-metadata:
-  name: mirror-config
-spec:
-  repositoryDigestMirrors:
-    - mirrors:
-        - cp.stg.icr.io/cp/noi
-      source: cp.icr.io/cp/noi
-    - mirrors:
-        - cp.stg.icr.io/cp
-      source: docker.io/ibmcom
-    - mirrors:
-        - cp.stg.icr.io/cp
-      source: icr.io/cpopen
-```
-
 ### Install AIManager using GitOps
 
 Same as Ceph, you can follow same steps to install Cloud Pak for AI Manager using GitOps.
@@ -197,13 +158,26 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/liyanwei/cp4waiops-gitops
+  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
   - Target version: release-3.3
   - path: config/3.3/aiManager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: katamari
 - HELM
+  - VALUES (Fill this section only if install internal build)
+      internalbuild: true
+      ARTIFACTORY_EMAIL: ${ARTIFACTORY_EMAIL}
+      ARTIFACTORY_KEY: ${ARTIFACTORY_KEY}
+      CP_PROD_KEY: ${CP_PROD_KEY}
+      CP_STG_KEY: ${CP_STG_KEY}
+      DOCKER_USER: ${DOCKER_USER}
+      DOCKER_KEY: ${DOCKER_KEY}
+      CP_STG_USER: ${CP_STG_USER}
+      CP_PROD_USER: ${CP_PROD_USER}
+      CP_PROD_KEY: ${CP_PROD_KEY}
+      CP_STG_KEY: ${CP_STG_KEY}      
+- PARAMETERS
   - spec.imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220218.0801-d188898ff
   - spec.dockerUsername: cp
   - spec.dockerPassword: <entitlement-key>
@@ -211,7 +185,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - spec.storageClassLargeBlock: rook-cephfs
   - spec.aiManager.channel: 0.1-dev
   - spec.aiManager.size: small
-  - spec.aiManager.namespace: small
+  - spec.aiManager.namespace: katamari
   - spec.aiManager.pakModules.aiopsFoundation.enabled: true
   - spec.aiManager.pakModules.applicationManager.enabled: true
   - spec.aiManager.pakModules.aiManager.enabled: true
@@ -232,13 +206,18 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/liyanwei/cp4waiops-gitops
+  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
   - Target version: release-3.3
   - path: config/3.3/eventManager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: noi
 - HELM
+  - VALUES (Fill this section only if install internal build)
+      internalbuild: true
+      CP_STG_KEY: ${CP_STG_KEY}
+      CP_STG_USER: ${CP_STG_USER}
+- PARAMETERS
   - spec.imageCatalog: docker.io/ibmcom/noi-operator-catalog@sha256:3c75cf5844314ea52571b808631080283a8e99d51ffae56d20638e835777af3b
   - spec.dockerUsername: cp
   - spec.dockerPassword: <entitlement-key>
@@ -253,6 +232,48 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
+
+### Install AIManager and EventManager using GitOps
+
+The parameters for Cloud Pak for Watson AIOps are as follows, if you already has a storage, please set the rookceph.enabled as false:
+
+- GENERAL
+  - Application Name: anyname(like "allinone")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
+  - Target version: release-3.3
+  - path: config/3.3/all-in-one
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: openshift-gitops
+- PARAMETERS
+  - argocd.cluster: openshift
+  - argocd.allowLocalDeploy: true
+  - rookceph.enabled: true
+  - cp4waiops.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  - cp4waiops.dockerUsername: cp
+  - cp4waiops.dockerPassword: <entitlement-key>
+  - cp4waiops.storageClass: rook-cephfs
+  - cp4waiops.storageClassLargeBlock: rook-cephfs
+  - cp4waiops.aiManager.enabled: true
+  - cp4waiops.aiManager.channel: 0.1-dev
+  - cp4waiops.aiManager.size: small
+  - cp4waiops.aiManager.namespace: katamari
+  - cp4waiops.aiManager.pakModules.aiopsFoundation.enabled: true
+  - cp4waiops.aiManager.pakModules.applicationManager.enabled: true
+  - cp4waiops.aiManager.pakModules.aiManager.enabled: true
+  - cp4waiops.aiManager.pakModules.connection.enabled: true
+  - cp4waiops.eventManager.enabled: true
+  - cp4waiops.eventManager.version: 1.6.4.0
+  - cp4waiops.eventManager.clusterDomain: apps.clustername.*.*.com
+  - cp4waiops.eventManager.channel: v1.7
+  - cp4waiops.eventManager.deploymentType: trial
+  - cp4waiops.eventManager.namespace: noi
+
+
+  NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 ### Verify CP4WAIOPS Installation
 
@@ -493,7 +514,7 @@ roleRef:
 
 ### Storage Consideration
 
-Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
+Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.3.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 
@@ -509,38 +530,99 @@ argocd app create ceph \
       --directory-recurse
 ```
 
-### Install CP4WAIOPS using GitOps
+### Install AIManager using GitOps
+
+Same as Ceph, you can follow same steps to install Cloud Pak for AI Manager using GitOps.
 
 ```sh
-argocd app create cp4waiops \
+argocd app create aimanagerapp \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.2/cp4waiops \
-      --revision HEAD \
-      --dest-namespace cp4waiops \
+      --repo https://github.com/liyanwei93/cp4waiops-gitops \
+      --path config/3.3/aiManager \
+      --revision release-3.3 \
+      --dest-namespace katamari \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set spec.dockerUsername=cp \
       --helm-set spec.dockerPassword= <entitlement-key> \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
-      --helm-set spec.aiManager.enabled=true \
-      --helm-set spec.aiManager.namespace=cp4waiops \
+      --helm-set spec.aiManager.namespace=katamari \
       --helm-set spec.aiManager.channel=v3.2 \
       --helm-set spec.aiManager.size=small \
-      --helm-set spec.eventManager.enabled=false \
-      --helm-set spec.eventManager.namespace=eventmanager \
-      --helm-set spec.eventManager.clusterDomain= <apps.clustername.*.*.com> \
-      --helm-set spec.eventManager.channel=v1.5 \
-      --helm-set spec.eventManager.deploymentType=trial
+      --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled=true \
+      --helm-set spec.aiManager.pakModules.applicationManager.enabled=true \
+      --helm-set spec.aiManager.pakModules.aiManager.enabled=true \
+      --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
 
 NOTE:
 
 - `entitlement-key` is the entitlement key that you copied in [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary)
 
-- `apps.clustername.*.*.com` is the domain name of your OCP cluster
+### Install EventManager using GitOps
+
+```sh
+argocd app create eventmanagerapp \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/liyanwei93/cp4waiops-gitops \
+      --path config/3.3/eventManager \
+      --revision release-3.3 \
+      --dest-namespace noi \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
+      --helm-set spec.dockerUsername=cp \
+      --helm-set spec.dockerPassword= <entitlement-key> \
+      --helm-set spec.storageClass=rook-cephfs \
+      --helm-set spec.storageClassLargeBlock=rook-cephfs \
+      --helm-set spec.eventManager.namespace=noi \
+      --helm-set spec.eventManager.channel=v1.7 \
+      --helm-set spec.eventManager.version=1.6.4.0 \
+      --helm-set spec.eventManager.clusterDomain=apps.clustername.*.*.com \
+      --helm-set spec.eventManager.deploymentType=trial
+```
+
+  NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
+
+
+### Install AIManager and EventManager using GitOps
+
+The parameters for Cloud Pak for Watson AIOps are as follows, if you already has a storage, please set the rookceph.enabled as false:
+
+```sh
+argocd app create allinone \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/liyanwei93/cp4waiops-gitops \
+      --path config/3.3/all-in-one \
+      --revision release-3.3 \
+      --dest-namespace noi \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set argocd.cluster=openshift
+      --helm-set argocd.allowLocalDeploy=true
+      --helm-set rookceph.enabled=true
+      --helm-set cp4waiops.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
+      --helm-set cp4waiops.dockerUsername=cp \
+      --helm-set cp4waiops.dockerPassword= <entitlement-key> \
+      --helm-set cp4waiops.storageClass=rook-cephfs \
+      --helm-set cp4waiops.storageClassLargeBlock=rook-cephfs \
+      --helm-set cp4waiops.aiManager.enabled=true \
+      --helm-set cp4waiops.aiManager.namespace=katamari \
+      --helm-set cp4waiops.aiManager.channel=v3.2 \
+      --helm-set cp4waiops.aiManager.size=small \
+      --helm-set cp4waiops.aiManager.pakModules.aiopsFoundation.enabled=true \
+      --helm-set cp4waiops.aiManager.pakModules.applicationManager.enabled=true \
+      --helm-set cp4waiops.aiManager.pakModules.aiManager.enabled=true \
+      --helm-set cp4waiops.aiManager.pakModules.connection.enabled=true \
+      --helm-set cp4waiops.eventManager.enbaled=true \
+      --helm-set cp4waiops.eventManager.namespace=noi \
+      --helm-set cp4waiops.eventManager.channel=v1.7 \
+      --helm-set cp4waiops.eventManager.version=1.6.4.0 \
+      --helm-set cp4waiops.eventManager.clusterDomain=apps.clustername.*.*.com \
+      --helm-set cp4waiops.eventManager.deploymentType=trial
+```
 
 ### Verify CP4WAIOPS Installation
 
@@ -554,15 +636,15 @@ In this tutorial, the output of the above command is as follows:
 
 ```console
 # kubectl get application -A
-NAMESPACE          NAME        SYNC STATUS   HEALTH STATUS
-openshift-gitops   ceph        Synced        Healthy
-openshift-gitops   cp4waiops   Synced        Healthy
+NAMESPACE          NAME              SYNC STATUS   HEALTH STATUS
+openshift-gitops   ceph              Synced        Healthy
+openshift-gitops   aimanagerapp      Synced        Healthy
 ```
 
-Wait a while and check if all pods under namespace `cp4waiops` and are running well without any crash.
+Wait a while and check if all pods under namespace `katamari` are running well without any crash.
 
 ```
-kubectl get pod -n cp4waiops
+kubectl get pod -n katamari
 ```
 ### Access CP4WAIOps UI
 

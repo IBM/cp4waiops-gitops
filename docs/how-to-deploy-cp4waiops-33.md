@@ -166,17 +166,15 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Namespace: katamari
 - HELM
   - VALUES (Fill this section only if install internal build)
-      internalbuild: true
-      ARTIFACTORY_EMAIL: ${ARTIFACTORY_EMAIL}
-      ARTIFACTORY_KEY: ${ARTIFACTORY_KEY}
-      CP_PROD_KEY: ${CP_PROD_KEY}
-      CP_STG_KEY: ${CP_STG_KEY}
-      DOCKER_USER: ${DOCKER_USER}
-      DOCKER_KEY: ${DOCKER_KEY}
-      CP_STG_USER: ${CP_STG_USER}
-      CP_PROD_USER: ${CP_PROD_USER}
-      CP_PROD_KEY: ${CP_PROD_KEY}
-      CP_STG_KEY: ${CP_STG_KEY}      
+      - gobalImagePullSecret: true
+      - artifactoryEmail: ${ARTIFACTORY_EMAIL}
+      - artifactoryKey: ${ARTIFACTORY_KEY}
+      - dockerUser: ${DOCKER_USER}
+      - dockerKey: ${DOCKER_KEY}
+      - cpStgUser: ${CP_STG_USER}
+      - cpProdUser: ${CP_PROD_USER}
+      - cpProdKey: ${CP_PROD_KEY}
+      - cpStgKey: ${CP_STG_KEY} 
 - PARAMETERS
   - spec.imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220218.0801-d188898ff
   - spec.dockerUsername: cp
@@ -214,9 +212,9 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Namespace: noi
 - HELM
   - VALUES (Fill this section only if install internal build)
-      internalbuild: true
-      CP_STG_KEY: ${CP_STG_KEY}
-      CP_STG_USER: ${CP_STG_USER}
+      - gobalImagePullSecret: true
+      - cpStgUser: ${CP_STG_USER}
+      - cpStgKey: ${CP_STG_KEY}  
 - PARAMETERS
   - spec.imageCatalog: docker.io/ibmcom/noi-operator-catalog@sha256:3c75cf5844314ea52571b808631080283a8e99d51ffae56d20638e835777af3b
   - spec.dockerUsername: cp
@@ -248,6 +246,17 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-gitops
+- HELM
+  - VALUES (Fill this section only if install internal build)
+      - gobalImagePullSecret: true
+      - artifactoryEmail: ${ARTIFACTORY_EMAIL}
+      - artifactoryKey: ${ARTIFACTORY_KEY}
+      - dockerUser: ${DOCKER_USER}
+      - dockerKey: ${DOCKER_KEY}
+      - cpStgUser: ${CP_STG_USER}
+      - cpProdUser: ${CP_PROD_USER}
+      - cpProdKey: ${CP_PROD_KEY}
+      - cpStgKey: ${CP_STG_KEY} 
 - PARAMETERS
   - argocd.cluster: openshift
   - argocd.allowLocalDeploy: true

@@ -261,12 +261,12 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
   - argocd.cluster: openshift
   - argocd.allowLocalDeploy: true
   - rookceph.enabled: true
-  - cp4waiops.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - cp4waiops.dockerUsername: cp
   - cp4waiops.dockerPassword: <entitlement-key>
   - cp4waiops.storageClass: rook-cephfs
   - cp4waiops.storageClassLargeBlock: rook-cephfs
   - cp4waiops.aiManager.enabled: true
+  - cp4waiops.aiManager.imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220302.0001-fc989f85a
   - cp4waiops.aiManager.channel: 0.1-dev
   - cp4waiops.aiManager.size: small
   - cp4waiops.aiManager.namespace: katamari
@@ -275,6 +275,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
   - cp4waiops.aiManager.pakModules.aiManager.enabled: true
   - cp4waiops.aiManager.pakModules.connection.enabled: true
   - cp4waiops.eventManager.enabled: true
+  - cp4waiops.aiManager.imageCatalog: docker.io/ibmcom/noi-operator-catalog@sha256:3c75cf5844314ea52571b808631080283a8e99d51ffae56d20638e835777af3b
   - cp4waiops.eventManager.version: 1.6.4.0
   - cp4waiops.eventManager.clusterDomain: apps.clustername.*.*.com
   - cp4waiops.eventManager.channel: v1.7
@@ -612,12 +613,12 @@ argocd app create allinone \
       --helm-set argocd.cluster=openshift
       --helm-set argocd.allowLocalDeploy=true
       --helm-set rookceph.enabled=true
-      --helm-set cp4waiops.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set cp4waiops.dockerUsername=cp \
       --helm-set cp4waiops.dockerPassword= <entitlement-key> \
       --helm-set cp4waiops.storageClass=rook-cephfs \
       --helm-set cp4waiops.storageClassLargeBlock=rook-cephfs \
       --helm-set cp4waiops.aiManager.enabled=true \
+      --helm-set cp4waiops.aiManager.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set cp4waiops.aiManager.namespace=katamari \
       --helm-set cp4waiops.aiManager.channel=v3.2 \
       --helm-set cp4waiops.aiManager.size=small \
@@ -626,6 +627,7 @@ argocd app create allinone \
       --helm-set cp4waiops.aiManager.pakModules.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.pakModules.connection.enabled=true \
       --helm-set cp4waiops.eventManager.enbaled=true \
+      --helm-set cp4waiops.eventManager.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set cp4waiops.eventManager.namespace=noi \
       --helm-set cp4waiops.eventManager.channel=v1.7 \
       --helm-set cp4waiops.eventManager.version=1.6.4.0 \

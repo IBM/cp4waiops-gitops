@@ -41,12 +41,12 @@ spec:
               value: '{{ .Values.cp4waiops.dockerUsername }}'
             - name: spec.dockerPassword
               value: '{{ .Values.cp4waiops.dockerPassword }}'
-            - name: spec.imageCatalog
-              value: '{{ .Values.cp4waiops.imageCatalog }}'
             - name: spec.storageClass
               value: '{{ .Values.cp4waiops.storageClass }}'
             - name: spec.storageClassLargeBlock
               value: '{{ .Values.cp4waiops.storageClassLargeBlock }}'
+            - name: spec.imageCatalog
+              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
             - name: spec.aiManager.namespace

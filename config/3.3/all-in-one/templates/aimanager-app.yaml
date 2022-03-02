@@ -24,7 +24,7 @@ spec:
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: config/3.3/aiManager
+        path: config/3.3/ai-manager
         repoURL: https://github.com/liyanwei93/cp4waiops-gitops
         targetRevision: release-3.3
         helm:
@@ -61,6 +61,24 @@ spec:
               value: '{{ .Values.cp4waiops.aiManager.pakModules.aiManager.enabled }}'
             - name: spec.aiManager.pakModules.connection.enabled
               value: '{{ .Values.cp4waiops.aiManager.pakModules.connection.enabled }}'
+            - name: artifactoryEmail
+              value: '{{ .Values.artifactoryEmail }}'
+            - name: artifactoryKey
+              value: '{{ .Values.artifactoryKey }}'
+            - name: dockerUser
+              value: '{{ .Values.dockerUser }}'
+            - name: dockerKey
+              value: '{{ .Values.dockerKey }}'
+            - name: cpStgUser
+              value: '{{ .Values.cpStgUser }}'
+            - name: cpStgKey
+              value: '{{ .Values.cpStgKey }}'
+            - name: cpProdUser
+              value: '{{ .Values.cpProdUser }}'
+            - name: cpProdKey
+              value: '{{ .Values.cpProdKey }}'
+            - name: gobalImagePullSecret
+              value: '{{ .Values.gobalImagePullSecret }}'
       ignoreDifferences:
         - group: orchestrator.aiops.ibm.com
           jsonPointers:

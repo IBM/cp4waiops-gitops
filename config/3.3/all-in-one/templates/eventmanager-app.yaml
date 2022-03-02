@@ -24,7 +24,7 @@ spec:
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: config/3.3/eventManager
+        path: config/3.3/event-manager
         repoURL: https://github.com/liyanwei93/cp4waiops-gitops
         targetRevision: release-3.3
         helm:
@@ -50,7 +50,13 @@ spec:
             - name: spec.eventManager.deploymentType
               value: '{{ .Values.cp4waiops.eventManager.deploymentType }}'
             - name: spec.eventManager.namespace
-              value: '{{ .Values.cp4waiops.eventManager.namespace }}'              
+              value: '{{ .Values.cp4waiops.eventManager.namespace }}'
+            - name: cpStgUser
+              value: '{{ .Values.cpStgUser }}'
+            - name: cpStgKey
+              value: '{{ .Values.cpStgKey }}'
+            - name: gobalImagePullSecret
+              value: '{{ .Values.gobalImagePullSecret }}'           
       ignoreDifferences:
         - group: noi.ibm.com/v1beta1
           jsonPointers:

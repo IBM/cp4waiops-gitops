@@ -25,8 +25,8 @@ spec:
       project: default
       source:
         path: config/3.3/ai-manager
-        repoURL: https://github.com/liyanwei93/cp4waiops-gitops
-        targetRevision: release-3.3
+        repoURL: https://github.com/IBM/cp4waiops-gitops
+        targetRevision: HEAD
         helm:
           valueFiles:
             - values.yaml

@@ -6,13 +6,13 @@
 spec:
   ## AI Manager catalog source image
   ##
-  imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220121.1200-1b9261056
+  imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
 
   ## dockerUsername is the usrname of IBM® Entitled Registry.
   ## It is used to create a docker-registry secret to enable your deployment to pull the AI Manager images 
   ## from the IBM® Entitled Registry.
   ## Default is cp
-  dockerUsername: username
+  dockerUsername: cp
 
   ## Obtain the entitlement key that is assigned to your IBMid. 
   ## Log in to MyIBM Container Software Library: https://myibm.ibm.com/products-services/containerlibrary
@@ -36,7 +36,7 @@ spec:
     ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers.
     ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
     ##
-    channel: 0.1-dev
+    channel: v3.3
 
     ## size is the size that you require for your AI Manager installation. It can be small or large.
     ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager

@@ -158,30 +158,19 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
-  - Target version: release-3.3
-  - path: config/3.3/aiManager
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/3.3/ai-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: katamari
-- HELM
-  - VALUES (Fill this section only if install internal build)
-      - gobalImagePullSecret: true
-      - artifactoryEmail: ${ARTIFACTORY_EMAIL}
-      - artifactoryKey: ${ARTIFACTORY_KEY}
-      - dockerUser: ${DOCKER_USER}
-      - dockerKey: ${DOCKER_KEY}
-      - cpStgUser: ${CP_STG_USER}
-      - cpProdUser: ${CP_PROD_USER}
-      - cpProdKey: ${CP_PROD_KEY}
-      - cpStgKey: ${CP_STG_KEY} 
 - PARAMETERS
-  - spec.imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220218.0801-d188898ff
+  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.dockerUsername: cp
-  - spec.dockerPassword: <entitlement-key>
+  - spec.dockerPassword: REPLACE_IT
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: 0.1-dev
+  - spec.aiManager.channel: v3.3
   - spec.aiManager.size: small
   - spec.aiManager.namespace: katamari
   - spec.aiManager.pakModules.aiopsFoundation.enabled: true
@@ -204,21 +193,16 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
-  - Target version: release-3.3
-  - path: config/3.3/eventManager
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/3.3/event-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
-  - Namespace: noi
-- HELM
-  - VALUES (Fill this section only if install internal build)
-      - gobalImagePullSecret: true
-      - cpStgUser: ${CP_STG_USER}
-      - cpStgKey: ${CP_STG_KEY}  
+  - Namespace: noi 
 - PARAMETERS
-  - spec.imageCatalog: docker.io/ibmcom/noi-operator-catalog@sha256:3c75cf5844314ea52571b808631080283a8e99d51ffae56d20638e835777af3b
+  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.dockerUsername: cp
-  - spec.dockerPassword: <entitlement-key>
+  - spec.dockerPassword: REPLACE_IT
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
   - spec.eventManager.version: 1.6.4.0
@@ -240,34 +224,23 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/liyanwei93/cp4waiops-gitops
-  - Target version: release-3.3
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
   - path: config/3.3/all-in-one
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-gitops
-- HELM
-  - VALUES (Fill this section only if install internal build)
-      - gobalImagePullSecret: true
-      - artifactoryEmail: ${ARTIFACTORY_EMAIL}
-      - artifactoryKey: ${ARTIFACTORY_KEY}
-      - dockerUser: ${DOCKER_USER}
-      - dockerKey: ${DOCKER_KEY}
-      - cpStgUser: ${CP_STG_USER}
-      - cpProdUser: ${CP_PROD_USER}
-      - cpProdKey: ${CP_PROD_KEY}
-      - cpStgKey: ${CP_STG_KEY} 
 - PARAMETERS
   - argocd.cluster: openshift
   - argocd.allowLocalDeploy: true
   - rookceph.enabled: true
   - cp4waiops.dockerUsername: cp
-  - cp4waiops.dockerPassword: <entitlement-key>
+  - cp4waiops.dockerPassword: REPLACE_IT
   - cp4waiops.storageClass: rook-cephfs
   - cp4waiops.storageClassLargeBlock: rook-cephfs
   - cp4waiops.aiManager.enabled: true
-  - cp4waiops.aiManager.imageCatalog: hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com/katamari/relatedimages/ibm-watson-aiops-catalog:v0.1.0-20220302.0001-fc989f85a
-  - cp4waiops.aiManager.channel: 0.1-dev
+  - cp4waiops.aiManager.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  - cp4waiops.aiManager.channel: v3.3
   - cp4waiops.aiManager.size: small
   - cp4waiops.aiManager.namespace: katamari
   - cp4waiops.aiManager.pakModules.aiopsFoundation.enabled: true
@@ -275,7 +248,7 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
   - cp4waiops.aiManager.pakModules.aiManager.enabled: true
   - cp4waiops.aiManager.pakModules.connection.enabled: true
   - cp4waiops.eventManager.enabled: true
-  - cp4waiops.aiManager.imageCatalog: docker.io/ibmcom/noi-operator-catalog@sha256:3c75cf5844314ea52571b808631080283a8e99d51ffae56d20638e835777af3b
+  - cp4waiops.aiManager.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - cp4waiops.eventManager.version: 1.6.4.0
   - cp4waiops.eventManager.clusterDomain: apps.clustername.*.*.com
   - cp4waiops.eventManager.channel: v1.7
@@ -287,15 +260,19 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
 
 ### Verify CP4WAIOPS Installation
 
-After both Ceph and Cloud Pak for Watson AIOps are ready, you will be able to see those two Apps from Argo CD UI as follows with status as `Healthy and Synced`.
+After both Ceph and Cloud Pak for Watson AIOps are ready, you will be able to see those four Apps from Argo CD UI as follows with status as `Healthy and Synced`.
 
-![w](images/app-ready.png)
+![w](images/all-in-one-apps.png)
 
-Same as Ceph, you can also check the topology of Cloud Pak for Watson AIOps using ArgoCD UI as follows:
+![w](images/application-sets.png)
 
-![w](images/cpk-topo.png)
+You can also check the topology of Cloud Pak for Watson AIOps using ArgoCD UI as follows:
 
-You can also check via termial as follows, and make sure there is no error pods.
+![w](images/aimanager-33.png)
+
+![w](images/eventmanager-33.png)
+
+You can also check via termial as follows, and make sure there is no error pods. For example, check pods of AIManager.
 
 If there are some pod got error, you can either check logs from ArgoCD UI or use CLI `oc logs` to check.
 
@@ -548,9 +525,9 @@ Same as Ceph, you can follow same steps to install Cloud Pak for AI Manager usin
 argocd app create aimanagerapp \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/liyanwei93/cp4waiops-gitops \
-      --path config/3.3/aiManager \
-      --revision release-3.3 \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/3.3/ai-manager \
+      --revision HEAD \
       --dest-namespace katamari \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
@@ -559,7 +536,7 @@ argocd app create aimanagerapp \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=katamari \
-      --helm-set spec.aiManager.channel=v3.2 \
+      --helm-set spec.aiManager.channel=v3.3 \
       --helm-set spec.aiManager.size=small \
       --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled=true \
       --helm-set spec.aiManager.pakModules.applicationManager.enabled=true \
@@ -577,9 +554,9 @@ NOTE:
 argocd app create eventmanagerapp \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/liyanwei93/cp4waiops-gitops \
-      --path config/3.3/eventManager \
-      --revision release-3.3 \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/3.3/event-manager \
+      --revision HEAD \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
@@ -605,10 +582,10 @@ The parameters for Cloud Pak for Watson AIOps are as follows, if you already has
 argocd app create allinone \
       --sync-policy automatic \
       --project default \
-      --repo https://github.com/liyanwei93/cp4waiops-gitops \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/3.3/all-in-one \
-      --revision release-3.3 \
-      --dest-namespace noi \
+      --revision HEAD \
+      --dest-namespace openshift-gitops \
       --dest-server https://kubernetes.default.svc \
       --helm-set argocd.cluster=openshift
       --helm-set argocd.allowLocalDeploy=true
@@ -620,7 +597,7 @@ argocd app create allinone \
       --helm-set cp4waiops.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set cp4waiops.aiManager.namespace=katamari \
-      --helm-set cp4waiops.aiManager.channel=v3.2 \
+      --helm-set cp4waiops.aiManager.channel=v3.3 \
       --helm-set cp4waiops.aiManager.size=small \
       --helm-set cp4waiops.aiManager.pakModules.aiopsFoundation.enabled=true \
       --helm-set cp4waiops.aiManager.pakModules.applicationManager.enabled=true \
@@ -647,16 +624,20 @@ In this tutorial, the output of the above command is as follows:
 
 ```console
 # kubectl get application -A
-NAMESPACE          NAME              SYNC STATUS   HEALTH STATUS
-openshift-gitops   ceph              Synced        Healthy
-openshift-gitops   aimanagerapp      Synced        Healthy
+NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS
+openshift-gitops   cp4waiops                 Synced        Healthy
+openshift-gitops   in-cluster-aimanager      Synced        Healthy
+openshift-gitops   in-cluster-eventmanager   Synced        Healthy
+openshift-gitops   in-cluster-rook-ceph      Synced        Healthy
 ```
 
-Wait a while and check if all pods under namespace `katamari` are running well without any crash.
+Wait a while and check if all pods under namespace `katamari` and `noi` are running well without any crash.
 
 ```
 kubectl get pod -n katamari
+kubectl get pod -n noi
 ```
 ### Access CP4WAIOps UI
 
 Refer to [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops) and play with Cloud Pak for Watson AIOps.
+

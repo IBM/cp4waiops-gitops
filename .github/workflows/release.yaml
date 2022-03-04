@@ -5,10 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'config/3.2/cp4waiops'
-      - 'config/3.3/ai-manager'
-      - 'config/3.3/event-manager'
-      - 'config/3.3/all-in-one'
+      - 'config/3.2/**'
 
   workflow_dispatch:
 
@@ -30,7 +27,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config/3.3'
+          charts_dir: 'config/3.2'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-

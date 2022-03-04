@@ -54,7 +54,7 @@ spec:
     ##
     namespace: cp4waiops
 
-    ## instanceName is the Installation CR name of CP4WAIOps (AI Manager)
+    ## instanceName is the Installation CR name of CP4WAIOps (AI Manager).
     instanceName: aiops-installation
 
   eventManager:

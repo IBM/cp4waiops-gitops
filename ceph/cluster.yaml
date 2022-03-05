@@ -25,7 +25,7 @@ spec:
     # Whether to allow unsupported versions of Ceph. Currently `nautilus` and `octopus` are supported.
     # Future versions such as `pacific` would require this to be set to `true`.
     # Do not set to true in production.
-    allowUnsupported: false
+    # allowUnsupported: false
   # The path on the host where configuration files will be persisted. Must be specified.
   # Important: if you reinstall the cluster, make sure you delete this directory from each host or else the mons will fail to start on the new cluster.
   # In Minikube, the '/data' directory is configured to persist across reboots. Use "/data/rook" in Minikube environment.
@@ -34,9 +34,9 @@ spec:
   # This means Ceph's status could be degraded and we don't recommend upgrading but you might decide otherwise
   # Use at your OWN risk
   # To understand Rook's upgrade process of Ceph, read https://rook.io/docs/rook/master/ceph-upgrade.html#ceph-version-upgrades
-  skipUpgradeChecks: false
+  # skipUpgradeChecks: false
   # Whether or not continue if PGs are not clean during an upgrade
-  continueUpgradeAfterChecksEvenIfNotHealthy: false
+  # continueUpgradeAfterChecksEvenIfNotHealthy: false
   # WaitTimeoutForHealthyOSDInMinutes defines the time (in minutes) the operator would wait before an OSD can be stopped for upgrade or restart.
   # If the timeout exceeds and OSD is not ok to stop, then the operator would skip upgrade for the current OSD and proceed with the next one
   # if `continueUpgradeAfterChecksEvenIfNotHealthy` is `false`. If `continueUpgradeAfterChecksEvenIfNotHealthy` is `true`, then opertor would
@@ -48,7 +48,7 @@ spec:
     count: 3
     # The mons should be on unique nodes. For production, at least 3 nodes are recommended for this reason.
     # Mons should only be allowed on the same node for test environments where data loss is acceptable.
-    allowMultiplePerNode: false
+    # allowMultiplePerNode: false
   mgr:
     modules:
     # Several modules should not need to be included in this list. The "dashboard" and "monitoring" modules
@@ -67,7 +67,7 @@ spec:
   # enable prometheus alerting for cluster
   monitoring:
     # requires Prometheus to be pre-installed
-    enabled: false
+    # enabled: false
     # namespace to deploy prometheusRule in. If empty, namespace of the cluster will be used.
     # Recommended:
     # If you have a single rook-ceph cluster, set the rulesNamespace to the same namespace as the cluster or keep it empty.
@@ -105,7 +105,7 @@ spec:
     # This value should only be set when the cluster is about to be deleted. After the confirmation is set,
     # Rook will immediately stop configuring the cluster and only wait for the delete command.
     # If the empty string is set, Rook will not destroy any data on hosts during uninstall.
-    confirmation: ""
+    # confirmation: ""
     # sanitizeDisks represents settings for sanitizing OSD disks on cluster deletion
     sanitizeDisks:
       # method indicates if the entire disk should be sanitized or simply ceph's metadata
@@ -121,7 +121,7 @@ spec:
       iteration: 1
     # allowUninstallWithVolumes defines how the uninstall should be performed
     # If set to true, cephCluster deletion does not wait for the PVs to be deleted.
-    allowUninstallWithVolumes: false
+    # allowUninstallWithVolumes: false
   # To control where various services will be scheduled by kubernetes, use the placement configuration sections below.
   # The example under 'all' would have all services scheduled on kubernetes nodes labeled with 'role=storage-node' and
   # tolerate taints with a key of 'storage-node'.
@@ -218,17 +218,17 @@ spec:
     # If true, the operator will create and manage PodDisruptionBudgets for OSD, Mon, RGW, and MDS daemons. OSD PDBs are managed dynamically
     # via the strategy outlined in the [design](https://github.com/rook/rook/blob/master/design/ceph/ceph-managed-disruptionbudgets.md). The operator will
     # block eviction of OSDs by default and unblock them safely when drains are detected.
-    managePodBudgets: false
+    # managePodBudgets: false
     # A duration in minutes that determines how long an entire failureDomain like `region/zone/host` will be held in `noout` (in addition to the
     # default DOWN/OUT interval) when it is draining. This is only relevant when  `managePodBudgets` is `true`. The default value is `30` minutes.
     osdMaintenanceTimeout: 30
     # A duration in minutes that the operator will wait for the placement groups to become healthy (active+clean) after a drain was completed and OSDs came back up.
     # Operator will continue with the next drain if the timeout exceeds. It only works if `managePodBudgets` is `true`.
     # No values or 0 means that the operator will wait until the placement groups are healthy before unblocking the next drain.
-    pgHealthCheckTimeout: 0
+    # pgHealthCheckTimeout: 0
     # If true, the operator will create and manage MachineDisruptionBudgets to ensure OSDs are only fenced when the cluster is healthy.
     # Only available on OpenShift.
-    manageMachineDisruptionBudgets: false
+    # manageMachineDisruptionBudgets: false
     # Namespace in which to watch for the MachineDisruptionBudgets.
     machineDisruptionBudgetNamespace: openshift-machine-api
 
@@ -237,19 +237,19 @@ spec:
   healthCheck:
     daemonHealth:
       mon:
-        disabled: false
+        # disabled: false
         interval: 45s
       osd:
-        disabled: false
+        # disabled: false
         interval: 60s
       status:
-        disabled: false
+        # disabled: false
         interval: 60s
     # Change pod liveness probe, it works for all mon,mgr,osd daemons
     livenessProbe:
-      mon:
-        disabled: false
-      mgr:
-        disabled: false
-      osd:
-        disabled: false
+      mon: {}
+        # disabled: false
+      mgr: {}
+        # disabled: false
+      osd: {}
+        # disabled: false

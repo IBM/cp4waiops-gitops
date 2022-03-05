@@ -2,7 +2,7 @@
 apiVersion: orchestrator.aiops.ibm.com/v1alpha1
 kind: Installation
 metadata:
-  name: aiops-installation
+  name: {{.Values.spec.aiManager.instanceName}}
   namespace: {{.Values.spec.aiManager.namespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "120"

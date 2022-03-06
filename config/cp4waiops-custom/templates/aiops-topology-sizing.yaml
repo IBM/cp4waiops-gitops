@@ -1,0 +1,26 @@
+{{- if eq .Values.profile "x-small" }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: aiops-topology-sizing
+  namespace: {{.Values.aiManager.namespace}}
+data:
+  asm: |
+    "cassandra":
+      specs:
+        replicas: {{.Values.res.cassandra.replicas}}
+      containers:
+        "cassandra":
+          resources:
+            limits:
+              cpu: {{.Values.res.cassandra.limits.cpu}}
+              memory: {{.Values.res.cassandra.limits.memory}}
+            requests:
+              cpu: {{.Values.res.cassandra.requests.cpu}}
+              memory: {{.Values.res.cassandra.requests.memory}}
+          env:
+            - name: CASSANDRA_HEAP_SIZE
+              value: {{.Values.res.cassandra.heap.size}}
+            - name: CASSANDRA_HEAP_NEWSIZE
+              value: {{.Values.res.cassandra.heap.newSize}}
+{{- end }}

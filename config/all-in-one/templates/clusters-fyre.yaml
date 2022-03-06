@@ -18,7 +18,7 @@ spec:
   project: default
   source:
     path: config/clusters/fyre
-    repoURL: https://github.com/IBM/cp4waiops-gitops
+    repoURL: https://github.com/morningspace/cp4waiops-gitops
     targetRevision: merge-sandbox
     helm:
       parameters:

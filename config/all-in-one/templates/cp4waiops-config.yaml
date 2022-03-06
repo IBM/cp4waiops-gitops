@@ -1,0 +1,43 @@
+{{- if and .Values.cp4waiops.enabled .Values.cp4waiops.setup }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cp4waiops-config
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-cp4waiops-config` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "300"
+    spec:
+      destination:
+        namespace: '{{ .Values.cp4waiops.aiManager.namespace }}'
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: gitops-charts/aiops-config-operator
+        repoURL: https://github.com/IBM/sample-app-gitops
+        targetRevision: HEAD
+        helm:
+          parameters:
+            - name: 'humio.enabled'
+              value: '{{ .Values.humio.enabled }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - Validate=false
+          - SkipDryRunOnMissingResource=true
+          - FailOnSharedResource=true
+          - CreateNamespace=true
+{{- end }}

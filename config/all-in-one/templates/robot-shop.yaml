@@ -1,0 +1,46 @@
+{{- if .Values.robotshop.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: robot-shops
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-robot-shop` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "200"
+    spec:
+      destination:
+        namespace: robot-shop
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: gitops-charts/robot-shop
+        repoURL: https://github.com/IBM/sample-app-gitops
+        targetRevision: HEAD
+        helm:
+          parameters:
+            - name: 'robot-shop.nodeport'
+              value: 'true'
+            - name: 'robot-shop.ocCreateRoute'
+              value: 'true'
+            - name: 'robot-shop.openshift'
+              value: 'true'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - Validate=false
+          - SkipDryRunOnMissingResource=true
+          - CreateNamespace=true
+{{- end }}

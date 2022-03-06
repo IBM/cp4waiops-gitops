@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-custom
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  destination:
+    {{- if .Values.argocd.namespace }}
+    namespace: {{ .Values.argocd.namespace }}
+    {{- else if eq .Values.argocd.cluster "kubernetes" }}
+    namespace: argocd
+    {{- else if eq .Values.argocd.cluster "openshift" }}
+    namespace: openshift-gitops
+    {{- end }}
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: config/argocd/{{ .Values.argocd.cluster }}
+    repoURL: https://github.com/IBM/cp4waiops-gitops
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

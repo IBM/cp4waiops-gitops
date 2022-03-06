@@ -1,0 +1,12 @@
+apiVersion: clusters.ibm.com/v1alpha1
+kind: OpenShiftFyre
+metadata:
+  name: openshiftfyre-qb-large
+  namespace: {{ default "default" .Release.Namespace }}
+spec:
+  # Add fields here
+  providerSecretRef: fyre-{{ .Values.fyre.credentials.user }}-secret
+  ocpVersion: "4.8.27"
+  size: "large"
+  argocd:
+    namespace: {{ .Values.argocd.namespace }}

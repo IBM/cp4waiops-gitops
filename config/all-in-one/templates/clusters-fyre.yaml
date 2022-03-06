@@ -19,7 +19,7 @@ spec:
   source:
     path: config/clusters/fyre
     repoURL: https://github.com/IBM/cp4waiops-gitops
-    targetRevision: HEAD
+    targetRevision: merge-sandbox
     helm:
       parameters:
         - name: fyre.credentials.user

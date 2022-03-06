@@ -26,7 +26,7 @@ spec:
       source:
         path: {{ template "cp4waiops.configPath" . }}
         repoURL: https://github.com/IBM/cp4waiops-gitops
-        targetRevision: HEAD
+        targetRevision: merge-sandbox
         helm:
           parameters:
             - name: spec.dockerUsername

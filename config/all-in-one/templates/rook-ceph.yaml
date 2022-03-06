@@ -24,9 +24,9 @@ spec:
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: ceph
+        path: config/ceph
         repoURL: https://github.com/IBM/cp4waiops-gitops
-        targetRevision: HEAD
+        targetRevision: merge-sandbox
       syncPolicy:
         automated:
           prune: true

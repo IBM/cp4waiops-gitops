@@ -3,8 +3,7 @@ kind: Job
 metadata:
   name: configure-aiops-network-policy
   annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/sync-wave: "50"
+    argocd.argoproj.io/sync-wave: "70"
   namespace: {{.Values.spec.eventManager.namespace}}
 spec:
   template:

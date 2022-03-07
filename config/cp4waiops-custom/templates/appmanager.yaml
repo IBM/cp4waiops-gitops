@@ -27,6 +27,7 @@ spec:
                 spec:
                   containers:
                   - name: jobmanager
+                    imagePullPolicy: Always
                     resources:
                       limits:
                         cpu: "{{.Values.res.irflink.jobmanager.jobmanager.limits.cpu}}"
@@ -34,14 +35,6 @@ spec:
                       requests:
                         cpu: "{{.Values.res.irflink.jobmanager.jobmanager.requests.cpu}}"
                         memory: "{{.Values.res.irflink.jobmanager.jobmanager.requests.memory}}"
-                  - name: tls-proxy
-                    resources:
-                      limits:
-                        cpu: "{{.Values.res.irflink.jobmanager.tlsproxy.limits.cpu}}"
-                        memory: "{{.Values.res.irflink.jobmanager.tlsproxy.limits.memory}}"
-                      requests:
-                        cpu: "{{.Values.res.irflink.jobmanager.tlsproxy.requests.cpu}}"
-                        memory: "{{.Values.res.irflink.jobmanager.tlsproxy.requests.memory}}"
           properties:
              jobmanager.memory.process.size: "{{.Values.res.irflink.jobmanager.processSize}}"
              taskmanager.memory.process.size: "{{.Values.res.irflink.taskmanager.processSize}}"
@@ -52,6 +45,7 @@ spec:
                 spec:
                   containers:
                   - name: taskmanager
+                    imagePullPolicy: Always
                     resources:
                       limits:
                         cpu: "{{.Values.res.irflink.taskmanager.taskmanager.limits.cpu}}"

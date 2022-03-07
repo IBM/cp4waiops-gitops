@@ -11,7 +11,6 @@
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops)
-    - [Install AIManager and EventManager using GitOps](#install-aimanager-and-eventmanager-using-gitops)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation)
     - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
@@ -20,7 +19,6 @@
     - [Storage Consideration](#storage-consideration-1)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops-1)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops-1)
-    - [Install AIManager and EventManager using GitOps](#install-aimanager-and-eventmanager-using-gitops-1)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
     - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
@@ -214,49 +212,6 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-
-### Install AIManager and EventManager using GitOps
-
-The parameters for Cloud Pak for Watson AIOps are as follows, if you already has a storage, please set the rookceph.enabled as false:
-
-- GENERAL
-  - Application Name: anyname(like "allinone")
-  - Project: default
-  - SYNC POLICY: Automatic
-- SOURCE
-  - REPO URL : https://github.com/IBM/cp4waiops-gitops
-  - Target version: HEAD
-  - path: config/3.3/all-in-one
-- DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: openshift-gitops
-- PARAMETERS
-  - argocd.cluster: openshift
-  - argocd.allowLocalDeploy: true
-  - rookceph.enabled: true
-  - cp4waiops.dockerUsername: cp
-  - cp4waiops.dockerPassword: REPLACE_IT
-  - cp4waiops.storageClass: rook-cephfs
-  - cp4waiops.storageClassLargeBlock: rook-cephfs
-  - cp4waiops.aiManager.enabled: true
-  - cp4waiops.aiManager.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - cp4waiops.aiManager.channel: v3.3
-  - cp4waiops.aiManager.size: small
-  - cp4waiops.aiManager.namespace: katamari
-  - cp4waiops.aiManager.pakModules.aiopsFoundation.enabled: true
-  - cp4waiops.aiManager.pakModules.applicationManager.enabled: true
-  - cp4waiops.aiManager.pakModules.aiManager.enabled: true
-  - cp4waiops.aiManager.pakModules.connection.enabled: true
-  - cp4waiops.eventManager.enabled: true
-  - cp4waiops.aiManager.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - cp4waiops.eventManager.version: 1.6.4.0
-  - cp4waiops.eventManager.clusterDomain: apps.clustername.*.*.com
-  - cp4waiops.eventManager.channel: v1.7
-  - cp4waiops.eventManager.deploymentType: trial
-  - cp4waiops.eventManager.namespace: noi
-
-
-  NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 ### Verify CP4WAIOPS Installation
 
@@ -573,44 +528,6 @@ argocd app create eventmanagerapp \
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-
-### Install AIManager and EventManager using GitOps
-
-The parameters for Cloud Pak for Watson AIOps are as follows, if you already has a storage, please set the rookceph.enabled as false:
-
-```sh
-argocd app create allinone \
-      --sync-policy automatic \
-      --project default \
-      --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.3/all-in-one \
-      --revision HEAD \
-      --dest-namespace openshift-gitops \
-      --dest-server https://kubernetes.default.svc \
-      --helm-set argocd.cluster=openshift
-      --helm-set argocd.allowLocalDeploy=true
-      --helm-set rookceph.enabled=true
-      --helm-set cp4waiops.dockerUsername=cp \
-      --helm-set cp4waiops.dockerPassword= <entitlement-key> \
-      --helm-set cp4waiops.storageClass=rook-cephfs \
-      --helm-set cp4waiops.storageClassLargeBlock=rook-cephfs \
-      --helm-set cp4waiops.aiManager.enabled=true \
-      --helm-set cp4waiops.aiManager.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set cp4waiops.aiManager.namespace=katamari \
-      --helm-set cp4waiops.aiManager.channel=v3.3 \
-      --helm-set cp4waiops.aiManager.size=small \
-      --helm-set cp4waiops.aiManager.pakModules.aiopsFoundation.enabled=true \
-      --helm-set cp4waiops.aiManager.pakModules.applicationManager.enabled=true \
-      --helm-set cp4waiops.aiManager.pakModules.aiManager.enabled=true \
-      --helm-set cp4waiops.aiManager.pakModules.connection.enabled=true \
-      --helm-set cp4waiops.eventManager.enbaled=true \
-      --helm-set cp4waiops.eventManager.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set cp4waiops.eventManager.namespace=noi \
-      --helm-set cp4waiops.eventManager.channel=v1.7 \
-      --helm-set cp4waiops.eventManager.version=1.6.4.0 \
-      --helm-set cp4waiops.eventManager.clusterDomain=apps.clustername.*.*.com \
-      --helm-set cp4waiops.eventManager.deploymentType=trial
-```
 
 ### Verify CP4WAIOPS Installation
 

@@ -49,6 +49,10 @@ spec:
           jsonPointers:
             - /spec/pakModules
           kind: Installation
+        - group: apiextensions.k8s.io
+          jsonPointers:
+            - /metadata/generation
+          kind: CustomResourceDefinition
       syncPolicy:
         automated:
           prune: true

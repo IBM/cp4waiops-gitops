@@ -12,6 +12,9 @@ spec:
   applicationInstanceLabelKey: "argocd.argoproj.io/instance"
   resourceCustomizations: |
     argoproj.io/Application:
+      ignoreDifferences: |
+        jsonPointers:
+        - /metadata/labels
       health.lua: |
         hs = {}
         hs.status = "Progressing"

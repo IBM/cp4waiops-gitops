@@ -366,22 +366,22 @@ res:
           memory: 512Mi
       tlsproxy:
         limits:
-          cpu: 500m
-          memory: 512Mi
+          cpu: "1"
+          memory: 1Gi
         requests:
           cpu: 100m
           memory: 256Mi
-      processSize: 768mb
+      processSize: 1gb
     taskmanager:
       replicas: 1
       taskmanager:
         limits:
           cpu: 500m
-          memory: 1408Mi
+          memory: 1Gi
         requests:
           cpu: 250m
           memory: 1Gi
-      processSize: 1gb
+      processSize: 4gb
 
   kong:
     replicas: 1

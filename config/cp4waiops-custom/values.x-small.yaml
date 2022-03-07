@@ -346,7 +346,7 @@ res:
           memory: 5888Mi
         requests:
           cpu: 500m
-          memory: 1024Mi
+          memory: 2048Mi
       heapSize: 4096mb
       managedSize: 512mb
       numberOfTaskSlots: "8"

@@ -364,20 +364,13 @@ res:
         requests:
           cpu: 100m
           memory: 512Mi
-      tlsproxy:
-        limits:
-          cpu: "1"
-          memory: 1Gi
-        requests:
-          cpu: 100m
-          memory: 256Mi
       processSize: 1gb
     taskmanager:
       replicas: 1
       taskmanager:
         limits:
           cpu: 500m
-          memory: 1Gi
+          memory: 1408Mi
         requests:
           cpu: 250m
           memory: 1Gi

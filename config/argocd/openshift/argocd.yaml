@@ -28,6 +28,10 @@ spec:
           end
         end
         return hs
+    argoproj.io/ApplicationSet:
+      ignoreDifferences: |
+        jsonPointers:
+        - /metadata/labels
     ceph.rook.io/CephCluster:
       health.lua: |
         hs = {}

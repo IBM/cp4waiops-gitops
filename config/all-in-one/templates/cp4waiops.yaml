@@ -51,9 +51,7 @@ spec:
           kind: Installation
         - group: apiextensions.k8s.io
           jsonPointers:
-            - /metadata/annotations
             - /metadata/generation
-            - /spec/versions
           kind: CustomResourceDefinition
       syncPolicy:
         automated:

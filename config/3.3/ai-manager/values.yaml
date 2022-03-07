@@ -48,7 +48,7 @@ spec:
     ## This is because AI Manager uses Security Context Constraints (SCC),
     ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
     ##
-    namespace: katamari
+    namespace: cp4waiops
 
     ## enable pakModules
     pakModules:

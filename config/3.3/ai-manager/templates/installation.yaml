@@ -12,6 +12,9 @@ spec:
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   license:
     accept: true
+  {{- if not .Values.gobalImagePullSecret }}
+  imagePullSecret: ibm-entitlement-key
+  {{- end }}
   pakModules:
     - name: aiopsFoundation
       enabled: {{.Values.spec.aiManager.pakModules.aiopsFoundation.enabled}}

@@ -16,49 +16,6 @@ spec:
       kind: Deployment
       name: aiopsedge-operator-controller-manager
       namespace: {{.Values.aiManager.namespace}}
-  - id: aiops-ir-lifecycle-locker
-    patchTemplate: |
-      spec:
-        flink:
-          jobManager: 
-            replicas: {{.Values.res.irflink.jobmanager.replicas}}
-            template:
-              pod:
-                spec:
-                  containers:
-                  - name: jobmanager
-                    imagePullPolicy: Always
-                    resources:
-                      limits:
-                        cpu: "{{.Values.res.irflink.jobmanager.jobmanager.limits.cpu}}"
-                        memory: "{{.Values.res.irflink.jobmanager.jobmanager.limits.memory}}"
-                      requests:
-                        cpu: "{{.Values.res.irflink.jobmanager.jobmanager.requests.cpu}}"
-                        memory: "{{.Values.res.irflink.jobmanager.jobmanager.requests.memory}}"
-          properties:
-             jobmanager.memory.process.size: "{{.Values.res.irflink.jobmanager.processSize}}"
-             taskmanager.memory.process.size: "{{.Values.res.irflink.taskmanager.processSize}}"
-          taskManager:
-            replicas: {{.Values.res.irflink.taskmanager.replicas}}
-            template:
-              pod:
-                spec:
-                  containers:
-                  - name: taskmanager
-                    imagePullPolicy: Always
-                    resources:
-                      limits:
-                        cpu: "{{.Values.res.irflink.taskmanager.taskmanager.limits.cpu}}"
-                        memory: "{{.Values.res.irflink.taskmanager.taskmanager.limits.memory}}"
-                      requests:
-                        cpu: "{{.Values.res.irflink.taskmanager.taskmanager.requests.cpu}}"
-                        memory: "{{.Values.res.irflink.taskmanager.taskmanager.requests.memory}}"
-    patchType: application/merge-patch+json
-    targetObjectRef:
-      apiVersion: eventprocessing.automation.ibm.com/v1beta1
-      kind: EventProcessor
-      name: aiops-ir-lifecycle
-      namespace: {{.Values.aiManager.namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
 {{- end }}

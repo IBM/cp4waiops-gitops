@@ -26,15 +26,16 @@ cluster:
   # Provider specific configuration
   provider:
     # Fyre configuration
-    fyre:
-      # Fyre credentials
-      credentials:
-        # Fyre user id required when calling Fyre API
-        user: REPLACE_IT
-        # Fyre user token required when calling Fyre API
-        token: REPLACE_IT
-        # Fyre product group id required when calling Fyre API
-        productGroupId: REPLACE_IT
+    # NOTE: Fyre is an internal used IaaS platform for IBM
+    type: fyre
+    # Fyre credentials
+    credentials:
+      # Fyre user id required when calling Fyre API
+      user: REPLACE_IT
+      # Fyre user token required when calling Fyre API
+      token: REPLACE_IT
+      # Fyre product group id required when calling Fyre API
+      productGroupId: REPLACE_IT
 
 # -----------------------------------------------------------------------------
 # Storage parameters
@@ -62,6 +63,8 @@ cp4waiops:
   dockerPassword: REPLACE_IT
 
   # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+  # NOTE: The profile x-small is only for small PoC or demo. If you are looking
+  # for official installation, use profile such as small or large instead.
   profile: x-small
 
   # AIManager specific configuration

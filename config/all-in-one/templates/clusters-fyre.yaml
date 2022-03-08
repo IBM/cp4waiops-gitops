@@ -1,4 +1,4 @@
-{{- if and .Values.cluster.enabled }}
+{{- if and .Values.cluster.enabled (eq .Values.cluster.provider.type "fyre") }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -23,11 +23,11 @@ spec:
     helm:
       parameters:
         - name: fyre.credentials.user
-          value: '{{ .Values.cluster.provider.fyre.credentials.user }}'
+          value: '{{ .Values.cluster.provider.credentials.user }}'
         - name: fyre.credentials.token
-          value: '{{ .Values.cluster.provider.fyre.credentials.token }}'
+          value: '{{ .Values.cluster.provider.credentials.token }}'
         - name: fyre.credentials.productGroupId
-          value: '{{ .Values.cluster.provider.fyre.credentials.productGroupId }}'
+          value: '{{ .Values.cluster.provider.credentials.productGroupId }}'
         - name: argocd.namespace
           {{- if .Values.argocd.namespace }}
           value: {{ .Values.argocd.namespace }}

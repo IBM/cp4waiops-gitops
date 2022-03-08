@@ -109,10 +109,10 @@ res:
     taskManager:
       limits:
         cpu: 500m
-        memory: 1Gi
+        memory: 1280Mi
       requests:
         cpu: 250m
-        memory: 1Gi
+        memory: 768Mi
     jobManager:
       limits:
         cpu: 600m
@@ -353,28 +353,6 @@ res:
 
   aiopsedgeOperator:
     replicas: 1
-
-  irflink:
-    jobmanager:
-      replicas: 1
-      jobmanager:
-        limits:
-          cpu: 600m
-          memory: 768Mi
-        requests:
-          cpu: 100m
-          memory: 512Mi
-      processSize: 1gb
-    taskmanager:
-      replicas: 1
-      taskmanager:
-        limits:
-          cpu: 500m
-          memory: 1408Mi
-        requests:
-          cpu: 250m
-          memory: 1Gi
-      processSize: 4gb
 
   kong:
     replicas: 1

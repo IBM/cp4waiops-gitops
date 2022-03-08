@@ -1,4 +1,4 @@
-{{- if and .Values.cluster.enabled }}
+{{- if and .Values.cluster.enabled (eq .Values.cluster.provider.type "fyre") }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:

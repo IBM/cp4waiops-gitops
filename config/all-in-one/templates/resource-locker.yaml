@@ -1,4 +1,4 @@
-{{- if and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small") }}
+{{- if or .Values.robotshop.enabled .Values.humio.enabled (and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small")) }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:

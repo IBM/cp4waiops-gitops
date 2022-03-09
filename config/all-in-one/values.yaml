@@ -54,7 +54,7 @@ cp4waiops:
   enabled: true
 
   # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
-  version: "3.2"
+  version: "3.3"
 
   # The username of image registry used to pull CP4WAIOps images.
   dockerUsername: cp

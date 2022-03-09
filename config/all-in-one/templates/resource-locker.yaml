@@ -1,0 +1,36 @@
+{{- if or .Values.robotshop.enabled .Values.humio.enabled (and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small")) }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: resource-lockers
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-resource-locker` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "100"
+    spec:
+      destination:
+        namespace: resource-locker-operator
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        chart: resource-locker-operator
+        repoURL: https://redhat-cop.github.io/resource-locker-operator
+        targetRevision: v1.1.3
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+{{- end }}

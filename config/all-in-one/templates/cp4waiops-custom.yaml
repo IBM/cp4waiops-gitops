@@ -1,0 +1,52 @@
+{{- if and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small") }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cp4waiops-custom
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-cp4waiops-custom` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "200"
+    spec:
+      destination:
+        namespace: '{{ .Values.cp4waiops.aiManager.namespace }}'
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: config/cp4waiops-custom
+        repoURL: https://github.com/IBM/cp4waiops-gitops
+        targetRevision: HEAD
+        helm:
+          valueFiles:
+            - values.yaml
+          {{- if eq .Values.cp4waiops.profile "x-small" }}
+            - values.x-small.yaml
+          {{- end }}
+          parameters:
+            - name: 'aiManager.instanceName'
+              value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
+            - name: 'aiManager.namespace'
+              value: '{{ .Values.cp4waiops.aiManager.namespace }}'
+            - name: 'profile'
+              value: '{{ .Values.cp4waiops.profile }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - Validate=false
+          - SkipDryRunOnMissingResource=true
+          - FailOnSharedResource=true
+          - CreateNamespace=true
+{{- end }}

@@ -1,0 +1,48 @@
+{{- if eq .Values.profile "x-small" }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanagermainprod-locker
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: "{{.Values.res.changeRisk.limits.cpu}}"
+                memory: "{{.Values.res.changeRisk.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.changeRisk.requests.cpu}}"
+                memory: "{{.Values.res.changeRisk.requests.memory}}"
+          logAnomaly:
+            resources:
+              limits:
+                cpu: "{{.Values.res.logAnomaly.limits.cpu}}"
+                memory: "{{.Values.res.logAnomaly.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.logAnomaly.requests.cpu}}"
+                memory: "{{.Values.res.logAnomaly.requests.memory}}"
+          aiPlatformApiServer:
+            resources:
+              limits:
+                cpu: "{{.Values.res.aiPlatformApiServer.limits.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
+          global:
+            logAnomaly:
+              replicas: 1
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

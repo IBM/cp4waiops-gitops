@@ -1,0 +1,188 @@
+{{- if eq .Values.profile "x-small" }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: iaf-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: nginx-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.nginx.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-nginx
+      namespace: {{.Values.aiManager.namespace}}
+  - id: usermgmt-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.usermgmt.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: usermgmt
+      namespace: {{.Values.aiManager.namespace}}
+  - id: zen-core-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.zencore.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core
+      namespace: {{.Values.aiManager.namespace}}
+  - id: zen-core-api-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.zencoreapi.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core-api
+      namespace: {{.Values.aiManager.namespace}}
+  - id: automationbase-locker
+    patchTemplate: |
+      spec:
+        elasticsearch:
+          nodegroupspecs:
+            - config:
+              - key: node.master
+                value: "true"
+              - key: node.data
+                value: "true"
+              name: aiops
+              replicas: {{.Values.res.elasticsearch.replicas}}
+              template:
+                pod:
+                  spec:
+                    containers:
+                    - env:
+                      - name: ES_JAVA_OPTS
+                        value: "{{.Values.res.elasticsearch.javaOps}}"
+                      name: elasticsearch
+                      resources:
+                        limits:
+                          cpu: "{{.Values.res.elasticsearch.elasticsearch.limits.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.elasticsearch.limits.memory}}"
+                        requests:
+                          cpu: "{{.Values.res.elasticsearch.elasticsearch.requests.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.elasticsearch.requests.memory}}"
+                    - name: tls-proxy
+                      resources:
+                        limits:
+                          cpu: "{{.Values.res.elasticsearch.tlsproxy.limits.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.tlsproxy.limits.memory}}"
+                        requests:
+                          cpu: "{{.Values.res.elasticsearch.tlsproxy.requests.cpu}}"
+                          memory: "{{.Values.res.elasticsearch.tlsproxy.requests.memory}}"
+        kafka:
+          entityOperator:
+            tlsSidecar:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.memory}}"
+            topicOperator:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.requests.memory}}"
+            userOperator:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.requests.memory}}"
+          kafka:
+            replicas: {{.Values.res.kafka.kafka.replicas}}
+            resources:
+              limits:
+                cpu: "{{.Values.res.kafka.kafka.limits.cpu}}"
+                memory: "{{.Values.res.kafka.kafka.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.kafka.kafka.requests.cpu}}"
+                memory: "{{.Values.res.kafka.kafka.requests.memory}}"
+          zookeeper:
+            replicas: {{.Values.res.kafka.zookeeper.replicas}}
+            resources:
+              limits:
+                cpu: "{{.Values.res.kafka.zookeeper.limits.cpu}}"
+                memory: "{{.Values.res.kafka.zookeeper.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.kafka.zookeeper.requests.cpu}}"
+                memory: "{{.Values.res.kafka.zookeeper.requests.memory}}"
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
+      namespace: {{.Values.aiManager.namespace}}
+  - id: cp4waiops-eventprocessor-locker
+    patchTemplate: |
+      spec:
+        flink:
+          jobManager: 
+            replicas: {{.Values.res.flink.jobmanager.replicas}}
+            template:
+              pod:
+                spec:
+                  containers:
+                  - name: jobmanager
+                    resources:
+                      limits:
+                        cpu: "{{.Values.res.flink.jobmanager.jobmanager.limits.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.jobmanager.limits.memory}}"
+                      requests:
+                        cpu: "{{.Values.res.flink.jobmanager.jobmanager.requests.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.jobmanager.requests.memory}}"
+                  - name: tls-proxy
+                    resources:
+                      limits:
+                        cpu: "{{.Values.res.flink.jobmanager.tlsproxy.limits.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.tlsproxy.limits.memory}}"
+                      requests:
+                        cpu: "{{.Values.res.flink.jobmanager.tlsproxy.requests.cpu}}"
+                        memory: "{{.Values.res.flink.jobmanager.tlsproxy.requests.memory}}"
+          properties:
+             jobmanager.memory.heap.size: "{{.Values.res.flink.jobmanager.heapSize}}"
+             jobmanager.memory.jvm-metaspace.size: "{{.Values.res.flink.jobmanager.jvmMetaSpaceSize}}"
+             taskmanager.memory.heap.size: "{{.Values.res.flink.taskmanager.heapSize}}"
+             taskmanager.memory.managed.size: "{{.Values.res.flink.taskmanager.managedSize}}"
+             taskmanager.numberOfTaskSlots: "{{.Values.res.flink.taskmanager.numberOfTaskSlots}}"
+          taskManager:
+            replicas: {{.Values.res.flink.taskmanager.replicas}}
+            template:
+              pod:
+                spec:
+                  containers:
+                  - name: taskmanager
+                    resources:
+                      limits:
+                        cpu: {{.Values.res.flink.taskmanager.taskmanager.limits.cpu}}
+                        memory: {{.Values.res.flink.taskmanager.taskmanager.limits.memory}}
+                      requests:
+                        cpu: {{.Values.res.flink.taskmanager.taskmanager.requests.cpu}}
+                        memory: {{.Values.res.flink.taskmanager.taskmanager.requests.memory}}
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: eventprocessing.automation.ibm.com/v1beta1
+      kind: EventProcessor
+      name: cp4waiops-eventprocessor
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

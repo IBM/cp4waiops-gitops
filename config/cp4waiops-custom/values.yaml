@@ -1,0 +1,6 @@
+---
+profile: small
+
+aiManager:
+  instanceName: aiops-installation
+  namespace: cp4waiops

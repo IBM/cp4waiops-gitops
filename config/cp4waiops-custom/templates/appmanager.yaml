@@ -1,0 +1,21 @@
+{{- if eq .Values.profile "x-small" }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.aiopsedgeOperator.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

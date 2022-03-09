@@ -1,0 +1,34 @@
+{{- if .Values.rookceph.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rook-cephs
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-rook-ceph` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "100"
+    spec:
+      destination:
+        namespace: rook-ceph
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: config/ceph
+        repoURL: https://github.com/IBM/cp4waiops-gitops
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+{{- end }}

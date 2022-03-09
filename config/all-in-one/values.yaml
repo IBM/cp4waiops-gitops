@@ -1,0 +1,103 @@
+# -----------------------------------------------------------------------------
+# Argo CD parameters
+# -----------------------------------------------------------------------------
+argocd:
+
+  # The type of the cluster that Argo CD runs on, values includes:
+  # - kubernetes
+  # - openshift
+  cluster: openshift
+
+  # The Argo CD namespace that can be auto-resolved based on cluster type,
+  # or you can uncomment below parameter to specificy it explicitly.
+  # namespace: argocd
+
+  # Allow apps to be deployed on the same cluster where Argo CD runs.
+  allowLocalDeploy: true
+
+# -----------------------------------------------------------------------------
+# Cluster parameters
+# -----------------------------------------------------------------------------
+cluster:
+
+  # Specify whether or not to provision a cluster before install CP4WAIOps.
+  enabled: false
+
+  # Provider specific configuration
+  provider:
+    # Fyre configuration
+    # NOTE: Fyre is an internal used IaaS platform for IBM
+    type: fyre
+    # Fyre credentials
+    credentials:
+      # Fyre user id required when calling Fyre API
+      user: REPLACE_IT
+      # Fyre user token required when calling Fyre API
+      token: REPLACE_IT
+      # Fyre product group id required when calling Fyre API
+      productGroupId: REPLACE_IT
+
+# -----------------------------------------------------------------------------
+# Storage parameters
+# -----------------------------------------------------------------------------
+rookceph:
+
+  # Specify whether or not to install Rook Ceph as storage used by CP4WAIOps.
+  enabled: true
+  
+# -----------------------------------------------------------------------------
+# CP4WAIOps parameters
+# -----------------------------------------------------------------------------
+cp4waiops:
+
+  # Specify whether or not to install CP4WAIOps.
+  enabled: true
+
+  # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
+  version: "3.2"
+
+  # The username of image registry used to pull CP4WAIOps images.
+  dockerUsername: cp
+
+  # The password of image registry used to pull CP4WAIOps images.
+  dockerPassword: REPLACE_IT
+
+  # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+  # NOTE: The profile x-small is only for small PoC or demo. If you are looking
+  # for official installation, use profile such as small or large instead.
+  profile: x-small
+
+  # AIManager specific configuration
+  aiManager:
+    # The instance name of CP4WAIOps.
+    instanceName: aiops-installation
+    # The namespace of CP4WAIOps.
+    namespace: cp4waiops
+
+  # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
+  # Humio, Kafka, Kubernetes, etc. after it is installed.
+  setup: true
+
+# -----------------------------------------------------------------------------
+# Robotshop parameters
+# -----------------------------------------------------------------------------
+robotshop:
+
+  # Specify whether or not to install Robotshop.
+  enabled: true
+
+# -----------------------------------------------------------------------------
+# Humio parameters
+# -----------------------------------------------------------------------------
+humio:
+
+  # Specify whether or not to install Humio.
+  enabled: true
+
+# -----------------------------------------------------------------------------
+# Istio parameters
+# -----------------------------------------------------------------------------
+istio:
+
+  # Specify whether or not to install Istio.
+  enabled: true

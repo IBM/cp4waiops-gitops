@@ -1,0 +1,43 @@
+{{- if and .Values.cluster.enabled (eq .Values.cluster.provider.type "fyre") }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: clusters-fyre
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  destination:
+    {{- if .Values.argocd.namespace }}
+    namespace: {{ .Values.argocd.namespace }}
+    {{- else if eq .Values.argocd.cluster "kubernetes" }}
+    namespace: argocd
+    {{- else if eq .Values.argocd.cluster "openshift" }}
+    namespace: openshift-gitops
+    {{- end }}
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: config/clusters/fyre
+    repoURL: https://github.com/IBM/cp4waiops-gitops
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: fyre.credentials.user
+          value: '{{ .Values.cluster.provider.credentials.user }}'
+        - name: fyre.credentials.token
+          value: '{{ .Values.cluster.provider.credentials.token }}'
+        - name: fyre.credentials.productGroupId
+          value: '{{ .Values.cluster.provider.credentials.productGroupId }}'
+        - name: argocd.namespace
+          {{- if .Values.argocd.namespace }}
+          value: {{ .Values.argocd.namespace }}
+          {{- else if eq .Values.argocd.cluster "kubernetes" }}
+          value: argocd
+          {{- else if eq .Values.argocd.cluster "openshift" }}
+          value: openshift-gitops
+          {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{- end }}

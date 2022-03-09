@@ -1,0 +1,287 @@
+{{- if eq .Values.profile "x-small" }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aiops-installation-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiops-installation-locker
+    patchTemplate: |
+      spec:
+        pakModules:
+          - name: aiopsFoundation
+            enabled: true
+            config:
+              - name: ibm-management-kong
+                spec:
+                  kong:
+                    replicaCount: {{.Values.res.kong.replicas}}
+              - name: couchdb
+                spec:
+                  couchdbcluster:
+                    resources:
+                      db:
+                        limits:
+                          cpu: "{{.Values.res.couchdbcluster.db.limits.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.db.limits.memory}}"
+                        requests:
+                          cpu: "{{.Values.res.couchdbcluster.db.requests.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.db.requests.memory}}"
+                      search:
+                        limits:
+                          cpu: "{{.Values.res.couchdbcluster.search.limits.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.search.limits.memory}}"
+                        requests:
+                          cpu: "{{.Values.res.couchdbcluster.search.requests.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.search.requests.memory}}"
+                      mgmt:
+                        limits:
+                          cpu: "{{.Values.res.couchdbcluster.mgmt.limits.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.mgmt.limits.memory}}"
+                        requests:
+                          cpu: "{{.Values.res.couchdbcluster.mgmt.requests.cpu}}"
+                          memory: "{{.Values.res.couchdbcluster.mgmt.requests.memory}}"
+              - name: redis
+                spec:
+                  redissentinel:
+                    resources:
+                      member:
+                        db:
+                          limits:
+                            cpu: "{{.Values.res.redis.member.db.limits.cpu}}"
+                            memory: "{{.Values.res.redis.member.db.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.member.db.requests.cpu}}"
+                            memory: "{{.Values.res.redis.member.db.requests.memory}}"
+                        mgmt:
+                          limits:
+                            cpu: "{{.Values.res.redis.member.mgmt.limits.cpu}}"
+                            memory: "{{.Values.res.redis.member.mgmt.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.member.mgmt.requests.cpu}}"
+                            memory: "{{.Values.res.redis.member.mgmt.requests.memory}}"
+                        proxy:
+                          limits:
+                            cpu: "{{.Values.res.redis.member.proxy.limits.cpu}}"
+                            memory: "{{.Values.res.redis.member.proxy.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.member.proxy.requests.cpu}}"
+                            memory: "{{.Values.res.redis.member.proxy.requests.memory}}"
+                        proxylog:
+                          limits:
+                            cpu: "{{.Values.res.redis.member.proxylog.limits.cpu}}"
+                            memory: "{{.Values.res.redis.member.proxylog.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.member.proxylog.requests.cpu}}"
+                            memory: "{{.Values.res.redis.member.proxylog.requests.memory}}"
+                      sentinel:
+                        db:
+                          limits:
+                            cpu: "{{.Values.res.redis.sentinel.db.limits.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.db.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.sentinel.db.requests.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.db.requests.memory}}"
+                        mgmt:
+                          limits:
+                            cpu: "{{.Values.res.redis.sentinel.mgmt.limits.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.mgmt.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.sentinel.mgmt.requests.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.mgmt.requests.memory}}"
+                        proxy:
+                          limits:
+                            cpu: "{{.Values.res.redis.sentinel.proxy.limits.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.proxy.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.sentinel.proxy.requests.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.proxy.requests.memory}}"
+                        proxylog:
+                          limits:
+                            cpu: "{{.Values.res.redis.sentinel.proxylog.limits.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.proxylog.limits.memory}}"
+                          requests:
+                            cpu: "{{.Values.res.redis.sentinel.proxylog.requests.cpu}}"
+                            memory: "{{.Values.res.redis.sentinel.proxylog.requests.memory}}"
+          - name: applicationManager
+            enabled: true
+            config:
+              - name: ir-lifecycle-operator
+                spec:
+                  lifecycleservice:
+                    customSizing:
+                      logstash:
+                        resourceLimitsCPU: "{{.Values.res.lifecycleservice.logstash.limits.cpu}}"
+                        resourceLimitsMemory: "{{.Values.res.lifecycleservice.logstash.limits.memory}}"
+                        resourceRequestsCPU: "{{.Values.res.lifecycleservice.logstash.requests.cpu}}"
+                        resourceRequestsMemory: "{{.Values.res.lifecycleservice.logstash.requests.memory}}"
+                      taskManager:
+                        resourceLimitsCPU: "{{.Values.res.lifecycleservice.taskManager.limits.cpu}}"
+                        resourceLimitsMemory: "{{.Values.res.lifecycleservice.taskManager.limits.memory}}"
+                        resourceRequestsCPU: "{{.Values.res.lifecycleservice.taskManager.requests.cpu}}"
+                        resourceRequestsMemory: "{{.Values.res.lifecycleservice.taskManager.requests.memory}}"
+                      jobManager:
+                        resourceLimitsCPU: "{{.Values.res.lifecycleservice.jobManager.limits.cpu}}"
+                        resourceLimitsMemory: "{{.Values.res.lifecycleservice.jobManager.limits.memory}}"
+                        resourceRequestsCPU: "{{.Values.res.lifecycleservice.jobManager.requests.cpu}}"
+                        resourceRequestsMemory: "{{.Values.res.lifecycleservice.jobManager.requests.memory}}"
+              - name: ir-ai-operator
+                spec:
+                  aiopsanalyticsorchestrator:
+                    customSizing:
+                      deployments:
+                        - name: probablecause
+                          replicas: {{.Values.res.probablecause.replicas}}
+                          containers:
+                          - name: probablecause
+                            limits:
+                              cpu: "{{.Values.res.probablecause.limits.cpu}}"
+                              memory: "{{.Values.res.probablecause.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.probablecause.requests.cpu}}"
+                              memory: "{{.Values.res.probablecause.requests.memory}}"
+                        - name: classifier
+                          replicas: {{.Values.res.classifier.replicas}}
+                          containers:
+                          - name: classifier
+                            limits:
+                              cpu: "{{.Values.res.classifier.limits.cpu}}"
+                              memory: "{{.Values.res.classifier.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.classifier.requests.cpu}}"
+                              memory: "{{.Values.res.classifier.requests.memory}}"
+                        - name: spark-worker
+                          replicas: {{.Values.res.sparkworker.replicas}}
+                          containers:
+                          - name: spark-worker
+                            limits:
+                              cpu: "{{.Values.res.sparkworker.limits.cpu}}"
+                              memory: "{{.Values.res.sparkworker.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.sparkworker.requests.cpu}}"
+                              memory: "{{.Values.res.sparkworker.requests.memory}}"
+                        - name: spark-pipeline-composer
+                          replicas: {{.Values.res.sparkpipelinecomposer.replicas}}
+                          containers:
+                          - name: spark-pipeline-composer
+                            limits:
+                              cpu: "{{.Values.res.sparkpipelinecomposer.limits.cpu}}"
+                              memory: "{{.Values.res.sparkpipelinecomposer.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.sparkpipelinecomposer.requests.cpu}}"
+                              memory: "{{.Values.res.sparkpipelinecomposer.requests.memory}}"
+                    pullSecrets:
+                    - ibm-entitlement-key
+              - name: ir-core-operator
+                spec:
+                  issueresolutioncore:
+                    customSizing:
+                      deployments:
+                        - name: ncodl-api
+                          replicas: {{.Values.res.ncodlapi.replicas}}
+                          containers:
+                          - name: api
+                            limits:
+                              cpu: "{{.Values.res.ncodlapi.limits.cpu}}"
+                              memory: "{{.Values.res.ncodlapi.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncodlapi.requests.cpu}}"
+                              memory: "{{.Values.res.ncodlapi.requests.memory}}"
+                        - name: ncodl-if
+                          replicas: {{.Values.res.ncodlif.replicas}}
+                          containers:
+                          - name: iducforward
+                            limits:
+                              cpu: "{{.Values.res.ncodlif.limits.cpu}}"
+                              memory: "{{.Values.res.ncodlif.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncodlif.requests.cpu}}"
+                              memory: "{{.Values.res.ncodlif.requests.memory}}"
+                        - name: ncodl-ir
+                          replicas: {{.Values.res.ncodlir.replicas}}
+                          containers:
+                          - name: iducrelay
+                            limits:
+                              cpu: "{{.Values.res.ncodlir.limits.cpu}}"
+                              memory: "{{.Values.res.ncodlir.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncodlir.requests.cpu}}"
+                              memory: "{{.Values.res.ncodlir.requests.memory}}"
+                        - name: ncodl-jobmgr
+                          replicas: {{.Values.res.ncodljobmgr.replicas}}
+                          containers:
+                          - name: jobmgr
+                            limits:
+                              cpu: "{{.Values.res.ncodljobmgr.limits.cpu}}"
+                              memory: "{{.Values.res.ncodljobmgr.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncodljobmgr.requests.cpu}}"
+                              memory: "{{.Values.res.ncodljobmgr.requests.memory}}"
+                        - name: ncodl-std
+                          replicas: {{.Values.res.ncodlstd.replicas}}
+                          containers:
+                          - name: standard
+                            limits:
+                              cpu: "{{.Values.res.ncodlstd.limits.cpu}}"
+                              memory: "{{.Values.res.ncodlstd.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncodlstd.requests.cpu}}"
+                              memory: "{{.Values.res.ncodlstd.requests.memory}}"
+                        - name: logstash
+                          replicas: {{.Values.res.logstash.replicas}}
+                          containers:
+                          - name: logstash
+                            limits:
+                              cpu: "{{.Values.res.logstash.limits.cpu}}"
+                              memory: "{{.Values.res.logstash.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.logstash.requests.cpu}}"
+                              memory: "{{.Values.res.logstash.requests.memory}}"
+                      statefulSets:
+                        - name: ncobackup
+                          replicas: {{.Values.res.ncobackup.replicas}}
+                          containers:
+                          - name: agg-gate
+                            limits:
+                              cpu: "{{.Values.res.ncobackup.agggate.limits.cpu}}"
+                              memory: "{{.Values.res.ncobackup.agggate.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncobackup.agggate.requests.cpu}}"
+                              memory: "{{.Values.res.ncobackup.agggate.requests.memory}}"
+                          - name: objserv
+                            limits:
+                              cpu: "{{.Values.res.ncobackup.objserv.limits.cpu}}"
+                              memory: "{{.Values.res.ncobackup.objserv.limits.memory}}"
+                            requests:
+                              cpu: "{{.Values.res.ncobackup.objserv.requests.cpu}}"
+                              memory: "{{.Values.res.ncobackup.objserv.requests.memory}}"
+                        - name: ncoprimary
+                          replicas: {{.Values.res.ncoprimary.replicas}}
+                          containers:
+                          - name: objserv
+                            limits:
+                              cpu: "{{.Values.res.ncoprimary.limits.cpu}}"
+                              memory: "{{.Values.res.ncoprimary.limits.memory}}"  
+                            requests:
+                              cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
+                              memory: "{{.Values.res.ncoprimary.requests.memory}}"
+          - name: aiManager
+            enabled: true
+            config:
+              - name: aimanager-operator
+                spec:
+                  aimanager:
+                    modelTrain:
+                      maxLearners: 1
+          - name: connection
+            enabled: true
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: orchestrator.aiops.ibm.com/v1alpha1
+      kind: Installation
+      name: {{.Values.aiManager.instanceName}}
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

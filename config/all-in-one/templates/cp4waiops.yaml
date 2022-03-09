@@ -1,0 +1,62 @@
+{{- if .Values.cp4waiops.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cp4waiops
+spec:
+  generators:
+  {{- if .Values.argocd.allowLocalDeploy }}
+  - clusters: {}
+  {{- else }}
+  - clusters:
+      selector:
+        matchLabels:
+          argocd.argoproj.io/secret-type: cluster
+  {{- end }}
+  template:
+    metadata:
+      name: '{{ `{{name}}-cp4waiops` }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "200"
+    spec:
+      destination:
+        namespace: '{{ .Values.cp4waiops.aiManager.namespace }}'
+        server: '{{ `{{server}}` }}'
+      project: default
+      source:
+        path: {{ template "cp4waiops.configPath" . }}
+        repoURL: https://github.com/IBM/cp4waiops-gitops
+        targetRevision: HEAD
+        helm:
+          parameters:
+            - name: spec.dockerUsername
+              value: '{{ .Values.cp4waiops.dockerUsername }}'
+            - name: spec.dockerPassword
+              value: '{{ .Values.cp4waiops.dockerPassword }}'
+            - name: spec.aiManager.instanceName
+              value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
+            - name: spec.aiManager.namespace
+              value: '{{ .Values.cp4waiops.aiManager.namespace }}'
+            {{- if eq .Values.cp4waiops.profile "x-small" }}
+            - name: spec.aiManager.size
+              value: 'small'
+            {{- else }}
+            - name: spec.aiManager.size
+              value: '{{ .Values.cp4waiops.profile }}'
+            {{- end }}
+      ignoreDifferences:
+        - group: orchestrator.aiops.ibm.com
+          jsonPointers:
+            - /spec/pakModules
+          kind: Installation
+        - group: apiextensions.k8s.io
+          jsonPointers:
+            - /metadata/generation
+          kind: CustomResourceDefinition
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+{{- end }}

@@ -52,6 +52,10 @@ spec:
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
             {{- end }}
+            {{- if .Values.globalImagePullSecrets }}
+            - name: globalImagePullSecrets
+              value: '{{ .Values.globalImagePullSecrets }}'
+            {{- end }}
       ignoreDifferences:
         - group: orchestrator.aiops.ibm.com
           jsonPointers:

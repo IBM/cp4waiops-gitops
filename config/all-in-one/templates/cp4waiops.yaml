@@ -44,6 +44,14 @@ spec:
             - name: spec.aiManager.size
               value: '{{ .Values.cp4waiops.profile }}'
             {{- end }}
+            {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+            - name: spec.imageCatalog
+              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
+            {{- end }}
+            {{- if .Values.cp4waiops.aiManager.channel }}
+            - name: spec.aiManager.channel
+              value: '{{ .Values.cp4waiops.aiManager.channel }}'
+            {{- end }}
       ignoreDifferences:
         - group: orchestrator.aiops.ibm.com
           jsonPointers:

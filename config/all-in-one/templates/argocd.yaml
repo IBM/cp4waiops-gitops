@@ -17,8 +17,8 @@ spec:
   project: default
   source:
     path: config/argocd/{{ .Values.argocd.cluster }}
-    repoURL: https://github.com/morningspace/cp4waiops-gitops
-    targetRevision: merge-sandbox
+    repoURL: https://github.com/IBM/cp4waiops-gitops
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true

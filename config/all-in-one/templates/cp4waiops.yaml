@@ -52,8 +52,8 @@ spec:
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
             {{- end }}
-            {{- if .Values.dockercfg }}
-            {{- range $idx, $cfg := .Values.dockercfg }}
+            {{- if .Values.globalImagePullSecrets }}
+            {{- range $idx, $cfg := .Values.globalImagePullSecrets }}
             {{- range $key, $val := $cfg }}
             - name: globalImagePullSecrets[{{ $idx }}].{{ $key }}
               value: '{{ $val }}'

@@ -212,6 +212,42 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
+### Install CP4WAIOps in One Click Using GitOps
+
+The all-in-one template allows you to:
+
+- Deploy AIManager
+- Deploy EventManager
+- Deploy StorageClass Rookceph if you don't have one
+
+The parameters for Cloud Pak for Watson AIOps are as follows:
+
+- GENERAL
+  - Application Name: anyname(like "allinone")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - REPO URL : https://github.com/IBM/cp4waiops-gitops
+  - Target version: HEAD
+  - path: config/all-in-one
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: openshift-gitops
+- PARAMETERS
+  - argocd.cluster: openshift ## The type of the cluster that Argo CD runs on, valid values: kubernetes, openshift.
+  - argocd.allowLocalDeploy: true ## Allow applications to be deployed on the same cluster where Argo CD runs.
+  - rookceph.enabled: true ## Specify whether or not to install Rook Ceph as storage used by CP4WAIOps.
+  - cp4waiops.enabled: true
+  - cp4waiops.version: "3.3"
+  - cp4waiops.dockerUsername: cp
+  - cp4waiops.dockerPassword: REPLACE_IT
+  - cp4waiops.aiManager.namespace: cp4waiops
+  - cp4waiops.aiManager.instanceName: aiops-installation
+  - cp4waiops.eventManager.enabled: true
+  - cp4waiops.eventManager.clusterDomain: apps.clustername...com
+  - cp4waiops.eventManager.namespace: noi
+
+  NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 ### Verify CP4WAIOPS Installation
 
@@ -528,6 +564,36 @@ argocd app create eventmanagerapp \
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
+### Install CP4WAIOps in One Click Using GitOps
+
+The all-in-one template allows you to:
+
+- Deploy AIManager
+- Deploy EventManager
+- Deploy StorageClass Rookceph if you don't have one
+
+```sh
+argocd app create allinone \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/all-in-one \
+      --revision HEAD \
+      --dest-namespace openshift-gitops \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set argocd.cluster=openshift \
+      --helm-set argocd.allowLocalDeploy=true \
+      --helm-set rookceph.enabled=true \
+      --helm-set cp4waiops.enabled=true \
+      --helm-set cp4waiops.version="3.3" \
+      --helm-set cp4waiops.dockerUsername=cp \
+      --helm-set cp4waiops.dockerPassword=REPLACE_IT \
+      --helm-set cp4waiops.aiManager.namespace=cp4waiops \
+      --helm-set cp4waiops.aiManager.instanceName=aiops-installation \
+      --helm-set cp4waiops.eventManager.enabled=true \
+      --helm-set cp4waiops.eventManager.clusterDomain=apps.clustername...com \
+      --helm-set cp4waiops.eventManager.namespace=noi
+```
 
 ### Verify CP4WAIOPS Installation
 

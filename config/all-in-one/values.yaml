@@ -54,7 +54,7 @@ cp4waiops:
   enabled: true
 
   # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
-  version: "3.2"
+  version: v3.3
 
   # The username of image registry used to pull CP4WAIOps images.
   dockerUsername: cp
@@ -65,14 +65,24 @@ cp4waiops:
   # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
   # NOTE: The profile x-small is only for small PoC or demo. If you are looking
   # for official installation, use profile such as small or large instead.
-  profile: x-small
+  profile: small
 
   # AIManager specific configuration
   aiManager:
+    # Specify whether or not to install AIManager.
+    enabled: true
     # The instance name of CP4WAIOps.
     instanceName: aiops-installation
     # The namespace of CP4WAIOps.
     namespace: cp4waiops
+
+  eventManager:
+    ## Enable Event Manager
+    enabled: true
+    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
+    clusterDomain: apps.clustername.*.*.com
+    # The namespace of EventManager.
+    namespace: noi
 
   # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
   # Humio, Kafka, Kubernetes, etc. after it is installed.

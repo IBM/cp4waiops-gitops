@@ -1,8 +1,8 @@
-{{- if .Values.cp4waiops.enabled }}
+{{- if .Values.cp4waiops.eventManager.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cp4waiops
+  name: eventmanager-app
 spec:
   generators:
   {{- if .Values.argocd.allowLocalDeploy }}
@@ -15,42 +15,45 @@ spec:
   {{- end }}
   template:
     metadata:
-      name: '{{ `{{name}}-cp4waiops` }}'
+      name: '{{ `{{name}}-eventmanager` }}'
       annotations:
         argocd.argoproj.io/sync-wave: "200"
     spec:
       destination:
-        namespace: '{{ .Values.cp4waiops.aiManager.namespace }}'
+        namespace: '{{ .Values.cp4waiops.eventManager.namespace }}'
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: {{ template "cp4waiops.configPath" . }}
+        path: {{ template "eventmanager.configPath" . }}
         repoURL: https://github.com/liyanwei93/cp4waiops-gitops
         targetRevision: init-3.3
         helm:
+          valueFiles:
+            - values.yaml
           parameters:
             - name: spec.dockerUsername
               value: '{{ .Values.cp4waiops.dockerUsername }}'
             - name: spec.dockerPassword
               value: '{{ .Values.cp4waiops.dockerPassword }}'
-            - name: spec.aiManager.instanceName
-              value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
-            - name: spec.aiManager.namespace
-              value: '{{ .Values.cp4waiops.aiManager.namespace }}'
-            {{- if eq .Values.cp4waiops.profile "x-small" }}
-            - name: spec.aiManager.size
-              value: 'small'
-            {{- else }}
-            - name: spec.aiManager.size
-              value: '{{ .Values.cp4waiops.profile }}'
+            - name: spec.eventManager.namespace
+              value: '{{ .Values.cp4waiops.eventManager.namespace }}'
+            - name: spec.eventManager.clusterDomain
+              value: '{{ .Values.cp4waiops.eventManager.clusterDomain }}'
+            {{- if .Values.cp4waiops.eventManager.version }}
+            - name: spec.eventManager.version
+              value: '{{ .Values.cp4waiops.eventManager.version }}'
+            {{- end }}      
+            {{- if .Values.cp4waiops.eventManager.channel }}
+            - name: spec.eventManager.channel
+              value: '{{ .Values.cp4waiops.eventManager.channel }}'
             {{- end }}
-            {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+            {{- if .Values.cp4waiops.eventManager.deploymentType }}
+            - name: spec.eventManager.deploymentType
+              value: '{{ .Values.cp4waiops.eventManager.deploymentType }}'
+            {{- end }}
+            {{- if .Values.cp4waiops.eventManager.imageCatalog }}
             - name: spec.imageCatalog
-              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
-            {{- end }}
-            {{- if .Values.cp4waiops.aiManager.channel }}
-            - name: spec.aiManager.channel
-              value: '{{ .Values.cp4waiops.aiManager.channel }}'
+              value: '{{ .Values.cp4waiops.eventManager.imageCatalog }}'
             {{- end }}
             {{- if .Values.cp4waiops.storageClass }}
             - name: spec.storageClass
@@ -69,14 +72,14 @@ spec:
             {{- end }}
             {{- end }}
       ignoreDifferences:
-        - group: orchestrator.aiops.ibm.com
+        - group: noi.ibm.com/v1beta1
           jsonPointers:
-            - /spec/pakModules
-          kind: Installation
-        - group: apiextensions.k8s.io
+            - /spec
+          kind: NOI
+        - group: v1
           jsonPointers:
-            - /metadata/generation
-          kind: CustomResourceDefinition
+            - /imagePullSecrets
+          kind: ServiceAccount
       syncPolicy:
         automated:
           prune: true

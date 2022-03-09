@@ -52,9 +52,13 @@ spec:
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
             {{- end }}
-            {{- if .Values.globalImagePullSecrets }}
-            - name: globalImagePullSecrets
-              value: '{{ .Values.globalImagePullSecrets }}'
+            {{- if .Values.dockercfg }}
+            {{- range $idx, $cfg := .Values.dockercfg }}
+            {{- range $key, $val := $cfg }}
+            - name: globalImagePullSecrets[{{ $idx }}].{{ $key }}
+              value: '{{ $val }}'
+            {{- end }}
+            {{- end }}
             {{- end }}
       ignoreDifferences:
         - group: orchestrator.aiops.ibm.com

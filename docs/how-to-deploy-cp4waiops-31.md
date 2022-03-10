@@ -27,7 +27,7 @@
 
 ## Prerequisite
 
-- OCP 4.6 + 
+- NOTE: Only OpenShift 4.6 with CP4WAIOPS 3.1 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
 - Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub
 - Install crossplane operator(Upbound Universal Crossplane (UXP)) in ocp operator-hub
 

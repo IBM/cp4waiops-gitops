@@ -1,4 +1,3 @@
-{{- if .Values.cp4waiops.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -25,8 +24,8 @@ spec:
       project: default
       source:
         path: {{ template "cp4waiops.configPath" . }}
-        repoURL: https://github.com/IBM/cp4waiops-gitops
-        targetRevision: HEAD
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
             - name: spec.dockerUsername
@@ -44,6 +43,22 @@ spec:
             - name: spec.aiManager.size
               value: '{{ .Values.cp4waiops.profile }}'
             {{- end }}
+            {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+            - name: spec.imageCatalog
+              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
+            {{- end }}
+            {{- if .Values.cp4waiops.aiManager.channel }}
+            - name: spec.aiManager.channel
+              value: '{{ .Values.cp4waiops.aiManager.channel }}'
+            {{- end }}
+            {{- if .Values.globalImagePullSecrets }}
+            {{- range $idx, $cfg := .Values.globalImagePullSecrets }}
+            {{- range $key, $val := $cfg }}
+            - name: globalImagePullSecrets[{{ $idx }}].{{ $key }}
+              value: '{{ $val }}'
+            {{- end }}
+            {{- end }}
+            {{- end }}
       ignoreDifferences:
         - group: orchestrator.aiops.ibm.com
           jsonPointers:
@@ -59,4 +74,3 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-{{- end }}

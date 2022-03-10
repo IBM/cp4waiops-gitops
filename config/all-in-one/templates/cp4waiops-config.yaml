@@ -1,4 +1,4 @@
-{{- if and .Values.cp4waiops.enabled .Values.cp4waiops.setup }}
+{{- if .Values.cp4waiops.setup.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -30,7 +30,23 @@ spec:
         helm:
           parameters:
             - name: 'humio.enabled'
-              value: '{{ .Values.humio.enabled }}'
+              {{- if .Values.cp4waiops.setup.humio }}
+              value: {{ hasKey .Values.cp4waiops.setup.humio "enabled" | ternary .Values.cp4waiops.setup.humio.enabled true }}
+              {{- else }}
+              value: true
+              {{- end }}
+            - name: 'kafka.enabled'
+              {{- if .Values.cp4waiops.setup.kafka }}
+              value: {{ hasKey .Values.cp4waiops.setup.kafka "enabled" | ternary .Values.cp4waiops.setup.kafka.enabled true }}
+              {{- else }}
+              value: true
+              {{- end }}
+            - name: 'kube.enabled'
+              {{- if .Values.cp4waiops.setup.kubernetes }}
+              value: {{ hasKey .Values.cp4waiops.setup.kubernetes "enabled" | ternary .Values.cp4waiops.setup.kubernetes.enabled true }}
+              {{- else }}
+              value: true
+              {{- end }}
       syncPolicy:
         automated:
           prune: true

@@ -1,4 +1,4 @@
-{{- if and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small") }}
+{{- if eq .Values.cp4waiops.profile "x-small" }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -25,8 +25,8 @@ spec:
       project: default
       source:
         path: config/cp4waiops-custom
-        repoURL: https://github.com/IBM/cp4waiops-gitops
-        targetRevision: HEAD
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:
           valueFiles:
             - values.yaml

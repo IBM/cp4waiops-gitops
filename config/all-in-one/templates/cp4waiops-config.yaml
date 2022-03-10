@@ -1,3 +1,4 @@
+{{- if .Values.cp4waiops.setup }}
 {{- if .Values.cp4waiops.setup.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -56,4 +57,5 @@ spec:
           - SkipDryRunOnMissingResource=true
           - FailOnSharedResource=true
           - CreateNamespace=true
+{{- end }}
 {{- end }}

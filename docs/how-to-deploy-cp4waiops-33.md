@@ -30,6 +30,8 @@
 
 # Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.3 with GitOps
 
+**NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.3 release!**
+
 ## Prerequisite
 
 - Refer to [System requirements for Cloud Pak for Watson AIOps 3.3](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements)

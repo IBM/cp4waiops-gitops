@@ -112,7 +112,7 @@ res:
         memory: 1280Mi
       requests:
         cpu: 250m
-        memory: 768Mi
+        memory: 1280Mi
     jobManager:
       limits:
         cpu: 600m

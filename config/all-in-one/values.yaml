@@ -18,24 +18,24 @@ argocd:
 # -----------------------------------------------------------------------------
 # Cluster parameters
 # -----------------------------------------------------------------------------
-cluster:
-
-  # Specify whether or not to provision a cluster before install CP4WAIOps.
-  enabled: false
-
-  # Provider specific configuration
-  provider:
-    # Fyre configuration
-    # NOTE: Fyre is an internal used IaaS platform for IBM
-    type: fyre
-    # Fyre credentials
-    credentials:
-      # Fyre user id required when calling Fyre API
-      user: REPLACE_IT
-      # Fyre user token required when calling Fyre API
-      token: REPLACE_IT
-      # Fyre product group id required when calling Fyre API
-      productGroupId: REPLACE_IT
+# cluster:
+#
+#   # Specify whether or not to provision a cluster before install CP4WAIOps.
+#   enabled: false
+#
+#   # Provider specific configuration
+#   provider:
+#     # Fyre configuration
+#     # NOTE: Fyre is an internal used IaaS platform for IBM
+#     type: fyre
+#     # Fyre credentials
+#     credentials:
+#       # Fyre user id required when calling Fyre API
+#       user: REPLACE_IT
+#       # Fyre user token required when calling Fyre API
+#       token: REPLACE_IT
+#       # Fyre product group id required when calling Fyre API
+#       productGroupId: REPLACE_IT
 
 # -----------------------------------------------------------------------------
 # Storage parameters
@@ -49,9 +49,6 @@ rookceph:
 # CP4WAIOps parameters
 # -----------------------------------------------------------------------------
 cp4waiops:
-
-  # Specify whether or not to install CP4WAIOps.
-  enabled: true
 
   # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
   version: v3.3
@@ -84,17 +81,28 @@ cp4waiops:
     # The namespace of EventManager.
     namespace: noi
 
-  # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
-  # Humio, Kafka, Kubernetes, etc. after it is installed.
-  setup: true
-
+  # Setup CP4WAIOps after installed
+  setup:
+    # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
+    # Humio, Kafka, Kubernetes, etc. after it is installed.
+    enabled: false
+    # Setup Humio integration
+    # humio:
+    #   enabled: false
+    # Setup Kafka integration
+    # kafka:
+    #   enabled: false
+    # Setup Kubernetes integration
+    # kubernetes:
+    #   enabled: false
+    
 # -----------------------------------------------------------------------------
 # Robotshop parameters
 # -----------------------------------------------------------------------------
 robotshop:
 
   # Specify whether or not to install Robotshop.
-  enabled: true
+  enabled: false
 
 # -----------------------------------------------------------------------------
 # Humio parameters
@@ -102,7 +110,7 @@ robotshop:
 humio:
 
   # Specify whether or not to install Humio.
-  enabled: true
+  enabled: false
 
 # -----------------------------------------------------------------------------
 # Istio parameters
@@ -110,4 +118,4 @@ humio:
 istio:
 
   # Specify whether or not to install Istio.
-  enabled: true
+  enabled: false

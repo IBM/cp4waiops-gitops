@@ -7,6 +7,6 @@ Specify the config path
   {{- else if eq .Values.cp4waiops.version "3.3" }}
   {{- printf "config/3.3/ai-manager" -}}
   {{- else }}
-  {{- printf "config/3.3/ai-manager" -}}
+  {{- fail "The CP4WAIOps all in one chart only supports release 3.2, 3.3." }}
   {{- end }}
 {{- end -}}

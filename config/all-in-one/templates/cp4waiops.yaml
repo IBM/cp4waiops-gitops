@@ -24,8 +24,8 @@ spec:
       project: default
       source:
         path: {{ template "cp4waiops.configPath" . }}
-        repoURL: https://github.com/morningspace/cp4waiops-gitops
-        targetRevision: release-3.3
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
             - name: spec.dockerUsername

@@ -80,7 +80,7 @@ The parameters for Ceph are as follows:
 - SOURCE
   - REPO URL : https://github.com/IBM/cp4waiops-gitops
   - Target version: HEAD
-  - path: ceph
+  - path: config/ceph
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: rook-ceph

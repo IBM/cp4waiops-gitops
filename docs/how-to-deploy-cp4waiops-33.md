@@ -7,7 +7,7 @@
   - [Install CP4WAIOPS Using OpenShift Web Console](#install-cp4waiops-using-openshift-web-console)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission)
     - [Login to ArgoCD](#login-to-argocd)
-    - [Storage Consideration](#storage-consideration)
+    - [(Optional) Storage Consideration](#optional-storage-consideration)
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops)
@@ -19,7 +19,7 @@
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
     - [Grant ArgoCD Cluster Admin Permission](#grant-argocd-cluster-admin-permission-1)
     - [Login to ArgoCD](#login-to-argocd-1)
-    - [Storage Consideration](#storage-consideration-1)
+    - [(Optional) Storage Consideration](#optional-storage-consideration-1)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops-1)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops-1)
     - [Install CP4WAIOps in One Click Using GitOps](#install-cp4waiops-in-one-click-using-gitops-1)
@@ -65,9 +65,11 @@
 
 ![w](images/gitops-login.png)
 
-### Storage Consideration
+### (Optional) Storage Consideration
 
 Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.3.
+
+NOTE: If your OpenShift Cluster already have default storageclass configured, you can ignore this step.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 
@@ -538,9 +540,11 @@ roleRef:
          --insecure
    ```
 
-### Storage Consideration
+### (Optional) Storage Consideration
 
 Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.3.
+
+NOTE: If your OpenShift Cluster already have default storageclass configured, you can ignore this step.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 

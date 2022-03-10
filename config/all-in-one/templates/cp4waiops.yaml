@@ -1,4 +1,4 @@
-{{- if .Values.cp4waiops.enabled }}
+{{- if .Values.cp4waiops.aiManager.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -25,8 +25,8 @@ spec:
       project: default
       source:
         path: {{ template "cp4waiops.configPath" . }}
-        repoURL: https://github.com/liyanwei93/cp4waiops-gitops
-        targetRevision: init-3.3
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
             - name: spec.dockerUsername

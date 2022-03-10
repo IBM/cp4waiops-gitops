@@ -11,6 +11,9 @@
     - [Verify Ceph Cluster Installation](#verify-ceph-cluster-installation)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops)
+    - [Install CP4WAIOps in One Click Using GitOps](#install-cp4waiops-in-one-click-using-gitops)
+      - [Install AIManager and EventManager](#install-aimanager-and-eventmanager)
+      - [Custom build support for CP4WAIops](#custom-build-support-for-cp4waiops)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation)
     - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
   - [Using CLI to Install CP4WAIOPS](#using-cli-to-install-cp4waiops)
@@ -19,6 +22,7 @@
     - [Storage Consideration](#storage-consideration-1)
     - [Install AIManager using GitOps](#install-aimanager-using-gitops-1)
     - [Install EventManager using GitOps](#install-eventmanager-using-gitops-1)
+    - [Install CP4WAIOps in One Click Using GitOps](#install-cp4waiops-in-one-click-using-gitops-1)
     - [Verify CP4WAIOPS Installation](#verify-cp4waiops-installation-1)
     - [Access CP4WAIOps UI](#access-cp4waiops-ui)
 
@@ -214,6 +218,8 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
 
 ### Install CP4WAIOps in One Click Using GitOps
 
+#### Install AIManager and EventManager
+
 The all-in-one template allows you to:
 
 - Deploy AIManager
@@ -237,10 +243,10 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - argocd.cluster: openshift ## The type of the cluster that Argo CD runs on, valid values: kubernetes, openshift.
   - argocd.allowLocalDeploy: true ## Allow applications to be deployed on the same cluster where Argo CD runs.
   - rookceph.enabled: true ## Specify whether or not to install Rook Ceph as storage used by CP4WAIOps.
-  - cp4waiops.enabled: true
-  - cp4waiops.version: "3.3"
+  - cp4waiops.version: v3.3
   - cp4waiops.dockerUsername: cp
   - cp4waiops.dockerPassword: REPLACE_IT
+  - cp4waiops.aiManager.enabled: true
   - cp4waiops.aiManager.namespace: cp4waiops
   - cp4waiops.aiManager.instanceName: aiops-installation
   - cp4waiops.eventManager.enabled: true
@@ -248,6 +254,46 @@ The parameters for Cloud Pak for Watson AIOps are as follows:
   - cp4waiops.eventManager.namespace: noi
 
   NOTE: `spec.dockerPassword` is the entitlement key that you copied in [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
+
+#### Custom build support for CP4WAIops
+
+Add custom build support for cp4waiops in all-in-one chart, specify custom build by providing some "implicit" helm params to override the default GA build. 
+
+For example: 
+
+- HELM
+  - VALUES
+    ```yaml
+    cp4waiops:
+      aiManager:
+        imageCatalog: <image_catalog>
+        channel: <channel>
+      eventManager:
+        imageCatalog: <image_catalog>
+        channel: <channel>
+    globalImagePullSecrets:
+    - registry: <registry1>
+      username: <username1>
+      password: <password1>
+    - registry: <registry2>
+      username: <username2>
+      password: <password3>
+    ```
+
+Below table summarizes the detailed meaning for each parameter:
+
+| Parameter                 | Type   | Default Value      | Description 
+| ------------------------- |--------|--------------------|-----------------------------------
+| cp4waiops.storageClass         | string   | rook-cephfs | The storage class that you want to use
+| cp4waiops.storageClassLargeBlock | string | rook-cephfs | The storage class large blockt that you want to use.
+| cp4waiops.profile         | string | small            | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+| globalImagePullSecrets    | array | REPLACE_IT          | If you install internal build, you need add the internal registry address, username and password
+| cp4waiops.aiManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog build of AIManager you want to use
+| cp4waiops.aiManager.channel | string | v3.3 | The channel of AIManager you want to use
+| cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog build of EventManager you want to use
+| cp4waiops.eventManager.channel | string | v1.7 | The channel of EventManager you want to use
+| cp4waiops.eventManager.version | string | 1.6.4.0 | The version of EventManager you want to use
+| cp4waiops.eventManager.deploymentType | string | trial | Deployment type of EventManager (trial or production)
 
 ### Verify CP4WAIOPS Installation
 
@@ -584,10 +630,10 @@ argocd app create allinone \
       --helm-set argocd.cluster=openshift \
       --helm-set argocd.allowLocalDeploy=true \
       --helm-set rookceph.enabled=true \
-      --helm-set cp4waiops.enabled=true \
-      --helm-set cp4waiops.version="3.3" \
+      --helm-set cp4waiops.version=v3.3 \
       --helm-set cp4waiops.dockerUsername=cp \
       --helm-set cp4waiops.dockerPassword=REPLACE_IT \
+      --helm-set cp4waiops.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.namespace=cp4waiops \
       --helm-set cp4waiops.aiManager.instanceName=aiops-installation \
       --helm-set cp4waiops.eventManager.enabled=true \

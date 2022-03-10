@@ -1,3 +1,4 @@
+{{- if .Values.istio }}
 {{- if .Values.istio.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -36,4 +37,5 @@ spec:
           - SkipDryRunOnMissingResource=true
           - FailOnSharedResource=true
           - CreateNamespace=true
+{{- end }}
 {{- end }}

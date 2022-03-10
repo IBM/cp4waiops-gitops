@@ -1,7 +1,7 @@
 {{/*
-Specify the config path
+Specify the config path for cp4waiops aimanager
 */}}
-{{- define "cp4waiops.configPath" -}}
+{{- define "cp4waiops.aimanager.configPath" -}}
   {{- if eq .Values.cp4waiops.version "v3.2" }}
   {{- printf "config/3.2/cp4waiops" -}}
   {{- else if eq .Values.cp4waiops.version "v3.3" }}
@@ -11,7 +11,10 @@ Specify the config path
   {{- end }}
 {{- end -}}
 
-{{- define "eventmanager.configPath" -}}
+{{/*
+Specify the config path for cp4waiops eventmanager
+*/}}
+{{- define "cp4waiops.eventmanager.configPath" -}}
   {{- if eq .Values.cp4waiops.version "v3.2" }}
   {{- printf "config/3.2/cp4waiops" -}}
   {{- else if eq .Values.cp4waiops.version "v3.3" }}

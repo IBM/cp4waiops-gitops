@@ -82,10 +82,10 @@ cp4waiops:
     namespace: noi
 
   # Setup CP4WAIOps after installed
-  setup:
+  # setup:
     # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
     # Humio, Kafka, Kubernetes, etc. after it is installed.
-    enabled: false
+    # enabled: true
     # Setup Humio integration
     # humio:
     #   enabled: false
@@ -99,23 +99,23 @@ cp4waiops:
 # -----------------------------------------------------------------------------
 # Robotshop parameters
 # -----------------------------------------------------------------------------
-robotshop:
+# robotshop:
 
   # Specify whether or not to install Robotshop.
-  enabled: false
+  # enabled: true
 
 # -----------------------------------------------------------------------------
 # Humio parameters
 # -----------------------------------------------------------------------------
-humio:
+# humio:
 
   # Specify whether or not to install Humio.
-  enabled: false
+  # enabled: true
 
 # -----------------------------------------------------------------------------
 # Istio parameters
 # -----------------------------------------------------------------------------
-istio:
+# istio:
 
   # Specify whether or not to install Istio.
-  enabled: false
+  # enabled: true

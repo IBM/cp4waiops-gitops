@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: eventmanager-app
+  name: cp4waiops-eventmanagers
 spec:
   generators:
   {{- if .Values.argocd.allowLocalDeploy }}
@@ -15,7 +15,7 @@ spec:
   {{- end }}
   template:
     metadata:
-      name: '{{ `{{name}}-eventmanager` }}'
+      name: '{{ `{{name}}-cp4waiops-eventmanager` }}'
       annotations:
         argocd.argoproj.io/sync-wave: "200"
     spec:
@@ -28,8 +28,6 @@ spec:
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
         targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:
-          valueFiles:
-            - values.yaml
           parameters:
             - name: spec.dockerUsername
               value: '{{ .Values.cp4waiops.dockerUsername }}'

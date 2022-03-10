@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: cp4waiops
+  name: cp4waiops-aimanagers
 spec:
   generators:
   {{- if .Values.argocd.allowLocalDeploy }}
@@ -15,7 +15,7 @@ spec:
   {{- end }}
   template:
     metadata:
-      name: '{{ `{{name}}-cp4waiops` }}'
+      name: '{{ `{{name}}-cp4waiops-aimanager` }}'
       annotations:
         argocd.argoproj.io/sync-wave: "200"
     spec:

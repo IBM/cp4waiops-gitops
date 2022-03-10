@@ -23,7 +23,6 @@ Please refer to the following tutorial to decide how you want to deploy your CP4
 - [3.2 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
 - [3.2 Airgap Install: Using OpenShift GitOps](./docs/how-to-deploy-airgap-32.md)
 - [3.3 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-33.md)
-- [Advanced Intallation Option](./docs/advanced-cp4waiops-installation-option.md)
 
 
 ## Advanced Install for CP4WAIOPS GitOps

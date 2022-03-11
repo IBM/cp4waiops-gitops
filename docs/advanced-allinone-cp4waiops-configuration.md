@@ -51,9 +51,7 @@ Prepare an OpenShift cluster as your demo environment. If you use the extremely 
 
 ## Install CP4WAIOps
 
-After login to Argo CD, you should be able to kick off the installation by clicking the "NEW APP" button on top left to create an Argo Application as below:
-
-![](images/05-new-app.png)
+Login to Argo CD, you should be able to kick off the installation by clicking the "NEW APP" button on top left to create an Argo Application.
 
 Just fill in the form using the suggested field values listed in below table:
 
@@ -77,12 +75,12 @@ For example:
 - HELM
   - VALUES
     ```yaml
-      robotshop:
-        enabled: true
-      humio:
-        enabled: true
-      istio:
-        enabled: true
+    robotshop:
+      enabled: true
+    humio:
+      enabled: true
+    istio:
+      enabled: true
     ```
 
 Below table summarizes the detailed meaning for each parameter:

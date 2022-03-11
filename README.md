@@ -27,7 +27,7 @@ Please refer to the following tutorial to decide how you want to deploy your CP4
 
 ## Advanced Install for CP4WAIOPS GitOps
 
-There has some advanced configurations for CP4WAIOps installation, please refer to:
+There are some advanced configuration for CP4WAIOps installation that can support more install usage scenarios, please refer to:
 
 - [CP4WAIOps Advanced Configuration Using OpenShift GitOps](./docs/advanced-allinone-cp4waiops-configuration.md)
 

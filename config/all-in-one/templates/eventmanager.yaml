@@ -24,7 +24,7 @@ spec:
         server: '{{ `{{server}}` }}'
       project: default
       source:
-        path: {{ template "eventmanager.configPath" . }}
+        path: {{ template "cp4waiops.eventmanager.configPath" . }}
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
         targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
         helm:

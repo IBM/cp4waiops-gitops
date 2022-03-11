@@ -1,3 +1,4 @@
+{{- if .Values.robotshop }}
 {{- if .Values.robotshop.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -43,4 +44,5 @@ spec:
           - Validate=false
           - SkipDryRunOnMissingResource=true
           - CreateNamespace=true
+{{- end }}
 {{- end }}

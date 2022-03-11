@@ -13,8 +13,8 @@
 This repo is about using either OpenShift GitOps or Kubernetes GitOps to deploy CP4WAIOPS (Cloud Pak for Watson AIOps) on Red Hat OpenShift Cluster.
 
 ## Supported CP4WAIOPS Versions
-- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0)
-- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0)
+- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
+- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
 
 ## Tutorial for CP4WAIOPS GitOps
 

@@ -250,6 +250,7 @@ NOTE:
 
 - For `cp4waiops.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
+- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
 #### Install CP4WAIOps using Custom Build
@@ -653,6 +654,7 @@ NOTE:
 
 - For `cp4waiops.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
+- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
 ### Verify CP4WAIOps Installation

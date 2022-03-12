@@ -28,7 +28,7 @@
 
 # Deploy CP4WAIOps 3.3 using GitOps
 
-**NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.3 release!**
+⚠️ **NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.3 release!**
 
 ## Prerequisite
 
@@ -39,7 +39,7 @@
 
 ### Grant Argo CD Cluster Admin Permission
 
-From the Red Hat OpenShift Console, go to **User Management** > **RoleBindings** > **Create binding**. Use the Form view to configure the properties for the **ClusterRoleBinding** with below values, and click the `Create` button.
+From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
 
 - Binding type
   - Cluster-wide role binding (ClusterRoleBinding)
@@ -209,13 +209,13 @@ NOTE:
 
 #### Install AI Manager and Event Manager in One Go
 
-The all-in-one configuration allows you to install below components in one go:
+The all-in-one configuration allows you to install following components in one go:
 
 - Ceph storage (optional)
 - AI Manager
 - Event Manager
 
-Just fill in the form using the suggested field values listed in below table when you create the Argo CD App:
+Just fill in the form using the suggested field values listed in following table when you create the Argo CD App:
 
 | Field                 | Value                                                 |
 | --------------------- | ----------------------------------------------------- |
@@ -228,7 +228,7 @@ Just fill in the form using the suggested field values listed in below table whe
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
 
-Besides the basic information that you input, it also allows you to change the install parameters as below to customize the install behavior.
+Besides the basic information that you input, it also allows you to use the install parameters as follows to customize the install behavior.
 
 | Parameter                             | Type   | Default Value      | Description 
 | ------------------------------------- |--------|--------------------|-------------
@@ -256,7 +256,7 @@ NOTE:
 
 The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
 
-Just use the install parameters listed in below table when you create the Argo CD App:
+Just use the install parameters listed in following table when you create the Argo CD App:
 
 | Parameter                           | Type   | Default Value                             | Description 
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
@@ -265,7 +265,7 @@ Just use the install parameters listed in below table when you create the Argo C
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 
-These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in its **HELM** > **VALUES** field. For example: 
+These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in its `HELM` > `VALUES` field. For example: 
 
 ```yaml
 cp4waiops:
@@ -277,7 +277,7 @@ cp4waiops:
     channel: <my_custom_channel_for_event_manager>
 ````
 
-Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. You will see more such parameters used in [CP4WAIOps Advanced Install Options Using GitOps](./cp4waiops-advanced-install-options.md).
+Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Advanced Install Options Using GitOps](./cp4waiops-advanced-install-options.md).
 
 | Parameter                             | Type   | Default Value | Description 
 | ------------------------------------- |--------|---------------|-----------------------------------
@@ -287,7 +287,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
-For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries. Again, since these parameters are invisible, you can add them when filling in the Argo CD App form in its **HELM** > **VALUES** field:
+For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries. Again, since these parameters are invisible, you can add them when filling in the Argo CD App form in its `HELM` > `VALUES` field:
 
 ```yaml
 globalImagePullSecrets:
@@ -505,7 +505,7 @@ Congratulations! You are ready to play with CP4WAIOps!
 
 ### Grant Argo CD Cluster Admin Permission
 
-Apply below YAML manifest to the cluster where Argo CD runs:
+Apply the following YAML manifest to the cluster where Argo CD runs:
 
 ```yaml
 kind: ClusterRoleBinding
@@ -524,7 +524,7 @@ roleRef:
 
 ### Login to Argo CD
 
-Make sure you have installed Argo CD CLI, i.e. the `argocd` command, then run below commands to login to Argo CD:
+Make sure you have installed Argo CD CLI, i.e. the `argocd` command, then run following commands to login to Argo CD:
 
 ```sh
 argo_route=openshift-gitops-server
@@ -545,7 +545,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### (Optional) Storage Considerations
 
-To create Argo CD APP for Ceph storage from command line, run below command:
+To create Argo CD APP for Ceph storage from command line, run following command:
 
 ```sh
 argocd app create ceph \
@@ -561,7 +561,7 @@ argocd app create ceph \
 
 ### Install AI Manager
 
-To create Argo CD APP for AI Manager to install AI Manager using GitOps, run below command:
+To create Argo CD APP for AI Manager to install AI Manager using GitOps, run following command:
 
 ```sh
 argocd app create aimanager-app \
@@ -592,7 +592,7 @@ NOTE:
 
 ### Install Event Manager
 
-To create Argo CD APP for Event Manager to install Event Manager using GitOps, run below command:
+To create Argo CD APP for Event Manager to install Event Manager using GitOps, run following command:
 
 ```sh
 argocd app create eventmanager-app \
@@ -622,7 +622,7 @@ NOTE:
 
 ### Install Using All-in-One Configuration
 
-To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run below command:
+To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 
 ```sh
 argocd app create cp4waiops-app \
@@ -655,7 +655,7 @@ NOTE:
 
 ### Verify CP4WAIOps Installation
 
-To verify the CP4WAIOps installation, run below commands:
+To verify the CP4WAIOps installation, run following commands:
 
 ```sh
 kubectl get application -A

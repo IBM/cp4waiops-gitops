@@ -23,34 +23,38 @@
 
 # CP4WAIOps Advanced Install Options Using GitOps
 
+This document is aimed to introduce different advanced install options for IBM Cloud Pak for Watson AIOps (CP4WAIOps) using GitOps.
+
 ## Deploy CP4WAIOps Demo Environment in One Click
 
-In this section, you will learn the extremely easy steps to deploy demo environment for Cloud Pak for Watson AIOps (CP4WAIOps) using GitOps in one click. It allows you to:
+In this section, you will learn the extremely easy steps to deploy CP4WAIOps demo environment using GitOps in one click. It allows you to:
 
-- Deploy CP4WAIOps using custom profile, e.g.: `x-small` profile, in a sandbox with restricted resource.
+- Deploy CP4WAIOps using custom profile `x-small` in a sandbox with restricted resource.
 - Setup integration with Humio, Kafka, Kubernetes, etc. as post-install step automatically.
 - Deploy Robot Shop as sample application and other dependencies on the same cluster where CP4WAIOps runs.
 
-Please note, the `x-small` profile is not an official profile supported by CP4WAIOps at the moment, it is only used as an experimental feature for demo, PoC, or dev environment.
-
-Althouth in this document, we use `x-small` profile, the same approach also supports CP4WAIOps install in production environment using official profile such as `small` or `large`.
-
-This install scenario has been tested and verfied on CP4WAIOps 3.2 and 3.3.
+This install scenario has been tested and verfied against CP4WAIOps 3.2 and 3.3.
 
 ![](images/00-demo-env.png)
 
+### The X-Small Profile
+
+The `x-small` profile only covers AI Manager, not including Event Manager. It is not an official profile supported by CP4WAIOps at the moment. It is only used as an experimental feature to setup demo, PoC, or dev environment.
+
+Althougth in this case `x-small` profile is used, the same approach also supports CP4WAIOps install in production environment using official profile such as `small` or `large`.
+
 ### Prepare Environment
 
-Prepare an OpenShift cluster as your demo environment. If you use the extremely small profile, i.e.: the `x-small` profile, it is recommended to setup a cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory.
+Prepare an OpenShift cluster as your demo environment. If you use `x-small` profile, it is recommended to setup a cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory.
 
-Make sure you install OpenShift GitOps (Argo CD) on this cluster first. To install OpenShift GitOps, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
+Before you start to install demo environment, make sure you have installed OpenShift GitOps (Argo CD) on the cluster. To install OpenShift GitOps, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
-Then, we will use Argo CD to install following applications in one go:
+You will use Argo CD to install following applications in one go:
 
 | Application        | Required | Description
 | ------------------ | -------- | -------------------------------------------------------------------
 | Ceph               | No       | The storage used by CP4WAIOps and other applications. It can be skipped if you already have storage solution available on your target cluster.
-| CP4WAIOps          | Yes      | Cloud Pak for Watson AIOps (AI Manager).
+| CP4WAIOps          | Yes      | IBM Cloud Pak for Watson AIOps.
 | Robot Shop         | No       | The sample application used to demonstrate CP4WAIOps features.
 | Humio & Fluent Bit | No       | The log collector used by CP4WAIOps.
 | Istio              | No       | The service mesh used by sample application for fault injection.
@@ -74,9 +78,34 @@ Just fill in the form using the suggested field values listed in following table
 
 NOTE:
 
-- For rpository URL and revision field, if you use a repository forked from the official CP4WAIOps GitOps repository as above, and on a different branch, please fill these fields using your own values.
+- For `repository URL` and `revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and on a different branch, please fill these fields using your own values.
 
 Besides the basic information, you can also use the install parameters as follows to customize the install behavior.
+
+| Parameter                             | Type   | Default Value      | Description 
+| ------------------------------------- |--------|--------------------|-------------
+| argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
+| argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
+| rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
+| cp4waiops.version                     | string | v3.3               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
+| cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+| cp4waiops.dockerUsername              | string | cp                 | The username of image registry used to pull images.
+| cp4waiops.dockerPassword              | string | REPLACE_IT         | The password of image registry used to pull images.
+| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
+| cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
+| cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
+| cp4waiops.eventManager.enabled        | bool   | true               | Specify whether or not to install Event Manager.
+| cp4waiops.eventManager.namespace      | string | noi                | The namespace where Event Manager is installed.
+| cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+
+NOTE:
+
+- For `cp4waiops.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
+- For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
+- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
+- For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+
+The following parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in `HELM` > `VALUES` field.
 
 | Parameter                          | Type   | Default Value  | Description 
 | ---------------------------------- |--------|----------------|-------------
@@ -84,11 +113,11 @@ Besides the basic information, you can also use the install parameters as follow
 | cp4waiops.setup.humio.enabled      | bool   | true           | Setup Humio integration.
 | cp4waiops.setup.kafka.enabled      | bool   | true           | Setup Kafka integration.
 | cp4waiops.setup.kubernetes.enabled | bool   | true           | Setup Kubernetes integration. 
-| robotshop.enabled                  | bool   | false          | Specify whether or not to install Robotshop.
+| robotshop.enabled                  | bool   | false          | Specify whether or not to install Robot Shop.
 | humio.enabled                      | bool   | false          | Specify whether or not to install Humio. 
 | istio.enabled                      | bool   | false          | Specify whether or not to install Istio.
 
-These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in the `HELM` > `VALUES` field. For example: 
+For example, add following YAML snippet to `HELM` > `VALUES` field will enable Robot Shop, Humio, and Istio: 
 
 ```yaml
 robotshop:
@@ -99,11 +128,11 @@ istio:
   enabled: true
 ```
 
-After you finish filling up the form, just click the "CREATE" button to kick off the install, then you are done! During the time when waiting for the install to complete, you will see a few more Argo CD Apps being rolled out gradually from Argo CD UI. Each App represents a specific application to be deployed which is managed by the root level App defined as above.
+After you finish filling up the form, just click the "CREATE" button to kick off the install, then you are done! During the time when waiting for the install to complete, you will see more Apps being rolled out gradually from Argo CD UI. Each App represents a specific application to be deployed which is managed by the root level App defined as above.
 
 ![](images/01-apps.png)
 
-Depends on the install parameters that you specified, it usually takes 1 hour to finish the install of CP4WAIOps, and 10 minutes to finish all the other applications deployment including Ceph, Robot Shop, Humio, Istio, etc. When you see all the Argo CD Apps turning into green, i.e.: `Synced` and `Healthy`, that means CP4WAIOps install is completed!
+Depends on the install parameters that you specified, it usually takes 1 hour to finish the install of CP4WAIOps, and 10 minutes to finish all other applications deployment including Ceph, Robot Shop, Humio, Istio, etc. When you see all Argo CD Apps turning into green, i.e.: `Synced` and `Healthy`, that means CP4WAIOps demo environment install is completed!
 
 ![](images/02-install-complete.png)
 
@@ -111,7 +140,7 @@ Depends on the install parameters that you specified, it usually takes 1 hour to
 
 #### CP4WAIOps
 
-To access CP4WAIOps, you can run following command to get the URL. Here `aiops-installation` is the CP4WAIOps instance name that you specified using the install parameter `cp4waiops.instanceName`.
+To access CP4WAIOps, you can run following command to get the URL. Here `aiops-installation` is the CP4WAIOps instance name that you specified using the install parameter `cp4waiops.instanceName` when creating the Argo CD App.
 
 ```sh
 kubectl -n cp4waiops get installation aiops-installation -o jsonpath='{.status.locations.cloudPakUiUrl}{"\n"}'
@@ -127,7 +156,7 @@ Then use these information to login CP4WAIOps UI:
 
 ![](images/waiops-dashbord.png)
 
-If you set the install parameter `cp4waiops.setup` to `true`, then you will have all the pre-configured integration with Humio, Kafka, and Kubernetes in place. To verify this, navigate to `define` > `Data and tool connections` after you login, you can see all the integrations created as follows:
+If you set the install parameter `cp4waiops.setup` to `true`, then you will have all the pre-configured integration with Humio, Kafka, and Kubernetes in place. To verify this, navigate to `define` > `Data and tool connections` after you login, you will see all integrations displayed as follows:
 
 ![](images/03-pre-configured-connections.png)
 
@@ -155,7 +184,7 @@ To get the password for user `developer`, run following command:
 kubectl -n humio-logging get secret developer-user-password -o jsonpath="{.data.password}" | base64 -d
 ```
 
-After login to Humio UI, you will see the pre-defined repo named `robot-shop` for Robot Shop sample application:
+Then use these information to login Humio UI. After login, you will see the pre-defined repo named `robot-shop` for Robot Shop:
 
 ![](images/05-humio-repo.png)
 
@@ -165,42 +194,44 @@ Click the repo, you will see the live logs captured by Humio from Robot Shop:
 
 ## Deploy CP4WAIOps Demo Environment to Multiple Clusters
 
-In this section, you will learn the steps to deploy the same demo environment for Cloud Pak for Watson AIOps (CP4WAIOps) to multiple clusters using GitOps with almost zero effort. You will see that to deploy CP4WAOps, sample application, and other dependencies to multiple clusters is extremely easy.
+In this section, you will learn the steps to deploy the same demo environment for CP4WAIOps to multiple clusters using GitOps with almost zero effort. You will see that to deploy CP4WAOps, sample application, and other dependencies to multiple clusters is extremely easy.
 
 ### Prepare Environments
 
-You need at least one cluster to host Argo CD, then one or more clusters to deploy the CP4WAIOps demo environment. As it is illustrated in following diagram:
-
-* `cluster 0` is used to host the Argo CD instance. It can be an OpenShift or a vanilla Kubernetes cluster which does not require too much resource since Argo CD is very lightweight and supports both OpenShift and vanilla Kubernetes.
-* `cluster 1` to `cluster X` are used to deploy the CP4WAIOps demo environments. If you are looking for an extremely small CP4WAIOps deployment with all default components, sample application, and other dependencies run on the same cluster for demo or PoC purpose, it is recommended to prepare cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory. If you are looking for production deployment, please refer to the system requirement details from the official [product document](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-ai-manager).
+To support this install scenario, you need at least one cluster to host Argo CD, and one or more clusters to deploy the CP4WAIOps demo environment. As it is illustrated in following diagram:
 
 ![](images/07-deploy-to-multiple-clusters.png)
 
+NOTE:
+
+* `cluster 0` is used to host the Argo CD instance. It can be an OpenShift cluster or a vanilla Kubernetes cluster which does not require too much resource since Argo CD is very lightweight and supports both OpenShift and vanilla Kubernetes.
+* `cluster 1` to `cluster x` are used to deploy CP4WAIOps demo environments. If you are looking for an extremely small CP4WAIOps deployment with all default components, sample application, and other dependencies run on the same cluster for demo or PoC purpose, it is recommended to prepare cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory. If you are looking for production deployment, please refer to the system requirement details from the official [product document](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-ai-manager).
+
 ### Install Argocd CLI
 
-In this case, we will also use Argo CD CLI, i.e.: the `argocd` command, to add clusters to Argo CD so that Argo CD can deploy the CP4WAIOps demo environment to those clusters. To install Argo CD CLI, please refer to the [Argo CD online document](https://argo-cd.readthedocs.io/en/stable/cli_installation/). You can install and run Argo CD CLI on any machine such as your notebook, since it is just a client tool used to connect to the Argo CD server.
+In this case, you will need Argo CD CLI, i.e.: the `argocd` command, to add clusters to Argo CD, so that Argo CD can deploy the CP4WAIOps demo environment to those clusters. To install Argo CD CLI, please refer to the [Argo CD online document](https://argo-cd.readthedocs.io/en/stable/cli_installation/). You can install and run Argo CD CLI on any machine such as your notebook, since it is just a client tool used to connect to the Argo CD server.
 
 ### Install CP4WAIOps Demo Environment
 
-After finish the Argo CD and Argo CD CLI install, you can now deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to the `Install Using All-in-One Configuration` section in [this document](how-to-deploy-cp4waiops-33.md) and use the same field values described in that document when filling up the form to create the Argo CD App.
+After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to [Install CP4WAIOps Demo Environment](#install-cp4waiops-demo-environment).
 
 The only difference when you set the install parameters is that:
 
-- When you set the install parameter `argocd.allowLocalDeploy`, make sure it is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, we use that cluster to run Argo CD dedicately.
+- For `argocd.allowLocalDeploy`, make sure it is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.
 
 After you create the Argo CD App, you will see something similar as follows from Argo CD UI:
 
 ![](images/08-deploy-appsets.png)
 
-You will only see the root level Argo CD App. There is no other child level Apps created for now. This is because there is no other cluter added into Argo CD to deploy the actual CP4WAIOps demo environment yet. But if you click the root level App and go into it, you will see all the child level App definitions are listed as follows:
+You will only see the root level Argo CD App. There is no other child level Apps created for now. This is because there is no other cluter added into Argo CD to deploy the actual CP4WAIOps demo environment yet. But if you click the root level App and go into it, you will see all child level App definitions are listed as follows:
 
 ![](images/09-appsets.png)
 
-Depends on the install parameters that you specified when you create the root level Argo CD App, you can enable or disable some of the applications according to your specific needs. In the above case, we enabled all Apps that are available indlucing CP4WAIOps (AI Manager), Robot Shop, Humio, Istio, etc. They will be deployed to the target cluster that is going to be added into Argo CD later.
+Depends on the install parameters that you specified when you create the root level Argo CD App, you can enable or disable some of the applications according to your specific needs. In this case, all available Apps are enabled indlucing CP4WAIOps, Robot Shop, Humio, Istio, etc. They will be deployed to the target cluster that is going to be added into Argo CD later.
 
 ### Add Cluster Into Argo CD
 
-Let's add our first cluster into Argo CD. Suppose you use OpenShift cluster to host Argo CD, you need to login to the cluster first using `oc login` command, then run following command to login to Argo CD using Argo CD CLI:
+Suppose you use OpenShift cluster to host Argo CD. To add our first cluster into Argo CD, you need to login to the cluster that runs Argo CD using `oc login` command, then run following command to login to Argo CD using Argo CD CLI:
 
 ```sh
 ARGO_HOST=$(oc get route openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}')
@@ -216,7 +247,7 @@ CURRENT_CONTEXT=$(oc config current-context)
 argocd cluster add $CURRENT_CONTEXT --name $CLUSTER_NAME
 ```
 
-Here, let's give the cluster a short name using `CLUSTER_NAME` and pass it into Argo CD CLI via argument `--name`.
+Here, a short name for the cluster is given using `CLUSTER_NAME` and is passed into Argo CD CLI via argument `--name`.
 
 Now, go to `Settings` > `Clusters` from Argo CD UI, you will see the newly added cluster is listed as follows:
 
@@ -226,7 +257,7 @@ If you go to `Applications`, all of a sudden, you will see all child level Apps 
 
 ![](images/11-apps-on-1st-cluster.png)
 
-If you click the root level App and go into it, you will see for each child level App definition, there is a corresponding App instance linked to it and that is the actual workload getting deployed to the target cluster that we added into Argo CD just now.
+If you click the root level App and go into it, you will see for each child level App definition, there is a corresponding App instance linked to it and that is the actual application getting deployed to the target cluster that was added into Argo CD just now.
 
 ![](images/12-deploy-to-1st-cluster.png)
 
@@ -236,27 +267,27 @@ Depends on the install parameters that you specified when creating the root leve
 
 ### Add More Clusters
 
-To add more clusters to deploy more CP4WAIOps demo environments is quite easy. Just repeat the above step to add clusters into Argo CD. Once detected, Argo CD will deploy applications to these clusters automatically. As an example, after you add the second cluster, you will see the newly added cluster will be added to the `Clusters` view from Argo CD UI:
+To add more clusters to deploy more CP4WAIOps demo environments is quite easy. Just repeat the above step to add clusters into Argo CD. Once detected by Argo CD, it will deploy applications to these clusters automatically. As an example, after you add the second cluster, you will see the newly added cluster will be added to the `Clusters` view from Argo CD UI:
 
 ![](images/14-add-2nd-cluster-to-argocd.png)
 
-You will also see each child level App definition now maps to two App instances and each instance represents the actual workload deployed to separate cluster.
+You will also see each child level App definition now maps to two App instances and each instance represents the actual application deployed to separate cluster.
 
 ![](images/15-deploy-to-2nd-cluster.png)
 
 ## Deploy CP4WAIOps Demo Environment Including Cluster Provisioning
 
-In this section, you will learn the steps to provision an OpenShift cluster, then use this cluster to deploy the demo environment for Cloud Pak for Watson AIOps (CP4WAIOps) using GitOps. With this approach, you will get a fully automated experience of launching a CP4WAIOps demo environment, started from cluster provisioning, till to the demo environment deployment, and configuration, all driven by GitOps automatically.
+In this section, you will learn the steps to provision an OpenShift cluster, then use this cluster to deploy CP4WAIOps demo environment using GitOps. With this approach, you will get a fully automated experience of launching a CP4WAIOps demo environment, started from cluster provisioning, till to the demo environment deployment, and configuration, all driven by GitOps automatically.
 
 ![](images/16-architecture-provision-cluster.png)
 
 ### Install CP4WAIOps Demo Environment
 
-After you finish the Argo CD install, you can deploy CP4WAIOps via Argo CD UI. To install CP4WAIOps, please refer to the `Install Using All-in-One Configuration` section in [this document](how-to-deploy-cp4waiops-33.md) and use the same field values described in that document when filling up the form to create the Argo CD App.
+After finish the install of Argo CD, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to [Install CP4WAIOps Demo Environment](#install-cp4waiops-demo-environment).
 
 The only difference when you set the install parameters is that:
 
-- When you set the install parameter `argocd.allowLocalDeploy`, make sure it is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, we use that cluster to run Argo CD dedicately.
+- For `argocd.allowLocalDeploy`, make sure it is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.
 - You will be able to configure the OpenShift cluster provisioning using following parameters.
 
 | Parameter                                   | Type   | Default Value | Description 
@@ -269,23 +300,23 @@ The only difference when you set the install parameters is that:
 
 NOTE:
 
-- For `cluster.provider.type`, `fyre` is currently the only supported provider in this document. It is an IBM IaaS platform only for internal use.
+- For `cluster.provider.type`, `fyre` is currently the only supported provider. It is an IBM IaaS platform only for internal use.
 
 After you create the Argo CD App, you will see something similar as follows from Argo CD UI:
 
 ![](images/17-apps-provision-cluster.png)
 
-Apart from the root level App, the App `cluster-operator-fyre` represents the operator that drives the cluster provisioning on Fyre. The App `clusters-fyre` maps the cluster provisioning request that we created and stored in git repository. Click the App `clusters-fyre` to check its details:
+Apart from the root level App, the App `cluster-operator-fyre` represents the operator that drives the cluster provisioning on Fyre. The App `clusters-fyre` maps the cluster provisioning request created and stored in git repository. Click the App `clusters-fyre` to check its details:
 
 ![](images/18-cluster-provision-request.png)
 
-There is a custom resource in type of `OpenShiftFyre` that "documents" the desired status for the OpenShift cluster that we requested. Also, there is a secret that includes the Fyre credentials that we input earlier when creating the Argo CD App using install parameters. The operator will use this information to communicate with Fyre API. You may also notice that the `OpenShiftFyre` resource is in `Processing` status. This means the operator has issued the request to Fyre successfully and Fyre has started to provision the cluster for us.
+There is a custom resource in type of `OpenShiftFyre` that "documents" the desired status for the OpenShift cluster to be requested. Also, there is a secret that includes the Fyre credentials that you input earlier when creating the Argo CD App using install parameters. The operator will use this information to communicate with Fyre API. You may also notice that the `OpenShiftFyre` resource is in `Processing` status. This means the operator has issued the request to Fyre successfully and Fyre has started to provision the cluster for you.
 
 If you go to the root level App, you will see that two new child level Apps are added:
 
 ![](images/19-appsets-cluster-provision.png)
 
-Because the cluster is still being provisioned and not available to deploy the CP4WAIOps demo environment yet, there is no actual App instance spawned for the demo environment. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added into Argo CD automatically by the operator. You can check it by going to `Settings` > `Clusters` from Argo CD UI:
+Because the cluster is still being provisioned and not available to deploy the CP4WAIOps demo environment yet, there is no actual App instance spawned for the demo environment. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added to Argo CD automatically by the operator. You can check it by going to `Settings` > `Clusters` from Argo CD UI:
 
 ![](images/20-cluster-auto-added.png)
 

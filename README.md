@@ -32,4 +32,4 @@ Please refer to the following documents and decide how you want to deploy CP4WAI
 
 There are some advanced configuration available for CP4WAIOps to support more install scenarios. For more details, please refer to: [CP4WAIOps Advanced Install Options Using GitOps](./docs/cp4waiops-advanced-install-options.md).
 
-Also, as a customer, you may want to fork or copy this repository and customize it to meet your specific needs, and use Github to track all the changes that you have made. For more details, please refer to [Customizing CP4WAIOps Install](./docs/advanced-install.md).
+Also, as a customer, you may want to fork this repository to customize it that meets your specific needs, and use Github to track all changes that you made. For more details, please refer to [Customizing CP4WAIOps Install](./docs/advanced-install.md).

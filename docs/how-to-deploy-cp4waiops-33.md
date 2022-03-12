@@ -64,7 +64,7 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ### (Optional) Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps 3.3, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations). Here, we use Ceph. You can choose different storage based on your system requirement.
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations). In this case, we use Ceph. You can choose different storage based on your own requirement.
 
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
@@ -88,11 +88,11 @@ After Argo CD App `ceph` is created, you can click the App from Argo CD UI to vi
 
 ![w](images/ceph-topo.png)
 
-You can use the filters on the left to filter out the resources that has been failed, and click the resource to check logs and events.
+You can use the filters on the left to filter out the resources, and click the resource to check logs and events.
 
 ![w](images/res-logs.png)
 
-You can also check all Ceph pods using CLI as follows to make sure there is no pod in error state. If there are some pods in error state, you can check logs using `kubectl logs` from command line.
+You can also check all Ceph pods from command line as follows to make sure there is no pod in error state. If there are some pods in error state, you can check logs using `kubectl logs`.
 
 ```console
 [root@api.body.cp.fyre.ibm.com ~]# kubectl get po -n rook-ceph
@@ -142,7 +142,7 @@ rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Comple
 
 ### Install AI Manager
 
-Same as Ceph, you can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD APP. The parameters for AI Manager are as follows:
+You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD APP. The parameters for AI Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "aimanager-app")
@@ -175,7 +175,7 @@ NOTE:
 
 ### Install Event Manager
 
-Same as Ceph, you can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD APP. The parameters for Event Manager are as follows:
+You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD APP. The parameters for Event Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "eventmanager-app")
@@ -265,7 +265,7 @@ Just use the install parameters listed in following table when you create the Ar
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 
-These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in its `HELM` > `VALUES` field. For example: 
+These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in the `HELM` > `VALUES` field. For example: 
 
 ```yaml
 cp4waiops:
@@ -287,7 +287,9 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
-For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries. Again, since these parameters are invisible, you can add them when filling in the Argo CD App form in its `HELM` > `VALUES` field:
+For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.
+
+Again, since these parameters are invisible, you can add them when filling in the Argo CD App form in the `HELM` > `VALUES` field:
 
 ```yaml
 globalImagePullSecrets:
@@ -479,23 +481,23 @@ zen-watcher-d8b795b46-2q6zx                                       1/1     Runnin
 
 If all pods for CP4WAIOps are up and running, you can login to CP4WAIOps UI as follows:
 
-- Login to OCP UI, click the drop down menu on top right.
+Login to Red Hat OpenShift Console, click the drop down menu on top right.
 
 ![w](images/ocp-hub.png)
 
-- Click the link to `IBM Cloud Pak for Administration` and login via `OpenShift authentication`.
+Click the link to `IBM Cloud Pak for Administration` and login via `OpenShift authentication`.
 
 ![w](images/cpk-hub.png)
 
-- Login to `IBM Cloud Pak for Administration` and click the drop down menu on top right, then select `IBM Automation (cp4waiops)`.
+Login to `IBM Cloud Pak for Administration` and click the drop down menu on top right, then select `IBM Automation (cp4waiops)`.
 
 ![w](images/cpk-hub-ui.png)
 
-- Login via `OpenShift authentication` to CP4WAIOps UI.
+Login to CP4WAIOps UI via `OpenShift authentication`.
 
 ![w](images/cp4waiops.png)
 
-- You will be navigated to CP4WAIOps UI!
+You will be navigated to CP4WAIOps UI.
 
 ![w](images/cp4waiops-ui.png)
 
@@ -655,7 +657,7 @@ NOTE:
 
 ### Verify CP4WAIOps Installation
 
-To verify the CP4WAIOps installation, run following commands:
+To verify the CP4WAIOps installation, run following command:
 
 ```sh
 kubectl get application -A
@@ -672,7 +674,7 @@ openshift-gitops   in-cluster-eventmanager   Synced        Healthy
 openshift-gitops   in-cluster-rook-ceph      Synced        Healthy
 ```
 
-Wait for a while and check if all pods under namespace `cp4waiops` and `noi` are up and running without any crash.
+Wait for a while and check if all pods under namespace `cp4waiops` and `noi` are up and running without any crash:
 
 ```
 kubectl get pod -n cp4waiops

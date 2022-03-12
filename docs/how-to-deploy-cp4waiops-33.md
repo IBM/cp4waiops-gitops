@@ -232,7 +232,7 @@ Besides the basic information that you input, it also allows you to use the inst
 
 | Parameter                             | Type   | Default Value      | Description 
 | ------------------------------------- |--------|--------------------|-------------
-| argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, values includes: openshift, kubernetes.
+| argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
 | rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
 | cp4waiops.version                     | string | v3.3               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
@@ -284,7 +284,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
 | cp4waiops.eventManager.version        | string | 1.6.4.0       | The version of Event Manager.
-| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, values include: trial, production.
+| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
 For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.
@@ -526,7 +526,7 @@ roleRef:
 
 ### Login to Argo CD
 
-Make sure you have installed Argo CD CLI, i.e. the `argocd` command, then run following commands to login to Argo CD:
+Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
 
 ```sh
 argo_route=openshift-gitops-server

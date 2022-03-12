@@ -50,7 +50,7 @@ rookceph:
 # -----------------------------------------------------------------------------
 cp4waiops:
 
-  # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
+  # Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
   version: v3.3
 
   # The username of image registry used to pull CP4WAIOps images.
@@ -64,22 +64,33 @@ cp4waiops:
   # for official installation, use profile such as small or large instead.
   profile: small
 
+  # The storage class for CP4WAIOps to use.
+  # storageClass: rook-cephfs
+
+  # The storage class for large block for CP4WAIOps to use.
+  # storageClassLargeBlock: rook-cephfs
+
   # AIManager specific configuration
   aiManager:
-    # Specify whether or not to install AIManager.
+    # Specify whether or not to install AI Manager.
     enabled: true
-    # The instance name of CP4WAIOps.
+    # The instance name of AI Manager.
     instanceName: aiops-installation
-    # The namespace of CP4WAIOps.
+    # The namespace where AI Manager is installed.
     namespace: cp4waiops
 
   eventManager:
-    ## Enable Event Manager
+    # Specify whether or not to install Event Manager.
     enabled: true
-    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
-    clusterDomain: apps.clustername.*.*.com
-    # The namespace of EventManager.
+    # The domain name of the cluster where Event Manager is installed.
+    # Use fully qualified domain name(FQDN), e.g.: apps.clustername.abc.xyz.com.
+    clusterDomain: REPLACE_IT
+    # The namespace where Event Manager is installed.
     namespace: noi
+    # The version of Event Manager.
+    # version: 1.6.4.0
+    # The deployment type of Event Manager, values include: trial, production.
+    # deploymentType: trial
 
   # Setup CP4WAIOps after installed
   # setup:
@@ -95,6 +106,15 @@ cp4waiops:
     # Setup Kubernetes integration
     # kubernetes:
     #   enabled: false
+
+# Specify a list of registries for image pull when needed during the install.
+# globalImagePullSecrets:
+# - registry: <my_own_registry_1>
+#   username: <username_to_registry_1>
+#   password: <password_to_registry_1>
+# - registry: <my_own_registry_2>
+#   username: <username_to_registry_2>
+#   password: <password_to_registry_2>
 
 # -----------------------------------------------------------------------------
 # Robotshop parameters

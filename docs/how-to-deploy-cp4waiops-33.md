@@ -73,8 +73,8 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/IBM/cp4waiops-gitops
-  - Target version: HEAD
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: HEAD
   - path: config/ceph
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -142,15 +142,15 @@ rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Comple
 
 ### Install AI Manager
 
-You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD APP. The parameters for AI Manager are as follows:
+You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "aimanager-app")
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/IBM/cp4waiops-gitops
-  - Target version: HEAD
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: HEAD
   - path: config/3.3/ai-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -171,19 +171,20 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD APP. 
 
 NOTE:
 
+- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 ### Install Event Manager
 
-You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD APP. The parameters for Event Manager are as follows:
+You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "eventmanager-app")
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
-  - REPO URL : https://github.com/IBM/cp4waiops-gitops
-  - Target version: HEAD
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: HEAD
   - path: config/3.3/event-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -202,6 +203,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD AP
 
 NOTE:
 
+- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
@@ -228,7 +230,7 @@ Just fill in the form using the suggested field values listed in following table
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
 
-Besides the basic information that you input, it also allows you to use the install parameters as follows to customize the install behavior.
+Besides the basic information, when filling in the form, you can also update the following install parameters that are commonly used to customize the install behavior.
 
 | Parameter                             | Type   | Default Value      | Description 
 | ------------------------------------- |--------|--------------------|-------------
@@ -244,7 +246,7 @@ Besides the basic information that you input, it also allows you to use the inst
 | cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
 | cp4waiops.eventManager.enabled        | bool   | true               | Specify whether or not to install Event Manager.
 | cp4waiops.eventManager.namespace      | string | noi                | The namespace where Event Manager is installed.
-| cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+| cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where Event Manager is installed.
 
 NOTE:
 
@@ -266,7 +268,9 @@ Just use the install parameters listed in following table when you create the Ar
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 
-These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the Argo CD App form in the `HELM` > `VALUES` field. For example: 
+These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in `HELM` > `VALUES` field.
+
+For example, adding following YAML snippet to `HELM` > `VALUES` field will install AI Manager and Event Manager using custom imageCatalog and channel:
 
 ```yaml
 cp4waiops:
@@ -290,7 +294,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 
 For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.
 
-Again, since these parameters are invisible, you can add them when filling in the Argo CD App form in the `HELM` > `VALUES` field:
+Again, since these parameters are invisible, you can add them when filling in the form in `HELM` > `VALUES` field:
 
 ```yaml
 globalImagePullSecrets:
@@ -548,7 +552,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### (Optional) Storage Considerations
 
-To create Argo CD APP for Ceph storage from command line, run following command:
+To create Argo CD App for Ceph storage from command line, run following command:
 
 ```sh
 argocd app create ceph \
@@ -564,7 +568,7 @@ argocd app create ceph \
 
 ### Install AI Manager
 
-To create Argo CD APP for AI Manager to install AI Manager using GitOps, run following command:
+To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
 ```sh
 argocd app create aimanager-app \
@@ -595,7 +599,7 @@ NOTE:
 
 ### Install Event Manager
 
-To create Argo CD APP for Event Manager to install Event Manager using GitOps, run following command:
+To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
 ```sh
 argocd app create eventmanager-app \

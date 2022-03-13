@@ -117,7 +117,7 @@ The following install parameters are not commonly used, so they are invisible wh
 | humio.enabled                      | bool   | false          | Specify whether or not to install Humio. 
 | istio.enabled                      | bool   | false          | Specify whether or not to install Istio.
 
-For example, add following YAML snippet to `HELM` > `VALUES` field will enable Robot Shop, Humio, and Istio: 
+For example, adding following YAML snippet to `HELM` > `VALUES` field will enable Robot Shop, Humio, and Istio: 
 
 ```yaml
 robotshop:
@@ -194,7 +194,7 @@ Click the repo, you will see the live logs captured by Humio from Robot Shop:
 
 ## Deploy CP4WAIOps Demo Environment to Multiple Clusters
 
-In this section, you will learn the steps to deploy the same demo environment for CP4WAIOps to multiple clusters using GitOps with almost zero effort. You will see that to deploy CP4WAOps, sample application, and other dependencies to multiple clusters is extremely easy.
+In this section, you will learn the steps to deploy the same CP4WAIOps demo environment to multiple clusters using GitOps with almost zero effort. You will see that to deploy CP4WAOps, sample application, and other dependencies to multiple clusters is extremely easy.
 
 ### Prepare Environments
 
@@ -271,7 +271,7 @@ To add more clusters to deploy more CP4WAIOps demo environments is quite easy. J
 
 ![](images/14-add-2nd-cluster-to-argocd.png)
 
-You will also see each child level App definition now maps to two App instances and each instance represents the actual application that are getting deployed to a separate cluster.
+You will also see each child level App definition now maps to two App instances and each instance represents the actual application that is getting deployed to a separate cluster.
 
 ![](images/15-deploy-to-2nd-cluster.png)
 

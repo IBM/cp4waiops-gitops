@@ -2,35 +2,34 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy Cloud Pak for Watson AIOps with GitOps](#deploy-cloud-pak-for-watson-aiops-with-gitops)
-  - [Supported CP4WAIOPS Versions](#supported-cp4waiops-versions)
-  - [Tutorial for CP4WAIOPS GitOps](#tutorial-for-cp4waiops-gitops)
-  - [Advanced Install for CP4WAIOPS GitOps](#advanced-install-for-cp4waiops-gitops)
+- [Deploy Cloud Pak for Watson AIOps using GitOps](#deploy-cloud-pak-for-watson-aiops-using-gitops)
+  - [Supported CP4WAIOps Versions](#supported-cp4waiops-versions)
+  - [Install CP4WAIOps using GitOps](#install-cp4waiops-using-gitops)
+  - [More Install Options for CP4WAIOps using GitOps](#more-install-options-for-cp4waiops-using-gitops)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy Cloud Pak for Watson AIOps with GitOps
-This repo is about using either OpenShift GitOps or Kubernetes GitOps to deploy CP4WAIOPS (Cloud Pak for Watson AIOps) on Red Hat OpenShift Cluster.
+# Deploy Cloud Pak for Watson AIOps using GitOps
 
-## Supported CP4WAIOPS Versions
+This repository is about using OpenShift GitOps to deployCloud Pak for Watson AIOps(CP4WAIOps) on Red Hat OpenShift Cluster.
+
+## Supported CP4WAIOps Versions
+
 - [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
 - [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
+- [3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0)
 
-## Tutorial for CP4WAIOPS GitOps
+## Install CP4WAIOps using GitOps
 
-Please refer to the following tutorial to decide how you want to deploy your CP4WAIOPS Cluster:
-- [3.1 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-31.md)
-- [3.2 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-32.md)
-- [3.2 Airgap Install: Using OpenShift GitOps](./docs/how-to-deploy-airgap-32.md)
-- [3.3 On-line Using OpenShift GitOps](./docs/how-to-deploy-cp4waiops-33.md)
+Please refer to the following documents and decide how you want to deploy CP4WAIOps:
 
+- [CP4WAIOps 3.1 Online Install](./docs/how-to-deploy-cp4waiops-31.md)
+- [CP4WAIOps 3.2 Online Install](./docs/how-to-deploy-cp4waiops-32.md)
+- [CP4WAIOps 3.2 Airgap Install](./docs/how-to-deploy-airgap-32.md)
+- [CP4WAIOps 3.3 Online Install](./docs/how-to-deploy-cp4waiops-33.md)
 
-## Advanced Install for CP4WAIOPS GitOps
+## More Install Options for CP4WAIOps using GitOps
 
-There are some advanced configuration for CP4WAIOps installation that can support more install usage scenarios, please refer to:
+There are some advanced configuration available for CP4WAIOps to support more install scenarios. For more details, please refer to: [CP4WAIOps Advanced Install Options Using GitOps](./docs/cp4waiops-advanced-install-options.md).
 
-- [CP4WAIOps Advanced Configuration Using OpenShift GitOps](./docs/advanced-allinone-cp4waiops-configuration.md)
-
-As a customer, you may want to fork or copy this repo and customize it to your needs, and you can also use Github etc to track all the changes that you have made.
-
-Please navigate to [Advanced Install](./docs/advanced-install.md) page for the details.
+Also, as a customer, you may want to fork this repository to customize it that meets your specific needs. For more details, please refer to [Customize CP4WAIOps Install Using Your Own Git Repository](./docs/cp4waiops-custom-install.md).

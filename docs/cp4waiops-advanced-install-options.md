@@ -39,7 +39,7 @@ This install scenario has been tested and verfied against CP4WAIOps 3.2 and 3.3.
 
 ### About X-Small Profile
 
-The `x-small` profile is not an official profile supported by CP4WAIOps at the moment. It only covers AI Manager, not including Event Manager. As an experimental feature, you can use it to setup demo, PoC, or dev environment.
+The `x-small` profile is not an official profile supported by CP4WAIOps at the moment. It only covers AI Manager and does not include Event Manager. As an experimental feature, you can use it to setup demo, PoC, or dev environment.
 
 Althougth in this install scenario, `x-small` profile is used, this approach also supports CP4WAIOps install in production environment using official profile such as `small` or `large`.
 
@@ -49,14 +49,14 @@ Prepare an OpenShift cluster as your demo environment. If you use `x-small` prof
 
 Before you start to install demo environment, make sure you have installed OpenShift GitOps (Argo CD) on the cluster. To install OpenShift GitOps, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
-You will use Argo CD to install following applications in one go:
+We will use Argo CD to install following applications in one go:
 
 | Application        | Required | Description
 | ------------------ | -------- | -------------------------------------------------------------------
 | Ceph               | No       | The storage used by CP4WAIOps and other applications. It can be skipped if you already have storage solution available on your target cluster.
 | CP4WAIOps          | Yes      | IBM Cloud Pak for Watson AIOps.
 | Robot Shop         | No       | The sample application used to demonstrate CP4WAIOps features.
-| Humio & Fluent Bit | No       | The log collector used by CP4WAIOps.
+| Humio & Fluent Bit | No       | The log collector used by CP4WAIOps for log anomaly detecting.
 | Istio              | No       | The service mesh used by sample application for fault injection.
 
 ### Install CP4WAIOps Demo Environment
@@ -78,7 +78,7 @@ Just fill in the form using the suggested field values listed in following table
 
 NOTE:
 
-- For `repository URL` and `revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and on a different branch, please fill these fields using your own values.
+- For `repository URL` and `revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 
 Besides the basic information, when filling in the form, you can also update the following install parameters that are commonly used to customize the install behavior.
 

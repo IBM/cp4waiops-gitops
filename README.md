@@ -15,8 +15,8 @@ This repository is about using OpenShift GitOps to deployCloud Pak for Watson AI
 
 ## Supported CP4WAIOps Versions
 
-- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0)
-- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0)
+- [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
+- [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
 - [3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0)
 
 ## Install CP4WAIOps using GitOps
@@ -30,6 +30,4 @@ Please refer to the following documents and decide how you want to deploy CP4WAI
 
 ## More Install Options for CP4WAIOps using GitOps
 
-There are some advanced configuration available for CP4WAIOps to support more install scenarios. For more details, please refer to: [CP4WAIOps Advanced Install Options Using GitOps](./docs/cp4waiops-advanced-install-options.md).
-
-Also, as a customer, you may want to fork this repository to customize it that meets your specific needs. For more details, please refer to [Customize CP4WAIOps Install Using Your Own Git Repository](./docs/cp4waiops-custom-install.md).
+There are some advanced configuration available for CP4WAIOps to support more install scenarios. Also, as a customer, you may want to fork this repository to customize it that meets your specific needs. For more details, please refer to [Customize CP4WAIOps Install](./docs/cp4waiops-custom-install.md).

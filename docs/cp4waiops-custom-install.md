@@ -2,14 +2,14 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Customize CP4WAIOps Install Using Your Own Git Repository](#customize-cp4waiops-install-using-your-own-git-repository)
+- [Customize CP4WAIOps Install](#customize-cp4waiops-install)
   - [Background](#background)
   - [Host Your Own Git Repository](#host-your-own-git-repository)
   - [Advanced Install](#advanced-install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Customize CP4WAIOps Install Using Your Own Git Repository
+# Customize CP4WAIOps Install
 
 ## Background
 

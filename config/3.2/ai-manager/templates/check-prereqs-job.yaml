@@ -51,7 +51,6 @@ spec:
             - -c
             - |
               set -x
-
               while : ; do
                 if oc get sc -o "jsonpath={.items[*].metadata.annotations['storageclass\.kubernetes\.io/is-default-class']}" | grep -q ^true$; then
                   echo "INFO: Default storage class available."

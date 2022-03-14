@@ -2,8 +2,8 @@
 ###################################
 # CP4WAIOps - Common Configs
 ###################################
-spec:
 
+spec:
   ## AI Manager catalog source image
   ##
   imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
@@ -33,11 +33,7 @@ spec:
   storageClassLargeBlock: rook-cephfs
 
   aiManager:
-    ## Enable AI Manager
-    ##
-    enabled: true
-
-    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
+    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers.
     ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
     ##
     channel: v3.2
@@ -48,38 +44,19 @@ spec:
 
     ## namespace is the project (namespace) that you want to create the AI Manager instance in.
     ## You must create a custom project (namespace) and not use the default, kube-system,
-    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-    ## This is because AI Manager uses Security Context Constraints (SCC), 
+    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces).
+    ## This is because AI Manager uses Security Context Constraints (SCC),
     ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
     ##
     namespace: cp4waiops
 
-    ## instanceName is the Installation CR name of CP4WAIOps (AI Manager).
-    instanceName: aiops-installation
-
-  eventManager:
-    ## Enable Event Manager
-    ##
-    enabled: false
-
-    # eventManager version
-    version: 1.6.3.2
-
-    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
-    ##
-    clusterDomain: apps.clustername.*.*.com.
-
-    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
-    ## For example, if you want to install Evemt Manager 1.5, the channel should be v1.5
-    ##
-    channel: v1.5
-
-    ## Deployment type (trial or production)
-    ## 
-    deploymentType: trial
-
-    ## namespace is the project (namespace) that you want to create the Event Manager instance in.
-    ## You must create a custom project (namespace) and not use the default, kube-system,
-    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
-    ##
-    namespace: eventmanager
+    ## enable pakModules
+    pakModules:
+      aiopsFoundation:
+        enabled: true
+      applicationManager:
+        enabled: true
+      aiManager:
+        enabled: true
+      connection:
+        enabled: true

@@ -1,0 +1,1193 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops-31/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+    
+    
+      
+        <title>Online Install - IBM Cloud Pak for Watson AIOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,400i,700%7CIBM+Plex+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"IBM Plex Sans";--md-code-font-family:"IBM Plex Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploy-cloud-pak-for-watson-aiops-with-openshift-gitops" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-header__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Cloud Pak for Watson AIOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Online Install
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link md-tabs__link--active">
+        GitOps Install
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-nav__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    IBM Cloud Pak for Watson AIOps
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          GitOps Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GitOps Install" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          GitOps Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          v3.3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.3" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          v3.3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-33/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          v3.2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.2" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          v3.2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-32/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-airgap-32/" class="md-nav__link">
+        Airgap Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_4">
+          v3.1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.1" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          v3.1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Online Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Online Install
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-infra-crossplane-cp4waiops-provider" class="md-nav__link">
+    Install Infra (Crossplane CP4WAIOPS Provider)
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Infra (Crossplane CP4WAIOPS Provider)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grant-argo-cd-enough-permissions" class="md-nav__link">
+    Grant Argo CD Enough Permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd" class="md-nav__link">
+    Login to Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-cp4waiops-provider" class="md-nav__link">
+    Install CP4WAIOPS Provider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-crossplane-provider" class="md-nav__link">
+    Verify Crossplane Provider
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify Crossplane Provider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-verify" class="md-nav__link">
+    CLI Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-verify" class="md-nav__link">
+    UI Verify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-consideration" class="md-nav__link">
+    Storage Consideration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-cloud-paks" class="md-nav__link">
+    Deploy Cloud Paks
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy Cloud Paks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-secret-storing-your-entitlement-key" class="md-nav__link">
+    Create a secret storing your entitlement key:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-secret-storing-target-ocp-cluster-kubeconfig" class="md-nav__link">
+    Create a secret storing target ocp cluster kubeconfig :
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-argocd-application-for-installing-cp4waiops-in-cluster" class="md-nav__link">
+    Create a ArgoCD application for installing cp4waiops in-cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-cloud-paks-installation" class="md-nav__link">
+    Verify Cloud Paks Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify Cloud Paks Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-verify_1" class="md-nav__link">
+    CLI Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-verify_1" class="md-nav__link">
+    UI Verify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-cp4waiops-ui" class="md-nav__link">
+    Access CP4WAIOps UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_5">
+          Advanced Install Options
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced Install Options" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced Install Options
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cp4waiops-custom-install/" class="md-nav__link">
+        Customize CP4WAIOps Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-cloudpak-with-sample-apps/" class="md-nav__link">
+        Deploy Demo Environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-cloudpak-to-multiple-clusters/" class="md-nav__link">
+        Deploy to Multiple Clusters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-ocp-cloudpak-with-gitops/" class="md-nav__link">
+        Deploy with Cluster Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-infra-crossplane-cp4waiops-provider" class="md-nav__link">
+    Install Infra (Crossplane CP4WAIOPS Provider)
+  </a>
+  
+    <nav class="md-nav" aria-label="Install Infra (Crossplane CP4WAIOPS Provider)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grant-argo-cd-enough-permissions" class="md-nav__link">
+    Grant Argo CD Enough Permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd" class="md-nav__link">
+    Login to Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-cp4waiops-provider" class="md-nav__link">
+    Install CP4WAIOPS Provider
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-crossplane-provider" class="md-nav__link">
+    Verify Crossplane Provider
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify Crossplane Provider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-verify" class="md-nav__link">
+    CLI Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-verify" class="md-nav__link">
+    UI Verify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-consideration" class="md-nav__link">
+    Storage Consideration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-cloud-paks" class="md-nav__link">
+    Deploy Cloud Paks
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy Cloud Paks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-secret-storing-your-entitlement-key" class="md-nav__link">
+    Create a secret storing your entitlement key:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-secret-storing-target-ocp-cluster-kubeconfig" class="md-nav__link">
+    Create a secret storing target ocp cluster kubeconfig :
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-argocd-application-for-installing-cp4waiops-in-cluster" class="md-nav__link">
+    Create a ArgoCD application for installing cp4waiops in-cluster
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-cloud-paks-installation" class="md-nav__link">
+    Verify Cloud Paks Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify Cloud Paks Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-verify_1" class="md-nav__link">
+    CLI Verify
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-verify_1" class="md-nav__link">
+    UI Verify
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-cp4waiops-ui" class="md-nav__link">
+    Access CP4WAIOps UI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-deploy-cp4waiops-31.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<ul>
+<li><a href="#deploy-cloud-pak-for-watson-aiops-with-openshift-gitops">Deploy Cloud Pak for Watson AIOps with OpenShift GitOps</a></li>
+<li><a href="#prerequisite">Prerequisite</a></li>
+<li><a href="#install-infra-crossplane-cp4waiops-provider">Install Infra (Crossplane CP4WAIOPS Provider)</a><ul>
+<li><a href="#grant-argo-cd-enough-permissions">Grant Argo CD Enough Permissions</a></li>
+<li><a href="#login-to-argo-cd">Login to Argo CD</a></li>
+<li><a href="#install-cp4waiops-provider">Install CP4WAIOPS Provider</a></li>
+<li><a href="#verify-crossplane-provider">Verify Crossplane Provider</a></li>
+<li><a href="#cli-verify">CLI Verify</a></li>
+<li><a href="#ui-verify">UI Verify</a></li>
+</ul>
+</li>
+<li><a href="#storage-consideration">Storage Consideration</a></li>
+<li><a href="#deploy-cloud-paks">Deploy Cloud Paks</a><ul>
+<li><a href="#create-a-secret-storing-your-entitlement-key">Create a secret storing your entitlement key:</a></li>
+<li><a href="#create-a-secret-storing-target-ocp-cluster-kubeconfig-">Create a secret storing target ocp cluster kubeconfig :</a></li>
+<li><a href="#create-a-argocd-application-for-installing-cp4waiops-in-cluster">Create a ArgoCD application for installing cp4waiops in-cluster</a></li>
+<li><a href="#verify-cloud-paks-installation">Verify Cloud Paks Installation</a></li>
+<li><a href="#cli-verify-1">CLI Verify</a></li>
+<li><a href="#ui-verify-1">UI Verify</a></li>
+<li><a href="#access-cp4waiops-ui">Access CP4WAIOps UI</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h1 id="deploy-cloud-pak-for-watson-aiops-with-openshift-gitops">Deploy Cloud Pak for Watson AIOps with OpenShift GitOps<a class="headerlink" href="#deploy-cloud-pak-for-watson-aiops-with-openshift-gitops" title="Permanent link">&para;</a></h1>
+<h2 id="prerequisite">Prerequisite<a class="headerlink" href="#prerequisite" title="Permanent link">&para;</a></h2>
+<ul>
+<li>NOTE: Only OpenShift 4.6 with CP4WAIOPS 3.1 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.</li>
+<li>Install gitops operator(Red Hat OpenShift GitOps) in ocp operator-hub</li>
+<li>Install crossplane operator(Upbound Universal Crossplane (UXP)) in ocp operator-hub</li>
+</ul>
+<h2 id="install-infra-crossplane-cp4waiops-provider">Install Infra (Crossplane CP4WAIOPS Provider)<a class="headerlink" href="#install-infra-crossplane-cp4waiops-provider" title="Permanent link">&para;</a></h2>
+<h3 id="grant-argo-cd-enough-permissions">Grant Argo CD Enough Permissions<a class="headerlink" href="#grant-argo-cd-enough-permissions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
+<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
+<span class="nt">metadata</span><span class="p">:</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argocd-admin</span>
+<span class="nt">subjects</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openshift-gitops-argocd-application-controller</span>
+    <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openshift-gitops</span>
+<span class="nt">roleRef</span><span class="p">:</span>
+  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
+  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cluster-admin</span>
+</code></pre></div>
+<h3 id="login-to-argo-cd">Login to Argo CD<a class="headerlink" href="#login-to-argo-cd" title="Permanent link">&para;</a></h3>
+<p>Login ArgoCD entrance</p>
+<p><img alt="Login entrance" src="../images/ArgoCD-Interface.png" />   </p>
+<p>Login Username/Password
+<div class="highlight"><pre><span></span><code>Username: admin  
+Password: Please copy the Data value of secret &quot;openshift-gitops-cluster&quot; in namespace &quot;openshift-gitops&quot;
+</code></pre></div></p>
+<p><img alt="Secret data" src="../images/login-argocd-user-pass.png" /> </p>
+<h3 id="install-cp4waiops-provider">Install CP4WAIOPS Provider<a class="headerlink" href="#install-cp4waiops-provider" title="Permanent link">&para;</a></h3>
+<p>Create application.<br />
+Choose "New App" in "Applications".<br />
+Fill in like below, then choose "create". </p>
+<div class="highlight"><pre><span></span><code>GENERAL
+Application Name: anyname(like &quot;crossplane-provider&quot;)
+Project: default
+SYNC POLICY: Automatic
+
+SOURCE
+REPO URL : https://github.com/IBM/cp4waiops-gitops
+Target version: HEAD
+path: config/3.1/argocd-apps/infra
+
+DESTINATION
+Cluster URL: https://kubernetes.default.svc
+Namespace: upbound-system
+
+HELM
+metadata.argocd_app_namespace: openshift-gitops
+metadata.cp4waiops_provider_namespace: upbound-system
+metadata.crossplane_namespace: upbound-system
+repoURL: https://github.com/IBM/cp4waiops-gitops
+</code></pre></div>
+<h3 id="verify-crossplane-provider">Verify Crossplane Provider<a class="headerlink" href="#verify-crossplane-provider" title="Permanent link">&para;</a></h3>
+<h4 id="cli-verify">CLI Verify<a class="headerlink" href="#cli-verify" title="Permanent link">&para;</a></h4>
+<p>After cp4waiops provider was deployed, you can run the command as follows to check:</p>
+<div class="highlight"><pre><span></span><code>kubectl get po -n upbound-system
+kubectl get application -A
+</code></pre></div>
+<p>In this tutorial, the output of the above command is as follows:</p>
+<p><div class="highlight"><pre><span></span><code><span class="gp"># </span>kubectl get po -n upbound-system
+<span class="go">NAME                                            READY   STATUS      RESTARTS   AGE</span>
+<span class="go">add-scc-policy-2wgw7                            0/1     Completed   0          98m</span>
+<span class="go">crossplane-5d88f96479-jdnf2                     1/1     Running     2          4h14m</span>
+<span class="go">crossplane-provider-cloudpak-57cf9bb7c8-5l852   1/1     Running     0          98m</span>
+<span class="go">crossplane-rbac-manager-58c6656768-4cgr5        1/1     Running     2          4h14m</span>
+<span class="go">upbound-bootstrapper-67d458bf85-kkgq9           1/1     Running     0          4h14m</span>
+<span class="go">xgql-7b65998b88-p6shn                           1/1     Running     2          4h14m</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="gp"># </span>kubectl get application -A
+<span class="go">NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS</span>
+<span class="go">openshift-gitops   ceph                      Synced        Healthy</span>
+<span class="go">openshift-gitops   crossplane-provider       Synced        Healthy</span>
+<span class="go">openshift-gitops   crossplane-provider-app   Synced        Healthy</span>
+</code></pre></div></p>
+<h4 id="ui-verify">UI Verify<a class="headerlink" href="#ui-verify" title="Permanent link">&para;</a></h4>
+<p>From Argo CD UI, you will be able to see there are two applications as follows:</p>
+<ul>
+<li>There are two applications, one is <code>crossplane-provider</code> and another is <code>crossplane-provider-app</code>. The <code>crossplane-provider</code> bring up the <code>crossplane-provider-app</code> via the <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern">app-of-apps pattern</a>.</li>
+</ul>
+<p><img alt="all apps" src="../images/ocp-crossplane-provider.png" /></p>
+<ul>
+<li>This is the deatail of app <code>crossplane-provider</code>, and the following picture describes the <a href="https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern">app-of-apps pattern</a>.</li>
+</ul>
+<p><img alt="app of apps" src="../images/ocp-crossplane-provider-detail.png" /></p>
+<ul>
+<li>The following picture is the detail of the <code>crossplane-provider-app</code>, you can see all of the resources for this app.
+<img alt="cp4waiops provider" src="../images/ocp-crossplane-provider-app-detail.png" /></li>
+</ul>
+<h2 id="storage-consideration">Storage Consideration<a class="headerlink" href="#storage-consideration" title="Permanent link">&para;</a></h2>
+<p>It depends where the OCP comes from , if you're using fyre , then could create gitops application</p>
+<div class="highlight"><pre><span></span><code>GENERAL
+Application Name: ceph
+Project: default
+SYNC POLICY: Automatic
+
+SOURCE
+REPO URL : https://github.com/IBM/cp4waiops-gitops
+Target version: HEAD
+path: ceph
+
+DESTINATION
+Cluster URL: https://kubernetes.default.svc
+Namespace: rook-ceph
+DIRECTORY
+DIRECTORY RECURSE: tick it
+</code></pre></div>
+<h2 id="deploy-cloud-paks">Deploy Cloud Paks<a class="headerlink" href="#deploy-cloud-paks" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-secret-storing-your-entitlement-key">Create a secret storing your entitlement key:<a class="headerlink" href="#create-a-secret-storing-your-entitlement-key" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl create secret generic image-pull-secret --from-literal=cp.icr.io=cp:&lt;entitlement-key&gt; -n crossplane-system
+</code></pre></div>
+<p><strong>Note:</strong> refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cp-waiops/3.1.0?topic=installing-preparing-install-cloud-pak#entitlement_keys">CP4WAIOPS-KC</a> to replace the <code>entitlement-key</code> </p>
+<h3 id="create-a-secret-storing-target-ocp-cluster-kubeconfig">Create a secret storing target ocp cluster kubeconfig :<a class="headerlink" href="#create-a-secret-storing-target-ocp-cluster-kubeconfig" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl create secret generic openshift-cluster-kubeconfig --from-file=credentials=&lt;kubeconfig&gt; -n crossplane-system
+</code></pre></div>
+<p><strong>Note:</strong> please replace the kubeconfig to your real file , default value : /root/.kube/config</p>
+<h3 id="create-a-argocd-application-for-installing-cp4waiops-in-cluster">Create a ArgoCD application for installing cp4waiops in-cluster<a class="headerlink" href="#create-a-argocd-application-for-installing-cp4waiops-in-cluster" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>GENERAL
+Application Name: anyname(like &quot;cp4waiops&quot;)
+Project: default
+SYNC POLICY: Automatic
+
+SOURCE
+REPO URL : https://github.com/IBM/cp4waiops-gitops
+Target version: HEAD
+path: config/3.1/cp4waiops
+
+DESTINATION
+Cluster URL: https://kubernetes.default.svc
+Namespace: upbound-system
+
+HELM
+spec.cp4waiops_namespace: cp4waiops
+spec.channel: v3.1
+spec.imageCatalog: icr.io/cpopen/aiops-orchestrator-catalog:3.1-latest
+spec.imagePullSecret: ibm-entitlement-key
+spec.kubeConfigSecretName: openshift-cluster-kubeconfig
+spec.kubeConfigSecretNS: crossplane-system
+spec.providerConfigRef: openshift-cluster-provider-config 
+spec.storageClass: rook-cephfs
+spec.storageClassLargeBlock: rook-cephfs
+</code></pre></div>
+<h3 id="verify-cloud-paks-installation">Verify Cloud Paks Installation<a class="headerlink" href="#verify-cloud-paks-installation" title="Permanent link">&para;</a></h3>
+<h4 id="cli-verify_1">CLI Verify<a class="headerlink" href="#cli-verify_1" title="Permanent link">&para;</a></h4>
+<p>After instana instance was deployed, you can run the command as follows to check:</p>
+<div class="highlight"><pre><span></span><code>kubectl get application -A
+</code></pre></div>
+<p>In this tutorial, the output of the above command is as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="gp"># </span>kubectl get application -A
+<span class="go">NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS</span>
+<span class="go">openshift-gitops   ceph                      Synced        Healthy</span>
+<span class="go">openshift-gitops   cp4waiops                 Synced        Healthy</span>
+<span class="go">openshift-gitops   crossplane-provider       Synced        Healthy</span>
+<span class="go">openshift-gitops   crossplane-provider-app   Synced        Healthy</span>
+</code></pre></div>
+<p>Wait a while and check if all pods under namespace <code>cp4waiops</code> and are running well without any crash.</p>
+<div class="highlight"><pre><span></span><code>kubectl get pod -n cp4waiops
+</code></pre></div>
+<h4 id="ui-verify_1">UI Verify<a class="headerlink" href="#ui-verify_1" title="Permanent link">&para;</a></h4>
+<p>From Argo CD UI, you will be able to see there are another application added as follows:</p>
+<p><img alt="cp4waiops apps" src="../images/ocp-cp4waiops.png" /></p>
+<ul>
+<li>The following picture is the detail of the <code>cp4waiops</code>, you can see all of the resources for this app.
+<img alt="cp4waiops" src="../images/ocp-cp4waiops-detail.png" /></li>
+</ul>
+<h3 id="access-cp4waiops-ui">Access CP4WAIOps UI<a class="headerlink" href="#access-cp4waiops-ui" title="Permanent link">&para;</a></h3>
+<p>After you successfully install IBM Cloud Pak for Watson AIOps, check <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-installing-online-offline#console">CP4WAIOPS-KC</a> to get the URL for accessing the IBM Cloud Pak for Watson AIOps console, username and password.</p>
+<p><img alt="w" src="../images/waiops-login.png" /></p>
+<p>After click <code>Log In</code>, you will be navigated to the CP4WAIOps UI as follows.</p>
+<p><img alt="w" src="../images/waiops-dashbord.png" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../how-to-deploy-airgap-32/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Airgap Install" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Airgap Install
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../cp4waiops-custom-install/" class="md-footer__link md-footer__link--next" aria-label="Next: Customize CP4WAIOps Install" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Customize CP4WAIOps Install
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
+      
+    
+  </body>
+</html>

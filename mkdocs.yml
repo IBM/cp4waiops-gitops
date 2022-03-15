@@ -1,5 +1,5 @@
 site_name: IBM Cloud Pak for Watson AIOps
-site_url: https://ibm.github.com/cp4waiops-gitops/
+site_url: https://ibm.github.io/cp4waiops-gitops/docs/
 repo_url: https://github.com/IBM/cp4waiops-gitops
 nav:
     - GitOps Install:

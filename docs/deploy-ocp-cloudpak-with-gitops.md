@@ -2,59 +2,75 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps Demo Environment With OCP Using GitOps](#deploy-cp4waiops-demo-environment-with-ocp-using-gitops)
-  - [Install CP4WAIOps](#install-cp4waiops)
+- [Deploy CP4WAIOps Demo Environment Including Cluster Provisioning](#deploy-cp4waiops-demo-environment-including-cluster-provisioning)
+  - [Install CP4WAIOps Demo Environment](#install-cp4waiops-demo-environment)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps Demo Environment With OCP Using GitOps
+# Deploy CP4WAIOps Demo Environment Including Cluster Provisioning
 
-This tutorial will work you through the steps to provision an OpenShift cluster, then use this cluster to deploy the demo environment for Cloud Pak for Watson AIOps (CP4WAIOps) using GitOps. With this approach, you will get a fully automated experience of launching a CP4WAIOps demo environment from end to end, started from cluster provisioning, till to the demo environment deployment, and configuration, all driven by GitOps automatically.
+In this tutorial, you will learn the steps to provision an OpenShift cluster, then use this cluster to deploy CP4WAIOps demo environment using GitOps. With this approach, you will get a fully automated experience of launching a CP4WAIOps demo environment, started from cluster provisioning, till to the demo environment deployment, and configuration, all driven by GitOps automatically.
 
 ![](images/16-architecture-provision-cluster.png)
 
+## Install CP4WAIOps Demo Environment
 
-## Install CP4WAIOps
+After finish the install of Argo CD, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to [Install CP4WAIOps Demo Environment](#install-cp4waiops-demo-environment).
 
-After you finish the Argo CD install, you can deploy CP4WAIOps via Argo CD UI. To install CP4WAIOps, please refer to the `Install CP4WAIOps` section in [this document](how-to-deploy-cp4waiops-33.md). We use the same field values described in that document when filling up the form to create the Argo Application.
+The only difference when you set the install parameters is that:
 
-The only difference happens when you set the installation parameters:
+- For `argocd.allowLocalDeploy`, make sure it is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.
+- You will be able to configure the OpenShift cluster provisioning using following install parameters.
 
-Firstly, you may need to make sure the installation parameter `argocd.allowLocalDeploy` is `false`. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this tutorial, we use that cluster to run Argo CD dedicately.
+| Parameter                                   | Type   | Default Value | Description 
+| ------------------------------------------- |--------|---------------|-----------------------------------
+| cluster.enabled                             | bool   | false         | Specify whether or not to provision a cluster before install CP4WAIOps.
+| cluster.provider.type                       | string | fyre          | The supported provider to provision cluster, valid values include: fyre.
+| cluster.provider.credentials.productGroupId | string | REPLACE_IT    | Fyre product group id required when calling Fyre API.
+| cluster.provider.credentials.token          | string | REPLACE_IT    | Fyre user token required when calling Fyre API.
+| cluster.provider.credentials.user           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
 
-Secondly, you will be able to configure the OpenShift cluster provisioning using below additional parameters.
+NOTE:
 
-| Parameter                                        | Type   | Default Value | Description 
-| ------------------------------------------------ |--------|---------------|-----------------------------------
-| cluster.enabled                                  | bool   | false         | Specify whether or not to provision a cluster before install CP4WAIOps.
-| cluster.provider.fyre.credentials.productGroupId | string | n/a           | Fyre product group id required when calling Fyre API
-| cluster.provider.fyre.credentials.token          | string | n/a           | Fyre user token required when calling Fyre API
-| cluster.provider.fyre.credentials.user           | string | n/a           | Fyre user id required when calling Fyre API
+- For `cluster.provider.type`, `fyre` is currently the only supported provider. It is an IBM IaaS platform only for internal use.
 
-After you create the Argo Application, you will see something similar as below from Argo CD UI:
+These parameters are invisible when you create the Argo CD App from UI. You can add them when filling in the form in `HELM` > `VALUES` field as follows:
+
+```yaml
+cluster:
+  enabled: true
+  provider:
+    type: fyre
+    credentials:
+      user: <my_user_id>
+      token: <my_user_token>
+      productGroupId: <my_product_group_id>
+```
+
+After you create the Argo CD App, you will see something similar as follows from Argo CD UI:
 
 ![](images/17-apps-provision-cluster.png)
 
-Apart from the root level application, the application `cluster-operator-fyre` represents the operator that drives the cluster provisioning on Fyre. The application `clusters-fyre` maps the cluster provisioning request that we created and stored in git repository. Click the `clusters-fyre` application to check its details:
+Apart from the root level App, the App `cluster-operator-fyre` represents the operator that drives the cluster provisioning on Fyre. The App `clusters-fyre` maps the cluster provisioning request created and stored in git repository. Click the App `clusters-fyre` to check its details:
 
 ![](images/18-cluster-provision-request.png)
 
-There is a custom resource in type of `OpenShiftFyre` that "documents" the desired status for the OpenShift cluster that we request. Also, there is a secret that includes the Fyre credentials that we input earlier when creating the Argo Application using installation parameters. The operator will use this information to communicate with Fyre API. You may also notice that the `OpenShiftFyre` resource is in `Processing` status. This means the operator has issued the request to Fyre successfully and Fyre has started to provision the cluster for us.
+There is a custom resource in type of `OpenShiftFyre` that "documents" the desired status for the OpenShift cluster to be requested. Also, there is a secret that includes the Fyre credentials that you input earlier when creating the Argo CD App using install parameters. The operator will use this information to communicate with Fyre API. You may also notice that the `OpenShiftFyre` resource is in `Processing` status. This means the operator has issued the request to Fyre successfully and Fyre has started to provision the cluster for you.
 
-If you go to the root level application, you will see that two new child level applications are added:
+If you go to the root level App, you will see that two new child level Apps are added:
 
 ![](images/19-appsets-cluster-provision.png)
 
-Because the cluster is still being provisioned and not available to deploy the CP4WAIOps demo environment yet, there's no actual application instance spawned for the demo environment, e.g.: the instane for CP4WAIOps, Robot Shop, Humio, Istio, etc. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added into Argo CD automatically by the operator. You can check it by going to `Settings` -> `Clusters` from Argo CD UI:
+Because the cluster is still being provisioned and not available to deploy the CP4WAIOps demo environment yet, there is no actual App instance spawned for the demo environment. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added to Argo CD automatically by the operator. You can check it by going to `Settings` > `Clusters` from Argo CD UI:
 
 ![](images/20-cluster-auto-added.png)
 
-When the new cluster is displayed in the list as above, Argo CD will then kick off the demo environment deployment on that cluster immediately without any manual intervention. You will see all child level applications are now getting created from the `Applications` view as below:
+When the new cluster is displayed in the list as above, Argo CD will then kick off the demo environment deployment on that cluster immediately without any manual intervention. You will see all child level Apps are now getting created from the `Applications` view as follows:
 
 ![](images/21-deploy-appsets.png)
 
-Specify the target cluster in the clusters filter box, then wait for all applications turning into green.
+Specify the target cluster in the clusters filter box, then wait for all Apps turning into green.
 
 ![](images/22-install-complete.png)
 
-Now you should be able to use your fresh new CP4WAIOps demo environment. Enjoy it!
+Now you should be able to use your fresh new CP4WAIOps demo environment!

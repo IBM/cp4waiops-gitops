@@ -11,7 +11,7 @@
 
 # Deploy Cloud Pak for Watson AIOps using GitOps
 
-This repository is about using OpenShift GitOps to deployCloud Pak for Watson AIOps(CP4WAIOps) on Red Hat OpenShift Cluster.
+This repository is about using OpenShift GitOps to deployCloud Pak for Watson AIOps(CP4WAIOps) on Red Hat OpenShift Cluster. Refer to our [gitops webpage](https://ibm.github.io/cp4waiops-gitops/docs/) to check detailed document and start your toturial with gitops.
 
 ## Supported CP4WAIOps Versions
 

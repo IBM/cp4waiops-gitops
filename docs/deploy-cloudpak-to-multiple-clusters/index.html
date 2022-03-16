@@ -716,7 +716,7 @@
 <h2 id="install-argocd-cli">Install Argocd CLI<a class="headerlink" href="#install-argocd-cli" title="Permanent link">&para;</a></h2>
 <p>In this case, you will need Argo CD CLI, i.e.: the <code>argocd</code> command, to add clusters to Argo CD, so that Argo CD can deploy the CP4WAIOps demo environment to those clusters. To install Argo CD CLI, please refer to the <a href="https://argo-cd.readthedocs.io/en/stable/cli_installation/">Argo CD online document</a>. You can install and run Argo CD CLI on any machine such as your notebook, since it is just a client tool used to connect to the Argo CD server.</p>
 <h2 id="install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment<a class="headerlink" href="#install-cp4waiops-demo-environment" title="Permanent link">&para;</a></h2>
-<p>After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to <a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a>.</p>
+<p>After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to <a href="../deploy-cloudpak-with-sample-apps/">Install CP4WAIOps Demo Environment</a>.</p>
 <p>The only difference when you set the install parameters is that:</p>
 <ul>
 <li>For <code>argocd.allowLocalDeploy</code>, make sure it is <code>false</code>. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.</li>

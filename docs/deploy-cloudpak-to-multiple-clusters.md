@@ -32,7 +32,7 @@ In this case, you will need Argo CD CLI, i.e.: the `argocd` command, to add clus
 
 ## Install CP4WAIOps Demo Environment
 
-After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to [Install CP4WAIOps Demo Environment](#install-cp4waiops-demo-environment).
+After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to [Install CP4WAIOps Demo Environment](./deploy-cloudpak-with-sample-apps.md).
 
 The only difference when you set the install parameters is that:
 

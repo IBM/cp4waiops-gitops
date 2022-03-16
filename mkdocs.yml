@@ -1,0 +1,55 @@
+site_name: IBM Cloud Pak for Watson AIOps
+site_url: https://ibm.github.io/cp4waiops-gitops/docs/
+repo_url: https://github.com/IBM/cp4waiops-gitops
+nav:
+    - GitOps Install:
+      - Introduction: README.md
+      - v3.3:
+        - Online Install: how-to-deploy-cp4waiops-33.md
+      - v3.2:
+        - Online Install: how-to-deploy-cp4waiops-32.md
+        - Airgap Install: how-to-deploy-airgap-32.md
+      - v3.1:
+        - Online Install: how-to-deploy-cp4waiops-31.md
+      - Advanced Install Options:
+        - Customize CP4WAIOps Install: cp4waiops-custom-install.md
+        - Deploy Demo Environment: deploy-cloudpak-with-sample-apps.md
+        - Deploy to Multiple Clusters: deploy-cloudpak-to-multiple-clusters.md
+        - Deploy with Cluster Provisioning: deploy-ocp-cloudpak-with-gitops.md
+        
+theme:
+    name: material
+    # logo: images/logo.png
+    # favicon: images/logo.png
+    palette:
+      scheme: default
+      primary: black
+    font:
+      text: IBM Plex Sans
+      code: IBM Plex Mono
+    language: en
+    features:
+      - navigation.instant
+      - navigation.tracking
+      - navigation.tabs
+      - navigation.tabs.sticky
+      - navigation.top
+      - navigation.sections
+use_directory_urls: true
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - toc:
+      permalink: true
+      toc_depth: 5
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.highlight
+  - pymdownx.tabbed
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: docs/snippets
+extra_css:
+    - css/extra.css

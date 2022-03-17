@@ -27,6 +27,8 @@
 
 # Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster
 
+NOTE: THIS IS NOT A RELEASED FEATURE FOR CP4WAIOPS!
+
 Refer to [here](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline) go get some detail for CP4WAIOPS 3.2 airgap install detail.
 
 There are three airgap models are supported as follows:

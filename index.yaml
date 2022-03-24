@@ -33,4 +33,15 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager32-0.0.1/eventmanager32-0.0.1.tgz
     version: 0.0.1
-generated: "2022-03-24T14:02:14.872115659Z"
+  eventmanager33:
+  - apiVersion: v1
+    appVersion: "3.3"
+    created: "2022-03-24T14:05:59.865379131Z"
+    description: EventManager 3.3 Chart
+    digest: 1c5bcd486b5dbb5577864d2a444a5fa1ae3f194a265071bce9e5959329180dbf
+    name: eventmanager33
+    type: application
+    urls:
+    - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager33-0.0.1/eventmanager33-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-03-24T14:05:59.865385431Z"

@@ -2,13 +2,14 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Customize CP4WAIOps Install Using Your Own Git Repository](#customize-cp4waiops-install-using-your-own-git-repository)
+- [Customize CP4WAIOps Install](#customize-cp4waiops-install)
   - [Background](#background)
   - [Host Your Own Git Repository](#host-your-own-git-repository)
+  - [Advanced Install](#advanced-install)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Customize CP4WAIOps Install Using Your Own Git Repository
+# Customize CP4WAIOps Install
 
 ## Background
 
@@ -24,7 +25,7 @@ To customize CP4WAIOps install using your own git repository, you need to follow
 
 - Fork this repository to your own GitHub account.
 
-- Modify parameters in `config/<version>/**/values.yaml` based on your specific install requirement. The [official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) uses a set of [helm charts](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/) to wrap all CP4WAIOps configuration YAML manifests in multiple helm templates. With helm chart, you can customize the CP4WAIOps install using parameters defined in a set of [`values.yaml`](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files) files. For example, the [values.yaml](../config/all-in-one/values.yaml) for all-in-one configuration provides a set of parameters with their default values that allow you to customize the CP4WAIOps install using all-in-one configuration.
+- Modify parameters in `config/<version>/**/values.yaml` based on your specific install requirement. The [official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) uses a set of [helm charts](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/) to wrap all CP4WAIOps configuration YAML manifests in multiple helm templates. With helm chart, you can customize the CP4WAIOps install using parameters defined in a set of [`values.yaml`](https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files) files. For example, the values.yaml for all-in-one configuration provides a set of parameters with their default values that allow you to customize the CP4WAIOps install using all-in-one configuration.
 
 - Other than modifying the existing `value.yaml` file, you can also define additional `values.yaml` files when needed. These `values.yaml` files along with the original `values.yaml` file can all be applied when you create Argo CD App to kick off the CP4WAIOps install either from UI or command line.
 
@@ -50,3 +51,9 @@ To customize CP4WAIOps install using your own git repository, you need to follow
           --helm-set spec.storageClassLargeBlock=rook-cephfs \
           --helm-set spec.size=small
   ```
+
+## Advanced Install
+
+- [Deploy CP4WAIOps Demo Environment to Multiple Clusters](./deploy-cloudpak-to-multiple-clusters.md)
+- [Deploy CP4WAIOps Demo Environment in One Click](./deploy-cloudpak-with-sample-apps.md)
+- [Deploy CP4WAIOps Demo Environment Including Cluster Provisioning](./deploy-ocp-cloudpak-with-gitops.md)

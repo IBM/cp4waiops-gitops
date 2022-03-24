@@ -1,4 +1,22 @@
-{{- if or .Values.robotshop.enabled .Values.humio.enabled (and .Values.cp4waiops.enabled (eq .Values.cp4waiops.profile "x-small")) }}
+{{- $resource_locker_enabled := false -}}
+
+{{- if .Values.robotshop }}
+  {{- if .Values.robotshop.enabled }}
+    {{- $resource_locker_enabled = true -}}
+  {{- end }}
+{{- end }}
+
+{{- if .Values.humio }}
+  {{- if .Values.humio.enabled }}
+    {{- $resource_locker_enabled = true -}}
+  {{- end }}
+{{- end }}
+
+{{- if eq .Values.cp4waiops.profile "x-small" }}
+  {{- $resource_locker_enabled = true -}}
+{{- end }}
+
+{{- if $resource_locker_enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:

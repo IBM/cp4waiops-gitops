@@ -1,0 +1,15 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-cp-waiops-catalog
+  namespace: openshift-marketplace
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  displayName: IBM Katamari Installer
+  publisher: IBM
+  sourceType: grpc
+  image: {{.Values.spec.imageCatalog}}
+  updateStrategy:
+    registryPoll:
+      interval: 45m

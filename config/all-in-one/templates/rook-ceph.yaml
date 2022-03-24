@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: rook-cephs
+  name: rook-cephfs
 spec:
   generators:
   {{- if .Values.argocd.allowLocalDeploy }}

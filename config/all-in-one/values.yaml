@@ -18,24 +18,24 @@ argocd:
 # -----------------------------------------------------------------------------
 # Cluster parameters
 # -----------------------------------------------------------------------------
-cluster:
-
-  # Specify whether or not to provision a cluster before install CP4WAIOps.
-  enabled: false
-
-  # Provider specific configuration
-  provider:
-    # Fyre configuration
-    # NOTE: Fyre is an internal used IaaS platform for IBM
-    type: fyre
-    # Fyre credentials
-    credentials:
-      # Fyre user id required when calling Fyre API
-      user: REPLACE_IT
-      # Fyre user token required when calling Fyre API
-      token: REPLACE_IT
-      # Fyre product group id required when calling Fyre API
-      productGroupId: REPLACE_IT
+# cluster:
+#
+#   # Specify whether or not to provision a cluster before install CP4WAIOps.
+#   enabled: false
+#
+#   # Provider specific configuration
+#   provider:
+#     # Fyre configuration
+#     # NOTE: Fyre is an internal used IaaS platform for IBM
+#     type: fyre
+#     # Fyre credentials
+#     credentials:
+#       # Fyre user id required when calling Fyre API
+#       user: REPLACE_IT
+#       # Fyre user token required when calling Fyre API
+#       token: REPLACE_IT
+#       # Fyre product group id required when calling Fyre API
+#       productGroupId: REPLACE_IT
 
 # -----------------------------------------------------------------------------
 # Storage parameters
@@ -50,11 +50,8 @@ rookceph:
 # -----------------------------------------------------------------------------
 cp4waiops:
 
-  # Specify whether or not to install CP4WAIOps.
-  enabled: true
-
-  # Specify the version of CP4WAIOps, e.g.: 3.2, 3.3.
-  version: "3.2"
+  # Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
+  version: v3.3
 
   # The username of image registry used to pull CP4WAIOps images.
   dockerUsername: cp
@@ -65,39 +62,80 @@ cp4waiops:
   # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
   # NOTE: The profile x-small is only for small PoC or demo. If you are looking
   # for official installation, use profile such as small or large instead.
-  profile: x-small
+  profile: small
+
+  # The storage class for CP4WAIOps to use.
+  # storageClass: rook-cephfs
+
+  # The storage class for large block for CP4WAIOps to use.
+  # storageClassLargeBlock: rook-cephfs
 
   # AIManager specific configuration
   aiManager:
-    # The instance name of CP4WAIOps.
+    # Specify whether or not to install AI Manager.
+    enabled: true
+    # The instance name of AI Manager.
     instanceName: aiops-installation
-    # The namespace of CP4WAIOps.
+    # The namespace where AI Manager is installed.
     namespace: cp4waiops
 
-  # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
-  # Humio, Kafka, Kubernetes, etc. after it is installed.
-  setup: true
+  eventManager:
+    # Specify whether or not to install Event Manager.
+    enabled: true
+    # The domain name of the cluster where Event Manager is installed.
+    # Use fully qualified domain name(FQDN), e.g.: apps.clustername.abc.xyz.com.
+    clusterDomain: REPLACE_IT
+    # The namespace where Event Manager is installed.
+    namespace: noi
+    # The version of Event Manager.
+    # version: 1.6.4.0
+    # The deployment type of Event Manager, values include: trial, production.
+    # deploymentType: trial
+
+  # Setup CP4WAIOps after installed
+  # setup:
+    # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
+    # Humio, Kafka, Kubernetes, etc. after it is installed.
+    # enabled: true
+    # Setup Humio integration
+    # humio:
+    #   enabled: false
+    # Setup Kafka integration
+    # kafka:
+    #   enabled: false
+    # Setup Kubernetes integration
+    # kubernetes:
+    #   enabled: false
+
+# Specify a list of registries for image pull when needed during the install.
+# globalImagePullSecrets:
+# - registry: <my_own_registry_1>
+#   username: <username_to_registry_1>
+#   password: <password_to_registry_1>
+# - registry: <my_own_registry_2>
+#   username: <username_to_registry_2>
+#   password: <password_to_registry_2>
 
 # -----------------------------------------------------------------------------
 # Robotshop parameters
 # -----------------------------------------------------------------------------
-robotshop:
+# robotshop:
 
   # Specify whether or not to install Robotshop.
-  enabled: true
+  # enabled: true
 
 # -----------------------------------------------------------------------------
 # Humio parameters
 # -----------------------------------------------------------------------------
-humio:
+# humio:
 
   # Specify whether or not to install Humio.
-  enabled: true
+  # enabled: true
 
 # -----------------------------------------------------------------------------
 # Istio parameters
 # -----------------------------------------------------------------------------
-istio:
+# istio:
 
   # Specify whether or not to install Istio.
-  enabled: true
+  # enabled: true

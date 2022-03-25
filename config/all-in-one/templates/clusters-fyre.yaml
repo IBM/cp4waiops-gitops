@@ -19,8 +19,8 @@ spec:
   project: default
   source:
     path: config/clusters/fyre
-    repoURL: https://github.com/IBM/cp4waiops-gitops
-    targetRevision: HEAD
+    repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+    targetRevision:  {{ default "HEAD" .Values.cp4waiops.targetRevision }}
     helm:
       parameters:
         - name: provider.fyre.credentials.user

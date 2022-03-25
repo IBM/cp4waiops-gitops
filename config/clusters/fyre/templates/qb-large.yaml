@@ -1,4 +1,4 @@
-{{- if .Values.fyre.quickburn.enabled }}
+{{- if .Values.provider.fyre.quickBurn.enabled }}
 apiVersion: clusters.ibm.com/v1alpha1
 kind: OpenShiftFyre
 metadata:

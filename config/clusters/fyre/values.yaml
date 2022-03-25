@@ -1,9 +1,10 @@
 ---
 provider:
   fyre:
-    user: REPLACE_IT
-    token: REPLACE_IT
-    productGroupId: REPLACE_IT
+    credentials:
+      user: REPLACE_IT
+      token: REPLACE_IT
+      productGroupId: REPLACE_IT
     quickBurn:
       enabled: false 
     ocpPlus:

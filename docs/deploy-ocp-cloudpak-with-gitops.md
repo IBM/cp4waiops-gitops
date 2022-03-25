@@ -29,11 +29,11 @@ The only difference when you set the install parameters is that:
 | cluster.provider.credentials.productGroupId | string | REPLACE_IT    | Fyre product group id required when calling Fyre API.
 | cluster.provider.credentials.token          | string | REPLACE_IT    | Fyre user token required when calling Fyre API.
 | cluster.provider.credentials.user           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
-| cluster.provider.quickBurn.enabled | string | REPLACE_IT    | Fyre product group id required when calling Fyre API.
-| cluster.provider.ocpPlus.enabled          | string | REPLACE_IT    | Fyre user token required when calling Fyre API.
-| cluster.provider.ocpPlus.site           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
-| cluster.provider.ocpPlus.ocpVersion           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
-| cluster.provider.ocpPlus.workerFlavor           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
+| cluster.provider.quickBurn.enabled | bool | false    | Request a quick burn OCP environment.
+| cluster.provider.ocpPlus.enabled          | bool | false    | Request a OCP+ environment.
+| cluster.provider.ocpPlus.site           | string | svl   | Fyre site required when calling Fyre API.
+| cluster.provider.ocpPlus.ocpVersion           | string | 4.8.27    | OCP Version required when calling Fyre API.
+| cluster.provider.ocpPlus.workerFlavor           | string | extra-large    | extra-large and large are supported. extra-large requests 6 worker nodes, large requests 3 worker nodes.
 
 NOTE:
 

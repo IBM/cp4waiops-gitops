@@ -8,7 +8,7 @@ provider:
       enabled: false 
     ocpPlus:
       enabled: false
-      site: "rtp"
+      site: "svl"
       ocpVersion: "4.8.27"
       workerFlavor: extra-large
 

@@ -23,12 +23,22 @@ spec:
     targetRevision: HEAD
     helm:
       parameters:
-        - name: fyre.credentials.user
+        - name: provider.fyre.credentials.user
           value: '{{ .Values.cluster.provider.credentials.user }}'
-        - name: fyre.credentials.token
+        - name: provider.fyre.credentials.token
           value: '{{ .Values.cluster.provider.credentials.token }}'
-        - name: fyre.credentials.productGroupId
+        - name: provider.fyre.credentials.productGroupId
           value: '{{ .Values.cluster.provider.credentials.productGroupId }}'
+        - name: provider.fyre.quickBurn.enabled
+          value: '{{ .Values.cluster.provider.quickBurn.enabled }}'
+        - name: provider.fyre.ocpPlus.enabled
+          value: '{{ .Values.cluster.provider.ocpPlus.enabled }}'
+        - name: provider.fyre.ocpPlus.site
+          value: '{{ .Values.cluster.provider.ocpPlus.site }}'
+        - name: provider.fyre.ocpPlus.ocpVersion
+          value: '{{ .Values.cluster.provider.ocpPlus.ocpVersion }}'
+        - name: provider.fyre.ocpPlus.workerFlavor
+          value: '{{ .Values.cluster.provider.ocpPlus.workerFlavor }}'
         - name: argocd.namespace
           {{- if .Values.argocd.namespace }}
           value: {{ .Values.argocd.namespace }}

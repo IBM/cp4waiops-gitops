@@ -36,6 +36,13 @@ argocd:
 #       token: REPLACE_IT
 #       # Fyre product group id required when calling Fyre API
 #       productGroupId: REPLACE_IT
+#     quickBurn:
+#       enabled: false 
+#     ocpPlus:
+#       enabled: false
+#       site: "rtp"
+#       ocpVersion: "4.8.27"
+#       workerFlavor: extra-large
 
 # -----------------------------------------------------------------------------
 # Storage parameters

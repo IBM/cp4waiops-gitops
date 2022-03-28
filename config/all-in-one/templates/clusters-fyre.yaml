@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: clusters-fyre
+  name: {{ .Values.cluster.provider.credentials.user }}-clusters-fyre
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
@@ -29,16 +29,20 @@ spec:
           value: '{{ .Values.cluster.provider.credentials.token }}'
         - name: provider.fyre.credentials.productGroupId
           value: '{{ .Values.cluster.provider.credentials.productGroupId }}'
-        - name: provider.fyre.quickBurn.enabled
-          value: '{{ .Values.cluster.provider.quickBurn.enabled }}'
-        - name: provider.fyre.ocpPlus.enabled
-          value: '{{ .Values.cluster.provider.ocpPlus.enabled }}'
-        - name: provider.fyre.ocpPlus.site
-          value: '{{ .Values.cluster.provider.ocpPlus.site }}'
-        - name: provider.fyre.ocpPlus.ocpVersion
-          value: '{{ .Values.cluster.provider.ocpPlus.ocpVersion }}'
-        - name: provider.fyre.ocpPlus.workerFlavor
-          value: '{{ .Values.cluster.provider.ocpPlus.workerFlavor }}'
+        - name: provider.fyre.quotaType
+          value: '{{ .Values.cluster.provider.quotaType }}'
+        {{- if .Values.cluster.provider.site }}
+        - name: provider.fyre.site
+          value: '{{ .Values.cluster.provider.site }}'
+        {{- end }}
+        {{- if .Values.cluster.provider.ocpVersion }}
+        - name: provider.fyre.ocpVersion
+          value: '{{ .Values.cluster.provider.ocpVersion }}'
+        {{- end }}
+        {{- if .Values.cluster.provider.workerFlavor }}
+        - name: provider.fyre.workerFlavor
+          value: '{{ .Values.cluster.provider.workerFlavor }}'
+        {{- end }}
         - name: argocd.namespace
           {{- if .Values.argocd.namespace }}
           value: {{ .Values.argocd.namespace }}

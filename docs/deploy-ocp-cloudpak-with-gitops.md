@@ -26,14 +26,13 @@ The only difference when you set the install parameters is that:
 | ------------------------------------------- |--------|---------------|-----------------------------------
 | cluster.enabled                             | bool   | false         | Specify whether or not to provision a cluster before install CP4WAIOps.
 | cluster.provider.type                       | string | fyre          | The supported provider to provision cluster, valid values include: fyre.
+| cluster.provider.quotaType                  | string | quick-burn    | The supported quota type to provision cluster, valid values include: quick-burn, ocp-plus.
 | cluster.provider.credentials.productGroupId | string | REPLACE_IT    | Fyre product group id required when calling Fyre API.
 | cluster.provider.credentials.token          | string | REPLACE_IT    | Fyre user token required when calling Fyre API.
 | cluster.provider.credentials.user           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
-| cluster.provider.quickBurn.enabled | bool | false    | Request a quick burn OCP environment.
-| cluster.provider.ocpPlus.enabled          | bool | false    | Request a OCP+ environment.
-| cluster.provider.ocpPlus.site           | string | svl   | Fyre site required when calling Fyre API.
-| cluster.provider.ocpPlus.ocpVersion           | string | 4.8.27    | OCP Version required when calling Fyre API.
-| cluster.provider.ocpPlus.workerFlavor           | string | extra-large    | extra-large and large are supported. extra-large requests 6 worker nodes, large requests 3 worker nodes.
+| cluster.provider.site           | string | svl   | Fyre site required when calling Fyre API, ocp-plus only.
+| cluster.provider.ocpVersion           | string | 4.8.27    | OCP Version required when calling Fyre API.
+| cluster.provider.workerFlavor           | string | extra-large    | The supported size to provision cluster, valid values include: extra-large and large are supported. extra-large requests 6 worker nodes, large requests 3 worker nodes.
 
 NOTE:
 
@@ -46,6 +45,7 @@ cluster:
   enabled: true
   provider:
     type: fyre
+    quotaType: quick-burn
     credentials:
       user: <my_user_id>
       token: <my_user_token>

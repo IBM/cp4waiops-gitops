@@ -1,4 +1,4 @@
-{{- if .Values.provider.fyre.quickBurn.enabled }}
+{{- if eq .Values.provider.fyre.quotaType "quick-burn" }}
 apiVersion: clusters.ibm.com/v1alpha1
 kind: OpenShiftFyre
 metadata:
@@ -7,7 +7,7 @@ metadata:
 spec:
   # Add fields here
   providerSecretRef: fyre-{{ .Values.provider.fyre.credentials.user }}-secret
-  ocpVersion: "4.8.27"
+  ocpVersion: {{ .Values.provider.fyre.ocpVersion }}
   size: "large"
   argocd:
     namespace: {{ .Values.argocd.namespace }}

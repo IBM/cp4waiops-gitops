@@ -19,8 +19,8 @@ spec:
   project: default
   source:
     path: gitops-charts/cluster-operator-fyre
-    repoURL: {{ default "https://github.com/IBM/sample-app-gitops" .Values.sampleapp.repoURL }}
-    targetRevision: {{ default "HEAD" .Values.sampleapp.targetRevision }}
+    repoURL: https://github.com/IBM/sample-app-gitops
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true

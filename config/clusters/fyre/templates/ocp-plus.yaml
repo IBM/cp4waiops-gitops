@@ -1,0 +1,31 @@
+{{- if eq .Values.provider.fyre.quotaType "ocp-plus" }}
+apiVersion: clusters.ibm.com/v1alpha1
+kind: OpenShiftFyre
+metadata:
+  name: {{ .Values.provider.fyre.credentials.user }}-ocp-plus
+  namespace: {{ default "default" .Release.Namespace }}
+spec:
+  # Add fields here
+  argocd:
+    namespace: {{ .Values.argocd.namespace }}
+  providerSecretRef: fyre-{{ .Values.provider.fyre.credentials.user }}-secret
+  quotaType: "ocp_plus"
+  site: {{ .Values.provider.fyre.site }}
+  ocpVersion: {{ .Values.provider.fyre.ocpVersion }}
+  platform: "x"
+  {{- if eq .Values.provider.fyre.workerFlavor "extra-large" }}
+  worker:
+    count: "6"
+    cpu: "16"
+    memory: "32"
+    additionalDisk:
+    - "100"
+  {{- else }}
+  worker:
+    count: "3"
+    cpu: "16"
+    memory: "32"
+    additionalDisk:
+    - "100"
+  {{- end }}
+{{- end }}

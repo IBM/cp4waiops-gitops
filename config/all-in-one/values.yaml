@@ -28,6 +28,14 @@ argocd:
 #     # Fyre configuration
 #     # NOTE: Fyre is an internal used IaaS platform for IBM
 #     type: fyre
+#     # The supported quota type to provision cluster, valid values include: quick-burn, ocp-plus
+#     quotaType: quick-burn
+#     # Fyre site required when calling Fyre API, ocp-plus only
+#     site: "rtp"
+#     # OCP Version required when calling Fyre API
+#     ocpVersion: "4.8.27"
+#     # Fyre configuration
+#     workerFlavor: extra-large
 #     # Fyre credentials
 #     credentials:
 #       # Fyre user id required when calling Fyre API

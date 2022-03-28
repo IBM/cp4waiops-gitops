@@ -32,7 +32,7 @@ The only difference when you set the install parameters is that:
 | cluster.provider.credentials.user           | string | REPLACE_IT    | Fyre user id required when calling Fyre API.
 | cluster.provider.site           | string | svl   | Fyre site required when calling Fyre API, ocp-plus only.
 | cluster.provider.ocpVersion           | string | 4.8.27    | OCP Version required when calling Fyre API.
-| cluster.provider.workerFlavor           | string | extra-large    | The supported size to provision cluster, valid values include: extra-large and large are supported. extra-large requests 6 worker nodes, large requests 3 worker nodes.
+| cluster.provider.workerFlavor           | string | extra-large    | The supported size to provision cluster, valid values include: extra-large, large. extra-large requests 6 worker nodes, large requests 3 worker nodes.
 
 NOTE:
 

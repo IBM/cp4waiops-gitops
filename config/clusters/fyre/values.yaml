@@ -1,17 +1,14 @@
 ---
 provider:
   fyre:
+    quotaType: quick-burn
+    site: "svl"
+    ocpVersion: "4.8.27"
+    workerFlavor: extra-large
     credentials:
       user: REPLACE_IT
       token: REPLACE_IT
       productGroupId: REPLACE_IT
-    quickBurn:
-      enabled: false 
-    ocpPlus:
-      enabled: false
-      site: "svl"
-      ocpVersion: "4.8.27"
-      workerFlavor: extra-large
 
 argocd:
   namespace: openshift-gitops

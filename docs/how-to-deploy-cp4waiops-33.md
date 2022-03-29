@@ -7,7 +7,7 @@
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Login to Argo CD](#login-to-argo-cd)
-    - [(Optional) Storage Considerations](#optional-storage-considerations)
+    - [Storage Considerations](#storage-considerations)
     - [Install AI Manager](#install-ai-manager)
     - [Install Event Manager](#install-event-manager)
     - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration)
@@ -18,7 +18,7 @@
   - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
     - [Login to Argo CD](#login-to-argo-cd-1)
-    - [(Optional) Storage Considerations](#optional-storage-considerations-1)
+    - [Storage Considerations](#storage-considerations-1)
     - [Install AI Manager](#install-ai-manager-1)
     - [Install Event Manager](#install-event-manager-1)
     - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration-1)
@@ -62,9 +62,11 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
 
-### (Optional) Storage Considerations
+### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations). In this case, we use Ceph. You can choose different storage based on your own requirement.
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
@@ -550,7 +552,11 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### (Optional) Storage Considerations
+### Storage Considerations
+
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
 To create Argo CD App for Ceph storage from command line, run following command:
 

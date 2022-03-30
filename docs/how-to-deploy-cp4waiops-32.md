@@ -78,8 +78,6 @@ The parameters for Ceph are as follows:
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: rook-ceph
-- DIRECTORY
-  - DIRECTORY RECURSE: check it
 
 ![w](images/ceph-gitops.png)
 
@@ -558,8 +556,7 @@ argocd app create ceph \
       --path config/ceph \
       --revision HEAD \
       --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc \
-      --directory-recurse
+      --dest-server https://kubernetes.default.svc
 ```
 
 ### Install AI Manager

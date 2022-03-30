@@ -81,8 +81,6 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: rook-ceph
-- DIRECTORY
-  - DIRECTORY RECURSE: check it
 
 ![w](images/ceph-gitops.png)
 
@@ -565,11 +563,10 @@ argocd app create ceph \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path ceph \
+      --path config/ceph \
       --revision HEAD \
       --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc \
-      --directory-recurse
+      --dest-server https://kubernetes.default.svc
 ```
 
 ### Install AI Manager

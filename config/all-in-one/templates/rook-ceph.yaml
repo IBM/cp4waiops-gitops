@@ -25,8 +25,8 @@ spec:
       project: default
       source:
         path: config/ceph
-        repoURL: https://github.com/IBM/cp4waiops-gitops
-        targetRevision: HEAD
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
       syncPolicy:
         automated:
           prune: true

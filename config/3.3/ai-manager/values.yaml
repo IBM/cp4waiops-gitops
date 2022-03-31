@@ -33,6 +33,10 @@ spec:
   storageClassLargeBlock: rook-cephfs
 
   aiManager:
+
+    # The instance name of AI Manager.
+    instanceName: aiops-installation
+
     ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers.
     ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
     ##

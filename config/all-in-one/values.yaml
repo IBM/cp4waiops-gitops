@@ -96,7 +96,7 @@ cp4waiops:
     # The namespace where Event Manager is installed.
     namespace: noi
     # The version of Event Manager.
-    # version: 1.6.4.0
+    # version: 1.6.4
     # The deployment type of Event Manager, values include: trial, production.
     # deploymentType: trial
 

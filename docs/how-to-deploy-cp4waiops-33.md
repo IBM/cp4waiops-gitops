@@ -8,9 +8,10 @@
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Storage Considerations](#storage-considerations)
-    - [Install AI Manager](#install-ai-manager)
-    - [Install Event Manager](#install-event-manager)
-    - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration)
+    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
+      - [Install AI Manager](#install-ai-manager)
+      - [Install Event Manager](#install-event-manager)
+    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
       - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
@@ -19,9 +20,10 @@
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
     - [Login to Argo CD](#login-to-argo-cd-1)
     - [Storage Considerations](#storage-considerations-1)
-    - [Install AI Manager](#install-ai-manager-1)
-    - [Install Event Manager](#install-event-manager-1)
-    - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration-1)
+    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
+      - [Install AI Manager](#install-ai-manager-1)
+      - [Install Event Manager](#install-event-manager-1)
+    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -139,8 +141,9 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+### Option 1: Install AI Manager and Event Manager Separately
 
-### Install AI Manager
+#### Install AI Manager
 
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
@@ -174,7 +177,7 @@ NOTE:
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-### Install Event Manager
+#### Install Event Manager
 
 You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
@@ -207,7 +210,7 @@ NOTE:
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Install Using All-in-One Configuration
+### Option 2: Install Using All-in-One Configuration
 
 #### Install AI Manager and Event Manager in One Go
 
@@ -568,8 +571,9 @@ argocd app create ceph \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
+### Option 1: Install AI Manager and Event Manager Separately
 
-### Install AI Manager
+#### Install AI Manager
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
@@ -600,7 +604,7 @@ NOTE:
 
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-### Install Event Manager
+#### Install Event Manager
 
 To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
@@ -630,7 +634,7 @@ NOTE:
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Install Using All-in-One Configuration
+### Option 2: Install Using All-in-One Configuration
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 

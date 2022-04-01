@@ -289,7 +289,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | ------------------------------------- |--------|---------------|-----------------------------------
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.4.0       | The version of Event Manager.
+| cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 

@@ -35,7 +35,7 @@ spec:
   eventManager:
 
     # eventManager version
-    version: 1.6.4.0
+    version: 1.6.4
 
     ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
     ##

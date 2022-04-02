@@ -27,7 +27,7 @@
 ## Prerequisite
 
 - NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
-- Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
+- Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
 - GitOps, refer to [Installing GitOps Operator in web console](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html)
 
 ## Install CP4WAIOPS Using OpenShift Web Console
@@ -59,7 +59,7 @@
 ![w](images/gitops-login.png)
 ### Storage Consideration
 
-Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
+Please refer to [Storage considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 
@@ -78,8 +78,6 @@ The parameters for Ceph are as follows:
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: rook-ceph
-- DIRECTORY
-  - DIRECTORY RECURSE: check it
 
 ![w](images/ceph-gitops.png)
 
@@ -291,7 +289,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | ------------------------------------- |--------|---------------|-----------------------------------
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.4.0       | The version of Event Manager.
+| cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
@@ -558,8 +556,7 @@ argocd app create ceph \
       --path config/ceph \
       --revision HEAD \
       --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc \
-      --directory-recurse
+      --dest-server https://kubernetes.default.svc
 ```
 
 ### Install AI Manager

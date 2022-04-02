@@ -29,7 +29,7 @@
 
 NOTE: THIS IS NOT A RELEASED FEATURE FOR CP4WAIOPS!
 
-Refer to [here](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline) go get some detail for CP4WAIOPS 3.2 airgap install detail.
+Refer to [here](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline) go get some detail for CP4WAIOPS 3.2 airgap install detail.
 
 There are three airgap models are supported as follows:
 - Bastion host
@@ -43,7 +43,7 @@ In this tutorial, we will share some detail for airgap with a Bastion host.
 - NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.
 - You must prepare a bastion host that can connect to the internet and to the air-gapped network with access to the Red Hat® OpenShift® Container Platform cluster and the local, intranet Docker registry.
 - Your bastion host must have 120GB storage to hold all of the software that is to be transferred to the local, intranet Docker registry.
-- Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
+- Refer to [System requirements for Cloud Pak for Watson AIOps 3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements)
 - GitOps, refer to [Installing GitOps Operator in web console](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html)
 - Local image registry and access, refer to [how to create a local registry](how-to-create-local-registry.md)
 - You need to have GitHub Enterprise Edition or Gitlab running in your local network. In this tutorial, we are using `github.com` to simulate.
@@ -119,7 +119,7 @@ Connect your host to your air-gapped environment and connet your OCP to the gito
 
 ### Storage Consideration
 
-Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
+Please refer to [Storage considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 
@@ -520,7 +520,7 @@ Connect your host to your air-gapped environment and connet your OCP to the gito
 
 ### Storage Consideration
 
-Please refer to [Storage considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
+Please refer to [Storage considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations) for CP4WAIOSP 3.2.
 
 In this tutorial, we are using Ceph, you can select different storage based on your system requirement.
 

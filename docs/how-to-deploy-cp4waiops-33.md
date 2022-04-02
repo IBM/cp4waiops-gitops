@@ -5,23 +5,25 @@
 - [Deploy CP4WAIOps 3.3 using GitOps](#deploy-cp4waiops-33-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
-    - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Storage Considerations](#storage-considerations)
-    - [Install AI Manager](#install-ai-manager)
-    - [Install Event Manager](#install-event-manager)
-    - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration)
+    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
+      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+      - [Install AI Manager](#install-ai-manager)
+      - [Install Event Manager](#install-event-manager)
+    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
       - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
     - [Access CP4WAIOps](#access-cp4waiops)
   - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
     - [Login to Argo CD](#login-to-argo-cd-1)
     - [Storage Considerations](#storage-considerations-1)
-    - [Install AI Manager](#install-ai-manager-1)
-    - [Install Event Manager](#install-event-manager-1)
-    - [Install Using All-in-One Configuration](#install-using-all-in-one-configuration-1)
+    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
+      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
+      - [Install AI Manager](#install-ai-manager-1)
+      - [Install Event Manager](#install-event-manager-1)
+    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -32,25 +34,10 @@
 
 ## Prerequisite
 
-- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps 3.3](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
+- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps 3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
 - To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
 ## Install CP4WAIOps from UI
-
-### Grant Argo CD Cluster Admin Permission
-
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
-
-- Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
-- RoleBinding
-  - Name: argocd-admin
-- Role
-  - Role Name: cluster-admin
-- Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
 
 ### Login to Argo CD
 
@@ -64,9 +51,9 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
@@ -81,8 +68,6 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: rook-ceph
-- DIRECTORY
-  - DIRECTORY RECURSE: check it
 
 ![w](images/ceph-gitops.png)
 
@@ -141,8 +126,24 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+### Option 1: Install AI Manager and Event Manager Separately
 
-### Install AI Manager
+#### Grant Argo CD Cluster Admin Permission
+
+From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+
+- Binding type
+  - Cluster-wide role binding (ClusterRoleBinding)
+- RoleBinding
+  - Name: argocd-admin
+- Role
+  - Role Name: cluster-admin
+- Subject
+  - ServiceAccount: check it
+  - Subject namespace: openshift-gitops
+  - Subject name: openshift-gitops-argocd-application-controller
+
+#### Install AI Manager
 
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
@@ -176,7 +177,7 @@ NOTE:
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-### Install Event Manager
+#### Install Event Manager
 
 You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
@@ -197,7 +198,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - spec.dockerPassword: REPLACE_IT
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.eventManager.version: 1.6.4.0
+  - spec.eventManager.version: 1.6.4
   - spec.eventManager.clusterDomain: REPLACE_IT
   - spec.eventManager.channel: v1.7
   - spec.eventManager.deploymentType: trial
@@ -209,7 +210,7 @@ NOTE:
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Install Using All-in-One Configuration
+### Option 2: Install Using All-in-One Configuration
 
 #### Install AI Manager and Event Manager in One Go
 
@@ -290,7 +291,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | ------------------------------------- |--------|---------------|-----------------------------------
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.4.0       | The version of Event Manager.
+| cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
@@ -512,25 +513,6 @@ Congratulations! You are ready to play with CP4WAIOps!
 
 ## Install CP4WAIOps from Command Line
 
-### Grant Argo CD Cluster Admin Permission
-
-Apply the following YAML manifest to the cluster where Argo CD runs:
-
-```yaml
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: argocd-admin
-subjects:
-  - kind: ServiceAccount
-    name: openshift-gitops-argocd-application-controller
-    namespace: openshift-gitops
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-```
-
 ### Login to Argo CD
 
 Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
@@ -554,9 +536,9 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
 To create Argo CD App for Ceph storage from command line, run following command:
 
@@ -565,14 +547,33 @@ argocd app create ceph \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path ceph \
+      --path config/ceph \
       --revision HEAD \
       --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc \
-      --directory-recurse
+      --dest-server https://kubernetes.default.svc
+```
+### Option 1: Install AI Manager and Event Manager Separately
+
+#### Grant Argo CD Cluster Admin Permission
+
+Apply the following YAML manifest to the cluster where Argo CD runs:
+
+```yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: argocd-admin
+subjects:
+  - kind: ServiceAccount
+    name: openshift-gitops-argocd-application-controller
+    namespace: openshift-gitops
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
 ```
 
-### Install AI Manager
+#### Install AI Manager
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
@@ -603,7 +604,7 @@ NOTE:
 
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
-### Install Event Manager
+#### Install Event Manager
 
 To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
@@ -623,7 +624,7 @@ argocd app create eventmanager-app \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
       --helm-set spec.eventManager.channel=v1.7 \
-      --helm-set spec.eventManager.version=1.6.4.0 \
+      --helm-set spec.eventManager.version=1.6.4 \
       --helm-set spec.eventManager.clusterDomain=REPLACE_IT \
       --helm-set spec.eventManager.deploymentType=trial
 ```
@@ -633,7 +634,7 @@ NOTE:
 - For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Install Using All-in-One Configuration
+### Option 2: Install Using All-in-One Configuration
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 

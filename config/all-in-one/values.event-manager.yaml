@@ -1,0 +1,149 @@
+# -----------------------------------------------------------------------------
+# Argo CD parameters
+# -----------------------------------------------------------------------------
+argocd:
+
+  # The type of the cluster that Argo CD runs on, values includes:
+  # - kubernetes
+  # - openshift
+  cluster: openshift
+
+  # The Argo CD namespace that can be auto-resolved based on cluster type,
+  # or you can uncomment below parameter to specificy it explicitly.
+  # namespace: argocd
+
+  # Allow apps to be deployed on the same cluster where Argo CD runs.
+  allowLocalDeploy: true
+
+# -----------------------------------------------------------------------------
+# Cluster parameters
+# -----------------------------------------------------------------------------
+# cluster:
+#
+#   # Specify whether or not to provision a cluster before install CP4WAIOps.
+#   enabled: false
+#
+#   # Provider specific configuration
+#   provider:
+#     # Fyre configuration
+#     # NOTE: Fyre is an internal used IaaS platform for IBM
+#     type: fyre
+#     # The supported quota type to provision cluster, valid values include: quick-burn, ocp-plus
+#     quotaType: quick-burn
+#     # Fyre site required when calling Fyre API, ocp-plus only
+#     site: "rtp"
+#     # OCP Version required when calling Fyre API
+#     ocpVersion: "4.8.27"
+#     # Fyre configuration
+#     workerFlavor: extra-large
+#     # Fyre credentials
+#     credentials:
+#       # Fyre user id required when calling Fyre API
+#       user: REPLACE_IT
+#       # Fyre user token required when calling Fyre API
+#       token: REPLACE_IT
+#       # Fyre product group id required when calling Fyre API
+#       productGroupId: REPLACE_IT
+
+# -----------------------------------------------------------------------------
+# Storage parameters
+# -----------------------------------------------------------------------------
+rookceph:
+
+  # Specify whether or not to install Rook Ceph as storage used by CP4WAIOps.
+  enabled: true
+  
+# -----------------------------------------------------------------------------
+# CP4WAIOps parameters
+# -----------------------------------------------------------------------------
+cp4waiops:
+
+  # Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
+  version: v3.3
+
+  # The username of image registry used to pull CP4WAIOps images.
+  dockerUsername: cp
+
+  # The password of image registry used to pull CP4WAIOps images.
+  dockerPassword: REPLACE_IT
+
+  # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+  # NOTE: The profile x-small is only for small PoC or demo. If you are looking
+  # for official installation, use profile such as small or large instead.
+  profile: small
+
+  # The storage class for CP4WAIOps to use.
+  # storageClass: rook-cephfs
+
+  # The storage class for large block for CP4WAIOps to use.
+  # storageClassLargeBlock: rook-cephfs
+
+  # AIManager specific configuration
+  aiManager:
+    # Specify whether or not to install AI Manager.
+    enabled: false
+    # The instance name of AI Manager.
+    instanceName: aiops-installation
+    # The namespace where AI Manager is installed.
+    namespace: cp4waiops
+
+  eventManager:
+    # Specify whether or not to install Event Manager.
+    enabled: true
+    # The domain name of the cluster where Event Manager is installed.
+    # Use fully qualified domain name(FQDN), e.g.: apps.clustername.abc.xyz.com.
+    clusterDomain: REPLACE_IT
+    # The namespace where Event Manager is installed.
+    namespace: noi
+    # The version of Event Manager.
+    # version: 1.6.4
+    # The deployment type of Event Manager, values include: trial, production.
+    # deploymentType: trial
+
+  # Setup CP4WAIOps after installed
+  # setup:
+    # Specify whether or not to setup CP4WAIOps with sample integrations, e.g.:
+    # Humio, Kafka, Kubernetes, etc. after it is installed.
+    # enabled: true
+    # Setup Humio integration
+    # humio:
+    #   enabled: false
+    # Setup Kafka integration
+    # kafka:
+    #   enabled: false
+    # Setup Kubernetes integration
+    # kubernetes:
+    #   enabled: false
+
+# Specify a list of registries for image pull when needed during the install.
+# globalImagePullSecrets:
+# - registry: <my_own_registry_1>
+#   username: <username_to_registry_1>
+#   password: <password_to_registry_1>
+# - registry: <my_own_registry_2>
+#   username: <username_to_registry_2>
+#   password: <password_to_registry_2>
+
+# -----------------------------------------------------------------------------
+# Robotshop parameters
+# -----------------------------------------------------------------------------
+# robotshop:
+
+  # Specify whether or not to install Robotshop.
+  # enabled: true
+
+# -----------------------------------------------------------------------------
+# Humio parameters
+# -----------------------------------------------------------------------------
+# humio:
+
+  # Specify whether or not to install Humio.
+  # enabled: true
+
+# -----------------------------------------------------------------------------
+# Istio parameters
+# -----------------------------------------------------------------------------
+# istio:
+
+  # Specify whether or not to install Istio.
+  # enabled: true

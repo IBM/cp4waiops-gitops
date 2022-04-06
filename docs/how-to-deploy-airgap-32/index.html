@@ -926,13 +926,15 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops-in-airgap-cluster">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster</a></li>
+<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops-in-airgap-cluster">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster</a><ul>
 <li><a href="#prerequisite">Prerequisite</a></li>
 <li><a href="#install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console</a><ul>
 <li><a href="#grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission</a></li>
 <li><a href="#login-to-argocd">Login to ArgoCD</a></li>
-<li><a href="#mirror-image-to-local-registry-with-gitops">Mirror Image to Local Registry with GitOps</a></li>
+<li><a href="#mirror-image-to-local-registry-with-gitops">Mirror Image to Local Registry with GitOps</a><ul>
 <li><a href="#bastion-host">Bastion host</a></li>
+</ul>
+</li>
 <li><a href="#storage-consideration">Storage Consideration</a></li>
 <li><a href="#verify-ceph-cluster-installation">Verify Ceph Cluster Installation</a></li>
 <li><a href="#install-cp4waiops-using-gitops">Install CP4WAIOPS using GitOps</a></li>
@@ -951,11 +953,13 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <h1 id="deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops-in-airgap-cluster">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps In Airgap Cluster<a class="headerlink" href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops-in-airgap-cluster" title="Permanent link">&para;</a></h1>
 <p>NOTE: THIS IS NOT A RELEASED FEATURE FOR CP4WAIOPS!</p>
-<p>Refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline">here</a> go get some detail for CP4WAIOPS 3.2 airgap install detail.</p>
+<p>Refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=installation-preparing-install-offline">here</a> go get some detail for CP4WAIOPS 3.2 airgap install detail.</p>
 <p>There are three airgap models are supported as follows:
 - Bastion host
 - Portable compute device
@@ -966,7 +970,7 @@
 <li>NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.</li>
 <li>You must prepare a bastion host that can connect to the internet and to the air-gapped network with access to the Red Hat® OpenShift® Container Platform cluster and the local, intranet Docker registry.</li>
 <li>Your bastion host must have 120GB storage to hold all of the software that is to be transferred to the local, intranet Docker registry.</li>
-<li>Refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps 3.2</a></li>
+<li>Refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps 3.2</a></li>
 <li>GitOps, refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing GitOps Operator in web console</a></li>
 <li>Local image registry and access, refer to <a href="../how-to-create-local-registry/">how to create a local registry</a></li>
 <li>You need to have GitHub Enterprise Edition or Gitlab running in your local network. In this tutorial, we are using <code>github.com</code> to simulate.</li>
@@ -974,12 +978,10 @@
 <h2 id="install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console<a class="headerlink" href="#install-cp4waiops-using-openshift-web-console" title="Permanent link">&para;</a></h2>
 <h3 id="grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission<a class="headerlink" href="#grant-argocd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</p>
-</li>
-<li>
-<p>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.</p>
-</li>
+<li>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</li>
+</ul>
+<ul>
+<li>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.<ul>
 <li>Binding type<ul>
 <li>Cluster-wide role binding (ClusterRoleBinding)</li>
 </ul>
@@ -996,6 +998,8 @@
 <li>ServiceAccount: check it</li>
 <li>Subject namespace: openshift-gitops</li>
 <li>Subject name: openshift-gitops-argocd-application-controller</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1043,7 +1047,7 @@
 </ul>
 <p>Connect your host to your air-gapped environment and connet your OCP to the gitops.</p>
 <h3 id="storage-consideration">Storage Consideration<a class="headerlink" href="#storage-consideration" title="Permanent link">&para;</a></h3>
-<p>Please refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
+<p>Please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
 <p>In this tutorial, we are using Ceph, you can select different storage based on your system requirement.</p>
 <p>From ArgoCD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then <code>Create</code>.</p>
 <p>The parameters for Ceph are as follows:</p>
@@ -1399,7 +1403,7 @@
 </ul>
 <p>Connect your host to your air-gapped environment and connet your OCP to the gitops.</p>
 <h3 id="storage-consideration_1">Storage Consideration<a class="headerlink" href="#storage-consideration_1" title="Permanent link">&para;</a></h3>
-<p>Please refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
+<p>Please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
 <p>In this tutorial, we are using Ceph, you can select different storage based on your system requirement.</p>
 <div class="highlight"><pre><span></span><code>argocd app create ceph <span class="se">\</span>
       --sync-policy automatic <span class="se">\</span>
@@ -1442,12 +1446,10 @@
 </code></pre></div>
 <p>NOTE:</p>
 <ul>
-<li>
-<p><code>entitlement-key</code> is the entitlement key that you copied in <a href="https://myibm.ibm.com/products-services/containerlibrary">MyIBM Container Software Library</a></p>
-</li>
-<li>
-<p><code>apps.clustername.*.*.com</code> is the domain name of your OCP cluster</p>
-</li>
+<li><code>entitlement-key</code> is the entitlement key that you copied in <a href="https://myibm.ibm.com/products-services/containerlibrary">MyIBM Container Software Library</a></li>
+</ul>
+<ul>
+<li><code>apps.clustername.*.*.com</code> is the domain name of your OCP cluster</li>
 </ul>
 <h3 id="verify-cp4waiops-installation_1">Verify CP4WAIOPS Installation<a class="headerlink" href="#verify-cp4waiops-installation_1" title="Permanent link">&para;</a></h3>
 <p>You can run the command as follows to check:</p>

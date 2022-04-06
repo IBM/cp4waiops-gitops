@@ -700,7 +700,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#creating-a-multi-arch-docker-registry">Creating a Multi-arch Docker Registry</a></li>
+<li><a href="#creating-a-multi-arch-docker-registry">Creating a Multi-arch Docker Registry</a><ul>
 <li><a href="#prerequisites">Prerequisites</a></li>
 <li><a href="#procedure">Procedure</a><ul>
 <li><a href="#install-httpd-tools">Install Httpd Tools</a></li>
@@ -721,17 +721,17 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <h1 id="creating-a-multi-arch-docker-registry">Creating a Multi-arch Docker Registry<a class="headerlink" href="#creating-a-multi-arch-docker-registry" title="Permanent link">&para;</a></h1>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>You have a Red Hat Enterprise Linux (RHEL) server on your network to use as the registry host.</p>
-</li>
-<li>
-<p>The registry host can access the internet.</p>
-</li>
+<li>You have a Red Hat Enterprise Linux (RHEL) server on your network to use as the registry host.</li>
+</ul>
+<ul>
+<li>The registry host can access the internet.</li>
 </ul>
 <h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
 <h3 id="install-httpd-tools">Install Httpd Tools<a class="headerlink" href="#install-httpd-tools" title="Permanent link">&para;</a></h3>
@@ -833,11 +833,15 @@ YWRtaW46YWRtaW4=
 <p><strong>Note:</strong> You need fill in the <code>config.json</code> path here</p>
 <h3 id="handle-cert-for-accessing-docker-registry">Handle Cert for Accessing Docker Registry<a class="headerlink" href="#handle-cert-for-accessing-docker-registry" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Pure kuberentes</li>
+<li>Pure kuberentes<ul>
 <li>Copy the domain.crt file to <code>/etc/docker/certs.d/&lt;local_registry_host_name&gt;:&lt;local_registry_host_port&gt;/ca.crt</code> on every kubernetes node . You do not need to restart Docker</li>
-<li>OCP 4</li>
+</ul>
+</li>
+<li>OCP 4<ul>
 <li>Copy the <code>domain.crt</code> to cluster and rename it to <code>ca.crt</code></li>
 <li>Create configmap and patch to use the cert</li>
+</ul>
+</li>
 </ul>
 <div class="highlight"><pre><span></span><code># oc create configmap registry-config --from-file=${MIRROR_ADDR_HOSTNAME}..${local_registry_host_port}=$path/ca.crt -n openshift-config
 

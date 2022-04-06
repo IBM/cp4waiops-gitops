@@ -638,8 +638,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning">Deploy CP4WAIOps Demo Environment Including Cluster Provisioning</a></li>
+<li><a href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning">Deploy CP4WAIOps Demo Environment Including Cluster Provisioning</a><ul>
 <li><a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a></li>
+</ul>
+</li>
 </ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -676,6 +678,12 @@
 <td>The supported provider to provision cluster, valid values include: fyre.</td>
 </tr>
 <tr>
+<td>cluster.provider.quotaType</td>
+<td>string</td>
+<td>quick-burn</td>
+<td>The supported quota type to provision cluster, valid values include: quick-burn, ocp-plus.</td>
+</tr>
+<tr>
 <td>cluster.provider.credentials.productGroupId</td>
 <td>string</td>
 <td>REPLACE_IT</td>
@@ -693,6 +701,24 @@
 <td>REPLACE_IT</td>
 <td>Fyre user id required when calling Fyre API.</td>
 </tr>
+<tr>
+<td>cluster.provider.site</td>
+<td>string</td>
+<td>svl</td>
+<td>Fyre site required when calling Fyre API, ocp-plus only.</td>
+</tr>
+<tr>
+<td>cluster.provider.ocpVersion</td>
+<td>string</td>
+<td>4.8.27</td>
+<td>OCP Version required when calling Fyre API.</td>
+</tr>
+<tr>
+<td>cluster.provider.workerFlavor</td>
+<td>string</td>
+<td>extra-large</td>
+<td>The supported size to provision cluster, valid values include: extra-large, large. extra-large requests 6 worker nodes, large requests 3 worker nodes.</td>
+</tr>
 </tbody>
 </table>
 <p>NOTE:</p>
@@ -704,6 +730,7 @@
   <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
   <span class="nt">provider</span><span class="p">:</span>
     <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">fyre</span>
+    <span class="nt">quotaType</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">quick-burn</span>
     <span class="nt">credentials</span><span class="p">:</span>
       <span class="nt">user</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_user_id&gt;</span>
       <span class="nt">token</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_user_token&gt;</span>

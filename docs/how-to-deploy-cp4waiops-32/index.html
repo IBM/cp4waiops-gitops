@@ -954,7 +954,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps</a></li>
+<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps</a><ul>
 <li><a href="#prerequisite">Prerequisite</a></li>
 <li><a href="#install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console</a><ul>
 <li><a href="#grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission</a></li>
@@ -976,24 +976,24 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <h1 id="deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps<a class="headerlink" href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops" title="Permanent link">&para;</a></h1>
 <h2 id="prerequisite">Prerequisite<a class="headerlink" href="#prerequisite" title="Permanent link">&para;</a></h2>
 <ul>
 <li>NOTE: Only OpenShift 4.8 with CP4WAIOPS 3.2 are fully tested, NOT A RELEASED FEATURE FOR CP4WAIOPS.</li>
-<li>Refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps 3.2</a></li>
+<li>Refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps 3.2</a></li>
 <li>GitOps, refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing GitOps Operator in web console</a></li>
 </ul>
 <h2 id="install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console<a class="headerlink" href="#install-cp4waiops-using-openshift-web-console" title="Permanent link">&para;</a></h2>
 <h3 id="grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission<a class="headerlink" href="#grant-argocd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</p>
-</li>
-<li>
-<p>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.</p>
-</li>
+<li>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</li>
+</ul>
+<ul>
+<li>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.<ul>
 <li>Binding type<ul>
 <li>Cluster-wide role binding (ClusterRoleBinding)</li>
 </ul>
@@ -1013,6 +1013,8 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 <h3 id="login-to-argocd">Login to ArgoCD<a class="headerlink" href="#login-to-argocd" title="Permanent link">&para;</a></h3>
 <ul>
 <li>You can now login to gitops UI as follows by clicking the menu on OpenShift top right.</li>
@@ -1023,24 +1025,28 @@
 </ul>
 <p><img alt="w" src="../images/gitops-login.png" /></p>
 <h3 id="storage-consideration">Storage Consideration<a class="headerlink" href="#storage-consideration" title="Permanent link">&para;</a></h3>
-<p>Please refer to <a href="https://ibmdocs-test.mybluemix.net/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
+<p>Please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-storage-considerations">Storage considerations</a> for CP4WAIOSP 3.2.</p>
 <p>In this tutorial, we are using Ceph, you can select different storage based on your system requirement.</p>
 <p>From ArgoCD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then <code>Create</code>.</p>
 <p>The parameters for Ceph are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: ceph</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>REPO URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Target version: HEAD</li>
 <li>path: config/ceph</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: rook-ceph</li>
-<li>DIRECTORY</li>
-<li>DIRECTORY RECURSE: check it</li>
+</ul>
+</li>
 </ul>
 <p><img alt="w" src="../images/ceph-gitops.png" /></p>
 <h3 id="verify-ceph-cluster-installation">Verify Ceph Cluster Installation<a class="headerlink" href="#verify-ceph-cluster-installation" title="Permanent link">&para;</a></h3>
@@ -1097,18 +1103,24 @@
 <h3 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h3>
 <p>You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (e.g.: "aimanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: HEAD</li>
 <li>path: config/3.2/ai-manager</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: cp4waiops</li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
@@ -1122,6 +1134,8 @@
 <li>spec.aiManager.pakModules.aiManager.enabled: true</li>
 <li>spec.aiManager.pakModules.connection.enabled: true</li>
 </ul>
+</li>
+</ul>
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
@@ -1130,18 +1144,24 @@
 <h3 id="install-event-manager">Install Event Manager<a class="headerlink" href="#install-event-manager" title="Permanent link">&para;</a></h3>
 <p>You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (e.g.: "eventmanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: HEAD</li>
 <li>path: config/3.2/event-manager</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: noi </li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
@@ -1152,6 +1172,8 @@
 <li>spec.eventManager.channel: v1.5</li>
 <li>spec.eventManager.deploymentType: trial</li>
 <li>spec.eventManager.namespace: noi</li>
+</ul>
+</li>
 </ul>
 <p>NOTE:</p>
 <ul>
@@ -1364,7 +1386,7 @@
 <span class="p p-Indicator">|</span><span class="err"> ------------------------------------- |--------|---------------|-----------------------------------</span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.</span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.</span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.4.0       | The version of Event Manager.</span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.</span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.</span>
 <span class="p p-Indicator">|</span><span class="err"> globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.</span>
 
@@ -1610,8 +1632,7 @@
       --path config/ceph <span class="se">\</span>
       --revision HEAD <span class="se">\</span>
       --dest-namespace rook-ceph <span class="se">\</span>
-      --dest-server https://kubernetes.default.svc <span class="se">\</span>
-      --directory-recurse
+      --dest-server https://kubernetes.default.svc
 </code></pre></div>
 <h3 id="install-ai-manager_1">Install AI Manager<a class="headerlink" href="#install-ai-manager_1" title="Permanent link">&para;</a></h3>
 <p>To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:</p>

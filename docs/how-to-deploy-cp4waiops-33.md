@@ -55,6 +55,9 @@ If your OpenShift cluster already have default storageclass configured, you can 
 
 In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
+For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
+You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
+
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
 - GENERAL

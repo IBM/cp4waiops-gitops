@@ -33,7 +33,7 @@ helm install efs-provisioner \
     --namespace default \
     --set  efsProvisioner.efsFileSystemId=${FSID} \
     --set efsProvisioner.awsRegion=${REGION} \
-    efs-provisioner.tgz
+    efs-provisioner-0.13.2.tgz
 ```
 - Run efs-helm.sh script to deploy efs provisioner
 - Update efs storage class as default storage

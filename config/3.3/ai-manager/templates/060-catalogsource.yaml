@@ -4,7 +4,7 @@ metadata:
   name: ibm-cp-waiops-catalog
   namespace: openshift-marketplace
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
+    argocd.argoproj.io/sync-wave: "60"
 spec:
   displayName: IBM Katamari Installer
   publisher: IBM

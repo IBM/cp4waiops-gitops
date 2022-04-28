@@ -4,7 +4,7 @@ metadata:
   name: {{.Values.spec.aiManager.instanceName}}
   namespace: {{.Values.spec.aiManager.namespace}}
   annotations:
-    argocd.argoproj.io/sync-wave: "120"
+    argocd.argoproj.io/sync-wave: "80"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   size: {{.Values.spec.aiManager.size}}
@@ -12,9 +12,9 @@ spec:
   storageClassLargeBlock: {{.Values.spec.storageClassLargeBlock}}
   license:
     accept: true
-  {{- if not .Values.globalImagePullSecrets }}
-  imagePullSecret: ibm-entitlement-key
-  {{- end }}
+  #{{- if not .Values.globalImagePullSecrets }}
+  #imagePullSecret: ibm-entitlement-key
+  #{{- end }}
   pakModules:
     - name: aiopsFoundation
       enabled: {{.Values.spec.aiManager.pakModules.aiopsFoundation.enabled}}

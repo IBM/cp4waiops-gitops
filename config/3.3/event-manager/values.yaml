@@ -12,7 +12,7 @@ spec:
   ## It is used to create a docker-registry secret to enable your deployment to pull the AI Manager images 
   ## from the IBM® Entitled Registry.
   ## Default is cp
-  dockerUsername: cp
+  # dockerUsername: cp
 
   ## Obtain the entitlement key that is assigned to your IBMid. 
   ## Log in to MyIBM Container Software Library: https://myibm.ibm.com/products-services/containerlibrary
@@ -20,7 +20,7 @@ spec:
   ## that are associated with the entitled software.
   ## DO NOT Commit your docker password here, but always specify it in UI or CLI when creating the ArgoCD app.
   ## 
-  dockerPassword: REPLACE_IT
+  # dockerPassword: REPLACE_IT
 
   ## storageClass is the storage class that you want to use. 
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 

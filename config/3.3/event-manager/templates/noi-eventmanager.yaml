@@ -81,7 +81,7 @@ spec:
       vmwarensx: false
     netDisco: false
   version: {{.Values.spec.eventManager.version}}
-  #entitlementSecret: ibm-entitlement-key
+  entitlementSecret: ibm-entitlement-key
   clusterDomain: {{.Values.spec.eventManager.clusterDomain}}
   integrations:
     humio:

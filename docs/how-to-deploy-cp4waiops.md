@@ -55,6 +55,9 @@ If your OpenShift cluster already have default storageclass configured, you can 
 
 In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
+For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
+You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
+
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
 - GENERAL
@@ -126,6 +129,46 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+## Obtain an entitlement key
+
+If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
+
+1. Go to the [Container software library](https://myibm.ibm.com/products-services/containerlibrary).
+
+1. Click "Copy key."
+
+1. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
+
+1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:
+
+   ```sh
+   export IBM_ENTITLEMENT_KEY=the key from the previous steps
+   podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
+   ```
+
+## Update the OCP global pull secret
+
+[Update the OCP global pull secret](https://docs.openshift.com/container-platform/4.7/openshift_images/managing_images/using-image-pull-secrets.html) with the entitlement key.
+
+Keep in mind that the registry user for that secret is "cp". A common mistakes is to assume the registry user is the name or email of the user owning the entitlement key.
+
+### Update the global pull secret using the OpenShift console
+
+1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
+
+1. Select the object "pull-secret".
+
+1. Click on "Actions -> Edit secret".
+
+1. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
+
+   - "Registry Server Address" cp.icr.io
+   - "Username": cp
+   - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
+   - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
+
+1. Click on "Save"
+
 ### Option 1: Install AI Manager and Event Manager Separately
 
 #### Grant Argo CD Cluster Admin Permission
@@ -160,8 +203,6 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - Namespace: cp4waiops
 - PARAMETERS
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.dockerUsername: cp
-  - spec.dockerPassword: REPLACE_IT
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
   - spec.aiManager.channel: v3.3
@@ -175,7 +216,6 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
 NOTE:
 
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 #### Install Event Manager
 
@@ -194,8 +234,6 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - Namespace: noi 
 - PARAMETERS
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.dockerUsername: cp
-  - spec.dockerPassword: REPLACE_IT
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
   - spec.eventManager.version: 1.6.4
@@ -207,7 +245,6 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 NOTE:
 
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
 ### Option 2: Install Using All-in-One Configuration
@@ -242,8 +279,6 @@ Besides the basic information, when filling in the form, you can also update the
 | rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
 | cp4waiops.version                     | string | v3.3               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
 | cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
-| cp4waiops.dockerUsername              | string | cp                 | The username of image registry used to pull images.
-| cp4waiops.dockerPassword              | string | REPLACE_IT         | The password of image registry used to pull images.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
 | cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
@@ -253,7 +288,6 @@ Besides the basic information, when filling in the form, you can also update the
 
 NOTE:
 
-- For `cp4waiops.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
@@ -587,8 +621,6 @@ argocd app create aimanager-app \
       --dest-namespace cp4waiops \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set spec.dockerUsername=cp \
-      --helm-set spec.dockerPassword=REPLACE_IT \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=cp4waiops \
@@ -601,8 +633,6 @@ argocd app create aimanager-app \
 ```
 
 NOTE:
-
-- For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 
 #### Install Event Manager
 
@@ -618,8 +648,6 @@ argocd app create eventmanager-app \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set spec.dockerUsername=cp \
-      --helm-set spec.dockerPassword=REPLACE_IT \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
@@ -631,7 +659,6 @@ argocd app create eventmanager-app \
 
 NOTE:
 
-- For `spec.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
 ### Option 2: Install Using All-in-One Configuration
@@ -651,8 +678,6 @@ argocd app create cp4waiops-app \
       --helm-set argocd.allowLocalDeploy=true \
       --helm-set rookceph.enabled=true \
       --helm-set cp4waiops.version=v3.3 \
-      --helm-set cp4waiops.dockerUsername=cp \
-      --helm-set cp4waiops.dockerPassword=REPLACE_IT \
       --helm-set cp4waiops.profile=small \
       --helm-set cp4waiops.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.namespace=cp4waiops \
@@ -663,7 +688,6 @@ argocd app create cp4waiops-app \
 ```
 NOTE:
 
-- For `cp4waiops.dockerPassword`, it is the entitlement key that you can copy from [My IBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary).
 - For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.

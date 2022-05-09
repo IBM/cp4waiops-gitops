@@ -83,6 +83,7 @@ spec:
                   - /bin/sh
                   - -c
                   - |
+                    set -x
 
                     echo "AIManager wait to be deleted..."
 

@@ -87,7 +87,13 @@ spec:
 
                     echo "AIManager wait to be deleted..."
 
-                    while true; do 
+                    while true; do
+
+                      if oc get Installation $installation_name -n $installation_namespace; then
+                        echo "INFO: Installation CR not found."
+                        break
+                      fi
+
                       status=`oc get Installation $installation_name -n $installation_namespace -o "jsonpath={.metadata.deletionTimestamp}"`
                       if [ "${status}" != "" ]; then
                         echo "AIManager deleting........"

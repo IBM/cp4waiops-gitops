@@ -1,0 +1,127 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Name }}-crossplane-kubernetes-provider
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - rbac.authorization.k8s.io/deleting
+rules:
+- apiGroups: ["apps"]
+  resources:
+  - deployments
+  verbs: ["get", "list", "watch", "create", "delete", "update","patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Name }}-crossplane-kubernetes-provider
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - rbac.authorization.k8s.io/deleting
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ .Release.Name }}-crossplane-kubernetes-provider
+subjects:
+  - kind: ServiceAccount
+    name: ibm-crossplane-provider-kubernetes
+    namespace: ibm-common-services
+---
+apiVersion: kubernetes.crossplane.io/v1alpha1
+kind: Object
+metadata:
+  name: aiops-delete-script
+  annotations:
+    kubernetes.crossplane.io/managementType: Undeletable
+    argocd.argoproj.io/sync-wave: "300"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  # Use management policy ObserveDelete to observe or delete k8s resource,
+  # but leave to third party to create or update the resource
+  forProvider:
+    manifest:
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: aiops-delete-script
+        namespace: {{.Values.spec.aiManager.namespace}}
+        finalizers:
+          - apps/deleting
+      spec:
+        selector:
+          matchLabels:
+            app: deleting
+        template:
+          metadata:
+            labels:
+              app: deleting
+          spec:
+            containers:
+              - name: deleting
+                image: quay.io/openshift/origin-cli:latest
+                imagePullPolicy: IfNotPresent
+                resources:
+                  requests:
+                    memory: "500Mi"
+                    cpu: "500m"
+                  limits:
+                    memory: "500Mi"
+                    cpu: "500m"
+                env:
+                  - name: installation_name
+                    value: {{.Values.spec.aiManager.instanceName}}
+                  - name: installation_namespace
+                    value: {{.Values.spec.aiManager.namespace}}
+                  - name: release_name
+                    value: {{ .Release.Name }}
+                  - name: channel
+                    value: {{.Values.spec.aiManager.channel}}
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+
+                    echo "AIManager wait to be deleted..."
+
+                    while true; do 
+                      status=`oc get Installation $installation_name -n $installation_namespace -o "jsonpath={.metadata.deletionTimestamp}"`
+                      if [ "${status}" != "" ]; then
+                        echo "AIManager deleting........"
+                        curl https://codeload.github.com/IBM/cp4waiops-samples/tar.gz/main | tar -xz --strip=2 cp4waiops-samples-main/uninstall
+                        version=(${channel//v/})
+                        cd $version
+                        sed -i 's/CP4WAIOPS_PROJECT="cp4waiops"/CP4WAIOPS_PROJECT="$installation_namespace"/g' uninstall-cp4waiops.props
+                        sed -i 's/INSTALLATION_NAME="ibm-cp-watson-aiops"/INSTALLATION_NAME="$installation_name"/g' uninstall-cp4waiops.props
+                        echo y | ./uninstall-cp4waiops.sh
+                        break
+                      else
+                        sleep 10s
+                      fi
+                    done
+
+                    oc patch deployment/aiops-delete-script \
+                    --type json \
+                    --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
+
+                    oc patch ClusterRoleBinding/$release_name-crossplane-kubernetes-provider \
+                    --type json \
+                    --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
+
+                    oc patch ClusterRole/$release_name-crossplane-kubernetes-provider \
+                    --type json \
+                    --patch='[ { "op": "remove", "path": "/metadata/finalizers" } ]'
+
+                    echo "end"
+
+                    while true; do 
+                      echo "Waitting to be deleted......"
+                      sleep 30s
+                    done
+
+            restartPolicy: Always
+            serviceAccountName: openshift-argocd-admin-ai
+  providerConfigRef:
+    name: kubernetes-provider

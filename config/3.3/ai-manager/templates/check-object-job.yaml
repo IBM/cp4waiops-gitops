@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: check-object-prereqs
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  template:
+    spec:
+      containers:
+        - name: check-object-prereqs
+          image: quay.io/openshift/origin-cli:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -x
+              while : ; do
+                if oc get Object; then
+                  echo "INFO: Crossplane kubernetes provider available."
+                  exit 0
+                fi
+                  echo "INFO: Crossplane kubernetes provider not available, waiting."
+                  sleep 10
+              done
+      restartPolicy: Never
+      serviceAccountName: openshift-argocd-admin-ai
+  backoffLimit: 10

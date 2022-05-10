@@ -17,10 +17,10 @@ spec:
               set -x
               while : ; do
                 if oc get Object; then
-                  echo "INFO: Crossplane kubernetes provider available."
+                  echo "INFO: Crossplane provider kubernetes available."
                   exit 0
                 fi
-                  echo "INFO: Crossplane kubernetes provider not available, waiting."
+                  echo "INFO: Crossplane provider kubernetes not available, waiting ..."
                   sleep 10
               done
       restartPolicy: Never

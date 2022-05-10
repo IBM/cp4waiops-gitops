@@ -39,8 +39,6 @@ metadata:
     argocd.argoproj.io/sync-wave: "300"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  # Use management policy ObserveDelete to observe or delete k8s resource,
-  # but leave to third party to create or update the resource
   forProvider:
     manifest:
       apiVersion: apps/v1
@@ -119,7 +117,7 @@ spec:
                     echo "end"
 
                     while true; do 
-                      echo "Waitting to be deleted......"
+                      echo "Waiting to be deleted ..."
                       sleep 30s
                     done
 

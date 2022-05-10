@@ -132,7 +132,7 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
-## Obtain an entitlement key
+### Obtain an entitlement key
 
 If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
 
@@ -149,13 +149,13 @@ If you don't already have an entitlement key to the IBM Entitled Registry, obtai
    podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
    ```
 
-## Update the OCP global pull secret
+### Update the OCP global pull secret
 
 [Update the OCP global pull secret](https://docs.openshift.com/container-platform/4.7/openshift_images/managing_images/using-image-pull-secrets.html) with the entitlement key.
 
 Keep in mind that the registry user for that secret is "cp". A common mistakes is to assume the registry user is the name or email of the user owning the entitlement key.
 
-### Update the global pull secret using the OpenShift console
+#### Update the global pull secret using the OpenShift console
 
 1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
 

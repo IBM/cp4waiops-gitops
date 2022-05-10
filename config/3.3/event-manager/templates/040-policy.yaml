@@ -3,8 +3,8 @@ kind: Job
 metadata:
   name: configure-aiops-network-policy
   annotations:
-    argocd.argoproj.io/sync-wave: "70"
-  namespace: {{.Values.spec.aiManager.namespace}}
+    argocd.argoproj.io/sync-wave: "40"
+  namespace: {{.Values.spec.eventManager.namespace}}
 spec:
   template:
     spec:
@@ -55,5 +55,5 @@ spec:
               fi
 
       restartPolicy: Never
-      serviceAccountName: openshift-argocd-admin-ai
+      serviceAccountName: openshift-argocd-admin-noi
   backoffLimit: 1

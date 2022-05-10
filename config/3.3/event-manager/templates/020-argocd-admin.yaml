@@ -10,7 +10,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: openshift-argocd-admin-noi
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "20"
 subjects:
   - kind: ServiceAccount
     name: openshift-argocd-admin-noi

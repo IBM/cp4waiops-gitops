@@ -356,3 +356,7 @@ res:
 
   kong:
     replicas: 1
+
+  aimanager:
+    maxLearners: 1
+

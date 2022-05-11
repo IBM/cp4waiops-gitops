@@ -7,105 +7,105 @@ data:
     generatedFor: "NonHA"
     automationbase:
       kafka:
-        replicas: 1
+        replicas: {{.Values.res.kafka.kafka.replicas}}
         config:
           default.replication.factor: 1
           min.insync.replicas: 1
         resources:
           limits:
-            cpu: 500m
-            memory: 1Gi
+            cpu: "{{.Values.res.kafka.kafka.limits.cpu}}"
+            memory: "{{.Values.res.kafka.kafka.limits.memory}}"
           requests:
-            cpu: 250m
-            memory: 500Mi
+            cpu: "{{.Values.res.kafka.kafka.requests.cpu}}"
+            memory: "{{.Values.res.kafka.kafka.requests.memory}}"
       zookeeper:
-        replicas: 1
+        replicas: {{.Values.res.kafka.zookeeper.replicas}}
         resources:
           limits:
-            cpu: 1000m
-            memory: 256Mi
+            cpu: "{{.Values.res.kafka.zookeeper.limits.cpu}}"
+            memory: "{{.Values.res.kafka.zookeeper.limits.memory}}"
           requests:
-            cpu: 50m
-            memory: 256Mi
+            cpu: "{{.Values.res.kafka.zookeeper.requests.cpu}}"
+            memory: "{{.Values.res.kafka.zookeeper.requests.memory}}"
       elasticsearch:
         env:
           - name: ES_JAVA_OPTS
-            value: -Xms512M -Xmx512M
-        replicas: 1
+            value: "{{.Values.res.elasticsearch.javaOps}}"
+        replicas: {{.Values.res.elasticsearch.replicas}}
         resources:
           limits:
-            cpu: 500m
-            memory: 1536Mi
+            cpu: "{{.Values.res.elasticsearch.elasticsearch.limits.cpu}}"
+            memory: "{{.Values.res.elasticsearch.elasticsearch.limits.memory}}"
           requests:
-            cpu: 250m
-            memory: 1Gi
+            cpu: "{{.Values.res.elasticsearch.elasticsearch.requests.cpu}}"
+            memory: "{{.Values.res.elasticsearch.elasticsearch.requests.memory}}"
         tls-proxy:
           resources:
             limits:
-              cpu: 500m
-              memory: 200Mi
+              cpu: "{{.Values.res.elasticsearch.tlsproxy.limits.cpu}}"
+              memory: "{{.Values.res.elasticsearch.tlsproxy.limits.memory}}"
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: "{{.Values.res.elasticsearch.tlsproxy.requests.cpu}}"
+              memory: "{{.Values.res.elasticsearch.tlsproxy.requests.memory}}"
     cp4waiops-eventprocessor:
       flink:
         # Settings for the jobmanager statefulSet
         jobmanager:
-          replicas: 1
+          replicas: {{.Values.res.flink.jobmanager.replicas}}
           resources:
             limits:
-              cpu: 1000m
-              memory: 1Gi
+              cpu: "{{.Values.res.flink.jobmanager.jobmanager.limits.cpu}}"
+              memory: "{{.Values.res.flink.jobmanager.jobmanager.limits.memory}}"
             requests:
-              cpu: 100m
-              memory: 1Gi
+              cpu: "{{.Values.res.flink.jobmanager.jobmanager.requests.cpu}}"
+              memory: "{{.Values.res.flink.jobmanager.jobmanager.requests.memory}}"
         # Settings for the taskmanager statefulSet
         taskmanager:
-          replicas: 1
+          replicas: {{.Values.res.flink.taskmanager.replicas}}
           resources:
             limits:
-              cpu: 1600m
-              memory: 5888Mi
+              cpu: {{.Values.res.flink.taskmanager.taskmanager.limits.cpu}}
+              memory: {{.Values.res.flink.taskmanager.taskmanager.limits.memory}}
             requests:
-              cpu: 500m
-              memory: 2048Mi
+              cpu: {{.Values.res.flink.taskmanager.taskmanager.requests.cpu}}
+              memory: {{.Values.res.flink.taskmanager.taskmanager.requests.memory}}
         properties:
-          jobmanager.memory.heap.size: 512mb
-          jobmanager.memory.jvm-metaspace.size: 128mb
-          taskmanager.memory.heap.size: 4gb
-          taskmanager.memory.managed.size: 512mb
-          taskmanager.numberOfTaskSlots: 8
+          jobmanager.memory.heap.size: "{{.Values.res.flink.jobmanager.heapSize}}"
+          jobmanager.memory.jvm-metaspace.size: "{{.Values.res.flink.jobmanager.jvmMetaSpaceSize}}"
+          taskmanager.memory.heap.size: "{{.Values.res.flink.taskmanager.heapSize}}"
+          taskmanager.memory.managed.size: "{{.Values.res.flink.taskmanager.managedSize}}"
+          taskmanager.numberOfTaskSlots: "{{.Values.res.flink.taskmanager.numberOfTaskSlots}}"
     configmaps:
     - name: aiops-topology-sizing
       data: 
         asm: |
           cassandra:
             specs:
-              replicas: 1
+              replicas: {{.Values.res.cassandra.replicas}}
             containers:
               cassandra:
                 resources:
                   limits:
-                    cpu: 600m
-                    memory: 1500Mi
+                    cpu: {{.Values.res.cassandra.limits.cpu}}
+                    memory: {{.Values.res.cassandra.limits.memory}}
                   requests:
-                    cpu: 200m
-                    memory: 1500Mi
+                    cpu: {{.Values.res.cassandra.requests.cpu}}
+                    memory: {{.Values.res.cassandra.requests.memory}}
                 env:
                   - name: CASSANDRA_HEAP_SIZE
-                    value: 600M
+                    value: {{.Values.res.cassandra.heap.size}}
                   - name: CASSANDRA_HEAP_NEWSIZE
-                    value: 150M
+                    value: {{.Values.res.cassandra.heap.newSize}}
     operandconfigs:
     - name: aimanager-operator
       spec:
         aimanager:
           modelTrain:
-            maxLearners: 1
+            maxLearners: {{.Values.res.aimanager.maxLearners}}
     - name: ibm-management-kong
       spec:
         kong:
-          replicaCount: 1
+          replicaCount: {{.Values.res.kong.replicas}}
     - name: couchdb
       spec:
         couchdbcluster:
@@ -113,25 +113,25 @@ data:
           resources:
             db:
               limits:
-                cpu: "700m"
-                memory: "768Mi"
+                cpu: "{{.Values.res.couchdbcluster.db.limits.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.db.limits.memory}}"
               requests:
-                cpu: "250m"
-                memory: "768Mi"
+                cpu: "{{.Values.res.couchdbcluster.db.requests.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.db.requests.memory}}"
             search:
               limits:
-                cpu: "500m"
-                memory: "250Mi"
+                cpu: "{{.Values.res.couchdbcluster.search.limits.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.search.limits.memory}}"
               requests:
-                cpu: "250m"
-                memory: "250Mi"
+                cpu: "{{.Values.res.couchdbcluster.search.requests.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.search.requests.memory}}"
             mgmt:
               limits:
-                cpu: "500m"
-                memory: "128Mi"
+                cpu: "{{.Values.res.couchdbcluster.mgmt.limits.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.mgmt.limits.memory}}"
               requests:
-                cpu: "250m"
-                memory: "64Mi"
+                cpu: "{{.Values.res.couchdbcluster.mgmt.requests.cpu}}"
+                memory: "{{.Values.res.couchdbcluster.mgmt.requests.memory}}"
     - name: redis
       spec:
         redissentinel:
@@ -139,215 +139,215 @@ data:
             member:
               db:
                 limits:
-                  cpu: "500m"
-                  memory: 512Mi
+                  cpu: "{{.Values.res.redis.member.db.limits.cpu}}"
+                  memory: "{{.Values.res.redis.member.db.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 256Mi
+                  cpu: "{{.Values.res.redis.member.db.requests.cpu}}"
+                  memory: "{{.Values.res.redis.member.db.requests.memory}}"
               mgmt:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.member.mgmt.limits.cpu}}"
+                  memory: "{{.Values.res.redis.member.mgmt.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.member.mgmt.requests.cpu}}"
+                  memory: "{{.Values.res.redis.member.mgmt.requests.memory}}"
               proxy:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.member.proxy.limits.cpu}}"
+                  memory: "{{.Values.res.redis.member.proxy.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.member.proxy.requests.cpu}}"
+                  memory: "{{.Values.res.redis.member.proxy.requests.memory}}"
               proxylog:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.member.proxylog.limits.cpu}}"
+                  memory: "{{.Values.res.redis.member.proxylog.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.member.proxylog.requests.cpu}}"
+                  memory: "{{.Values.res.redis.member.proxylog.requests.memory}}"
             sentinel:
               db:
                 limits:
-                  cpu: "500m"
-                  memory: 512Mi
+                  cpu: "{{.Values.res.redis.sentinel.db.limits.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.db.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 256Mi
+                  cpu: "{{.Values.res.redis.sentinel.db.requests.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.db.requests.memory}}"
               mgmt:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.sentinel.mgmt.limits.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.mgmt.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.sentinel.mgmt.requests.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.mgmt.requests.memory}}"
               proxy:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.sentinel.proxy.limits.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.proxy.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.sentinel.proxy.requests.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.proxy.requests.memory}}"
               proxylog:
                 limits:
-                  cpu: "500m"
-                  memory: 150Mi
+                  cpu: "{{.Values.res.redis.sentinel.proxylog.limits.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.proxylog.limits.memory}}"
                 requests:
-                  cpu: "60m"
-                  memory: 100Mi
+                  cpu: "{{.Values.res.redis.sentinel.proxylog.requests.cpu}}"
+                  memory: "{{.Values.res.redis.sentinel.proxylog.requests.memory}}"
     - name: ir-lifecycle-operator
       spec:
         lifecycleservice:
           customSizing:
             logstash:
-              resourceLimitsCPU: "625m"
-              resourceLimitsMemory: "1536Mi"
-              resourceRequestsCPU: "250m"
-              resourceRequestsMemory: "600Mi"
+              resourceLimitsCPU: "{{.Values.res.lifecycleservice.logstash.limits.cpu}}"
+              resourceLimitsMemory: "{{.Values.res.lifecycleservice.logstash.limits.memory}}"
+              resourceRequestsCPU: "{{.Values.res.lifecycleservice.logstash.requests.cpu}}"
+              resourceRequestsMemory: "{{.Values.res.lifecycleservice.logstash.requests.memory}}"
             taskManager:
-              resourceLimitsCPU: "500m"
-              resourceLimitsMemory: "1280Mi"
-              resourceRequestsCPU: "250m"
-              resourceRequestsMemory: "1280Mi"
+              resourceLimitsCPU: "{{.Values.res.lifecycleservice.taskManager.limits.cpu}}"
+              resourceLimitsMemory: "{{.Values.res.lifecycleservice.taskManager.limits.memory}}"
+              resourceRequestsCPU: "{{.Values.res.lifecycleservice.taskManager.requests.cpu}}"
+              resourceRequestsMemory: "{{.Values.res.lifecycleservice.taskManager.requests.memory}}"
             jobManager:
-              resourceLimitsCPU: "600m"
-              resourceLimitsMemory: "768Mi"
-              resourceRequestsCPU: "100m"
-              resourceRequestsMemory: "512Mi"
+              resourceLimitsCPU: "{{.Values.res.lifecycleservice.jobManager.limits.cpu}}"
+              resourceLimitsMemory: "{{.Values.res.lifecycleservice.jobManager.limits.memory}}"
+              resourceRequestsCPU: "{{.Values.res.lifecycleservice.jobManager.requests.cpu}}"
+              resourceRequestsMemory: "{{.Values.res.lifecycleservice.jobManager.requests.memory}}"
     - name: ir-ai-operator
       spec:
         aiopsanalyticsorchestrator:
           customSizing:
             deployments:
               - name: probablecause
-                replicas: 1
+                replicas: {{.Values.res.probablecause.replicas}}
                 containers:
                 - name: probablecause
                   limits:
-                    cpu: "1000m"
-                    memory: "1Gi"
+                    cpu: "{{.Values.res.probablecause.limits.cpu}}"
+                    memory: "{{.Values.res.probablecause.limits.memory}}"
                   requests:
-                    cpu: "400m"
-                    memory: "750Mi"
+                    cpu: "{{.Values.res.probablecause.requests.cpu}}"
+                    memory: "{{.Values.res.probablecause.requests.memory}}"
               - name: classifier
-                replicas: 1
+                replicas: {{.Values.res.classifier.replicas}}
                 containers:
                 - name: classifier
                   limits:
-                    cpu: "1"
-                    memory: "2048Mi"
+                    cpu: "{{.Values.res.classifier.limits.cpu}}"
+                    memory: "{{.Values.res.classifier.limits.memory}}"
                   requests:
-                    cpu: "400m"
-                    memory: "750Mi"
+                    cpu: "{{.Values.res.classifier.requests.cpu}}"
+                    memory: "{{.Values.res.classifier.requests.memory}}"
               - name: spark-worker
-                replicas: 1
+                replicas: {{.Values.res.sparkworker.replicas}}
                 containers:
                 - name: spark-worker
                   limits:
-                    cpu: "1"
-                    memory: "1000Mi"
+                    cpu: "{{.Values.res.sparkworker.limits.cpu}}"
+                    memory: "{{.Values.res.sparkworker.limits.memory}}"
                   requests:
-                    cpu: "350m"
-                    memory: "1000Mi"
+                    cpu: "{{.Values.res.sparkworker.requests.cpu}}"
+                    memory: "{{.Values.res.sparkworker.requests.memory}}"
               - name: spark-pipeline-composer
-                replicas: 1
+                replicas: {{.Values.res.sparkpipelinecomposer.replicas}}
                 containers:
                 - name: spark-pipeline-composer
                   limits:
-                    cpu: "250m"
-                    memory: "896Mi"
+                    cpu: "{{.Values.res.sparkpipelinecomposer.limits.cpu}}"
+                    memory: "{{.Values.res.sparkpipelinecomposer.limits.memory}}"
                   requests:
-                    cpu: "250m"
-                    memory: "600Mi"
+                    cpu: "{{.Values.res.sparkpipelinecomposer.requests.cpu}}"
+                    memory: "{{.Values.res.sparkpipelinecomposer.requests.memory}}"
     - name: ir-core-operator
       spec:
         issueresolutioncore:
           customSizing:
             deployments:
               - name: ncodl-api
-                replicas: 1
+                replicas: {{.Values.res.ncodlapi.replicas}}
                 containers:
                 - name: api
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncodlapi.limits.cpu}}"
+                    memory: "{{.Values.res.ncodlapi.limits.memory}}"
                   requests:
-                    cpu: "100"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncodlapi.requests.cpu}}"
+                    memory: "{{.Values.res.ncodlapi.requests.memory}}"
               - name: ncodl-if
-                replicas: 1
+                replicas: {{.Values.res.ncodlif.replicas}}
                 containers:
                 - name: iducforward
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncodlif.limits.cpu}}"
+                    memory: "{{.Values.res.ncodlif.limits.memory}}"
                   requests:
-                    cpu: "100m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncodlif.requests.cpu}}"
+                    memory: "{{.Values.res.ncodlif.requests.memory}}"
               - name: ncodl-ir
-                replicas: 1
+                replicas: {{.Values.res.ncodlir.replicas}}
                 containers:
                 - name: iducrelay
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncodlir.limits.cpu}}"
+                    memory: "{{.Values.res.ncodlir.limits.memory}}"
                   requests:
-                    cpu: "50m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncodlir.requests.cpu}}"
+                    memory: "{{.Values.res.ncodlir.requests.memory}}"
               - name: ncodl-jobmgr
-                replicas: 1
+                replicas: {{.Values.res.ncodljobmgr.replicas}}
                 containers:
                 - name: jobmgr
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncodljobmgr.limits.cpu}}"
+                    memory: "{{.Values.res.ncodljobmgr.limits.memory}}"
                   requests:
-                    cpu: "50m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncodljobmgr.requests.cpu}}"
+                    memory: "{{.Values.res.ncodljobmgr.requests.memory}}"
               - name: ncodl-std
-                replicas: 1
+                replicas: {{.Values.res.ncodlstd.replicas}}
                 containers:
                 - name: standard
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncodlstd.limits.cpu}}"
+                    memory: "{{.Values.res.ncodlstd.limits.memory}}"
                   requests:
-                    cpu: "50m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncodlstd.requests.cpu}}"
+                    memory: "{{.Values.res.ncodlstd.requests.memory}}"
               - name: logstash
-                replicas: 1
+                replicas: {{.Values.res.logstash.replicas}}
                 containers:
                 - name: logstash
                   limits:
-                    cpu: "500m"
-                    memory: "1792Mi"
+                    cpu: "{{.Values.res.logstash.limits.cpu}}"
+                    memory: "{{.Values.res.logstash.limits.memory}}"
                   requests:
-                    cpu: "100m"
-                    memory: "700Mi"
-            statefulsets:
+                    cpu: "{{.Values.res.logstash.requests.cpu}}"
+                    memory: "{{.Values.res.logstash.requests.memory}}"
+            statefulSets:
               - name: ncobackup
-                replicas: 1
+                replicas: {{.Values.res.ncobackup.replicas}}
                 containers:
                 - name: agg-gate
                   limits:
-                    cpu: "500m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncobackup.agggate.limits.cpu}}"
+                    memory: "{{.Values.res.ncobackup.agggate.limits.memory}}"
                   requests:
-                    cpu: "50m"
-                    memory: "256Mi"
+                    cpu: "{{.Values.res.ncobackup.agggate.requests.cpu}}"
+                    memory: "{{.Values.res.ncobackup.agggate.requests.memory}}"
                 - name: objserv
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"
+                    cpu: "{{.Values.res.ncobackup.objserv.limits.cpu}}"
+                    memory: "{{.Values.res.ncobackup.objserv.limits.memory}}"
                   requests:
-                    cpu: "100m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncobackup.objserv.requests.cpu}}"
+                    memory: "{{.Values.res.ncobackup.objserv.requests.memory}}"
               - name: ncoprimary
-                replicas: 1
+                replicas: {{.Values.res.ncoprimary.replicas}}
                 containers:
                 - name: objserv
                   limits:
-                    cpu: "500m"
-                    memory: "1024Mi"  
+                    cpu: "{{.Values.res.ncoprimary.limits.cpu}}"
+                    memory: "{{.Values.res.ncoprimary.limits.memory}}"  
                   requests:
-                    cpu: "125m"
-                    memory: "512Mi"
+                    cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
+                    memory: "{{.Values.res.ncoprimary.requests.memory}}"

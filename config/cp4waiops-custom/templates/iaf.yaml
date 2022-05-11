@@ -49,38 +49,6 @@ spec:
   - id: automationbase-locker
     patchTemplate: |
       spec:
-        elasticsearch:
-          nodegroupspecs:
-            - config:
-              - key: node.master
-                value: "true"
-              - key: node.data
-                value: "true"
-              name: aiops
-              replicas: {{.Values.res.elasticsearch.replicas}}
-              template:
-                pod:
-                  spec:
-                    containers:
-                    - env:
-                      - name: ES_JAVA_OPTS
-                        value: "{{.Values.res.elasticsearch.javaOps}}"
-                      name: elasticsearch
-                      resources:
-                        limits:
-                          cpu: "{{.Values.res.elasticsearch.elasticsearch.limits.cpu}}"
-                          memory: "{{.Values.res.elasticsearch.elasticsearch.limits.memory}}"
-                        requests:
-                          cpu: "{{.Values.res.elasticsearch.elasticsearch.requests.cpu}}"
-                          memory: "{{.Values.res.elasticsearch.elasticsearch.requests.memory}}"
-                    - name: tls-proxy
-                      resources:
-                        limits:
-                          cpu: "{{.Values.res.elasticsearch.tlsproxy.limits.cpu}}"
-                          memory: "{{.Values.res.elasticsearch.tlsproxy.limits.memory}}"
-                        requests:
-                          cpu: "{{.Values.res.elasticsearch.tlsproxy.requests.cpu}}"
-                          memory: "{{.Values.res.elasticsearch.tlsproxy.requests.memory}}"
         kafka:
           entityOperator:
             tlsSidecar:
@@ -107,24 +75,6 @@ spec:
                 requests:
                   cpu: "{{.Values.res.kafka.entityOperator.userOperator.requests.cpu}}"
                   memory: "{{.Values.res.kafka.entityOperator.userOperator.requests.memory}}"
-          kafka:
-            replicas: {{.Values.res.kafka.kafka.replicas}}
-            resources:
-              limits:
-                cpu: "{{.Values.res.kafka.kafka.limits.cpu}}"
-                memory: "{{.Values.res.kafka.kafka.limits.memory}}"
-              requests:
-                cpu: "{{.Values.res.kafka.kafka.requests.cpu}}"
-                memory: "{{.Values.res.kafka.kafka.requests.memory}}"
-          zookeeper:
-            replicas: {{.Values.res.kafka.zookeeper.replicas}}
-            resources:
-              limits:
-                cpu: "{{.Values.res.kafka.zookeeper.limits.cpu}}"
-                memory: "{{.Values.res.kafka.zookeeper.limits.memory}}"
-              requests:
-                cpu: "{{.Values.res.kafka.zookeeper.requests.cpu}}"
-                memory: "{{.Values.res.kafka.zookeeper.requests.memory}}"
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: base.automation.ibm.com/v1beta1

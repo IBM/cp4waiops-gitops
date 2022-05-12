@@ -6,6 +6,8 @@ metadata:
     app.kubernetes.io/managed-by: ibm-aiops-orchestrator
     app.kubernetes.io/name: custom-sized-profiles
     app.kubernetes.io/part-of: ibm-aiops 
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
   name: custom-size-x-small
 data:
   profiles: |

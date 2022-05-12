@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: ibm-aiops 
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
-  name: custom-size-x-small
+  name: aiops-custom-size-profile
 data:
   profiles: |
     generatedFor: "NonHA"

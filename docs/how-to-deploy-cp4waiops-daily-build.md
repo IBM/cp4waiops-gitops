@@ -173,7 +173,7 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 5. Add another credentials for daily build repo `hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com`
    - "Registry Server Address" hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com
    - "Username": [Your Email address]
-   - "Password": paste the api token for the account above
+   - "Password": paste the api token of the account above
    - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
 
 
@@ -310,8 +310,8 @@ Just use the install parameters listed in following table when you create the Ar
 
 | Parameter                           | Type   | Default Value                             | Description 
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
-| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
-| cp4waiops.aiManager.channel         | string | v3.3                                      | The subscription channel for AI Manager.
+| cp4waiops.aiManager.imageCatalog    | string | from the [slack avt channel](https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7)              | The image catalog for AI Manager.
+| cp4waiops.aiManager.channel         | string | from the [slack avt channel](https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7)              | The subscription channel for AI Manager.
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 

@@ -52,6 +52,22 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
 
+### Grant Argo CD Cluster Admin Permission
+
+From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+
+- Binding type
+  - Cluster-wide role binding (ClusterRoleBinding)
+- RoleBinding
+  - Name: argocd-admin
+- Role
+  - Role Name: cluster-admin
+- Subject
+  - ServiceAccount: check it
+  - Subject namespace: openshift-gitops
+  - Subject name: openshift-gitops-argocd-application-controller
+
+
 ### Storage Considerations
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
@@ -181,21 +197,6 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 ### Option 1: Install AI Manager and Event Manager Separately
 
-#### Grant Argo CD Cluster Admin Permission
-
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
-
-- Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
-- RoleBinding
-  - Name: argocd-admin
-- Role
-  - Role Name: cluster-admin
-- Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
-
 #### Install AI Manager
 
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
@@ -302,7 +303,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-#### Install CP4WAIOps using Custom Build
+#### Install CP4WAIOps using Daily Build/Custom Build
 
 The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
 

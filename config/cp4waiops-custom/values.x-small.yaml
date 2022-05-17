@@ -349,7 +349,7 @@ res:
           memory: 2048Mi
       heapSize: 4096mb
       managedSize: 512mb
-      numberOfTaskSlots: "8"
+      numberOfTaskSlots: 8
 
   aiopsedgeOperator:
     replicas: 1

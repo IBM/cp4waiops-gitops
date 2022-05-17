@@ -81,7 +81,7 @@ data:
           jobmanager.memory.jvm-metaspace.size: "{{.Values.res.flink.jobmanager.jvmMetaSpaceSize}}"
           taskmanager.memory.heap.size: "{{.Values.res.flink.taskmanager.heapSize}}"
           taskmanager.memory.managed.size: "{{.Values.res.flink.taskmanager.managedSize}}"
-          taskmanager.numberOfTaskSlots: "{{.Values.res.flink.taskmanager.numberOfTaskSlots}}"
+          taskmanager.numberOfTaskSlots: {{.Values.res.flink.taskmanager.numberOfTaskSlots}}
     configmaps:
     - name: aiops-topology-sizing
       data: 

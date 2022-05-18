@@ -28,7 +28,6 @@ Please refer to the following documents and decide how you want to deploy CP4WAI
 - [CP4WAIOps 3.2 Airgap Install](./docs/how-to-deploy-airgap-32.md)
 - [CP4WAIOps 3.3 Online Install](./docs/how-to-deploy-cp4waiops-33.md)
 - [CP4WAIOps Online Install](./docs/how-to-deploy-cp4waiops.md)
-- [CP4WAIOps Daily Build Online Install](./docs/how-to-deploy-cp4waiops-daily-build.md)
 
 ## More Install Options for CP4WAIOps using GitOps
 

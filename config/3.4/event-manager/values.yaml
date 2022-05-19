@@ -2,8 +2,8 @@
 ###################################
 # CP4WAIOps - Common Configs
 ###################################
-
 spec:
+
   ## AI Manager catalog source image
   ##
   imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
@@ -12,7 +12,7 @@ spec:
   ## It is used to create a docker-registry secret to enable your deployment to pull the AI Manager images 
   ## from the IBM® Entitled Registry.
   ## Default is cp
-  dockerUsername: cp
+  # dockerUsername: cp
 
   ## Obtain the entitlement key that is assigned to your IBMid. 
   ## Log in to MyIBM Container Software Library: https://myibm.ibm.com/products-services/containerlibrary
@@ -20,7 +20,7 @@ spec:
   ## that are associated with the entitled software.
   ## DO NOT Commit your docker password here, but always specify it in UI or CLI when creating the ArgoCD app.
   ## 
-  dockerPassword: REPLACE_IT
+  # dockerPassword: REPLACE_IT
 
   ## storageClass is the storage class that you want to use. 
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
@@ -32,35 +32,26 @@ spec:
   ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
   storageClassLargeBlock: rook-cephfs
 
-  aiManager:
+  eventManager:
 
-    # The instance name of AI Manager.
-    instanceName: aiops-installation
+    # eventManager version
+    version: 1.6.4
 
-    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers.
-    ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
+    ## Use the fully qualified domain name (FQDN) to formulate the clusterDomain property, using the following formula:
     ##
-    channel: v3.3
+    clusterDomain: apps.clustername.*.*.com
 
-    ## size is the size that you require for your AI Manager installation. It can be small or large.
-    ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager
-    size: small
+    ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers. 
+    ## For example, if you want to install Evemt Manager 1.5, the channel should be v1.5
+    ##
+    channel: v1.7
 
-    ## namespace is the project (namespace) that you want to create the AI Manager instance in.
+    ## Deployment type (trial or production)
+    ## 
+    deploymentType: trial
+
+    ## namespace is the project (namespace) that you want to create the Event Manager instance in.
     ## You must create a custom project (namespace) and not use the default, kube-system,
-    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces).
-    ## This is because AI Manager uses Security Context Constraints (SCC),
-    ## and SCCs cannot be assigned to pods created in one of the default OpenShift projects (namespaces).
+    ## kube-public, openshift-node, openshift-infra, or openshift projects (namespaces). 
     ##
-    namespace: cp4waiops
-
-    ## enable pakModules
-    pakModules:
-      aiopsFoundation:
-        enabled: true
-      applicationManager:
-        enabled: true
-      aiManager:
-        enabled: true
-      connection:
-        enabled: true
+    namespace: noi

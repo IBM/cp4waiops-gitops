@@ -306,7 +306,7 @@ res:
       replicas: 1
       limits:
         cpu: 500m
-        memory: 1Gi
+        memory: 1280Mi
       requests:
         cpu: 250m
         memory: 500Mi
@@ -349,10 +349,14 @@ res:
           memory: 2048Mi
       heapSize: 4096mb
       managedSize: 512mb
-      numberOfTaskSlots: "8"
+      numberOfTaskSlots: 8
 
   aiopsedgeOperator:
     replicas: 1
 
   kong:
     replicas: 1
+
+  aimanager:
+    maxLearners: 1
+

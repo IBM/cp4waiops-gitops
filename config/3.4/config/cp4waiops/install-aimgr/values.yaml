@@ -6,7 +6,7 @@
 spec:
   ## AI Manager catalog source image
   ##
-  imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  #imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
 
   ## dockerUsername is the usrname of IBM® Entitled Registry.
   ## It is used to create a docker-registry secret to enable your deployment to pull the AI Manager images 

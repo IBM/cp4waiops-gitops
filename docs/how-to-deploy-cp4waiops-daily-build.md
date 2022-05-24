@@ -2,21 +2,21 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps 3.4 using GitOps](#deploy-cp4waiops-33-using-gitops)
+- [Deploy CP4WAIOps 3.3 using GitOps](#deploy-cp4waiops-33-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
+    - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Storage Considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
       - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
     - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
-      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
       - [Install AI Manager](#install-ai-manager)
       - [Install Event Manager](#install-event-manager)
     - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
+      - [Install CP4WAIOps using Daily Build/Custom Build](#install-cp4waiops-using-daily-buildcustom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
     - [Access CP4WAIOps](#access-cp4waiops)
   - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
@@ -31,9 +31,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps 3.4 using GitOps
+# Deploy CP4WAIOps 3.3 using GitOps
 
-⚠️ **NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.4 release!**
+⚠️ **NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.3 release!**
 
 ## Prerequisite
 
@@ -51,6 +51,22 @@ You can now login to Argo CD UI as follows by clicking the drop down menu on top
 Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
+
+### Grant Argo CD Cluster Admin Permission
+
+From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+
+- Binding type
+  - Cluster-wide role binding (ClusterRoleBinding)
+- RoleBinding
+  - Name: argocd-admin
+- Role
+  - Role Name: cluster-admin
+- Subject
+  - ServiceAccount: check it
+  - Subject namespace: openshift-gitops
+  - Subject name: openshift-gitops-argocd-application-controller
+
 
 ### Storage Considerations
 
@@ -159,35 +175,27 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
 
-1. Select the object "pull-secret".
+2. Select the object "pull-secret".
 
-1. Click on "Actions -> Edit secret".
+3. Click on "Actions -> Edit secret".
 
-1. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
+4. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
 
    - "Registry Server Address" cp.icr.io
    - "Username": cp
    - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
    - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
 
-1. Click on "Save"
+5. Add another credentials for daily build repo `hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com`
+   - "Registry Server Address" hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com
+   - "Username": [Your Email address]
+   - "Password": paste the api token of the account above
+   - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
+
+
+6. Click on "Save"
 
 ### Option 1: Install AI Manager and Event Manager Separately
-
-#### Grant Argo CD Cluster Admin Permission
-
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
-
-- Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
-- RoleBinding
-  - Name: argocd-admin
-- Role
-  - Role Name: cluster-admin
-- Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
 
 #### Install AI Manager
 
@@ -200,7 +208,7 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
   - Revision: HEAD
-  - path: config/3.4/ai-manager
+  - path: config/3.3/ai-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: cp4waiops
@@ -208,7 +216,7 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: v3.4
+  - spec.aiManager.channel: v3.3
   - spec.aiManager.size: small
   - spec.aiManager.namespace: cp4waiops
   - spec.aiManager.pakModules.aiopsFoundation.enabled: true
@@ -231,7 +239,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
   - Revision: HEAD
-  - path: config/3.4/event-manager
+  - path: config/3.3/event-manager
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: noi 
@@ -280,7 +288,7 @@ Besides the basic information, when filling in the form, you can also update the
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
 | rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
-| cp4waiops.version                     | string | v3.4               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3, v3.4.
+| cp4waiops.version                     | string | v3.3               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
 | cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
@@ -295,7 +303,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-#### Install CP4WAIOps using Custom Build
+#### Install CP4WAIOps using Daily Build/Custom Build
 
 The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
 
@@ -303,8 +311,8 @@ Just use the install parameters listed in following table when you create the Ar
 
 | Parameter                           | Type   | Default Value                             | Description 
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
-| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
-| cp4waiops.aiManager.channel         | string | v3.4                                      | The subscription channel for AI Manager.
+| cp4waiops.aiManager.imageCatalog    | string | from the [slack avt channel](https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7)              | The image catalog for AI Manager.
+| cp4waiops.aiManager.channel         | string | from the [slack avt channel](https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7)              | The subscription channel for AI Manager.
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 
@@ -619,7 +627,7 @@ argocd app create aimanager-app \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.4/ai-manager \
+      --path config/3.3/ai-manager \
       --revision HEAD \
       --dest-namespace cp4waiops \
       --dest-server https://kubernetes.default.svc \
@@ -627,7 +635,7 @@ argocd app create aimanager-app \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=cp4waiops \
-      --helm-set spec.aiManager.channel=v3.4 \
+      --helm-set spec.aiManager.channel=v3.3 \
       --helm-set spec.aiManager.size=small \
       --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled=true \
       --helm-set spec.aiManager.pakModules.applicationManager.enabled=true \
@@ -646,7 +654,7 @@ argocd app create eventmanager-app \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.4/event-manager \
+      --path config/3.3/event-manager \
       --revision HEAD \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
@@ -680,7 +688,7 @@ argocd app create cp4waiops-app \
       --helm-set argocd.cluster=openshift \
       --helm-set argocd.allowLocalDeploy=true \
       --helm-set rookceph.enabled=true \
-      --helm-set cp4waiops.version=v3.4 \
+      --helm-set cp4waiops.version=v3.3 \
       --helm-set cp4waiops.profile=small \
       --helm-set cp4waiops.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.namespace=cp4waiops \

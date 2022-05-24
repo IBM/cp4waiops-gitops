@@ -33,8 +33,6 @@
 
 # Deploy CP4WAIOps 3.4 using GitOps
 
-⚠️ **NOTE: This is a TECHNICAL PREVIEW feature for IBM Cloud Pak for Watson AIOps 3.4 release!**
-
 ## Prerequisite
 
 - To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps 3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).

@@ -1,13 +1,13 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: ibm-noi-catalog
+  name: ibm-cp-waiops-catalog
   namespace: openshift-marketplace
   annotations:
-    argocd.argoproj.io/sync-wave: "100"
+    argocd.argoproj.io/sync-wave: "60"
 spec:
-  displayName: ibm-noi-catalog
-  publisher: IBM Content
+  displayName: IBM Katamari Installer
+  publisher: IBM
   sourceType: grpc
   image: {{.Values.spec.imageCatalog}}
   updateStrategy:

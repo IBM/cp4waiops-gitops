@@ -9,5 +9,5 @@ spec:
   channel: {{.Values.spec.aiManager.channel}}
   installPlanApproval: Automatic
   name: ibm-aiops-orchestrator
-  source: ibm-cp-waiops-catalog
+  source: ibm-operator-catalog
   sourceNamespace: openshift-marketplace

@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps 3.4 using GitOps](#deploy-cp4waiops-33-using-gitops)
+- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-33-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
@@ -31,11 +31,11 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps 3.4 using GitOps
+# Deploy CP4WAIOps using GitOps
 
 ## Prerequisite
 
-- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps 3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
+- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
 - To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
 ## Install CP4WAIOps from UI
@@ -187,6 +187,25 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
   - Subject namespace: openshift-gitops
   - Subject name: openshift-gitops-argocd-application-controller
 
+#### Install shared components
+
+- GENERAL
+  - Application Name: anyname (e.g.: "cp-shared")
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: release-3.4
+  - path: config/cp-shared
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: openshift-marketplace
+- PARAMETERS
+  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  - spec.argocd_application_controller: openshift-gitops-argocd-application-controller
+  - spec.argocd_namespace: openshift-gitops
+
+
 #### Install AI Manager
 
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
@@ -197,13 +216,12 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
-  - path: config/3.4/ai-manager
+  - Revision: release-3.4
+  - path: config/cp4waiops/install-aimgr
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: cp4waiops
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
   - spec.aiManager.channel: v3.4
@@ -229,7 +247,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
   - Revision: HEAD
-  - path: config/3.4/event-manager
+  - path: config/cp4waiops/install-emgr
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: noi 
@@ -617,11 +635,10 @@ argocd app create aimanager-app \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.4/ai-manager \
-      --revision HEAD \
+      --path config/cp4waiops/install-aimgr \
+      --revision release-3.4 \
       --dest-namespace cp4waiops \
       --dest-server https://kubernetes.default.svc \
-      --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=cp4waiops \
@@ -644,8 +661,8 @@ argocd app create eventmanager-app \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/3.4/event-manager \
-      --revision HEAD \
+      --path config/cp4waiops/event-manager \
+      --revision release-3.4 \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \

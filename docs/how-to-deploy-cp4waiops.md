@@ -67,7 +67,7 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
+  - Revision: release-3.4
   - path: config/ceph
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -246,7 +246,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
+  - Revision: release-3.4
   - path: config/cp4waiops/install-emgr
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -284,7 +284,7 @@ Just fill in the form using the suggested field values listed in following table
 | Project               | default                                               |
 | Sync Policy           | Automatic                                             |
 | Repository URL        | https://github.com/IBM/cp4waiops-gitops               |
-| Revision              | HEAD                                                  |
+| Revision              | release-3.4                                                  |
 | Path                  | config/all-in-one                                     |
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
@@ -601,7 +601,7 @@ argocd app create ceph \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/ceph \
-      --revision HEAD \
+      --revision release-3.4 \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
@@ -689,7 +689,7 @@ argocd app create cp4waiops-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/all-in-one \
-      --revision HEAD \
+      --revision release-3.4 \
       --dest-namespace openshift-gitops \
       --dest-server https://kubernetes.default.svc \
       --helm-set argocd.cluster=openshift \

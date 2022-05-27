@@ -62,10 +62,10 @@ cp4waiops:
   version: v3.3
 
   # The username of image registry used to pull CP4WAIOps images.
-  dockerUsername: cp
+  #dockerUsername: cp
 
   # The password of image registry used to pull CP4WAIOps images.
-  dockerPassword: REPLACE_IT
+  #dockerPassword: REPLACE_IT
 
   # The CP4WAIOps deployment profile, e.g.: x-small, small, large.
   # NOTE: The profile x-small is only for small PoC or demo. If you are looking

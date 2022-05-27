@@ -1,4 +1,4 @@
-{{- if eq .Values.cp4waiops.profile "x-small" }}
+{{- if or (eq .Values.cp4waiops.profile "x-small")   (eq .Values.cp4waiops.profile "x-small-idle")  }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -32,6 +32,9 @@ spec:
             - values.yaml
           {{- if eq .Values.cp4waiops.profile "x-small" }}
             - values.x-small.yaml
+          {{- end }}
+          {{- if eq .Values.cp4waiops.profile "x-small-idle" }}
+            - values.x-small-idle.yaml
           {{- end }}
           parameters:
             - name: 'aiManager.instanceName'

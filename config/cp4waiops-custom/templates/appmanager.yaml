@@ -1,4 +1,3 @@
-{{- if eq .Values.profile "x-small" }}
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
 metadata:
@@ -18,4 +17,3 @@ spec:
       namespace: {{.Values.aiManager.namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
-{{- end }}

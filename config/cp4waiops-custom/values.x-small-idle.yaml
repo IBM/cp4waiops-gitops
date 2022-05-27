@@ -227,8 +227,6 @@ res:
       cpu: 125m
       memory: 128Mi
 
-        
-
   changeRisk:
     limits:
       cpu: 750m
@@ -242,13 +240,13 @@ res:
       memory: 2048Mi
     requests:
       cpu: 250m
-      memory: 256Mi
+      memory: 128Mi
   aiPlatformApiServer:
     limits:
       memory: 2Gi
       cpu: 200m
     requests:
-      memory: 512Mi
+      memory: 128Mi
       cpu: 100m
 
   nginx:

@@ -37,7 +37,7 @@ spec:
               value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
             - name: spec.aiManager.namespace
               value: '{{ .Values.cp4waiops.aiManager.namespace }}'
-            {{- if eq .Values.cp4waiops.profile "x-small" }}
+            {{- if or (eq .Values.cp4waiops.profile "x-small")   (eq .Values.cp4waiops.profile "x-small-idle")  }}
             - name: spec.aiManager.size
               value: 'small'
             {{- else }}

@@ -627,6 +627,22 @@ roleRef:
   name: cluster-admin
 ```
 
+#### Install shared components
+
+```sh
+argocd app create cp-shared \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/cp-shared \
+      --revision release-3.4 \
+      --dest-namespace openshift-marketplace \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
+      --helm-set spec.argocd_application_controller=openshift-gitops-argocd-application-controller \
+      --helm-set spec.argocd_namespace=openshift-gitops
+```
+
 #### Install AI Manager
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
@@ -680,7 +696,7 @@ NOTE:
 
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Option 2: Install Using All-in-One Configuration
+### Option 2: (**experimental**)Install Using All-in-One Configuration
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 

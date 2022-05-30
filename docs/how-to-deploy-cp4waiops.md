@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-33-using-gitops)
+- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
@@ -12,9 +12,10 @@
       - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
     - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
       - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+      - [Install shared components](#install-shared-components)
       - [Install AI Manager](#install-ai-manager)
       - [Install Event Manager](#install-event-manager)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
+    - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
       - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
@@ -26,7 +27,7 @@
       - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
       - [Install AI Manager](#install-ai-manager-1)
       - [Install Event Manager](#install-event-manager-1)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
+    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

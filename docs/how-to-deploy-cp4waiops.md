@@ -197,7 +197,7 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
   - Revision: release-3.4
-  - path: config/cp-shared
+  - path: config/cp-shared/operators
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-marketplace
@@ -634,7 +634,7 @@ argocd app create cp-shared \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/cp-shared \
+      --path config/cp-shared/operators \
       --revision release-3.4 \
       --dest-namespace openshift-marketplace \
       --dest-server https://kubernetes.default.svc \

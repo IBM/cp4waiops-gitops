@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: config/cp-shared
+    path: config/cp-shared/operators
     repoURL: https://github.com/IBM/cp4waiops-gitops
     targetRevision: release-3.4
   syncPolicy:

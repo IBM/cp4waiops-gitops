@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-33-using-gitops)
+- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
@@ -12,9 +12,10 @@
       - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
     - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
       - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+      - [Install shared components](#install-shared-components)
       - [Install AI Manager](#install-ai-manager)
       - [Install Event Manager](#install-event-manager)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
+    - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
       - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
@@ -24,9 +25,10 @@
     - [Storage Considerations](#storage-considerations-1)
     - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
       - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
+      - [Install shared components](#install-shared-components-1)
       - [Install AI Manager](#install-ai-manager-1)
       - [Install Event Manager](#install-event-manager-1)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
+    - [Option 2: (**experimental**)Install Using All-in-One Configuration](#option-2-experimentalinstall-using-all-in-one-configuration)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -196,7 +198,7 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
   - Revision: release-3.4
-  - path: config/cp-shared
+  - path: config/cp-shared/operators
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-marketplace
@@ -626,6 +628,22 @@ roleRef:
   name: cluster-admin
 ```
 
+#### Install shared components
+
+```sh
+argocd app create cp-shared \
+      --sync-policy automatic \
+      --project default \
+      --repo https://github.com/IBM/cp4waiops-gitops.git \
+      --path config/cp-shared/operators \
+      --revision release-3.4 \
+      --dest-namespace openshift-marketplace \
+      --dest-server https://kubernetes.default.svc \
+      --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
+      --helm-set spec.argocd_application_controller=openshift-gitops-argocd-application-controller \
+      --helm-set spec.argocd_namespace=openshift-gitops
+```
+
 #### Install AI Manager
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
@@ -679,7 +697,7 @@ NOTE:
 
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Option 2: Install Using All-in-One Configuration
+### Option 2: (**experimental**)Install Using All-in-One Configuration
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 

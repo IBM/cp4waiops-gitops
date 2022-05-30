@@ -25,9 +25,10 @@
     - [Storage Considerations](#storage-considerations-1)
     - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
       - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
+      - [Install shared components](#install-shared-components-1)
       - [Install AI Manager](#install-ai-manager-1)
       - [Install Event Manager](#install-event-manager-1)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
+    - [Option 2: (**experimental**)Install Using All-in-One Configuration](#option-2-experimentalinstall-using-all-in-one-configuration)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

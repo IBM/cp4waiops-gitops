@@ -142,7 +142,7 @@ If you don't already have an entitlement key to the IBM Entitled Registry, obtai
 
 1. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
 
-1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:
+1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:  
    Depending on what contianer system you are using, you might need to use `docker login` instead of `podman login` for following commands.
 
    ```sh

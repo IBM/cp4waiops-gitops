@@ -143,6 +143,7 @@ If you don't already have an entitlement key to the IBM Entitled Registry, obtai
 1. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
 
 1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:
+   Depending on what contianer system you are using, you might need to use `docker login` instead of `podman login` for following commands.
 
    ```sh
    export IBM_ENTITLEMENT_KEY=the key from the previous steps
@@ -340,7 +341,7 @@ cp4waiops:
     channel: <my_custom_channel_for_event_manager>
 ````
 
-Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Advanced Install Options Using GitOps](./cp4waiops-advanced-install-options.md).
+Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
 
 | Parameter                             | Type   | Default Value | Description 
 | ------------------------------------- |--------|---------------|-----------------------------------
@@ -667,8 +668,6 @@ argocd app create aimanager-app \
       --helm-set spec.aiManager.pakModules.aiManager.enabled=true \
       --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
-
-NOTE:
 
 #### Install Event Manager
 

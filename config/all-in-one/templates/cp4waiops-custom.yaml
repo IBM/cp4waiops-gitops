@@ -25,8 +25,8 @@ spec:
       project: default
       source:
         path: config/cp4waiops-custom
-        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
+        repoURL: {{ default "https://github.com/lihongbj/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "values-x-small-idle" .Values.cp4waiops.targetRevision }}
         helm:
           valueFiles:
             - values.yaml

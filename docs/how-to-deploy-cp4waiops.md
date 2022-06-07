@@ -21,15 +21,15 @@
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
     - [Access CP4WAIOps](#access-cp4waiops)
   - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Cli Login to Argo CD](#cli-login-to-argo-cd)
-    - [Cli Storage Considerations](#cli-storage-considerations)
-    - [Cli Option 1: Install AI Manager and Event Manager Separately](#cli-option-1-install-ai-manager-and-event-manager-separately)
-      - [Cli Grant Argo CD Cluster Admin Permission](#cli-grant-argo-cd-cluster-admin-permission)
-      - [Cli Install shared components](#cli-install-shared-components)
-      - [Cli Install AI Manager](#cli-install-ai-manager)
-      - [Cli Install Event Manager](#cli-install-event-manager)
-    - [Cli Option 2: (**experimental**)Install Using All-in-One Configuration](#cli-option-2-experimentalinstall-using-all-in-one-configuration)
-    - [Cli Verify CP4WAIOps Installation](#cli-verify-cp4waiops-installation)
+    - [Login to Argo CD](#login-to-argo-cd-1)
+    - [Storage Considerations](#storage-considerations-1)
+    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
+      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
+      - [Install shared components](#install-shared-components-1)
+      - [Install AI Manager](#install-ai-manager-1)
+      - [Install Event Manager](#install-event-manager-1)
+    - [Option 2: (**experimental**)Install Using All-in-One Configuration](#option-2-experimentalinstall-using-all-in-one-configuration)
+    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -569,7 +569,7 @@ Congratulations! You are ready to play with CP4WAIOps!
 
 ## Install CP4WAIOps from Command Line
 
-### Cli Login to Argo CD
+### Login to Argo CD
 
 Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
 
@@ -590,7 +590,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### Cli Storage Considerations
+### Storage Considerations
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
@@ -608,9 +608,9 @@ argocd app create ceph \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
-### Cli Option 1: Install AI Manager and Event Manager Separately
+### Option 1: Install AI Manager and Event Manager Separately
 
-#### Cli Grant Argo CD Cluster Admin Permission
+#### Grant Argo CD Cluster Admin Permission
 
 Apply the following YAML manifest to the cluster where Argo CD runs:
 
@@ -629,7 +629,7 @@ roleRef:
   name: cluster-admin
 ```
 
-#### Cli Install shared components
+#### Install shared components
 
 ```sh
 argocd app create cp-shared \
@@ -645,7 +645,7 @@ argocd app create cp-shared \
       --helm-set spec.argocd_namespace=openshift-gitops
 ```
 
-#### Cli Install AI Manager
+#### Install AI Manager
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
@@ -669,7 +669,7 @@ argocd app create aimanager-app \
       --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
 
-#### Cli Install Event Manager
+#### Install Event Manager
 
 To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
@@ -696,7 +696,7 @@ NOTE:
 
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Cli Option 2: (**experimental**)Install Using All-in-One Configuration
+### Option 2: (**experimental**)Install Using All-in-One Configuration
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 
@@ -727,7 +727,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Cli Verify CP4WAIOps Installation
+### Verify CP4WAIOps Installation
 
 To verify the CP4WAIOps installation, run following command:
 

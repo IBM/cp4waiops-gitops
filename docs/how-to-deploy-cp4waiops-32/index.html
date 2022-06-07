@@ -8,45 +8,45 @@
       
       
       
-      
         <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops-32/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.2">
     
     
       
-        <title>Online Install - IBM Cloud Pak for Watson AIOps</title>
+        <title>How to deploy cp4waiops 32 - IBM Cloud Pak for Watson AIOps</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.5d38496d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
           
           
           <meta name="theme-color" content="#000000">
         
       
+      
     
     
     
       
         
+        
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,400i,700%7CIBM+Plex+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"IBM Plex Sans";--md-code-font-family:"IBM Plex Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="../css/extra.css">
     
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -61,7 +61,6 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
   
     
-    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -78,6 +77,7 @@
       
     </div>
     
+    
       
 
   
@@ -87,11 +87,11 @@
     <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-header__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Online Install
+              How to deploy cp4waiops 32
             
           </span>
         </div>
@@ -113,22 +113,21 @@
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
       
@@ -148,11 +147,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/IBM/cp4waiops-gitops" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -171,15 +169,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link md-tabs__link--active">
+      <a href=".." class="md-tabs__link">
         GitOps Install
       </a>
     </li>
@@ -216,18 +212,17 @@
     <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-nav__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     IBM Cloud Pak for Watson AIOps
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/IBM/cp4waiops-gitops" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -243,14 +238,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
       
       
       
@@ -298,14 +291,14 @@
       
       
         <label class="md-nav__link" for="__nav_1_2">
-          v3.3
+          v3.4
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="v3.3" data-md-level="2">
+      <nav class="md-nav" aria-label="v3.4" data-md-level="2">
         <label class="md-nav__title" for="__nav_1_2">
           <span class="md-nav__icon md-icon"></span>
-          v3.3
+          v3.4
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -315,7 +308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../how-to-deploy-cp4waiops-33/" class="md-nav__link">
+      <a href="../how-to-deploy-cp4waiops/" class="md-nav__link">
         Online Install
       </a>
     </li>
@@ -334,339 +327,25 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
       
       
       
       
         <label class="md-nav__link" for="__nav_1_3">
-          v3.2
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="v3.2" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_3">
-          <span class="md-nav__icon md-icon"></span>
-          v3.2
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Online Install
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Online Install
-      </a>
-      
-        
-
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisite" class="md-nav__link">
-    Prerequisite
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-cp4waiops-using-openshift-web-console" class="md-nav__link">
-    Install CP4WAIOPS Using OpenShift Web Console
-  </a>
-  
-    <nav class="md-nav" aria-label="Install CP4WAIOPS Using OpenShift Web Console">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grant-argocd-cluster-admin-permission" class="md-nav__link">
-    Grant ArgoCD Cluster Admin Permission
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#login-to-argocd" class="md-nav__link">
-    Login to ArgoCD
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storage-consideration" class="md-nav__link">
-    Storage Consideration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-ceph-cluster-installation" class="md-nav__link">
-    Verify Ceph Cluster Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager" class="md-nav__link">
-    Install AI Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-event-manager" class="md-nav__link">
-    Install Event Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-using-all-in-one-configuration" class="md-nav__link">
-    Install Using All-in-One Configuration
-  </a>
-  
-    <nav class="md-nav" aria-label="Install Using All-in-One Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager-and-event-manager-in-one-go" class="md-nav__link">
-    Install AI Manager and Event Manager in One Go
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-cp4waiops-using-custom-build" class="md-nav__link">
-    Install CP4WAIOps using Custom Build
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-cp4waiops-installation" class="md-nav__link">
-    Verify CP4WAIOPS Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#access-cloud-pak-for-watson-aiops" class="md-nav__link">
-    Access Cloud Pak for Watson AIOps
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-cli-to-install-cp4waiops" class="md-nav__link">
-    Using CLI to Install CP4WAIOPS
-  </a>
-  
-    <nav class="md-nav" aria-label="Using CLI to Install CP4WAIOPS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grant-argocd-cluster-admin-permission_1" class="md-nav__link">
-    Grant ArgoCD Cluster Admin Permission
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#login-to-argocd_1" class="md-nav__link">
-    Login to ArgoCD
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#optional-storage-considerations" class="md-nav__link">
-    (Optional) Storage Considerations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager_1" class="md-nav__link">
-    Install AI Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-event-manager_1" class="md-nav__link">
-    Install Event Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-using-all-in-one-configuration_1" class="md-nav__link">
-    Install Using All-in-One Configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-cp4waiops-installation_1" class="md-nav__link">
-    Verify CP4WAIOps Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../how-to-deploy-airgap-32/" class="md-nav__link">
-        Airgap Install
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_1_4">
-          v3.1
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="v3.1" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_4">
-          <span class="md-nav__icon md-icon"></span>
-          v3.1
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../how-to-deploy-cp4waiops-31/" class="md-nav__link">
-        Online Install
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_1_5">
           Advanced Install Options
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Advanced Install Options" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_5">
+        <label class="md-nav__title" for="__nav_1_3">
           <span class="md-nav__icon md-icon"></span>
           Advanced Install Options
         </label>
@@ -753,7 +432,6 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-
 
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
@@ -945,16 +623,17 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-deploy-cp4waiops-32.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+  <a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-deploy-cp4waiops-32.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps</a><ul>
+<li><a href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps</a></li>
 <li><a href="#prerequisite">Prerequisite</a></li>
 <li><a href="#install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console</a><ul>
 <li><a href="#grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission</a></li>
@@ -976,8 +655,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 <h1 id="deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops">Deploy CP4WAIOPS (Cloud Pak for Watson AIOps) 3.2 with GitOps<a class="headerlink" href="#deploy-cp4waiops-cloud-pak-for-watson-aiops-32-with-gitops" title="Permanent link">&para;</a></h1>
@@ -990,10 +667,12 @@
 <h2 id="install-cp4waiops-using-openshift-web-console">Install CP4WAIOPS Using OpenShift Web Console<a class="headerlink" href="#install-cp4waiops-using-openshift-web-console" title="Permanent link">&para;</a></h2>
 <h3 id="grant-argocd-cluster-admin-permission">Grant ArgoCD Cluster Admin Permission<a class="headerlink" href="#grant-argocd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
 <ul>
-<li>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</li>
-</ul>
-<ul>
-<li>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.<ul>
+<li>
+<p>From the Red Hat OpenShift Console, go to <strong>User Management</strong> &gt; <strong>RoleBindings</strong> &gt; <strong>Create binding</strong>.</p>
+</li>
+<li>
+<p>Use the Form view to configure the properties for the <strong>ClusterRoleBinding</strong>, and select the Create button.</p>
+</li>
 <li>Binding type<ul>
 <li>Cluster-wide role binding (ClusterRoleBinding)</li>
 </ul>
@@ -1013,8 +692,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <h3 id="login-to-argocd">Login to ArgoCD<a class="headerlink" href="#login-to-argocd" title="Permanent link">&para;</a></h3>
 <ul>
 <li>You can now login to gitops UI as follows by clicking the menu on OpenShift top right.</li>
@@ -1030,23 +707,17 @@
 <p>From ArgoCD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then <code>Create</code>.</p>
 <p>The parameters for Ceph are as follows:</p>
 <ul>
-<li>GENERAL<ul>
+<li>GENERAL</li>
 <li>Application Name: ceph</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-</ul>
-</li>
-<li>SOURCE<ul>
+<li>SOURCE</li>
 <li>REPO URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Target version: HEAD</li>
 <li>path: config/ceph</li>
-</ul>
-</li>
-<li>DESTINATION<ul>
+<li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: rook-ceph</li>
-</ul>
-</li>
 </ul>
 <p><img alt="w" src="../images/ceph-gitops.png" /></p>
 <h3 id="verify-ceph-cluster-installation">Verify Ceph Cluster Installation<a class="headerlink" href="#verify-ceph-cluster-installation" title="Permanent link">&para;</a></h3>
@@ -1103,24 +774,18 @@
 <h3 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h3>
 <p>You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:</p>
 <ul>
-<li>GENERAL<ul>
+<li>GENERAL</li>
 <li>Application Name: anyname (e.g.: "aimanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-</ul>
-</li>
-<li>SOURCE<ul>
+<li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: HEAD</li>
 <li>path: config/3.2/ai-manager</li>
-</ul>
-</li>
-<li>DESTINATION<ul>
+<li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: cp4waiops</li>
-</ul>
-</li>
-<li>PARAMETERS<ul>
+<li>PARAMETERS</li>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
@@ -1134,8 +799,6 @@
 <li>spec.aiManager.pakModules.aiManager.enabled: true</li>
 <li>spec.aiManager.pakModules.connection.enabled: true</li>
 </ul>
-</li>
-</ul>
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
@@ -1144,24 +807,18 @@
 <h3 id="install-event-manager">Install Event Manager<a class="headerlink" href="#install-event-manager" title="Permanent link">&para;</a></h3>
 <p>You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:</p>
 <ul>
-<li>GENERAL<ul>
+<li>GENERAL</li>
 <li>Application Name: anyname (e.g.: "eventmanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-</ul>
-</li>
-<li>SOURCE<ul>
+<li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: HEAD</li>
 <li>path: config/3.2/event-manager</li>
-</ul>
-</li>
-<li>DESTINATION<ul>
+<li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: noi </li>
-</ul>
-</li>
-<li>PARAMETERS<ul>
+<li>PARAMETERS</li>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
@@ -1172,8 +829,6 @@
 <li>spec.eventManager.channel: v1.5</li>
 <li>spec.eventManager.deploymentType: trial</li>
 <li>spec.eventManager.namespace: noi</li>
-</ul>
-</li>
 </ul>
 <p>NOTE:</p>
 <ul>
@@ -1371,37 +1026,37 @@
 </table>
 <p>These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in <code>HELM</code> &gt; <code>VALUES</code> field.</p>
 <p>For example, adding following YAML snippet to <code>HELM</code> &gt; <code>VALUES</code> field will install AI Manager and Event Manager using custom imageCatalog and channel:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">cp4waiops</span><span class="p">:</span>
-  <span class="nt">aiManager</span><span class="p">:</span>
-    <span class="nt">imageCatalog</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_image_catalog_for_ai_manager&gt;</span>
-    <span class="nt">channel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_channel_for_ai_manager&gt;</span>
-  <span class="nt">eventManager</span><span class="p">:</span>
-    <span class="nt">imageCatalog</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_image_catalog_for_event_manager&gt;</span>
-    <span class="nt">channel</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_channel_for_event_manager&gt;</span>
-<span class="err">````</span>
+<div class="highlight"><pre><span></span><code><span class="nt">cp4waiops</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">aiManager</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">imageCatalog</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_image_catalog_for_ai_manager&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_channel_for_ai_manager&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">eventManager</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">imageCatalog</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_image_catalog_for_event_manager&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_custom_channel_for_event_manager&gt;</span><span class="w"></span>
+<span class="err">````</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Advanced Install Options Using GitOps](./cp4waiops-advanced-install-options.md).</span>
+<span class="l l-Scalar l-Scalar-Plain">Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Advanced Install Options Using GitOps](./cp4waiops-advanced-install-options.md).</span><span class="w"></span>
 
-<span class="p p-Indicator">|</span><span class="err"> Parameter                             | Type   | Default Value | Description</span> 
-<span class="p p-Indicator">|</span><span class="err"> ------------------------------------- |--------|---------------|-----------------------------------</span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.</span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.</span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.</span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.</span>
-<span class="p p-Indicator">|</span><span class="err"> globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.</span>
+<span class="p p-Indicator">|</span><span class="err"> Parameter                             | Type   | Default Value | Description</span><span class="w"> </span>
+<span class="p p-Indicator">|</span><span class="err"> ------------------------------------- |--------|---------------|-----------------------------------</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.</span>
+<span class="l l-Scalar l-Scalar-Plain">For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.</span><span class="w"></span>
 
-<span class="l l-Scalar l-Scalar-Plain">Again, since these parameters are invisible, you can add them when filling in the form in `HELM` &gt; `VALUES` field</span><span class="p p-Indicator">:</span>
+<span class="l l-Scalar l-Scalar-Plain">Again, since these parameters are invisible, you can add them when filling in the form in `HELM` &gt; `VALUES` field</span><span class="p p-Indicator">:</span><span class="w"></span>
 
-<span class="err">```</span><span class="l l-Scalar l-Scalar-Plain">yaml</span>
-<span class="nt">globalImagePullSecrets</span><span class="p">:</span>
-<span class="p p-Indicator">-</span> <span class="nt">registry</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_own_registry_1&gt;</span>
-  <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;username_to_registry_1&gt;</span>
-  <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;password_to_registry_1&gt;</span>
-<span class="p p-Indicator">-</span> <span class="nt">registry</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;my_own_registry_2&gt;</span>
-  <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;username_to_registry_2&gt;</span>
-  <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;password_to_registry_2&gt;</span>
+<span class="err">```</span><span class="l l-Scalar l-Scalar-Plain">yaml</span><span class="w"></span>
+<span class="nt">globalImagePullSecrets</span><span class="p">:</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_own_registry_1&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;username_to_registry_1&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;password_to_registry_1&gt;</span><span class="w"></span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;my_own_registry_2&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;username_to_registry_2&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;password_to_registry_2&gt;</span><span class="w"></span>
 </code></pre></div>
 <h3 id="verify-cp4waiops-installation">Verify CP4WAIOPS Installation<a class="headerlink" href="#verify-cp4waiops-installation" title="Permanent link">&para;</a></h3>
 <p>After both Ceph and Cloud Pak for Watson AIOps are ready, you will be able to see those two Apps from Argo CD UI as follows with status as <code>Healthy and Synced</code>.</p>
@@ -1593,18 +1248,18 @@
 </ul>
 <h2 id="using-cli-to-install-cp4waiops">Using CLI to Install CP4WAIOPS<a class="headerlink" href="#using-cli-to-install-cp4waiops" title="Permanent link">&para;</a></h2>
 <h3 id="grant-argocd-cluster-admin-permission_1">Grant ArgoCD Cluster Admin Permission<a class="headerlink" href="#grant-argocd-cluster-admin-permission_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span>
-<span class="nt">apiVersion</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span>
-<span class="nt">metadata</span><span class="p">:</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">argocd-admin</span>
-<span class="nt">subjects</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openshift-gitops-argocd-application-controller</span>
-    <span class="nt">namespace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">openshift-gitops</span>
-<span class="nt">roleRef</span><span class="p">:</span>
-  <span class="nt">apiGroup</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span>
-  <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ClusterRole</span>
-  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cluster-admin</span>
+<div class="highlight"><pre><span></span><code><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRoleBinding</span><span class="w"></span>
+<span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io/v1</span><span class="w"></span>
+<span class="nt">metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argocd-admin</span><span class="w"></span>
+<span class="nt">subjects</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ServiceAccount</span><span class="w"></span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openshift-gitops-argocd-application-controller</span><span class="w"></span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">openshift-gitops</span><span class="w"></span>
+<span class="nt">roleRef</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rbac.authorization.k8s.io</span><span class="w"></span>
+<span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ClusterRole</span><span class="w"></span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cluster-admin</span><span class="w"></span>
 </code></pre></div>
 <h3 id="login-to-argocd_1">Login to ArgoCD<a class="headerlink" href="#login-to-argocd_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># OCP 4.8</span>
@@ -1734,74 +1389,33 @@ NOTE:</p>
 <div class="highlight"><pre><span></span><code>kubectl get pod -n cp4waiops
 kubectl get pod -n noi
 </code></pre></div>
-                
-              
-              
-                
-
 
               
             </article>
+            
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          <a href="#" class="md-top md-top--hidden md-icon" data-md-component="top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
         
       </main>
       
-        
-<footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../how-to-deploy-cp4waiops-33/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Online Install" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Online Install
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../how-to-deploy-airgap-32/" class="md-footer__link md-footer__link--next" aria-label="Next: Airgap Install" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Airgap Install
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
+        <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        
-          Made with
-          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-            Material for MkDocs
-          </a>
-        
-        
-      </div>
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -1811,10 +1425,10 @@ kubectl get pod -n noi
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
+      <script src="../assets/javascripts/bundle.7f366e99.min.js"></script>
       
     
   </body>

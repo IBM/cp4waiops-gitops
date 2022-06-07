@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{.Values.spec.eventManager.namespace}}
-  annotations:
-    argocd.argoproj.io/sync-wave: "21"
-spec:
-  finalizers:
-  - kubernetes

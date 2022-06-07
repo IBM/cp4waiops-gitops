@@ -1,4 +1,4 @@
-{{- if or (eq .Values.cp4waiops.profile "x-small")   (eq .Values.cp4waiops.profile "x-small-idle")  }}
+{{- if eq .Values.cp4waiops.profile "x-small" }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -25,16 +25,13 @@ spec:
       project: default
       source:
         path: config/cp4waiops-custom
-        repoURL: {{ default "https://github.com/lihongbj/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "values-x-small-idle" .Values.cp4waiops.targetRevision }}
+        repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+        targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
         helm:
           valueFiles:
             - values.yaml
           {{- if eq .Values.cp4waiops.profile "x-small" }}
             - values.x-small.yaml
-          {{- end }}
-          {{- if eq .Values.cp4waiops.profile "x-small-idle" }}
-            - values.x-small-idle.yaml
           {{- end }}
           parameters:
             - name: 'aiManager.instanceName'

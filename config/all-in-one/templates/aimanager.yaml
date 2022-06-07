@@ -26,13 +26,9 @@ spec:
       source:
         path: {{ template "cp4waiops.aimanager.configPath" . }}
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
+        targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
-            - name: spec.dockerUsername
-              value: '{{ .Values.cp4waiops.dockerUsername }}'
-            - name: spec.dockerPassword
-              value: '{{ .Values.cp4waiops.dockerPassword }}'
             - name: spec.aiManager.instanceName
               value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
             - name: spec.aiManager.namespace

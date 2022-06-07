@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: custom-size-x-small
+  name: aiops-custom-size-profile
 data:
   profiles: |
     generatedFor: "NonHA"
@@ -13,8 +13,8 @@ data:
           min.insync.replicas: 1
         resources:
           limits:
-            cpu: 500m
-            memory: 1Gi
+            cpu: "500m"
+            memory: "1280Mi"
           requests:
             cpu: 250m
             memory: 500Mi
@@ -271,7 +271,7 @@ data:
                     cpu: "500m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "100"
+                    cpu: "100m"
                     memory: "512Mi"
               - name: ncodl-if
                 replicas: 1

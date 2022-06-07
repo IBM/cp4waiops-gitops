@@ -1,0 +1,882 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-create-local-registry/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+    
+    
+      
+        <title>How to create local registry - IBM Cloud Pak for Watson AIOps</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,400i,700%7CIBM+Plex+Mono&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creating-a-multi-arch-docker-registry" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-header__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Cloud Pak for Watson AIOps
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to create local registry
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        GitOps Install
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="IBM Cloud Pak for Watson AIOps" class="md-nav__button md-logo" aria-label="IBM Cloud Pak for Watson AIOps" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    IBM Cloud Pak for Watson AIOps
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IBM/cp4waiops-gitops/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          GitOps Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GitOps Install" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          GitOps Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          v3.3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.3" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          v3.3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-33/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          v3.2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.2" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          v3.2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-32/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-airgap-32/" class="md-nav__link">
+        Airgap Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_4">
+          v3.1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.1" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          v3.1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-31/" class="md-nav__link">
+        Online Install
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_5">
+          Advanced Install Options
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced Install Options" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced Install Options
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cp4waiops-custom-install/" class="md-nav__link">
+        Customize CP4WAIOps Install
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-cloudpak-with-sample-apps/" class="md-nav__link">
+        Deploy Demo Environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-cloudpak-to-multiple-clusters/" class="md-nav__link">
+        Deploy to Multiple Clusters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploy-ocp-cloudpak-with-gitops/" class="md-nav__link">
+        Deploy with Cluster Provisioning
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procedure" class="md-nav__link">
+    Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-httpd-tools" class="md-nav__link">
+    Install Httpd Tools
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-folders-for-docker-registry" class="md-nav__link">
+    Create Folders for Docker Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provide-certificate-for-docker-registry" class="md-nav__link">
+    Provide Certificate for Docker Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-user-name-and-password-for-docker-registry" class="md-nav__link">
+    Generate User Name and Password for Docker Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-docker-registry-container-to-host-your-registry" class="md-nav__link">
+    Create docker-registry Container to Host Your Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-required-ports-for-docker-registry" class="md-nav__link">
+    Open Required Ports for Docker Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-self-signed-certificate-to-your-list-of-trusted-certificates" class="md-nav__link">
+    Add Self-signed Certificate to Your List of Trusted Certificates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirm-docker-registry-is-available" class="md-nav__link">
+    Confirm Docker Registry is Available
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-docker-registry" class="md-nav__link">
+    Access Docker Registry
+  </a>
+  
+    <nav class="md-nav" aria-label="Access Docker Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry" class="md-nav__link">
+    Generate base64-encoded User Name and Password or Token for Your Mirror Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prepare-pullsecret-content" class="md-nav__link">
+    Prepare Pullsecret Content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-imagepullsecret" class="md-nav__link">
+    Create Imagepullsecret
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle-cert-for-accessing-docker-registry" class="md-nav__link">
+    Handle Cert for Accessing Docker Registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-create-local-registry.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<ul>
+<li><a href="#creating-a-multi-arch-docker-registry">Creating a Multi-arch Docker Registry</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#procedure">Procedure</a><ul>
+<li><a href="#install-httpd-tools">Install Httpd Tools</a></li>
+<li><a href="#create-folders-for-docker-registry">Create Folders for Docker Registry</a></li>
+<li><a href="#provide-certificate-for-docker-registry">Provide Certificate for Docker Registry</a></li>
+<li><a href="#generate-user-name-and-password-for-docker-registry">Generate User Name and Password for Docker Registry</a></li>
+<li><a href="#create-docker-registry-container-to-host-your-registry">Create docker-registry Container to Host Your Registry</a></li>
+<li><a href="#open-required-ports-for-docker-registry">Open Required Ports for Docker Registry</a></li>
+<li><a href="#add-self-signed-certificate-to-your-list-of-trusted-certificates">Add Self-signed Certificate to Your List of Trusted Certificates</a></li>
+<li><a href="#confirm-docker-registry-is-available">Confirm Docker Registry is Available</a></li>
+</ul>
+</li>
+<li><a href="#access-docker-registry">Access Docker Registry</a><ul>
+<li><a href="#generate-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry">Generate base64-encoded User Name and Password or Token for Your Mirror Registry</a></li>
+<li><a href="#prepare-pullsecret-content">Prepare Pullsecret Content</a></li>
+<li><a href="#create-imagepullsecret">Create Imagepullsecret</a></li>
+<li><a href="#handle-cert-for-accessing-docker-registry">Handle Cert for Accessing Docker Registry</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h1 id="creating-a-multi-arch-docker-registry">Creating a Multi-arch Docker Registry<a class="headerlink" href="#creating-a-multi-arch-docker-registry" title="Permanent link">&para;</a></h1>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>You have a Red Hat Enterprise Linux (RHEL) server on your network to use as the registry host.</p>
+</li>
+<li>
+<p>The registry host can access the internet.</p>
+</li>
+</ul>
+<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">&para;</a></h2>
+<h3 id="install-httpd-tools">Install Httpd Tools<a class="headerlink" href="#install-httpd-tools" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>yum -y install docker httpd-tools
+</code></pre></div>
+<h3 id="create-folders-for-docker-registry">Create Folders for Docker Registry<a class="headerlink" href="#create-folders-for-docker-registry" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir -p /opt/registry/{auth,certs,data}
+</code></pre></div>
+<h3 id="provide-certificate-for-docker-registry">Provide Certificate for Docker Registry<a class="headerlink" href="#provide-certificate-for-docker-registry" title="Permanent link">&para;</a></h3>
+<p>If you do not have an existing, trusted certificate authority, you can generate a self-signed certificate:</p>
+<div class="highlight"><pre><span></span><code>cd /opt/registry/certs
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
+</code></pre></div>
+<p>At the prompts, provide the required values for the certificate:</p>
+<div class="highlight"><pre><span></span><code>Country Name (2 letter code)    
+Specify the two-letter ISO country code for your location. See the ISO 3166 country codes standard.
+
+State or Province Name (full name)  
+Enter the full name of your state or province.
+
+Locality Name (eg, city)    
+Enter the name of your city.
+
+Organization Name (eg, company) 
+Enter your company name.
+
+Organizational Unit Name (eg, section)  
+Enter your department name.
+
+Common Name (eg, your name or your server’s hostname)   
+Enter the host name for the registry host. Ensure that your hostname is in DNS and that it resolves to the expected IP address.
+
+Email Address   
+Enter your email address. For more information, see the req description in the OpenSSL documentation.
+</code></pre></div>
+<p><strong>Note</strong>: make sure enter the <code>hostname</code> for the common name , that could be resolved to the expect IP address when login docker reigstry</p>
+<h3 id="generate-user-name-and-password-for-docker-registry">Generate User Name and Password for Docker Registry<a class="headerlink" href="#generate-user-name-and-password-for-docker-registry" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>htpasswd -bBc /opt/registry/auth/htpasswd &lt;user_name&gt; &lt;password&gt; 
+</code></pre></div>
+<strong>Note:</strong> you will use this <code>user_name</code> <code>password</code> to login the docker registry</p>
+<h3 id="create-docker-registry-container-to-host-your-registry">Create docker-registry Container to Host Your Registry<a class="headerlink" href="#create-docker-registry-container-to-host-your-registry" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>docker run --name mirror-registry -p &lt;local_registry_host_port&gt;:5000 \
+     -v /opt/registry/data:/var/lib/registry:z \
+     -v /opt/registry/auth:/auth:z \
+     -e &quot;REGISTRY_AUTH=htpasswd&quot; \
+     -e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&quot; \
+     -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+     -v /opt/registry/certs:/certs:z \
+     -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+     -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+     -e REGISTRY_COMPATIBILITY_SCHEMA1_ENABLED=true \
+     -d docker.io/library/registry:2
+</code></pre></div>
+<strong>Note:</strong> For <code>local_registry_host_port</code>, specify the port that your docker registry uses to serve content</p>
+<h3 id="open-required-ports-for-docker-registry">Open Required Ports for Docker Registry<a class="headerlink" href="#open-required-ports-for-docker-registry" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># firewall-cmd --add-port=&lt;local_registry_host_port&gt;/tcp --zone=internal --permanent 
+# firewall-cmd --add-port=&lt;local_registry_host_port&gt;/tcp --zone=public   --permanent 
+# firewall-cmd --reload
+</code></pre></div>
+<h3 id="add-self-signed-certificate-to-your-list-of-trusted-certificates">Add Self-signed Certificate to Your List of Trusted Certificates<a class="headerlink" href="#add-self-signed-certificate-to-your-list-of-trusted-certificates" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>cp /opt/registry/certs/domain.crt /etc/pki/ca-trust/source/anchors/
+# update-ca-trust
+</code></pre></div>
+<h3 id="confirm-docker-registry-is-available">Confirm Docker Registry is Available<a class="headerlink" href="#confirm-docker-registry-is-available" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>curl -u &lt;user_name&gt;:&lt;password&gt; -k https://&lt;local_registry_host_name&gt;:&lt;local_registry_host_port&gt;/v2/_catalog 
+
+{&quot;repositories&quot;:[]}
+</code></pre></div>
+<p><strong>Note:</strong>
+- For <code>user_name</code> and <code>password</code> , specify the user name and password for your registry.
+- For <code>local_registry_host_name</code>, specify the registry domain name that you specified in your certificate, such as <code>registry.example.com</code>
+- For <code>local_registry_host_port</code>, specify the port that your docker registry uses to serve content</p>
+<h2 id="access-docker-registry">Access Docker Registry<a class="headerlink" href="#access-docker-registry" title="Permanent link">&para;</a></h2>
+<h3 id="generate-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry">Generate base64-encoded User Name and Password or Token for Your Mirror Registry<a class="headerlink" href="#generate-base64-encoded-user-name-and-password-or-token-for-your-mirror-registry" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code># echo -n &#39;&lt;user_name&gt;:&lt;password&gt;&#39; | base64 -w0
+
+YWRtaW46YWRtaW4=
+</code></pre></div>
+<p><strong>Note:</strong> For <code>user_name</code> and <code>password</code>, specify the user name and password that you configured for your registry</p>
+<h3 id="prepare-pullsecret-content">Prepare Pullsecret Content<a class="headerlink" href="#prepare-pullsecret-content" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="gp"># </span>cat config.json
+<span class="go">{</span>
+<span class="go">  &quot;auths&quot;: {</span>
+<span class="go">    &quot;&lt;local_registry_host_name&gt;:&lt;local_registry_host_port&gt;&quot;: {</span>
+<span class="go">      &quot;auth&quot;: &quot;YWRtaW46YWRtaW4=&quot;</span>
+<span class="go">    }</span>
+<span class="go">  }</span>
+<span class="go">}</span>
+</code></pre></div>
+<p><strong>Note:</strong>
+- For <code>local_registry_host_name</code>, specify the registry domain name that you specified in your certificate.
+- For <code>local_registry_host_port</code>, specify the port that your docker registry uses to serve content.
+- For <code>credentials</code>, specify the base64-encoded user name and password for the docker registry that you generated.</p>
+<h3 id="create-imagepullsecret">Create Imagepullsecret<a class="headerlink" href="#create-imagepullsecret" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>kubectl create secret generic cp4mcm-pull-secret \
+  --from-file=.dockerconfigjson=&lt;path&gt;/config.json \
+  --type=kubernetes.io/dockerconfigjson 
+</code></pre></div>
+<p><strong>Note:</strong> You need fill in the <code>config.json</code> path here</p>
+<h3 id="handle-cert-for-accessing-docker-registry">Handle Cert for Accessing Docker Registry<a class="headerlink" href="#handle-cert-for-accessing-docker-registry" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pure kuberentes</li>
+<li>Copy the domain.crt file to <code>/etc/docker/certs.d/&lt;local_registry_host_name&gt;:&lt;local_registry_host_port&gt;/ca.crt</code> on every kubernetes node . You do not need to restart Docker</li>
+<li>OCP 4</li>
+<li>Copy the <code>domain.crt</code> to cluster and rename it to <code>ca.crt</code></li>
+<li>Create configmap and patch to use the cert</li>
+</ul>
+<div class="highlight"><pre><span></span><code># oc create configmap registry-config --from-file=${MIRROR_ADDR_HOSTNAME}..${local_registry_host_port}=$path/ca.crt -n openshift-config
+
+# oc patch image.config.openshift.io/cluster --patch &#39;{&quot;spec&quot;:{&quot;additionalTrustedCA&quot;:{&quot;name&quot;:&quot;registry-config&quot;}}}&#39; --type=merge
+</code></pre></div>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      
+    
+  </body>
+</html>

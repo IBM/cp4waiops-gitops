@@ -101,7 +101,7 @@ data:
                     value: 150M
 
 
-    - name: zen-sizing
+    - name: ibm-zen-config
       data:
         zen: |-
           scale_data:

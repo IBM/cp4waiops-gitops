@@ -100,7 +100,7 @@ data:
                   - name: CASSANDRA_HEAP_NEWSIZE
                     value: {{.Values.res.cassandra.heap.newSize}}
 
-    - name: zen-sizing
+    - name: ibm-zen-config
       data:
         zen: |-
           scale_data:

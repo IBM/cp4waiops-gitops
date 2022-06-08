@@ -24,11 +24,11 @@ This repository is about using OpenShift GitOps to deployCloud Pak for Watson AI
 
 Please refer to the following documents and decide how you want to deploy CP4WAIOps:
 
-- [NON OFFICIAL - CP4WAIOps 3.1 Online Install](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops-31.md)
-- [NON OFFICIAL - CP4WAIOps 3.2 Online Install](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops-32.md)
-- [NON OFFICIAL - CP4WAIOps 3.2 Airgap Install](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-airgap-32.md)
-- [CP4WAIOps 3.3 Tech Preview Online Install](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops-33.md)
-- [CP4WAIOps 3.4 Online Install](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md)
+- [NON OFFICIAL - CP4WAIOps 3.1 Online Install](./docs/how-to-deploy-cp4waiops-31.md)
+- [NON OFFICIAL - CP4WAIOps 3.2 Online Install](./docs/how-to-deploy-cp4waiops-32.md)
+- [NON OFFICIAL - CP4WAIOps 3.2 Airgap Install](./docs/how-to-deploy-airgap-32.md)
+- [CP4WAIOps 3.3 Tech Preview Online Install](./docs/how-to-deploy-cp4waiops-33.md)
+- [CP4WAIOps 3.4 Online Install](./docs/how-to-deploy-cp4waiops.md)
 
 ## More Install Options for CP4WAIOps using GitOps
 

@@ -6,46 +6,6 @@ metadata:
   namespace: resource-locker-operator
 spec:
   patches:
-  - id: nginx-locker
-    patchTemplate: |
-      spec:
-        replicas: {{.Values.res.nginx.replicas}}
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: ibm-nginx
-      namespace: {{.Values.aiManager.namespace}}
-  - id: usermgmt-locker
-    patchTemplate: |
-      spec:
-        replicas: {{.Values.res.usermgmt.replicas}}
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: usermgmt
-      namespace: {{.Values.aiManager.namespace}}
-  - id: zen-core-locker
-    patchTemplate: |
-      spec:
-        replicas: {{.Values.res.zencore.replicas}}
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: zen-core
-      namespace: {{.Values.aiManager.namespace}}
-  - id: zen-core-api-locker
-    patchTemplate: |
-      spec:
-        replicas: {{.Values.res.zencoreapi.replicas}}
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: zen-core-api
-      namespace: {{.Values.aiManager.namespace}}
   - id: automationbase-locker
     patchTemplate: |
       spec:

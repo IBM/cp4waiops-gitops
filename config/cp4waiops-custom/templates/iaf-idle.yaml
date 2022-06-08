@@ -1,0 +1,46 @@
+{{- if eq .Values.profile "x-small-idle"  }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: iaf-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: automationbase-locker
+    patchTemplate: |
+      spec:
+        kafka:
+          entityOperator:
+            tlsSidecar:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "128Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "64Mi"
+            topicOperator:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "256Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+            userOperator:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "256Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

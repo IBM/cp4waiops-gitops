@@ -1,0 +1,362 @@
+###################################
+# Custom Profile
+###################################
+
+res:
+  cassandra:
+    replicas: 1
+    limits:
+      cpu: 600m
+      memory: 1500Mi
+    requests:
+      cpu: 200m
+      memory: 768Mi
+    heap:
+      size: 600M
+      newSize: 150M
+
+  couchdbcluster:
+    db:
+      limits:
+        cpu: "700m"
+        memory: "768Mi"
+      requests:
+        cpu: "250m"
+        memory: "128Mi"
+    search:
+      limits:
+        cpu: "500m"
+        memory: "250Mi"
+      requests:
+        cpu: "250m"
+        memory: "128Mi"
+    mgmt:
+      limits:
+        cpu: "500m"
+        memory: "128Mi"
+      requests:
+        cpu: "250m"
+        memory: "64Mi"
+
+  redis:
+    member:
+      db:
+        limits:
+          cpu: "500m"
+          memory: 512Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      mgmt:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      proxy:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      proxylog:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+    sentinel:
+      db:
+        limits:
+          cpu: "500m"
+          memory: 512Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      mgmt:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      proxy:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+      proxylog:
+        limits:
+          cpu: "500m"
+          memory: 150Mi
+        requests:
+          cpu: "60m"
+          memory: 64Mi
+
+  lifecycleservice:
+    logstash:
+      limits:
+        cpu: 625m
+        memory: 1536Mi
+      requests:
+        cpu: 250m
+        memory: 600Mi
+    taskManager:
+      limits:
+        cpu: 500m
+        memory: 1280Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    jobManager:
+      limits:
+        cpu: 600m
+        memory: 768Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+  probablecause:
+    replicas: 1
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 400m
+      memory: 256Mi
+  classifier:
+    replicas: 1
+    limits:
+      cpu: "1"
+      memory: 2048Mi
+    requests:
+      cpu: 400m
+      memory: 128Mi
+  sparkworker:
+    replicas: 1
+    limits:
+      cpu: "1"
+      memory: 1000Mi
+    requests:
+      cpu: 350m
+      memory: 512Mi
+  sparkpipelinecomposer:
+    replicas: 1
+    limits:
+      cpu: 250m
+      memory: 896Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
+
+  ncodlapi:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ncodlif:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ncodlir:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  ncodljobmgr:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  ncodlstd:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  logstash:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1792Mi
+    requests:
+      cpu: 100m
+      memory: 512Mi
+  ncobackup:
+    replicas: 1
+    agggate:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+    objserv:
+      limits:
+        cpu: 500m
+        memory: 1024Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+  ncoprimary:
+    replicas: 1
+    limits:
+      cpu: 500m
+      memory: 1024Mi  
+    requests:
+      cpu: 125m
+      memory: 128Mi
+
+  changeRisk:
+    limits:
+      cpu: 750m
+      memory: 1400Mi
+    requests:
+      cpu: 500m
+      memory: 1000Mi
+  logAnomaly:
+    limits:
+      cpu: 500m
+      memory: 2048Mi
+    requests:
+      cpu: 250m
+      memory: 128Mi
+  aiPlatformApiServer:
+    limits:
+      memory: 2Gi
+      cpu: 200m
+    requests:
+      memory: 128Mi
+      cpu: 100m
+
+  nginx:
+    replicas: 1
+
+  usermgmt:
+    replicas: 1
+
+  zencore:
+    replicas: 1
+
+  zencoreapi:
+    replicas: 1
+
+  elasticsearch:
+    replicas: 1
+    javaOps: "-Xms512M -Xmx512M"
+    elasticsearch:
+      limits:
+        cpu: 500m
+        memory: 1536Mi
+      requests:
+        cpu: 250m
+        memory: 768Mi
+    tlsproxy:
+      limits:
+        cpu: 500m
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+
+  kafka:
+    entityOperator:
+      tlsSidecar:
+        limits:
+          cpu: 500m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 64Mi
+      topicOperator:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      userOperator:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+    kafka:
+      replicas: 1
+      limits:
+        cpu: 500m
+        memory: 1280Mi
+      requests:
+        cpu: 250m
+        memory: 500Mi
+    zookeeper:
+      replicas: 1
+      limits:
+        cpu: 1000m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  flink:
+    jobmanager:
+      replicas: 1
+      jobmanager:
+        limits:
+          cpu: 750m
+          memory: 2560Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      tlsproxy:
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      heapSize: 512mb
+      jvmMetaSpaceSize: 128mb
+    taskmanager:
+      replicas: 1
+      taskmanager:
+        limits:
+          cpu: 1600m
+          memory: 5888Mi
+        requests:
+          cpu: 500m
+          memory: 512Mi
+      heapSize: 4096mb
+      managedSize: 512mb
+      numberOfTaskSlots: 8
+
+  aiopsedgeOperator:
+    replicas: 1
+
+  kong:
+    replicas: 1
+
+  aimanager:
+    maxLearners: 1
+

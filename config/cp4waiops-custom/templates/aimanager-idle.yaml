@@ -1,0 +1,48 @@
+{{- if eq .Values.profile "x-small-idle"  }}
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanagermainprod-locker
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: "750m"
+                memory: "1400Mi"
+              requests:
+                cpu: "500m"
+                memory: "1000Mi"
+          logAnomaly:
+            resources:
+              limits:
+                cpu: "500m"
+                memory: "2048Mi"
+              requests:
+                cpu: "250m"
+                memory: "128Mi"
+          aiPlatformApiServer:
+            resources:
+              limits:
+                cpu: "200m"
+                memory: "2Gi"
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
+          global:
+            logAnomaly:
+              replicas: 1
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

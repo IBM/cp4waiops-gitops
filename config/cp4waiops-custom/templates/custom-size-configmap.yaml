@@ -1,3 +1,4 @@
+{{- if eq .Values.profile "x-small"  }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -98,6 +99,32 @@ data:
                     value: {{.Values.res.cassandra.heap.size}}
                   - name: CASSANDRA_HEAP_NEWSIZE
                     value: {{.Values.res.cassandra.heap.newSize}}
+
+    - name: zen-sizing
+      data:
+        zen: |-
+          scale_data:
+            Usermgmt:
+              name: usermgmt
+              kind: Deployment
+              container: usermgmt-container
+              replicas: {{.Values.res.usermgmt.replicas}}
+            Nginx:
+              name: ibm-nginx
+              kind: Deployment
+              container: ibm-nginx-container
+              replicas: {{.Values.res.nginx.replicas}}
+            ZenCore:
+              name: zen-core
+              kind: Deployment
+              container: zen-core-container
+              replicas: {{.Values.res.zencore.replicas}}
+            ZenCoreApi:
+              name: zen-core-api
+              kind: Deployment
+              container: zen-core-api-container
+              replicas: {{.Values.res.zencoreapi.replicas}}
+                      
     operandconfigs:
     - name: aimanager-operator
       spec:
@@ -353,3 +380,4 @@ data:
                   requests:
                     cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
                     memory: "{{.Values.res.ncoprimary.requests.memory}}"
+{{- end }}

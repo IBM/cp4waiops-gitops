@@ -96,6 +96,31 @@ data:
                     value: 600M
                   - name: CASSANDRA_HEAP_NEWSIZE
                     value: 150M
+    - name: ibm-zen-config
+      data:
+        zen: |-
+          scale_data:
+            Usermgmt:
+              name: usermgmt
+              kind: Deployment
+              container: usermgmt-container
+              replicas: 1
+            Nginx:
+              name: ibm-nginx
+              kind: Deployment
+              container: ibm-nginx-container
+              replicas: 1
+            ZenCore:
+              name: zen-core
+              kind: Deployment
+              container: zen-core-container
+              replicas: 1
+            ZenCoreApi:
+              name: zen-core-api
+              kind: Deployment
+              container: zen-core-api-container
+              replicas: 1
+                      
     operandconfigs:
     - name: aimanager-operator
       spec:

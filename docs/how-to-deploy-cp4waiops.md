@@ -569,7 +569,7 @@ Congratulations! You are ready to play with CP4WAIOps!
 
 ## Install CP4WAIOps from Command Line
 
-### Cli Login to Argo CD
+### Login to Argo CD (Cli)
 
 Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
 
@@ -590,7 +590,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### Cli Storage Considerations
+### Storage Considerations (Cli)
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
 
@@ -608,9 +608,9 @@ argocd app create ceph \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
-### Cli Option 1: Install AI Manager and Event Manager Separately
+### Option 1: Install AI Manager and Event Manager Separately (Cli)
 
-#### Cli Grant Argo CD Cluster Admin Permission
+#### Grant Argo CD Cluster Admin Permission (Cli)
 
 Apply the following YAML manifest to the cluster where Argo CD runs:
 
@@ -629,7 +629,7 @@ roleRef:
   name: cluster-admin
 ```
 
-#### Cli Install shared components
+#### Install shared components (Cli)
 
 ```sh
 argocd app create cp-shared \
@@ -645,7 +645,7 @@ argocd app create cp-shared \
       --helm-set spec.argocd_namespace=openshift-gitops
 ```
 
-#### Cli Install AI Manager
+#### Install AI Manager (Cli)
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
@@ -669,7 +669,7 @@ argocd app create aimanager-app \
       --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
 
-#### Cli Install Event Manager
+#### Install Event Manager (Cli)
 
 To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
@@ -696,7 +696,7 @@ NOTE:
 
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Cli Option 2: (**experimental**)Install Using All-in-One Configuration
+### Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 
@@ -727,7 +727,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Cli Verify CP4WAIOps Installation
+### Verify CP4WAIOps Installation (Cli)
 
 To verify the CP4WAIOps installation, run following command:
 

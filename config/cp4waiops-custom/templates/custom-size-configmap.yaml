@@ -1,4 +1,4 @@
-{{- if eq .Values.profile "x-small"  }}
+{{- if eq .Values.profile "x-small-custom" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -380,4 +380,116 @@ data:
                   requests:
                     cpu: "{{.Values.res.ncoprimary.requests.cpu}}"
                     memory: "{{.Values.res.ncoprimary.requests.memory}}"
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanagermainprod-locker
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: "{{.Values.res.changeRisk.limits.cpu}}"
+                memory: "{{.Values.res.changeRisk.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.changeRisk.requests.cpu}}"
+                memory: "{{.Values.res.changeRisk.requests.memory}}"
+          logAnomaly:
+            resources:
+              limits:
+                cpu: "{{.Values.res.logAnomaly.limits.cpu}}"
+                memory: "{{.Values.res.logAnomaly.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.logAnomaly.requests.cpu}}"
+                memory: "{{.Values.res.logAnomaly.requests.memory}}"
+          aiPlatformApiServer:
+            resources:
+              limits:
+                cpu: "{{.Values.res.aiPlatformApiServer.limits.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.limits.memory}}"
+              requests:
+                cpu: "{{.Values.res.aiPlatformApiServer.requests.cpu}}"
+                memory: "{{.Values.res.aiPlatformApiServer.requests.memory}}"
+          global:
+            logAnomaly:
+              replicas: 1
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.aiopsedgeOperator.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: iaf-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: automationbase-locker
+    patchTemplate: |
+      spec:
+        kafka:
+          entityOperator:
+            tlsSidecar:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.tlsSidecar.requests.memory}}"
+            topicOperator:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.topicOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.topicOperator.requests.memory}}"
+            userOperator:
+              resources:
+                limits:
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.limits.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.limits.memory}}"
+                requests:
+                  cpu: "{{.Values.res.kafka.entityOperator.userOperator.requests.cpu}}"
+                  memory: "{{.Values.res.kafka.entityOperator.userOperator.requests.memory}}"
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
 {{- end }}

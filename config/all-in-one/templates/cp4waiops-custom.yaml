@@ -1,4 +1,4 @@
-{{- if or (eq .Values.cp4waiops.profile "x-small")   (eq .Values.cp4waiops.profile "x-small-idle")  }}
+{{- if or (eq .Values.cp4waiops.profile "x-small")  (eq .Values.cp4waiops.profile "x-small-idle") (eq .Values.cp4waiops.profile "x-small-custom") }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -30,7 +30,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-          {{- if eq .Values.cp4waiops.profile "x-small" }}
+          {{- if eq .Values.cp4waiops.profile "x-small-custom" }}
             - values.x-small.yaml
           {{- end }}
           parameters:

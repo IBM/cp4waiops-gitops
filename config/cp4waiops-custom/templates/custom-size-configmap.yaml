@@ -99,32 +99,6 @@ data:
                     value: {{.Values.res.cassandra.heap.size}}
                   - name: CASSANDRA_HEAP_NEWSIZE
                     value: {{.Values.res.cassandra.heap.newSize}}
-
-    - name: ibm-zen-config
-      data:
-        zen: |-
-          scale_data:
-            Usermgmt:
-              name: usermgmt
-              kind: Deployment
-              container: usermgmt-container
-              replicas: {{.Values.res.usermgmt.replicas}}
-            Nginx:
-              name: ibm-nginx
-              kind: Deployment
-              container: ibm-nginx-container
-              replicas: {{.Values.res.nginx.replicas}}
-            ZenCore:
-              name: zen-core
-              kind: Deployment
-              container: zen-core-container
-              replicas: {{.Values.res.zencore.replicas}}
-            ZenCoreApi:
-              name: zen-core-api
-              kind: Deployment
-              container: zen-core-api-container
-              replicas: {{.Values.res.zencoreapi.replicas}}
-                      
     operandconfigs:
     - name: aimanager-operator
       spec:
@@ -431,26 +405,6 @@ spec:
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
 metadata:
-  name: appmanager-resource-locker
-  namespace: resource-locker-operator
-spec:
-  patches:
-  - id: aiopsedge-operator-controller-manager-locker
-    patchTemplate: |
-      spec:
-        replicas: {{.Values.res.aiopsedgeOperator.replicas}}
-    patchType: application/strategic-merge-patch+json
-    targetObjectRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: aiopsedge-operator-controller-manager
-      namespace: {{.Values.aiManager.namespace}}
-  serviceAccountRef:
-    name: resource-locker-operator-controller-manager
----
-apiVersion: redhatcop.redhat.io/v1alpha1
-kind: ResourceLocker
-metadata:
   name: iaf-resource-locker
   namespace: resource-locker-operator
 spec:
@@ -489,6 +443,26 @@ spec:
       apiVersion: base.automation.ibm.com/v1beta1
       kind: AutomationBase
       name: automationbase-sample
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-locker
+    patchTemplate: |
+      spec:
+        replicas: {{.Values.res.aiopsedgeOperator.replicas}}
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
       namespace: {{.Values.aiManager.namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager

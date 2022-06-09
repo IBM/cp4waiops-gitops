@@ -55,4 +55,14 @@
          <lastmod>2022-06-09</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops-daily-build/</loc>
+         <lastmod>2022-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops/</loc>
+         <lastmod>2022-06-09</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>

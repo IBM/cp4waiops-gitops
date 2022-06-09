@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops-33/">
+        <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops-daily-build/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
     
     
       
-        <title>Online Install - IBM Cloud Pak for Watson AIOps</title>
+        <title>How to deploy cp4waiops daily build - IBM Cloud Pak for Watson AIOps</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Online Install
+              How to deploy cp4waiops daily build
             
           </span>
         </div>
@@ -169,15 +169,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link md-tabs__link--active">
+      <a href=".." class="md-tabs__link">
         GitOps Install
       </a>
     </li>
@@ -240,14 +238,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
       
       
       
@@ -331,16 +327,14 @@
               
   
   
-    
-  
   
     
       
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
       
       
       
@@ -361,229 +355,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Online Install
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../how-to-deploy-cp4waiops-33/" class="md-nav__link">
         Online Install
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisite" class="md-nav__link">
-    Prerequisite
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-cp4waiops-from-ui" class="md-nav__link">
-    Install CP4WAIOps from UI
-  </a>
-  
-    <nav class="md-nav" aria-label="Install CP4WAIOps from UI">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#login-to-argo-cd" class="md-nav__link">
-    Login to Argo CD
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storage-considerations" class="md-nav__link">
-    Storage Considerations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-1-install-ai-manager-and-event-manager-separately" class="md-nav__link">
-    Option 1: Install AI Manager and Event Manager Separately
-  </a>
-  
-    <nav class="md-nav" aria-label="Option 1: Install AI Manager and Event Manager Separately">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grant-argo-cd-cluster-admin-permission" class="md-nav__link">
-    Grant Argo CD Cluster Admin Permission
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager" class="md-nav__link">
-    Install AI Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-event-manager" class="md-nav__link">
-    Install Event Manager
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-install-using-all-in-one-configuration" class="md-nav__link">
-    Option 2: Install Using All-in-One Configuration
-  </a>
-  
-    <nav class="md-nav" aria-label="Option 2: Install Using All-in-One Configuration">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager-and-event-manager-in-one-go" class="md-nav__link">
-    Install AI Manager and Event Manager in One Go
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-cp4waiops-using-custom-build" class="md-nav__link">
-    Install CP4WAIOps using Custom Build
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-cp4waiops-installation" class="md-nav__link">
-    Verify CP4WAIOps Installation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#access-cp4waiops" class="md-nav__link">
-    Access CP4WAIOps
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-cp4waiops-from-command-line" class="md-nav__link">
-    Install CP4WAIOps from Command Line
-  </a>
-  
-    <nav class="md-nav" aria-label="Install CP4WAIOps from Command Line">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#login-to-argo-cd_1" class="md-nav__link">
-    Login to Argo CD
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storage-considerations_1" class="md-nav__link">
-    Storage Considerations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-1-install-ai-manager-and-event-manager-separately_1" class="md-nav__link">
-    Option 1: Install AI Manager and Event Manager Separately
-  </a>
-  
-    <nav class="md-nav" aria-label="Option 1: Install AI Manager and Event Manager Separately">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grant-argo-cd-cluster-admin-permission_1" class="md-nav__link">
-    Grant Argo CD Cluster Admin Permission
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-ai-manager_1" class="md-nav__link">
-    Install AI Manager
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-event-manager_1" class="md-nav__link">
-    Install Event Manager
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#option-2-install-using-all-in-one-configuration_1" class="md-nav__link">
-    Option 2: Install Using All-in-One Configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verify-cp4waiops-installation_1" class="md-nav__link">
-    Verify CP4WAIOps Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -742,9 +518,43 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#grant-argo-cd-cluster-admin-permission" class="md-nav__link">
+    Grant Argo CD Cluster Admin Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#storage-considerations" class="md-nav__link">
     Storage Considerations
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-an-entitlement-key" class="md-nav__link">
+    Obtain an entitlement key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-the-ocp-global-pull-secret" class="md-nav__link">
+    Update the OCP global pull secret
+  </a>
+  
+    <nav class="md-nav" aria-label="Update the OCP global pull secret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-the-global-pull-secret-using-the-openshift-console" class="md-nav__link">
+    Update the global pull secret using the OpenShift console
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -755,13 +565,6 @@
   
     <nav class="md-nav" aria-label="Option 1: Install AI Manager and Event Manager Separately">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#grant-argo-cd-cluster-admin-permission" class="md-nav__link">
-    Grant Argo CD Cluster Admin Permission
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#install-ai-manager" class="md-nav__link">
@@ -798,8 +601,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-cp4waiops-using-custom-build" class="md-nav__link">
-    Install CP4WAIOps using Custom Build
+  <a href="#install-cp4waiops-using-daily-buildcustom-build" class="md-nav__link">
+    Install CP4WAIOps using Daily Build/Custom Build
   </a>
   
 </li>
@@ -915,7 +718,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-deploy-cp4waiops-33.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/IBM/cp4waiops-gitops/edit/master/docs/how-to-deploy-cp4waiops-daily-build.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
@@ -929,14 +732,17 @@
 <li><a href="#prerequisite">Prerequisite</a></li>
 <li><a href="#install-cp4waiops-from-ui">Install CP4WAIOps from UI</a><ul>
 <li><a href="#login-to-argo-cd">Login to Argo CD</a></li>
-<li><a href="#storage-considerations">Storage Considerations</a></li>
-<li><a href="#option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately</a></li>
 <li><a href="#grant-argo-cd-cluster-admin-permission">Grant Argo CD Cluster Admin Permission</a></li>
+<li><a href="#storage-considerations">Storage Considerations</a></li>
+<li><a href="#obtain-an-entitlement-key">Obtain an entitlement key</a></li>
+<li><a href="#update-the-ocp-global-pull-secret">Update the OCP global pull secret</a></li>
+<li><a href="#update-the-global-pull-secret-using-the-openshift-console">Update the global pull secret using the OpenShift console</a></li>
+<li><a href="#option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately</a></li>
 <li><a href="#install-ai-manager">Install AI Manager</a></li>
 <li><a href="#install-event-manager">Install Event Manager</a></li>
 <li><a href="#option-2-install-using-all-in-one-configuration">Option 2: Install Using All-in-One Configuration</a></li>
 <li><a href="#install-ai-manager-and-event-manager-in-one-go">Install AI Manager and Event Manager in One Go</a></li>
-<li><a href="#install-cp4waiops-using-custom-build">Install CP4WAIOps using Custom Build</a></li>
+<li><a href="#install-cp4waiops-using-daily-buildcustom-build">Install CP4WAIOps using Daily Build/Custom Build</a></li>
 <li><a href="#verify-cp4waiops-installation">Verify CP4WAIOps Installation</a></li>
 <li><a href="#access-cp4waiops">Access CP4WAIOps</a></li>
 </ul>
@@ -968,9 +774,25 @@
 <p><img alt="w" src="../images/gitops-menu.png" /></p>
 <p>Argo CD UI will be popped up and you can login using <code>LOG IN VIA OPENSHIFT</code>.</p>
 <p><img alt="w" src="../images/gitops-login.png" /></p>
+<h3 id="grant-argo-cd-cluster-admin-permission">Grant Argo CD Cluster Admin Permission<a class="headerlink" href="#grant-argo-cd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
+<p>From Red Hat OpenShift Console, go to <code>User Management</code> &gt; <code>RoleBindings</code> &gt; <code>Create binding</code>. Use the form view to configure the properties for the <code>ClusterRoleBinding</code> with values as follows, and click the <code>Create</code> button.</p>
+<ul>
+<li>Binding type</li>
+<li>Cluster-wide role binding (ClusterRoleBinding)</li>
+<li>RoleBinding</li>
+<li>Name: argocd-admin</li>
+<li>Role</li>
+<li>Role Name: cluster-admin</li>
+<li>Subject</li>
+<li>ServiceAccount: check it</li>
+<li>Subject namespace: openshift-gitops</li>
+<li>Subject name: openshift-gitops-argocd-application-controller</li>
+</ul>
 <h3 id="storage-considerations">Storage Considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
 <p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
 <p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">AWS EFS guide</a> for details.
+You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS configuration instruction</a></p>
 <p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then click <code>CREATE</code> button.</p>
 <ul>
 <li>GENERAL</li>
@@ -1035,21 +857,64 @@
 <span class="go">rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m</span>
 <span class="go">rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m</span>
 </code></pre></div>
+<h3 id="obtain-an-entitlement-key">Obtain an entitlement key<a class="headerlink" href="#obtain-an-entitlement-key" title="Permanent link">&para;</a></h3>
+<p>If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:</p>
+<ol>
+<li>
+<p>Go to the <a href="https://myibm.ibm.com/products-services/containerlibrary">Container software library</a>.</p>
+</li>
+<li>
+<p>Click "Copy key."</p>
+</li>
+<li>
+<p>Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.</p>
+</li>
+<li>
+<p>(Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">IBM_ENTITLEMENT_KEY</span><span class="o">=</span>the key from the previous steps
+podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><span class="si">${</span><span class="nv">IBM_ENTITLEMENT_KEY</span><span class="p">:?</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="update-the-ocp-global-pull-secret">Update the OCP global pull secret<a class="headerlink" href="#update-the-ocp-global-pull-secret" title="Permanent link">&para;</a></h3>
+<p><a href="https://docs.openshift.com/container-platform/4.7/openshift_images/managing_images/using-image-pull-secrets.html">Update the OCP global pull secret</a> with the entitlement key.</p>
+<p>Keep in mind that the registry user for that secret is "cp". A common mistakes is to assume the registry user is the name or email of the user owning the entitlement key.</p>
+<h4 id="update-the-global-pull-secret-using-the-openshift-console">Update the global pull secret using the OpenShift console<a class="headerlink" href="#update-the-global-pull-secret-using-the-openshift-console" title="Permanent link">&para;</a></h4>
+<ol>
+<li>
+<p>Navigate to the "Workloads &gt; Secrets" page in the "Administrator" perspective.</p>
+</li>
+<li>
+<p>Select the object "pull-secret".</p>
+</li>
+<li>
+<p>Click on "Actions -&gt; Edit secret".</p>
+</li>
+<li>
+<p>Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:</p>
+</li>
+<li>
+<p>"Registry Server Address" cp.icr.io</p>
+</li>
+<li>"Username": cp</li>
+<li>"Password": paste the entitlement key you copied from the <a href="#obtain-an-entitlement-key">Obtain an entitlement key</a> setp</li>
+<li>
+<p>"Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration</p>
+</li>
+<li>
+<p>Add another credentials for daily build repo <code>hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com</code></p>
+</li>
+<li>"Registry Server Address" hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com</li>
+<li>"Username": [Your Email address]</li>
+<li>"Password": paste the api token of the account above</li>
+<li>
+<p>"Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration</p>
+</li>
+<li>
+<p>Click on "Save"</p>
+</li>
+</ol>
 <h3 id="option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately<a class="headerlink" href="#option-1-install-ai-manager-and-event-manager-separately" title="Permanent link">&para;</a></h3>
-<h4 id="grant-argo-cd-cluster-admin-permission">Grant Argo CD Cluster Admin Permission<a class="headerlink" href="#grant-argo-cd-cluster-admin-permission" title="Permanent link">&para;</a></h4>
-<p>From Red Hat OpenShift Console, go to <code>User Management</code> &gt; <code>RoleBindings</code> &gt; <code>Create binding</code>. Use the form view to configure the properties for the <code>ClusterRoleBinding</code> with values as follows, and click the <code>Create</code> button.</p>
-<ul>
-<li>Binding type</li>
-<li>Cluster-wide role binding (ClusterRoleBinding)</li>
-<li>RoleBinding</li>
-<li>Name: argocd-admin</li>
-<li>Role</li>
-<li>Role Name: cluster-admin</li>
-<li>Subject</li>
-<li>ServiceAccount: check it</li>
-<li>Subject namespace: openshift-gitops</li>
-<li>Subject name: openshift-gitops-argocd-application-controller</li>
-</ul>
 <h4 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h4>
 <p>You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:</p>
 <ul>
@@ -1066,8 +931,6 @@
 <li>Namespace: cp4waiops</li>
 <li>PARAMETERS</li>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
-<li>spec.dockerUsername: cp</li>
-<li>spec.dockerPassword: REPLACE_IT</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
 <li>spec.aiManager.channel: v3.3</li>
@@ -1081,7 +944,6 @@
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
-<li>For <code>spec.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
 </ul>
 <h4 id="install-event-manager">Install Event Manager<a class="headerlink" href="#install-event-manager" title="Permanent link">&para;</a></h4>
 <p>You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:</p>
@@ -1099,8 +961,6 @@
 <li>Namespace: noi </li>
 <li>PARAMETERS</li>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
-<li>spec.dockerUsername: cp</li>
-<li>spec.dockerPassword: REPLACE_IT</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
 <li>spec.eventManager.version: 1.6.4</li>
@@ -1112,7 +972,6 @@
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
-<li>For <code>spec.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
 <li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
 </ul>
 <h3 id="option-2-install-using-all-in-one-configuration">Option 2: Install Using All-in-One Configuration<a class="headerlink" href="#option-2-install-using-all-in-one-configuration" title="Permanent link">&para;</a></h3>
@@ -1208,18 +1067,6 @@
 <td>The CP4WAIOps deployment profile, e.g.: x-small, small, large.</td>
 </tr>
 <tr>
-<td>cp4waiops.dockerUsername</td>
-<td>string</td>
-<td>cp</td>
-<td>The username of image registry used to pull images.</td>
-</tr>
-<tr>
-<td>cp4waiops.dockerPassword</td>
-<td>string</td>
-<td>REPLACE_IT</td>
-<td>The password of image registry used to pull images.</td>
-</tr>
-<tr>
 <td>cp4waiops.aiManager.enabled</td>
 <td>bool</td>
 <td>true</td>
@@ -1259,12 +1106,11 @@
 </table>
 <p>NOTE:</p>
 <ul>
-<li>For <code>cp4waiops.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
 <li>For <code>cp4waiops.profile</code>, the profile <code>x-small</code> is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as <code>small</code> or <code>large</code> instead.</li>
 <li>For <code>cp4waiops.eventManager.enabled</code>, it needs to be false if you use <code>x-small</code> profile as it only covers AI Manager, not including Event Manager.</li>
 <li>For <code>cp4waiops.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
 </ul>
-<h4 id="install-cp4waiops-using-custom-build">Install CP4WAIOps using Custom Build<a class="headerlink" href="#install-cp4waiops-using-custom-build" title="Permanent link">&para;</a></h4>
+<h4 id="install-cp4waiops-using-daily-buildcustom-build">Install CP4WAIOps using Daily Build/Custom Build<a class="headerlink" href="#install-cp4waiops-using-daily-buildcustom-build" title="Permanent link">&para;</a></h4>
 <p>The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.</p>
 <p>Just use the install parameters listed in following table when you create the Argo CD App:</p>
 <table>
@@ -1280,13 +1126,13 @@
 <tr>
 <td>cp4waiops.aiManager.imageCatalog</td>
 <td>string</td>
-<td>icr.io/cpopen/ibm-operator-catalog:latest</td>
+<td>from the <a href="https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7">slack avt channel</a></td>
 <td>The image catalog for AI Manager.</td>
 </tr>
 <tr>
 <td>cp4waiops.aiManager.channel</td>
 <td>string</td>
-<td>v3.3</td>
+<td>from the <a href="https://ibm-cloudplatform.slack.com/archives/C01U44EA2P7">slack avt channel</a></td>
 <td>The subscription channel for AI Manager.</td>
 </tr>
 <tr>
@@ -1573,8 +1419,6 @@
       --dest-namespace cp4waiops <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.imageCatalog<span class="o">=</span>icr.io/cpopen/ibm-operator-catalog:latest <span class="se">\</span>
-      --helm-set spec.dockerUsername<span class="o">=</span>cp <span class="se">\</span>
-      --helm-set spec.dockerPassword<span class="o">=</span>REPLACE_IT <span class="se">\</span>
       --helm-set spec.storageClass<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.storageClassLargeBlock<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.aiManager.namespace<span class="o">=</span>cp4waiops <span class="se">\</span>
@@ -1586,9 +1430,6 @@
       --helm-set spec.aiManager.pakModules.connection.enabled<span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <p>NOTE:</p>
-<ul>
-<li>For <code>spec.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
-</ul>
 <h4 id="install-event-manager_1">Install Event Manager<a class="headerlink" href="#install-event-manager_1" title="Permanent link">&para;</a></h4>
 <p>To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:</p>
 <div class="highlight"><pre><span></span><code>argocd app create eventmanager-app <span class="se">\</span>
@@ -1600,8 +1441,6 @@
       --dest-namespace noi <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.imageCatalog<span class="o">=</span>icr.io/cpopen/ibm-operator-catalog:latest <span class="se">\</span>
-      --helm-set spec.dockerUsername<span class="o">=</span>cp <span class="se">\</span>
-      --helm-set spec.dockerPassword<span class="o">=</span>REPLACE_IT <span class="se">\</span>
       --helm-set spec.storageClass<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.storageClassLargeBlock<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.eventManager.namespace<span class="o">=</span>noi <span class="se">\</span>
@@ -1612,7 +1451,6 @@
 </code></pre></div>
 <p>NOTE:</p>
 <ul>
-<li>For <code>spec.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
 <li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
 </ul>
 <h3 id="option-2-install-using-all-in-one-configuration_1">Option 2: Install Using All-in-One Configuration<a class="headerlink" href="#option-2-install-using-all-in-one-configuration_1" title="Permanent link">&para;</a></h3>
@@ -1629,8 +1467,6 @@
       --helm-set argocd.allowLocalDeploy<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set rookceph.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set cp4waiops.version<span class="o">=</span>v3.3 <span class="se">\</span>
-      --helm-set cp4waiops.dockerUsername<span class="o">=</span>cp <span class="se">\</span>
-      --helm-set cp4waiops.dockerPassword<span class="o">=</span>REPLACE_IT <span class="se">\</span>
       --helm-set cp4waiops.profile<span class="o">=</span>small <span class="se">\</span>
       --helm-set cp4waiops.aiManager.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set cp4waiops.aiManager.namespace<span class="o">=</span>cp4waiops <span class="se">\</span>
@@ -1641,7 +1477,6 @@
 </code></pre></div>
 NOTE:</p>
 <ul>
-<li>For <code>cp4waiops.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
 <li>For <code>cp4waiops.profile</code>, the profile <code>x-small</code> is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as <code>small</code> or <code>large</code> instead.</li>
 <li>For <code>cp4waiops.eventManager.enabled</code>, it needs to be false if you use <code>x-small</code> profile as it only covers AI Manager, not including Event Manager.</li>
 <li>For <code>cp4waiops.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
@@ -1677,42 +1512,6 @@ kubectl get pod -n noi
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../how-to-deploy-cp4waiops/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Online Install" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Online Install
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../cp4waiops-custom-install/" class="md-footer__link md-footer__link--next" aria-label="Next: Customize CP4WAIOps Install" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Customize CP4WAIOps Install
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

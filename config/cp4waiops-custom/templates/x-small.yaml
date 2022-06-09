@@ -409,6 +409,46 @@ metadata:
   namespace: resource-locker-operator
 spec:
   patches:
+  - id: nginx-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-nginx
+      namespace: cp4waiops
+  - id: usermgmt-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: usermgmt
+      namespace: cp4waiops
+  - id: zen-core-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core
+      namespace: cp4waiops
+  - id: zen-core-api-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core-api
+      namespace: cp4waiops
   - id: automationbase-locker
     patchTemplate: |
       spec:

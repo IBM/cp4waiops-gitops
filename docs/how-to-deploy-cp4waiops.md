@@ -52,6 +52,21 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
 
+### Grant Argo CD Cluster Admin Permission
+
+From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+
+- Binding type
+  - Cluster-wide role binding (ClusterRoleBinding)
+- RoleBinding
+  - Name: argocd-admin
+- Role
+  - Role Name: cluster-admin
+- Subject
+  - ServiceAccount: check it
+  - Subject namespace: openshift-gitops
+  - Subject name: openshift-gitops-argocd-application-controller
+
 ### Storage Considerations
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
@@ -174,21 +189,6 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 1. Click on "Save"
 
 ### Option 1: Install AI Manager and Event Manager Separately
-
-#### Grant Argo CD Cluster Admin Permission
-
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
-
-- Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
-- RoleBinding
-  - Name: argocd-admin
-- Role
-  - Role Name: cluster-admin
-- Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
 
 #### Install shared components
 
@@ -752,3 +752,11 @@ Wait for a while and check if all pods under namespace `cp4waiops` and `noi` are
 kubectl get pod -n cp4waiops
 kubectl get pod -n noi
 ```
+
+## Trouble Shooting
+
+### Storage
+- ceph pod reporting `cephosd: failed to lookup binary path "/rootfs/usr/sbin/lvm" on the host rootfs` error.  
+  Solution:  
+  this is due to missing lvm2 support, refer to known issue [6705](https://github.com/rook/rook/issues/6057#issuecomment-681732903) here: 
+  simply install lvm2 on all nodes will solve the problem.

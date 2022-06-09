@@ -758,5 +758,5 @@ kubectl get pod -n noi
 ### Storage
 - ceph pod reporting `cephosd: failed to lookup binary path "/rootfs/usr/sbin/lvm" on the host rootfs` error.  
   Solution:  
-  this is due to missing lvm2 support, refer to known issue [6705](https://github.com/rook/rook/issues/6057#issuecomment-681732903) here: 
-  simply install lvm2 on all nodes will solve the problem.
+  This is due to missing lvm2 support, refer to known issue [6705](https://github.com/rook/rook/issues/6057#issuecomment-681732903) here:   
+  Simply install lvm2 on all nodes will solve the problem.

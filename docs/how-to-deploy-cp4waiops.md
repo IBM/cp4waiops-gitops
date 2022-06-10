@@ -269,7 +269,12 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 NOTE:
 
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+```bash
+INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+echo ${appDomain}
+```
 
 ### Option 2: (**Experimental**) Install Using All-in-One Configuration 
 
@@ -696,7 +701,13 @@ argocd app create eventmanager-app \
 
 NOTE:
 
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+
+```bash
+INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+echo ${appDomain}
+```
 
 ### Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)
 

@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://ibm.github.io/cp4waiops-gitops/docs/how-to-deploy-cp4waiops/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.2">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4a0965b7.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.5d38496d.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
@@ -1137,7 +1137,7 @@ You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS 
 <p>You can use the filters on the left to filter out the resources, and click the resource to check logs and events.</p>
 <p><img alt="w" src="../images/res-logs.png" /></p>
 <p>You can also check all Ceph pods from command line as follows to make sure there is no pod in error state. If there are some pods in error state, you can check logs using <code>kubectl logs</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="gp">[root@api.body.cp.fyre.ibm.com ~]# </span>kubectl get po -n rook-ceph
+<p><div class="highlight"><pre><span></span><code><span class="gp">[root@api.body.cp.fyre.ibm.com ~]# </span>kubectl get po -n rook-ceph
 <span class="go">NAME                                                              READY   STATUS      RESTARTS   AGE</span>
 <span class="go">csi-cephfsplugin-7b6jk                                            3/3     Running     0          2d</span>
 <span class="go">csi-cephfsplugin-l7mvz                                            3/3     Running     0          2d</span>
@@ -1181,6 +1181,16 @@ You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS 
 <span class="go">rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m</span>
 <span class="go">rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m</span>
 </code></pre></div>
+NOTE:</p>
+<ul>
+<li>In some cases, there're multiple storageclasse been set to default, and this will causes issue, to avoid that, you can check the cluster sc with follwoing command:<br />
+<div class="highlight"><pre><span></span><code>oc get sc
+</code></pre></div>
+  In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.<br />
+  To remove the default setting from a sc, </li>
+<li>use <code>oc edit sc [STORAGE-CLASS-NAME]</code> command.</li>
+<li>remove the <code>storageclass.kubernetes.io/is-default-class: "true"</code> line under <code>annotations</code></li>
+</ul>
 <h3 id="obtain-an-entitlement-key">Obtain an entitlement key<a class="headerlink" href="#obtain-an-entitlement-key" title="Permanent link">&para;</a></h3>
 <p>If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:</p>
 <ol>
@@ -1208,6 +1218,9 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <ol>
 <li>
 <p>Navigate to the "Workloads &gt; Secrets" page in the "Administrator" perspective.</p>
+</li>
+<li>
+<p>Select the project "openshift-config".</p>
 </li>
 <li>
 <p>Select the object "pull-secret".</p>
@@ -1305,7 +1318,11 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
-<li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
+<li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:<br />
+<div class="highlight"><pre><span></span><code><span class="nv">INGRESS_OPERATOR_NAMESPACE</span><span class="o">=</span>openshift-ingress-operator
+<span class="nv">appDomain</span><span class="o">=</span><span class="sb">`</span>kubectl -n <span class="si">${</span><span class="nv">INGRESS_OPERATOR_NAMESPACE</span><span class="si">}</span> get ingresscontrollers default -o json <span class="p">|</span> python -c <span class="s2">&quot;import json,sys;obj=json.load(sys.stdin);print obj[&#39;status&#39;][&#39;domain&#39;];&quot;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">appDomain</span><span class="si">}</span>
+</code></pre></div></li>
 </ul>
 <h3 id="option-2-experimental-install-using-all-in-one-configuration">Option 2: (<strong>Experimental</strong>) Install Using All-in-One Configuration<a class="headerlink" href="#option-2-experimental-install-using-all-in-one-configuration" title="Permanent link">&para;</a></h3>
 <h4 id="install-ai-manager-and-event-manager-in-one-go">Install AI Manager and Event Manager in One Go<a class="headerlink" href="#install-ai-manager-and-event-manager-in-one-go" title="Permanent link">&para;</a></h4>
@@ -1795,8 +1812,12 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </code></pre></div>
 <p>NOTE:</p>
 <ul>
-<li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
+<li>For <code>spec.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  </li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="nv">INGRESS_OPERATOR_NAMESPACE</span><span class="o">=</span>openshift-ingress-operator
+<span class="nv">appDomain</span><span class="o">=</span><span class="sb">`</span>kubectl -n <span class="si">${</span><span class="nv">INGRESS_OPERATOR_NAMESPACE</span><span class="si">}</span> get ingresscontrollers default -o json <span class="p">|</span> python -c <span class="s2">&quot;import json,sys;obj=json.load(sys.stdin);print obj[&#39;status&#39;][&#39;domain&#39;];&quot;</span><span class="sb">`</span>
+<span class="nb">echo</span> <span class="si">${</span><span class="nv">appDomain</span><span class="si">}</span>
+</code></pre></div>
 <h3 id="option-2-experimentalinstall-using-all-in-one-configuration-cli">Option 2: (<strong>Experimental</strong>)Install Using All-in-One Configuration (Cli)<a class="headerlink" href="#option-2-experimentalinstall-using-all-in-one-configuration-cli" title="Permanent link">&para;</a></h3>
 <p>To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:</p>
 <p><div class="highlight"><pre><span></span><code>argocd app create cp4waiops-app <span class="se">\</span>
@@ -1856,7 +1877,7 @@ kubectl get pod -n noi
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+          <a href="#" class="md-top md-top--hidden md-icon" data-md-component="top">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
             Back to top
           </a>
@@ -1924,7 +1945,7 @@ kubectl get pod -n noi
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.f758a944.min.js"></script>
+      <script src="../assets/javascripts/bundle.7f366e99.min.js"></script>
       
     
   </body>

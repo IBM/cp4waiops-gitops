@@ -1,4 +1,4 @@
-{{- if or (eq .Values.cp4waiops.profile "x-small")  (eq .Values.cp4waiops.profile "x-small-idle") (eq .Values.cp4waiops.profile "x-small-custom") }}
+{{- if hasPrefix "x-small" .Values.cp4waiops.profile }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:

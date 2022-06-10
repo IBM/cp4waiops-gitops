@@ -1,4 +1,4 @@
-{{- if eq .Values.profile "x-small-custom" }}
+{{- if hasSuffix "-custom" .Values.profile }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

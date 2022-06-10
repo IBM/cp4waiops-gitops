@@ -12,7 +12,7 @@
   {{- end }}
 {{- end }}
 
-{{- if or (eq .Values.cp4waiops.profile "x-small")  (eq .Values.cp4waiops.profile "x-small-idle")  (eq .Values.cp4waiops.profile "x-small-custom") }}
+{{- if hasPrefix "x-small" .Values.cp4waiops.profile }}
   {{- $resource_locker_enabled = true -}}
 {{- end }}
 

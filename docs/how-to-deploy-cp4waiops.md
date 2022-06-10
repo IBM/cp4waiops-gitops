@@ -149,6 +149,17 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+NOTE:
+
+- In some cases, there're multiple storageclasse been set to default, and this will causes issue, to avoid that, you can check the cluster sc with follwoing command:  
+```bash
+oc get sc
+```
+  In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.  
+  To remove the default setting from a sc, 
+  - use `oc edit sc [STORAGE-CLASS-NAME]` command.
+  - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
+
 ### Obtain an entitlement key
 
 If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
@@ -177,6 +188,8 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
 
+1. Select the project "openshift-config".
+ 
 1. Select the object "pull-secret".
 
 1. Click on "Actions -> Edit secret".

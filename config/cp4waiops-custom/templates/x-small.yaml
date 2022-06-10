@@ -1,6 +1,9 @@
+{{- if eq .Values.profile "x-small" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
   name: aiops-custom-size-profile
 data:
   profiles: |
@@ -351,4 +354,156 @@ data:
                   requests:
                     cpu: "125m"
                     memory: "512Mi"
-
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanagermainprod-locker
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: "750m"
+                memory: "1400Mi"
+              requests:
+                cpu: "500m"
+                memory: "1000Mi"
+          logAnomaly:
+            resources:
+              limits:
+                cpu: "500m"
+                memory: "2048Mi"
+              requests:
+                cpu: "250m"
+                memory: "256Mi"
+          aiPlatformApiServer:
+            resources:
+              limits:
+                cpu: "200m"
+                memory: "2Gi"
+              requests:
+                cpu: "100m"
+                memory: "512Mi"
+          global:
+            logAnomaly:
+              replicas: 1
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: iaf-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: nginx-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-nginx
+      namespace: cp4waiops
+  - id: usermgmt-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: usermgmt
+      namespace: cp4waiops
+  - id: zen-core-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core
+      namespace: cp4waiops
+  - id: zen-core-api-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core-api
+      namespace: cp4waiops
+  - id: automationbase-locker
+    patchTemplate: |
+      spec:
+        kafka:
+          entityOperator:
+            tlsSidecar:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "128Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "64Mi"
+            topicOperator:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "256Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+            userOperator:
+              resources:
+                limits:
+                  cpu: "500m"
+                  memory: "256Mi"
+                requests:
+                  cpu: "100m"
+                  memory: "256Mi"
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

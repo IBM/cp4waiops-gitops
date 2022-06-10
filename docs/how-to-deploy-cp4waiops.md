@@ -149,6 +149,17 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+NOTE:
+
+- In some cases, there're multiple storageclasse been set to default, and this will causes issue, to avoid that, you can check the cluster sc with follwoing command:  
+```bash
+oc get sc
+```
+  In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.  
+  To remove the default setting from a sc, 
+  - use `oc edit sc [STORAGE-CLASS-NAME]` command.
+  - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
+
 ### Obtain an entitlement key
 
 If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
@@ -177,6 +188,8 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
 
+1. Select the project "openshift-config".
+ 
 1. Select the object "pull-secret".
 
 1. Click on "Actions -> Edit secret".
@@ -269,7 +282,12 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 NOTE:
 
 - For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+```bash
+INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+echo ${appDomain}
+```
 
 ### Option 2: (**Experimental**) Install Using All-in-One Configuration 
 
@@ -696,7 +714,13 @@ argocd app create eventmanager-app \
 
 NOTE:
 
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+
+```bash
+INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+echo ${appDomain}
+```
 
 ### Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)
 

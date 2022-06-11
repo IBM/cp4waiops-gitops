@@ -202,19 +202,19 @@ data:
         lifecycleservice:
           customSizing:
             logstash:
-              resourceLimitsCPU: "150m"
+              resourceLimitsCPU: "300m"
               resourceLimitsMemory: "1536Mi"
               resourceRequestsCPU: "50m"
               resourceRequestsMemory: "600Mi"
             taskManager:
-              resourceLimitsCPU: "200m"
+              resourceLimitsCPU: "300m"
               resourceLimitsMemory: "1280Mi"
               resourceRequestsCPU: "50m"
               resourceRequestsMemory: "256Mi"
             jobManager:
-              resourceLimitsCPU: "100m"
+              resourceLimitsCPU: "300m"
               resourceLimitsMemory: "768Mi"
-              resourceRequestsCPU: "20m"
+              resourceRequestsCPU: "50m"
               resourceRequestsMemory: "256Mi"
     - name: ir-ai-operator
       spec:
@@ -226,10 +226,10 @@ data:
                 containers:
                 - name: probablecause
                   limits:
-                    cpu: "100m"
+                    cpu: "300m"
                     memory: "1Gi"
                   requests:
-                    cpu: "10m"
+                    cpu: "100m"
                     memory: "256Mi"
               - name: classifier
                 replicas: 1
@@ -271,60 +271,60 @@ data:
                 containers:
                 - name: api
                   limits:
-                    cpu: "100m"
+                    cpu: "200m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "20m"
                     memory: "128Mi"
               - name: ncodl-if
                 replicas: 1
                 containers:
                 - name: iducforward
                   limits:
-                    cpu: "100m"
+                    cpu: "500m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "50m"
                     memory: "128Mi"
               - name: ncodl-ir
                 replicas: 1
                 containers:
                 - name: iducrelay
                   limits:
-                    cpu: "100m"
+                    cpu: "200m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "20m"
                     memory: "128Mi"
               - name: ncodl-jobmgr
                 replicas: 1
                 containers:
                 - name: jobmgr
                   limits:
-                    cpu: "100m"
+                    cpu: "200m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "20m"
                     memory: "128Mi"
               - name: ncodl-std
                 replicas: 1
                 containers:
                 - name: standard
                   limits:
-                    cpu: "100m"
+                    cpu: "200m"
                     memory: "1024Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "20m"
                     memory: "128Mi"
               - name: logstash
                 replicas: 1
                 containers:
                 - name: logstash
                   limits:
-                    cpu: "150m"
+                    cpu: "300m"
                     memory: "1792Mi"
                   requests:
-                    cpu: "30m"
+                    cpu: "50m"
                     memory: "512Mi"
             statefulSets:
               - name: ncobackup

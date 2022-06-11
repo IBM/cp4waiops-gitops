@@ -209,13 +209,13 @@ data:
             taskManager:
               resourceLimitsCPU: "500m"
               resourceLimitsMemory: "1280Mi"
-              resourceRequestsCPU: "50m"
-              resourceRequestsMemory: "256Mi"
+              resourceRequestsCPU: "250m"
+              resourceRequestsMemory: "1280Mi"
             jobManager:
-              resourceLimitsCPU: "500m"
+              resourceLimitsCPU: "600m"
               resourceLimitsMemory: "768Mi"
-              resourceRequestsCPU: "50m"
-              resourceRequestsMemory: "256Mi"
+              resourceRequestsCPU: "100m"
+              resourceRequestsMemory: "512Mi"
     - name: ir-ai-operator
       spec:
         aiopsanalyticsorchestrator:
@@ -226,20 +226,20 @@ data:
                 containers:
                 - name: probablecause
                   limits:
-                    cpu: "800m"
+                    cpu: "1000m"
                     memory: "1Gi"
                   requests:
-                    cpu: "100m"
-                    memory: "256Mi"
+                    cpu: "400m"
+                    memory: "750Mi"
               - name: classifier
                 replicas: 1
                 containers:
                 - name: classifier
                   limits:
-                    cpu: "100m"
+                    cpu: "500m"
                     memory: "2048Mi"
                   requests:
-                    cpu: "20m"
+                    cpu: "100m"
                     memory: "128Mi"
               - name: spark-worker
                 replicas: 1

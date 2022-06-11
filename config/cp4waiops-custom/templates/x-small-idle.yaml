@@ -202,17 +202,17 @@ data:
         lifecycleservice:
           customSizing:
             logstash:
-              resourceLimitsCPU: "300m"
+              resourceLimitsCPU: "625m"
               resourceLimitsMemory: "1536Mi"
               resourceRequestsCPU: "50m"
               resourceRequestsMemory: "600Mi"
             taskManager:
-              resourceLimitsCPU: "300m"
+              resourceLimitsCPU: "500m"
               resourceLimitsMemory: "1280Mi"
               resourceRequestsCPU: "50m"
               resourceRequestsMemory: "256Mi"
             jobManager:
-              resourceLimitsCPU: "300m"
+              resourceLimitsCPU: "500m"
               resourceLimitsMemory: "768Mi"
               resourceRequestsCPU: "50m"
               resourceRequestsMemory: "256Mi"
@@ -226,7 +226,7 @@ data:
                 containers:
                 - name: probablecause
                   limits:
-                    cpu: "300m"
+                    cpu: "800m"
                     memory: "1Gi"
                   requests:
                     cpu: "100m"
@@ -256,10 +256,10 @@ data:
                 containers:
                 - name: spark-pipeline-composer
                   limits:
-                    cpu: "100m"
+                    cpu: "300m"
                     memory: "896Mi"
                   requests:
-                    cpu: "10m"
+                    cpu: "20m"
                     memory: "256Mi"
     - name: ir-core-operator
       spec:
@@ -321,7 +321,7 @@ data:
                 containers:
                 - name: logstash
                   limits:
-                    cpu: "300m"
+                    cpu: "500m"
                     memory: "1792Mi"
                   requests:
                     cpu: "50m"

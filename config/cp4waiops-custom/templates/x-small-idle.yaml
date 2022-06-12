@@ -68,16 +68,16 @@ data:
           resources:
             limits:
               cpu: 1600m
-              memory: 2888Mi
+              memory: 1280Mi
             requests:
               cpu: 300m
               memory: 1024Mi
         properties:
           jobmanager.memory.heap.size: 512mb
           jobmanager.memory.jvm-metaspace.size: 128mb
-          taskmanager.memory.heap.size: 4096mb
+          taskmanager.memory.heap.size: 2gb 
           taskmanager.memory.managed.size: 512mb
-          taskmanager.numberOfTaskSlots: 8
+          taskmanager.numberOfTaskSlots: 2
     configmaps:
     - name: aiops-topology-sizing
       data: 
@@ -210,7 +210,7 @@ data:
               resourceLimitsCPU: "500m"
               resourceLimitsMemory: "1280Mi"
               resourceRequestsCPU: "250m"
-              resourceRequestsMemory: "512Mi"
+              resourceRequestsMemory: "1280Mi"
             jobManager:
               resourceLimitsCPU: "600m"
               resourceLimitsMemory: "768Mi"

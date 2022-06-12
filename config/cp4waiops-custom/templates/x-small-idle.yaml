@@ -61,17 +61,17 @@ data:
               memory: 1Gi
             requests:
               cpu: 100m
-              memory: 512Mi
+              memory: 1Gi
         # Settings for the taskmanager statefulSet
         taskmanager:
           replicas: 1
           resources:
             limits:
               cpu: 1600m
-              memory: 2888Mi
+              memory: 5888Mi
             requests:
-              cpu: 300m
-              memory: 1024Mi
+              cpu: 500m
+              memory: 2048Mi
         properties:
           jobmanager.memory.heap.size: 512mb
           jobmanager.memory.jvm-metaspace.size: 128mb
@@ -210,7 +210,7 @@ data:
               resourceLimitsCPU: "500m"
               resourceLimitsMemory: "1280Mi"
               resourceRequestsCPU: "250m"
-              resourceRequestsMemory: "512Mi"
+              resourceRequestsMemory: "1280Mi"
             jobManager:
               resourceLimitsCPU: "600m"
               resourceLimitsMemory: "768Mi"

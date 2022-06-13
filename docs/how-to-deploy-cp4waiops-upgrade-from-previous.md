@@ -24,8 +24,25 @@
 ## Upgrade CP4WAIOps from UI
 
 ### Login to Argo CD
-  
 
+You can now login to Argo CD UI as follows by clicking the drop down menu on top right.
+
+![w](images/gitops-menu.png)
+
+Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
+
+![w](images/gitops-login.png)
+
+### Upgrade AI Manager from Application Dashboard
+- Click on the AI Manager application `aimanager-app`
+- Click on the `APP DETAILS` button on the top of the screen:
+![w](images/upgrade-app-details.png)
+- Select `PARAMETERS` tab
+  - Click on `EDIT`
+  - Update the "spec.aiManager.channel" value to `v3.4`
+  - Click on `SAVE`
+![w](images/Upgrade-app-parameter.png)
+  
 ## Upgrade CP4WAIOps from Command Line
 
 ### Login to Argo CD (Cli)

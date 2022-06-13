@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Upgrade CP4WAIOps From Previous Version using GitOps](#upgrade-cp4waiops-from-previous-version-using-gitops)
+  - [Prerequisite](#prerequisite)
+  - [Upgrade CP4WAIOps from UI](#upgrade-cp4waiops-from-ui)
+  - [Upgrade CP4WAIOps from Command Line](#upgrade-cp4waiops-from-command-line)
+    - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
+    - [Verify Argo CD Cli](#verify-argo-cd-cli)
+    - [Perform Upgrade](#perform-upgrade)
+  - [Verify Upgrade Result](#verify-upgrade-result)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Upgrade CP4WAIOps From Previous Version using GitOps
 
 ## Prerequisite

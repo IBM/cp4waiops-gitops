@@ -89,7 +89,7 @@ data:
               cassandra:
                 resources:
                   limits:
-                    cpu: 100m
+                    cpu: 300m
                     memory: 1500Mi
                   requests:
                     cpu: 20m
@@ -120,14 +120,14 @@ data:
                 memory: 768Mi
               requests:
                 cpu: 20m
-                memory: 128Mi
+                memory: 64Mi
             search:
               limits:
                 cpu: 100m
                 memory: 250Mi
               requests:
                 cpu: 10m
-                memory: 128Mi
+                memory: 64Mi
             mgmt:
               limits:
                 cpu: 100m
@@ -145,29 +145,29 @@ data:
                   cpu: 100m
                   memory: 512Mi
                 requests:
-                  cpu: 20m
-                  memory: 64Mi
+                  cpu: 10m
+                  memory: 32Mi
               mgmt:
                 limits:
                   cpu: 200m
                   memory: 150Mi
                 requests:
-                  cpu: 60m
+                  cpu: 30m
                   memory: 64Mi
               proxy:
                 limits:
                   cpu: 200m
                   memory: 150Mi
                 requests:
-                  cpu: 40m
-                  memory: 64Mi
+                  cpu: 10m
+                  memory: 32Mi
               proxylog:
                 limits:
                   cpu: 100m
                   memory: 150Mi
                 requests:
                   cpu: 10m
-                  memory: 64Mi
+                  memory: 32Mi
             sentinel:
               db:
                 limits:
@@ -175,20 +175,20 @@ data:
                   memory: 512Mi
                 requests:
                   cpu: 10m
-                  memory: 64Mi
+                  memory: 32Mi
               mgmt:
                 limits:
                   cpu: 200m
                   memory: 150Mi
                 requests:
-                  cpu: 60m
+                  cpu: 30m
                   memory: 64Mi
               proxy:
                 limits:
                   cpu: 200m
                   memory: 150Mi
                 requests:
-                  cpu: 50m
+                  cpu: 20m
                   memory: 64Mi
               proxylog:
                 limits:
@@ -196,7 +196,7 @@ data:
                   memory: 150Mi
                 requests:
                   cpu: 10m
-                  memory: 64Mi
+                  memory: 32Mi
     - name: ir-lifecycle-operator
       spec:
         lifecycleservice:
@@ -204,7 +204,7 @@ data:
             logstash:
               resourceLimitsCPU: 625m
               resourceLimitsMemory: 1536Mi
-              resourceRequestsCPU: 50m
+              resourceRequestsCPU: 20m
               resourceRequestsMemory: 600Mi
             taskManager:
               resourceLimitsCPU: 500m
@@ -229,8 +229,8 @@ data:
                     cpu: 1000m
                     memory: 1Gi
                   requests:
-                    cpu: 400m
-                    memory: 750Mi
+                    cpu: 20m
+                    memory: 300Mi
               - name: classifier
                 replicas: 1
                 containers:
@@ -239,8 +239,8 @@ data:
                     cpu: 500m
                     memory: 2048Mi
                   requests:
-                    cpu: 100m
-                    memory: 128Mi
+                    cpu: 10m
+                    memory: 64Mi
               - name: spark-worker
                 replicas: 1
                 containers:
@@ -275,7 +275,7 @@ data:
                     memory: 1024Mi
                   requests:
                     cpu: 20m
-                    memory: 128Mi
+                    memory: 64Mi
               - name: ncodl-if
                 replicas: 1
                 containers:
@@ -284,7 +284,7 @@ data:
                     cpu: 500m
                     memory: 1024Mi
                   requests:
-                    cpu: 50m
+                    cpu: 10m
                     memory: 128Mi
               - name: ncodl-ir
                 replicas: 1
@@ -294,7 +294,7 @@ data:
                     cpu: 200m
                     memory: 1024Mi
                   requests:
-                    cpu: 20m
+                    cpu: 10m
                     memory: 128Mi
               - name: ncodl-jobmgr
                 replicas: 1
@@ -304,7 +304,7 @@ data:
                     cpu: 200m
                     memory: 1024Mi
                   requests:
-                    cpu: 20m
+                    cpu: 10m
                     memory: 128Mi
               - name: ncodl-std
                 replicas: 1
@@ -324,7 +324,7 @@ data:
                     cpu: 500m
                     memory: 1792Mi
                   requests:
-                    cpu: 50m
+                    cpu: 20m
                     memory: 512Mi
             statefulSets:
               - name: ncobackup
@@ -353,7 +353,7 @@ data:
                     memory: 1024Mi  
                   requests:
                     cpu: 10m
-                    memory: 128Mi
+                    memory: 50Mi
 ---
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
@@ -372,24 +372,24 @@ spec:
                 cpu: 750m
                 memory: 1400Mi
               requests:
-                cpu: 500m
-                memory: 1000Mi
+                cpu: 50m
+                memory: 500Mi
           logAnomaly:
             resources:
               limits:
                 cpu: 500m
                 memory: 2048Mi
               requests:
-                cpu: 250m
-                memory: 128Mi
+                cpu: 20m
+                memory: 100Mi
           aiPlatformApiServer:
             resources:
               limits:
                 cpu: 200m
-                memory: 2Gi"
+                memory: 2Gi
               requests:
-                cpu: 100m
-                memory: 128Mi
+                cpu: 10m
+                memory: 50Mi
           global:
             logAnomaly:
               replicas: 1
@@ -460,24 +460,24 @@ spec:
                   cpu: 500m
                   memory: 128Mi
                 requests:
-                  cpu: 100m
-                  memory: 64Mi
+                  cpu: 10m
+                  memory: 16Mi
             topicOperator:
               resources:
                 limits:
                   cpu: 500m
                   memory: 256Mi
                 requests:
-                  cpu: 100m
-                  memory: 256Mi
+                  cpu: 10m
+                  memory: 100Mi
             userOperator:
               resources:
                 limits:
                   cpu: 500m
                   memory: 256Mi
                 requests:
-                  cpu: 100m
-                  memory: 256Mi
+                  cpu: 10m
+                  memory: 100Mi
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: base.automation.ibm.com/v1beta1

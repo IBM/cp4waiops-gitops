@@ -37,10 +37,10 @@ data:
         replicas: 1
         resources:
           limits:
-            cpu: 150m
+            cpu: 500m
             memory: 1536Mi
           requests:
-            cpu: 10m
+            cpu: 100m
             memory: 768Mi
         tls-proxy:
           resources:
@@ -271,11 +271,11 @@ data:
                 containers:
                 - name: api
                   limits:
-                    cpu: 200m
+                    cpu: 500m
                     memory: 1024Mi
                   requests:
-                    cpu: 20m
-                    memory: 64Mi
+                    cpu: 60m
+                    memory: 128Mi
               - name: ncodl-if
                 replicas: 1
                 containers:
@@ -380,8 +380,8 @@ spec:
                 cpu: 500m
                 memory: 2048Mi
               requests:
-                cpu: 20m
-                memory: 100Mi
+                cpu: 250m
+                memory: 128Mi
           aiPlatformApiServer:
             resources:
               limits:

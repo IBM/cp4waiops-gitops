@@ -5,6 +5,7 @@
 - [Upgrade CP4WAIOps From Previous Version using GitOps](#upgrade-cp4waiops-from-previous-version-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Upgrade CP4WAIOps from UI](#upgrade-cp4waiops-from-ui)
+    - [Login to Argo CD](#login-to-argo-cd)
   - [Upgrade CP4WAIOps from Command Line](#upgrade-cp4waiops-from-command-line)
     - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
     - [Verify Argo CD Cli](#verify-argo-cd-cli)

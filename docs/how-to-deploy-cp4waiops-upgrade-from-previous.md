@@ -25,11 +25,10 @@
 
 ### Login to Argo CD
 
-You can now login to Argo CD UI as follows by clicking the drop down menu on top right.
-
+You can now login to Argo CD UI as follows by clicking the drop down menu on top right.  
 ![w](images/gitops-menu.png)
 
-Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
+Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.  
 
 ![w](images/gitops-login.png)
 

@@ -18,9 +18,12 @@
 ## Prerequisite
 
 - To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
-- The upgrade methord here is suitable for CP4WAIOps previous installed using gitops.
+- The upgrade method here is suitable for CP4WAIOps previous installed using gitops.
 
 ## Upgrade CP4WAIOps from UI
+
+### Login to Argo CD
+  
 
 ## Upgrade CP4WAIOps from Command Line
 
@@ -58,7 +61,10 @@ aimanager-app  https://kubernetes.default.svc  cp4waiops              default  S
 ceph           https://kubernetes.default.svc  rook-ceph              default  Synced  Healthy  Auto        <none>      https://github.com/IBM/cp4waiops-gitops  config/ceph                     release-3.3
 cp-shared      https://kubernetes.default.svc  openshift-marketplace  default  Synced  Healthy  Auto        <none>      https://github.com/IBM/cp4waiops-gitops  config/cp-shared/operators      release-3.3
 ```
+NOTE:
 
+The results may or may not contains application `cp-shared`, no need to worry about it.  
+  
 ### Perform Upgrade
 
 ```bash
@@ -68,27 +74,13 @@ argocd app sync aimanager-app
 
 ## Verify Upgrade Result
 
-The upgrade process will take a while, largely depending on the network performance.  
+The upgrade process will take a while, it will largely depends on the network performance.  
 After upgrade completed, all pod should be in running status and ready.  
 
 Use command line to check CSV details.
 ```bash
 oc get csv -n cp4waiops
 ```
-
-The output should be showing the new version 3.4.x for components below:
-- IBM Watson AIOps AI Manager
-- IBM Watson AIOps Edge
-- IBM Netcool Agile Service Manager
-- IBM Watson AIOps Issue Resolution AI & Analytics
-- IBM Watson AIOps Issue Resolution Core
-- IBM Cloud Pak for Watson AIOps Lifecycle
-- IBM Cloud Pak for Watson AIOps AI Manager
-- IBM Internal - IBM Watson AIOps Kong
-- IBM Postgreservice
-- IBM Secure Tunnel
-- IBM Vault Operator
-- IBM Watson AIOps UI
 
 The output should be looking like below:
 ```
@@ -115,3 +107,19 @@ ibm-vault-operator.v3.3.2               IBM Vault Operator                      
 ibm-watson-aiops-ui-operator.v3.3.2     IBM Watson AIOps UI                                3.3.2                                             Succeeded
 openshift-gitops-operator.v1.5.2        Red Hat OpenShift GitOps                           1.5.2                                             Succeeded
 ```
+
+The output should be showing the new version 3.4.x for components below:
+- IBM Watson AIOps AI Manager
+- IBM Watson AIOps Edge
+- IBM Netcool Agile Service Manager
+- IBM Watson AIOps Issue Resolution AI & Analytics
+- IBM Watson AIOps Issue Resolution Core
+- IBM Cloud Pak for Watson AIOps Lifecycle
+- IBM Cloud Pak for Watson AIOps AI Manager
+- IBM Internal - IBM Watson AIOps Kong
+- IBM Postgreservice
+- IBM Secure Tunnel
+- IBM Vault Operator
+- IBM Watson AIOps UI
+
+  

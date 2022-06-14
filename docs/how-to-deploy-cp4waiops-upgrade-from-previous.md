@@ -66,7 +66,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### Verify Argo CD Cli 
+### Verify Argo CD (Cli)
 
 ```bash
 argocd app list
@@ -81,9 +81,9 @@ cp-shared      https://kubernetes.default.svc  openshift-marketplace  default  S
 ```
 NOTE:
 
-The results may or may not contains application `cp-shared`, no need to worry about it.  
+The results may not contains application `cp-shared`, no need to worry about it.  
   
-### Perform Upgrade
+### Upgrade AI Manager (Cli)
 
 ```bash
 argocd app set aimanager-app -p spec.aiManager.channel=v3.4
@@ -102,28 +102,28 @@ oc get csv -n cp4waiops
 
 The output should be looking like below:
 ```
-NAME                                    DISPLAY                                            VERSION   REPLACES                                PHASE
-aimanager-operator.v3.3.2               IBM Watson AIOps AI Manager                        3.3.2                                             Succeeded
-aiopsedge-operator.v3.3.2               IBM Watson AIOps Edge                              3.3.2                                             Succeeded
-asm-operator.v3.3.2                     IBM Netcool Agile Service Manager                  3.3.2                                             Succeeded
-couchdb-operator.v2.2.1                 Operator for Apache CouchDB                        2.2.1     couchdb-operator.v2.2.0                 Succeeded
-ibm-aiops-ir-ai.v3.3.2                  IBM Watson AIOps Issue Resolution AI & Analytics   3.3.2                                             Succeeded
-ibm-aiops-ir-core.v3.3.2                IBM Watson AIOps Issue Resolution Core             3.3.2                                             Succeeded
-ibm-aiops-ir-lifecycle.v3.3.2           IBM Cloud Pak for Watson AIOps Lifecycle           3.3.2                                             Succeeded
-ibm-aiops-orchestrator.v3.3.2           IBM Cloud Pak for Watson AIOps AI Manager          3.3.2                                             Succeeded
-ibm-automation-core.v1.3.7              IBM Automation Foundation Core                     1.3.7     ibm-automation-core.v1.3.6              Succeeded
-ibm-automation-elastic.v1.3.6           IBM Elastic                                        1.3.6     ibm-automation-elastic.v1.3.5           Succeeded
-ibm-automation-eventprocessing.v1.3.7   IBM Automation Foundation Event Processing         1.3.7     ibm-automation-eventprocessing.v1.3.6   Succeeded
-ibm-automation-flink.v1.3.6             IBM Automation Foundation Flink                    1.3.6     ibm-automation-flink.v1.3.5             Succeeded
-ibm-automation.v1.3.7                   IBM Automation Foundation                          1.3.7     ibm-automation.v1.3.6                   Succeeded
-ibm-cloud-databases-redis.v1.4.3        IBM Operator for Redis                             1.4.3     ibm-cloud-databases-redis.v1.4.2        Succeeded
-ibm-common-service-operator.v3.18.0     IBM Cloud Pak foundational services                3.18.0    ibm-common-service-operator.v3.17.0     Succeeded
-ibm-management-kong.v3.3.2              IBM Internal - IBM Watson AIOps Kong               3.3.2                                             Succeeded
-ibm-postgreservice-operator.v3.3.2      IBM Postgreservice                                 3.3.2                                             Succeeded
-ibm-secure-tunnel-operator.v3.3.2       IBM Secure Tunnel                                  3.3.2                                             Succeeded
-ibm-vault-operator.v3.3.2               IBM Vault Operator                                 3.3.2                                             Succeeded
-ibm-watson-aiops-ui-operator.v3.3.2     IBM Watson AIOps UI                                3.3.2                                             Succeeded
-openshift-gitops-operator.v1.5.2        Red Hat OpenShift GitOps                           1.5.2                                             Succeeded
+NAME                                               DISPLAY                                            VERSION              REPLACES                                PHASE
+aimanager-operator.v3.4.0                          IBM Watson AIOps AI Manager                        3.4.0                aimanager-operator.v3.3.2               Succeeded
+aiopsedge-operator.v3.4.0                          IBM Watson AIOps Edge                              3.4.0                aiopsedge-operator.v3.3.2               Succeeded
+asm-operator.v3.4.0                                IBM Netcool Agile Service Manager                  3.4.0                asm-operator.v3.3.2                     Succeeded
+couchdb-operator.v2.2.1                            Operator for Apache CouchDB                        2.2.1                couchdb-operator.v2.2.0                 Succeeded
+ibm-aiops-ir-ai.v3.4.0                             IBM Watson AIOps Issue Resolution AI & Analytics   3.4.0                ibm-aiops-ir-ai.v3.3.2                  Succeeded
+ibm-aiops-ir-core.v3.4.0                           IBM Watson AIOps Issue Resolution Core             3.4.0                ibm-aiops-ir-core.v3.3.2                Succeeded
+ibm-aiops-ir-lifecycle.v3.4.0                      IBM Cloud Pak for Watson AIOps Lifecycle           3.4.0                ibm-aiops-ir-lifecycle.v3.3.2           Succeeded
+ibm-aiops-orchestrator.v3.4.0                      IBM Cloud Pak for Watson AIOps AI Manager          3.4.0                ibm-aiops-orchestrator.v3.3.2           Succeeded
+ibm-automation-core.v1.3.7                         IBM Automation Foundation Core                     1.3.7                ibm-automation-core.v1.3.6              Succeeded
+ibm-automation-elastic.v1.3.6                      IBM Elastic                                        1.3.6                ibm-automation-elastic.v1.3.5           Succeeded
+ibm-automation-eventprocessing.v1.3.7              IBM Automation Foundation Event Processing         1.3.7                ibm-automation-eventprocessing.v1.3.6   Succeeded
+ibm-automation-flink.v1.3.6                        IBM Automation Foundation Flink                    1.3.6                ibm-automation-flink.v1.3.5             Succeeded
+ibm-automation.v1.3.7                              IBM Automation Foundation                          1.3.7                ibm-automation.v1.3.6                   Succeeded
+ibm-cloud-databases-redis.v1.4.3                   IBM Operator for Redis                             1.4.3                ibm-cloud-databases-redis.v1.4.2        Succeeded
+ibm-common-service-operator.v3.18.0                IBM Cloud Pak foundational services                3.18.0               ibm-common-service-operator.v3.17.0     Succeeded
+ibm-management-kong.v3.4.0                         IBM Internal - IBM Watson AIOps Kong               3.4.0                ibm-management-kong.v3.3.2              Succeeded
+ibm-postgreservice-operator.v3.4.0                 IBM Postgreservice                                 3.4.0                ibm-postgreservice-operator.v3.3.2      Succeeded
+ibm-secure-tunnel-operator.v3.4.0                  IBM Secure Tunnel                                  3.4.0                ibm-secure-tunnel-operator.v3.3.2       Succeeded
+ibm-vault-operator.v3.4.0                          IBM Vault Operator                                 3.4.0                ibm-vault-operator.v3.3.2               Succeeded
+ibm-watson-aiops-ui-operator.v3.4.0                IBM Watson AIOps UI                                3.4.0                ibm-watson-aiops-ui-operator.v3.3.2     Succeeded
+openshift-gitops-operator.v1.5.2                   Red Hat OpenShift GitOps                           1.5.2                                                        Succeeded
 ```
 
 The output should be showing the new version 3.4.x for components below:

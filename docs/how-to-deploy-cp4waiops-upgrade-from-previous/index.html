@@ -15,7 +15,7 @@
     
     
       
-        <title>How to deploy cp4waiops upgrade from previous - IBM Cloud Pak for Watson AIOps</title>
+        <title>Online Upgrade from Previous Version - IBM Cloud Pak for Watson AIOps</title>
       
     
     
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              How to deploy cp4waiops upgrade from previous
+              Online Upgrade from Previous Version
             
           </span>
         </div>
@@ -169,13 +169,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href=".." class="md-tabs__link md-tabs__link--active">
         GitOps Install
       </a>
     </li>
@@ -238,12 +240,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
       
       
       
@@ -278,14 +282,16 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
       
       
       
@@ -311,6 +317,129 @@
       <a href="../how-to-deploy-cp4waiops/" class="md-nav__link">
         Online Install
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Online Upgrade from Previous Version
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Online Upgrade from Previous Version
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-cp4waiops-from-ui" class="md-nav__link">
+    Upgrade CP4WAIOps from UI
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrade CP4WAIOps from UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd" class="md-nav__link">
+    Login to Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-ai-manager-from-application-dashboard" class="md-nav__link">
+    Upgrade AI Manager from Application Dashboard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-cp4waiops-from-command-line" class="md-nav__link">
+    Upgrade CP4WAIOps from Command Line
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrade CP4WAIOps from Command Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd-cli" class="md-nav__link">
+    Login to Argo CD (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-argo-cd-cli" class="md-nav__link">
+    Verify Argo CD (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-ai-manager-cli" class="md-nav__link">
+    Upgrade AI Manager (Cli)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-upgrade-result" class="md-nav__link">
+    Verify Upgrade Result
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -546,14 +675,14 @@
         
           <li class="md-nav__item">
   <a href="#verify-argo-cd-cli" class="md-nav__link">
-    Verify Argo CD Cli
+    Verify Argo CD (Cli)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#perform-upgrade" class="md-nav__link">
-    Perform Upgrade
+  <a href="#upgrade-ai-manager-cli" class="md-nav__link">
+    Upgrade AI Manager (Cli)
   </a>
   
 </li>
@@ -601,8 +730,8 @@
 </li>
 <li><a href="#upgrade-cp4waiops-from-command-line">Upgrade CP4WAIOps from Command Line</a><ul>
 <li><a href="#login-to-argo-cd-cli">Login to Argo CD (Cli)</a></li>
-<li><a href="#verify-argo-cd-cli">Verify Argo CD Cli</a></li>
-<li><a href="#perform-upgrade">Perform Upgrade</a></li>
+<li><a href="#verify-argo-cd-cli">Verify Argo CD (Cli)</a></li>
+<li><a href="#upgrade-ai-manager-cli">Upgrade AI Manager (Cli)</a></li>
 </ul>
 </li>
 <li><a href="#verify-upgrade-result">Verify Upgrade Result</a></li>
@@ -650,7 +779,7 @@
       --password <span class="s2">&quot;</span><span class="si">${</span><span class="nv">argo_pwd</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
       --insecure
 </code></pre></div>
-<h3 id="verify-argo-cd-cli">Verify Argo CD Cli<a class="headerlink" href="#verify-argo-cd-cli" title="Permanent link">&para;</a></h3>
+<h3 id="verify-argo-cd-cli">Verify Argo CD (Cli)<a class="headerlink" href="#verify-argo-cd-cli" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>argocd app list
 </code></pre></div>
 <p>The output should shows the previous installed CP4WAIOps version.
@@ -660,8 +789,8 @@ ceph           https://kubernetes.default.svc  rook-ceph              default  S
 cp-shared      https://kubernetes.default.svc  openshift-marketplace  default  Synced  Healthy  Auto        &lt;none&gt;      https://github.com/IBM/cp4waiops-gitops  config/cp-shared/operators      release-3.3
 </code></pre></div>
 NOTE:</p>
-<p>The results may or may not contains application <code>cp-shared</code>, no need to worry about it.  </p>
-<h3 id="perform-upgrade">Perform Upgrade<a class="headerlink" href="#perform-upgrade" title="Permanent link">&para;</a></h3>
+<p>The results may not contains application <code>cp-shared</code>, no need to worry about it.  </p>
+<h3 id="upgrade-ai-manager-cli">Upgrade AI Manager (Cli)<a class="headerlink" href="#upgrade-ai-manager-cli" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>argocd app <span class="nb">set</span> aimanager-app -p spec.aiManager.channel<span class="o">=</span>v3.4
 argocd app sync aimanager-app
 </code></pre></div>
@@ -672,28 +801,28 @@ After upgrade completed, all pod should be in running status and ready.  </p>
 <div class="highlight"><pre><span></span><code>oc get csv -n cp4waiops
 </code></pre></div></p>
 <p>The output should be looking like below:
-<div class="highlight"><pre><span></span><code>NAME                                    DISPLAY                                            VERSION   REPLACES                                PHASE
-aimanager-operator.v3.3.2               IBM Watson AIOps AI Manager                        3.3.2                                             Succeeded
-aiopsedge-operator.v3.3.2               IBM Watson AIOps Edge                              3.3.2                                             Succeeded
-asm-operator.v3.3.2                     IBM Netcool Agile Service Manager                  3.3.2                                             Succeeded
-couchdb-operator.v2.2.1                 Operator for Apache CouchDB                        2.2.1     couchdb-operator.v2.2.0                 Succeeded
-ibm-aiops-ir-ai.v3.3.2                  IBM Watson AIOps Issue Resolution AI &amp; Analytics   3.3.2                                             Succeeded
-ibm-aiops-ir-core.v3.3.2                IBM Watson AIOps Issue Resolution Core             3.3.2                                             Succeeded
-ibm-aiops-ir-lifecycle.v3.3.2           IBM Cloud Pak for Watson AIOps Lifecycle           3.3.2                                             Succeeded
-ibm-aiops-orchestrator.v3.3.2           IBM Cloud Pak for Watson AIOps AI Manager          3.3.2                                             Succeeded
-ibm-automation-core.v1.3.7              IBM Automation Foundation Core                     1.3.7     ibm-automation-core.v1.3.6              Succeeded
-ibm-automation-elastic.v1.3.6           IBM Elastic                                        1.3.6     ibm-automation-elastic.v1.3.5           Succeeded
-ibm-automation-eventprocessing.v1.3.7   IBM Automation Foundation Event Processing         1.3.7     ibm-automation-eventprocessing.v1.3.6   Succeeded
-ibm-automation-flink.v1.3.6             IBM Automation Foundation Flink                    1.3.6     ibm-automation-flink.v1.3.5             Succeeded
-ibm-automation.v1.3.7                   IBM Automation Foundation                          1.3.7     ibm-automation.v1.3.6                   Succeeded
-ibm-cloud-databases-redis.v1.4.3        IBM Operator for Redis                             1.4.3     ibm-cloud-databases-redis.v1.4.2        Succeeded
-ibm-common-service-operator.v3.18.0     IBM Cloud Pak foundational services                3.18.0    ibm-common-service-operator.v3.17.0     Succeeded
-ibm-management-kong.v3.3.2              IBM Internal - IBM Watson AIOps Kong               3.3.2                                             Succeeded
-ibm-postgreservice-operator.v3.3.2      IBM Postgreservice                                 3.3.2                                             Succeeded
-ibm-secure-tunnel-operator.v3.3.2       IBM Secure Tunnel                                  3.3.2                                             Succeeded
-ibm-vault-operator.v3.3.2               IBM Vault Operator                                 3.3.2                                             Succeeded
-ibm-watson-aiops-ui-operator.v3.3.2     IBM Watson AIOps UI                                3.3.2                                             Succeeded
-openshift-gitops-operator.v1.5.2        Red Hat OpenShift GitOps                           1.5.2                                             Succeeded
+<div class="highlight"><pre><span></span><code>NAME                                               DISPLAY                                            VERSION              REPLACES                                PHASE
+aimanager-operator.v3.4.0                          IBM Watson AIOps AI Manager                        3.4.0                aimanager-operator.v3.3.2               Succeeded
+aiopsedge-operator.v3.4.0                          IBM Watson AIOps Edge                              3.4.0                aiopsedge-operator.v3.3.2               Succeeded
+asm-operator.v3.4.0                                IBM Netcool Agile Service Manager                  3.4.0                asm-operator.v3.3.2                     Succeeded
+couchdb-operator.v2.2.1                            Operator for Apache CouchDB                        2.2.1                couchdb-operator.v2.2.0                 Succeeded
+ibm-aiops-ir-ai.v3.4.0                             IBM Watson AIOps Issue Resolution AI &amp; Analytics   3.4.0                ibm-aiops-ir-ai.v3.3.2                  Succeeded
+ibm-aiops-ir-core.v3.4.0                           IBM Watson AIOps Issue Resolution Core             3.4.0                ibm-aiops-ir-core.v3.3.2                Succeeded
+ibm-aiops-ir-lifecycle.v3.4.0                      IBM Cloud Pak for Watson AIOps Lifecycle           3.4.0                ibm-aiops-ir-lifecycle.v3.3.2           Succeeded
+ibm-aiops-orchestrator.v3.4.0                      IBM Cloud Pak for Watson AIOps AI Manager          3.4.0                ibm-aiops-orchestrator.v3.3.2           Succeeded
+ibm-automation-core.v1.3.7                         IBM Automation Foundation Core                     1.3.7                ibm-automation-core.v1.3.6              Succeeded
+ibm-automation-elastic.v1.3.6                      IBM Elastic                                        1.3.6                ibm-automation-elastic.v1.3.5           Succeeded
+ibm-automation-eventprocessing.v1.3.7              IBM Automation Foundation Event Processing         1.3.7                ibm-automation-eventprocessing.v1.3.6   Succeeded
+ibm-automation-flink.v1.3.6                        IBM Automation Foundation Flink                    1.3.6                ibm-automation-flink.v1.3.5             Succeeded
+ibm-automation.v1.3.7                              IBM Automation Foundation                          1.3.7                ibm-automation.v1.3.6                   Succeeded
+ibm-cloud-databases-redis.v1.4.3                   IBM Operator for Redis                             1.4.3                ibm-cloud-databases-redis.v1.4.2        Succeeded
+ibm-common-service-operator.v3.18.0                IBM Cloud Pak foundational services                3.18.0               ibm-common-service-operator.v3.17.0     Succeeded
+ibm-management-kong.v3.4.0                         IBM Internal - IBM Watson AIOps Kong               3.4.0                ibm-management-kong.v3.3.2              Succeeded
+ibm-postgreservice-operator.v3.4.0                 IBM Postgreservice                                 3.4.0                ibm-postgreservice-operator.v3.3.2      Succeeded
+ibm-secure-tunnel-operator.v3.4.0                  IBM Secure Tunnel                                  3.4.0                ibm-secure-tunnel-operator.v3.3.2       Succeeded
+ibm-vault-operator.v3.4.0                          IBM Vault Operator                                 3.4.0                ibm-vault-operator.v3.3.2               Succeeded
+ibm-watson-aiops-ui-operator.v3.4.0                IBM Watson AIOps UI                                3.4.0                ibm-watson-aiops-ui-operator.v3.3.2     Succeeded
+openshift-gitops-operator.v1.5.2                   Red Hat OpenShift GitOps                           1.5.2                                                        Succeeded
 </code></pre></div></p>
 <p>The output should be showing the new version 3.4.x for components below:
 - IBM Watson AIOps AI Manager
@@ -723,6 +852,42 @@ openshift-gitops-operator.v1.5.2        Red Hat OpenShift GitOps                
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../how-to-deploy-cp4waiops/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Online Install" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Online Install
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../how-to-deploy-cp4waiops-33/" class="md-footer__link md-footer__link--next" aria-label="Next: Online Install" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Online Install
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

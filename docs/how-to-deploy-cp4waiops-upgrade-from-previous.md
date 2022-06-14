@@ -9,8 +9,8 @@
     - [Upgrade AI Manager from Application Dashboard](#upgrade-ai-manager-from-application-dashboard)
   - [Upgrade CP4WAIOps from Command Line](#upgrade-cp4waiops-from-command-line)
     - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
-    - [Verify Argo CD Cli](#verify-argo-cd-cli)
-    - [Perform Upgrade](#perform-upgrade)
+    - [Verify Argo CD (Cli)](#verify-argo-cd-cli)
+    - [Upgrade AI Manager (Cli)](#upgrade-ai-manager-cli)
   - [Verify Upgrade Result](#verify-upgrade-result)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

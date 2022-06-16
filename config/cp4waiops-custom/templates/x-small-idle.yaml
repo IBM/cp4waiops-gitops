@@ -605,8 +605,8 @@ spec:
                     cpu: 1000m
                     memory: 1090Mi
                   requests:
-                    cpu: 600m
-                    memory: 650Mi
+                    cpu: 300m
+                    memory: 350Mi
               clientRegistration:
                 resources:
                   limits:
@@ -623,16 +623,16 @@ spec:
                     cpu: 1000m
                     memory: 410Mi
                   requests:
-                    cpu: 260m
-                    memory: 240Mi
+                    cpu: 130m
+                    memory: 140Mi
               identityProvider:
                 resources:
                   limits:
                     cpu: 1000m
                     memory: 420Mi
                   requests:
-                    cpu: 570m
-                    memory: 250Mi
+                    cpu: 300m
+                    memory: 150Mi
               replicas: 1
             oidcclientwatcher:
               replicas: 1

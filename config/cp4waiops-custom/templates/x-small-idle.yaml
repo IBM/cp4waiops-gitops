@@ -250,7 +250,7 @@ data:
                     memory: 1000Mi
                   requests:
                     cpu: 10m
-                    memory: 512Mi
+                    memory: 256Mi
               - name: spark-pipeline-composer
                 replicas: 1
                 containers:
@@ -260,7 +260,7 @@ data:
                     memory: 896Mi
                   requests:
                     cpu: 20m
-                    memory: 256Mi
+                    memory: 128Mi
     - name: ir-core-operator
       spec:
         issueresolutioncore:

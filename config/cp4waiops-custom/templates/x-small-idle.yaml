@@ -25,7 +25,7 @@ data:
         replicas: 1
         resources:
           limits:
-            cpu: 200m
+            cpu: 1000m
             memory: 256Mi
           requests:
             cpu: 10m
@@ -45,7 +45,7 @@ data:
         tls-proxy:
           resources:
             limits:
-              cpu: 100m
+              cpu: 500m
               memory: 200Mi
             requests:
               cpu: 10m
@@ -89,7 +89,7 @@ data:
               cassandra:
                 resources:
                   limits:
-                    cpu: 300m
+                    cpu: 600m
                     memory: 1500Mi
                   requests:
                     cpu: 20m
@@ -116,21 +116,21 @@ data:
           resources:
             db:
               limits:
-                cpu: 200m
+                cpu: 700m
                 memory: 768Mi
               requests:
                 cpu: 20m
                 memory: 64Mi
             search:
               limits:
-                cpu: 100m
+                cpu: 500m
                 memory: 250Mi
               requests:
                 cpu: 10m
                 memory: 64Mi
             mgmt:
               limits:
-                cpu: 100m
+                cpu: 500m
                 memory: 128Mi
               requests:
                 cpu: 10m
@@ -142,28 +142,28 @@ data:
             member:
               db:
                 limits:
-                  cpu: 100m
+                  cpu: 500m
                   memory: 512Mi
                 requests:
                   cpu: 10m
                   memory: 32Mi
               mgmt:
                 limits:
-                  cpu: 200m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 30m
                   memory: 64Mi
               proxy:
                 limits:
-                  cpu: 200m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 10m
                   memory: 32Mi
               proxylog:
                 limits:
-                  cpu: 100m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 10m
@@ -171,28 +171,28 @@ data:
             sentinel:
               db:
                 limits:
-                  cpu: 100m
+                  cpu: 500m
                   memory: 512Mi
                 requests:
                   cpu: 10m
                   memory: 32Mi
               mgmt:
                 limits:
-                  cpu: 200m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 30m
                   memory: 64Mi
               proxy:
                 limits:
-                  cpu: 200m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 20m
                   memory: 64Mi
               proxylog:
                 limits:
-                  cpu: 100m
+                  cpu: 500m
                   memory: 150Mi
                 requests:
                   cpu: 10m
@@ -236,7 +236,7 @@ data:
                 containers:
                 - name: classifier
                   limits:
-                    cpu: 500m
+                    cpu: 1
                     memory: 2048Mi
                   requests:
                     cpu: 10m
@@ -246,7 +246,7 @@ data:
                 containers:
                 - name: spark-worker
                   limits:
-                    cpu: 100m
+                    cpu: 1
                     memory: 1000Mi
                   requests:
                     cpu: 10m
@@ -256,7 +256,7 @@ data:
                 containers:
                 - name: spark-pipeline-composer
                   limits:
-                    cpu: 300m
+                    cpu: 250m
                     memory: 896Mi
                   requests:
                     cpu: 20m
@@ -291,7 +291,7 @@ data:
                 containers:
                 - name: iducrelay
                   limits:
-                    cpu: 200m
+                    cpu: 500m
                     memory: 1024Mi
                   requests:
                     cpu: 10m
@@ -301,7 +301,7 @@ data:
                 containers:
                 - name: jobmgr
                   limits:
-                    cpu: 200m
+                    cpu: 500m
                     memory: 1024Mi
                   requests:
                     cpu: 10m
@@ -311,7 +311,7 @@ data:
                 containers:
                 - name: standard
                   limits:
-                    cpu: 200m
+                    cpu: 500m
                     memory: 1024Mi
                   requests:
                     cpu: 20m
@@ -332,14 +332,14 @@ data:
                 containers:
                 - name: agg-gate
                   limits:
-                    cpu: 100m
+                    cpu: 500m
                     memory: 512Mi
                   requests:
                     cpu: 10m
                     memory: 64Mi
                 - name: objserv
                   limits:
-                    cpu: 100m
+                    cpu: 500m
                     memory: 1024Mi
                   requests:
                     cpu: 10m
@@ -349,7 +349,7 @@ data:
                 containers:
                 - name: objserv
                   limits:
-                    cpu: 100m
+                    cpu: 500m
                     memory: 1024Mi  
                   requests:
                     cpu: 10m

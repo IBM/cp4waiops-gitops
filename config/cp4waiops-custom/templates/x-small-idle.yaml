@@ -321,7 +321,7 @@ data:
                 containers:
                 - name: logstash
                   limits:
-                    cpu: 500m
+                    cpu: 1000m
                     memory: 1792Mi
                   requests:
                     cpu: 20m

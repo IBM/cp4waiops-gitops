@@ -241,6 +241,38 @@ data:
                   requests:
                     cpu: 10m
                     memory: 64Mi
+
+              - name: metric-action
+                replicas: 1
+                containers:
+                - name: metric-action
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+              - name: metric-api
+                replicas: 1
+                containers:
+                - name: metric-api
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+              - name: metric-spark
+                replicas: 1
+                containers:
+                - name: metric-spark
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+
               - name: spark-worker
                 replicas: 1
                 containers:
@@ -390,6 +422,16 @@ spec:
               requests:
                 cpu: 10m
                 memory: 50Mi
+
+          controller:
+            resources:
+              limits:
+                cpu: 1000m               
+                memory: 1Gi
+              requests:
+                cpu: 50m
+                memory: 100Mi
+
           global:
             logAnomaly:
               replicas: 1

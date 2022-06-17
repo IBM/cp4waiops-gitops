@@ -273,6 +273,17 @@ data:
                     cpu: 50m
                     memory: 100Mi
 
+              - name: spark-master
+                replicas: 1
+                containers:
+                - name: spark-master
+                  limits:
+                    cpu: 600m
+                    memory: 488Mi
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+
               - name: spark-worker
                 replicas: 1
                 containers:

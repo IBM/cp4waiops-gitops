@@ -93,7 +93,7 @@ data:
                     memory: 1500Mi
                   requests:
                     cpu: 20m
-                    memory: 768Mi
+                    memory: 512Mi
                 env:
                   - name: CASSANDRA_HEAP_SIZE
                     value: 600M
@@ -433,7 +433,6 @@ spec:
               requests:
                 cpu: 10m
                 memory: 50Mi
-
           controller:
             resources:
               limits:
@@ -442,6 +441,39 @@ spec:
               requests:
                 cpu: 50m
                 memory: 100Mi
+
+          similarIncidents:
+            resources:
+              limits:
+                memory: 2Gi
+                cpu: 800m                  
+              requests:
+                cpu: 40m
+                memory: 256Mi
+          chatopsSlackIntegrator:
+            resources:
+              limits:
+                cpu: 300m
+                memory: 512Mi
+              requests:
+                cpu: 20m
+                memory: 128Mi        
+          chatopsTeamsIntegrator:
+            resources:
+              limits:
+                cpu: 300m
+                memory: 512Mi                  
+              requests:
+                cpu: 20m
+                memory: 128Mi        
+          chatopsOrchestrator:
+            resources:
+              limits:
+                cpu: 200m
+                memory: 1Gi
+              requests:
+                cpu: 20m
+                memory: 88Mi        
 
           global:
             logAnomaly:

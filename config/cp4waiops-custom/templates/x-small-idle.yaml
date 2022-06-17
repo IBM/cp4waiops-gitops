@@ -604,7 +604,6 @@ spec:
                 requests:
                   cpu: 500m
                   memory: 640Mi
-              storageClass: rook-cephfs
             operandRequest: {}
         - name: ibm-cert-manager-operator
           spec:
@@ -795,7 +794,6 @@ spec:
             mustgatherConfig: {}
             mustgatherService:
               persistentVolumeClaim:
-                storageClassName: rook-cephfs
         - name: ibm-commonui-operator
           spec:
             commonWebUI:

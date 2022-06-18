@@ -608,7 +608,7 @@ spec:
         members:
           affinity:
             podAntiAffinity: null 
-    patchType: application/strategic-merge-patch+json
+    patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: redis.databases.cloud.ibm.com/v1
       kind: RedisSentinel
@@ -621,7 +621,7 @@ spec:
           spec:
             affinity:
               podAntiAffinity: null
-    patchType: application/strategic-merge-patch+json
+    patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: apps/v1
       kind: StatefulSet

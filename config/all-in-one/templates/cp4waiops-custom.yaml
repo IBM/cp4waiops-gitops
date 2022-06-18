@@ -40,6 +40,8 @@ spec:
               value: '{{ .Values.cp4waiops.aiManager.namespace }}'
             - name: 'profile'
               value: '{{ .Values.cp4waiops.profile }}'
+            - name: 'isSNO'
+              value: '{{ .Values.isSNO }}'
       syncPolicy:
         automated:
           prune: true

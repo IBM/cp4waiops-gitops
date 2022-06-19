@@ -3,7 +3,7 @@ apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "90"
+    argocd.argoproj.io/sync-wave: "75"
   name: redis-resource-locker
   namespace: resource-locker-operator
 spec:

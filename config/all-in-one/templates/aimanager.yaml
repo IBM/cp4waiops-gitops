@@ -48,6 +48,8 @@ spec:
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
             {{- end }}
+            - name: spec.isSNO
+              value: '{{ .Values.isSNO }}'
             {{- if .Values.cp4waiops.storageClass }}
             - name: spec.storageClass
               value: '{{ .Values.cp4waiops.storageClass }}'

@@ -13,6 +13,12 @@ spec:
     path: config/cp-shared/operators
     repoURL: https://github.com/IBM/cp4waiops-gitops
     targetRevision: release-3.4
+    helm:
+      parameters:
+        {{- if .Values.cp4waiops.imageCatalog }}
+        - name: spec.imageCatalog
+          value: '{{ .Values.cp4waiops.imageCatalog }}'
+        {{- end }}
   syncPolicy:
     automated:
       prune: true

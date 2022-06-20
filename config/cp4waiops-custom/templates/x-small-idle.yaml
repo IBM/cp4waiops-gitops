@@ -16,40 +16,40 @@ data:
           min.insync.replicas: 1
         resources:
           limits:
-            cpu: "500m"
-            memory: "1280Mi"
+            cpu: 500m
+            memory: 1280Mi
           requests:
-            cpu: "150m"
-            memory: "500Mi"
+            cpu: 150m
+            memory: 500Mi
       zookeeper:
         replicas: 1
         resources:
           limits:
-            cpu: "200m"
-            memory: "256Mi"
+            cpu: 1000m
+            memory: 256Mi
           requests:
-            cpu: "10m"
-            memory: "128Mi"
+            cpu: 10m
+            memory: 128Mi
       elasticsearch:
         env:
           - name: ES_JAVA_OPTS
-            value: "-Xms512M -Xmx512M"
+            value: -Xms512M -Xmx512M
         replicas: 1
         resources:
           limits:
-            cpu: "150m"
-            memory: "1536Mi"
+            cpu: 500m
+            memory: 1536Mi
           requests:
-            cpu: "10m"
-            memory: "768Mi"
+            cpu: 100m
+            memory: 768Mi
         tls-proxy:
           resources:
             limits:
-              cpu: "100m"
-              memory: "200Mi"
+              cpu: 500m
+              memory: 200Mi
             requests:
-              cpu: "10m"
-              memory: "100Mi"
+              cpu: 10m
+              memory: 100Mi
     cp4waiops-eventprocessor:
       flink:
         # Settings for the jobmanager statefulSet
@@ -57,26 +57,26 @@ data:
           replicas: 1
           resources:
             limits:
-              cpu: "150m"
-              memory: "2560Mi"
+              cpu: 1000m
+              memory: 1Gi
             requests:
-              cpu: "10m"
-              memory: "256Mi"
+              cpu: 100m
+              memory: 1Gi
         # Settings for the taskmanager statefulSet
         taskmanager:
           replicas: 1
           resources:
             limits:
-              cpu: 150m
-              memory: 1888Mi
+              cpu: 1600m
+              memory: 5888Mi
             requests:
-              cpu: 20m
-              memory: 512Mi
+              cpu: 500m
+              memory: 2048Mi
         properties:
-          jobmanager.memory.heap.size: "512mb"
-          jobmanager.memory.jvm-metaspace.size: "128mb"
-          taskmanager.memory.heap.size: "4096mb"
-          taskmanager.memory.managed.size: "512mb"
+          jobmanager.memory.heap.size: 512mb
+          jobmanager.memory.jvm-metaspace.size: 128mb
+          taskmanager.memory.heap.size: 4096mb
+          taskmanager.memory.managed.size: 512mb
           taskmanager.numberOfTaskSlots: 8
     configmaps:
     - name: aiops-topology-sizing
@@ -89,11 +89,11 @@ data:
               cassandra:
                 resources:
                   limits:
-                    cpu: 100m
+                    cpu: 600m
                     memory: 1500Mi
                   requests:
                     cpu: 20m
-                    memory: 768Mi
+                    memory: 512Mi
                 env:
                   - name: CASSANDRA_HEAP_SIZE
                     value: 600M
@@ -116,25 +116,25 @@ data:
           resources:
             db:
               limits:
-                cpu: "200m"
-                memory: "768Mi"
+                cpu: 700m
+                memory: 768Mi
               requests:
-                cpu: "20m"
-                memory: "128Mi"
+                cpu: 20m
+                memory: 64Mi
             search:
               limits:
-                cpu: "100m"
-                memory: "250Mi"
+                cpu: 500m
+                memory: 250Mi
               requests:
-                cpu: "10m"
-                memory: "128Mi"
+                cpu: 10m
+                memory: 64Mi
             mgmt:
               limits:
-                cpu: "100m"
-                memory: "128Mi"
+                cpu: 500m
+                memory: 128Mi
               requests:
-                cpu: "10m"
-                memory: "64Mi"
+                cpu: 10m
+                memory: 64Mi
     - name: redis
       spec:
         redissentinel:
@@ -142,80 +142,80 @@ data:
             member:
               db:
                 limits:
-                  cpu: "100m"
-                  memory: "512Mi"
+                  cpu: 500m
+                  memory: 512Mi
                 requests:
-                  cpu: "20m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 32Mi
               mgmt:
                 limits:
-                  cpu: "200m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "60m"
-                  memory: "64Mi"
+                  cpu: 30m
+                  memory: 64Mi
               proxy:
                 limits:
-                  cpu: "200m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "40m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 32Mi
               proxylog:
                 limits:
-                  cpu: "100m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "10m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 32Mi
             sentinel:
               db:
                 limits:
-                  cpu: "100m"
-                  memory: "512Mi"
+                  cpu: 500m
+                  memory: 512Mi
                 requests:
-                  cpu: "10m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 32Mi
               mgmt:
                 limits:
-                  cpu: "200m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "60m"
-                  memory: "64Mi"
+                  cpu: 30m
+                  memory: 64Mi
               proxy:
                 limits:
-                  cpu: "200m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "50m"
-                  memory: "64Mi"
+                  cpu: 20m
+                  memory: 64Mi
               proxylog:
                 limits:
-                  cpu: "100m"
-                  memory: "150Mi"
+                  cpu: 500m
+                  memory: 150Mi
                 requests:
-                  cpu: "10m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 32Mi
     - name: ir-lifecycle-operator
       spec:
         lifecycleservice:
           customSizing:
             logstash:
-              resourceLimitsCPU: "150m"
-              resourceLimitsMemory: "1536Mi"
-              resourceRequestsCPU: "50m"
-              resourceRequestsMemory: "600Mi"
+              resourceLimitsCPU: 625m
+              resourceLimitsMemory: 1536Mi
+              resourceRequestsCPU: 20m
+              resourceRequestsMemory: 600Mi
             taskManager:
-              resourceLimitsCPU: "200m"
-              resourceLimitsMemory: "1280Mi"
-              resourceRequestsCPU: "50m"
-              resourceRequestsMemory: "256Mi"
+              resourceLimitsCPU: 500m
+              resourceLimitsMemory: 1280Mi
+              resourceRequestsCPU: 250m
+              resourceRequestsMemory: 1280Mi
             jobManager:
-              resourceLimitsCPU: "100m"
-              resourceLimitsMemory: "768Mi"
-              resourceRequestsCPU: "20m"
-              resourceRequestsMemory: "256Mi"
+              resourceLimitsCPU: 600m
+              resourceLimitsMemory: 768Mi
+              resourceRequestsCPU: 100m
+              resourceRequestsMemory: 512Mi
     - name: ir-ai-operator
       spec:
         aiopsanalyticsorchestrator:
@@ -226,41 +226,84 @@ data:
                 containers:
                 - name: probablecause
                   limits:
-                    cpu: "100m"
-                    memory: "1Gi"
+                    cpu: 1000m
+                    memory: 1Gi
                   requests:
-                    cpu: "10m"
-                    memory: "256Mi"
+                    cpu: 20m
+                    memory: 300Mi
               - name: classifier
                 replicas: 1
                 containers:
                 - name: classifier
                   limits:
-                    cpu: "100m"
-                    memory: "2048Mi"
+                    cpu: 1
+                    memory: 2048Mi
                   requests:
-                    cpu: "20m"
-                    memory: "128Mi"
+                    cpu: 10m
+                    memory: 64Mi
+
+              - name: metric-action
+                replicas: 1
+                containers:
+                - name: metric-action
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+              - name: metric-api
+                replicas: 1
+                containers:
+                - name: metric-api
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+              - name: metric-spark
+                replicas: 1
+                containers:
+                - name: metric-spark
+                  limits:
+                    cpu: 1000m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 50m
+                    memory: 100Mi
+
+              - name: spark-master
+                replicas: 1
+                containers:
+                - name: spark-master
+                  limits:
+                    cpu: 600m
+                    memory: 488Mi
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+
               - name: spark-worker
                 replicas: 1
                 containers:
                 - name: spark-worker
                   limits:
-                    cpu: "100m"
-                    memory: "1000Mi"
+                    cpu: 1
+                    memory: 1000Mi
                   requests:
-                    cpu: "10m"
-                    memory: "512Mi"
+                    cpu: 10m
+                    memory: 256Mi
               - name: spark-pipeline-composer
                 replicas: 1
                 containers:
                 - name: spark-pipeline-composer
                   limits:
-                    cpu: "100m"
-                    memory: "896Mi"
+                    cpu: 250m
+                    memory: 896Mi
                   requests:
-                    cpu: "10m"
-                    memory: "256Mi"
+                    cpu: 20m
+                    memory: 128Mi
     - name: ir-core-operator
       spec:
         issueresolutioncore:
@@ -271,89 +314,89 @@ data:
                 containers:
                 - name: api
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 60m
+                    memory: 128Mi
               - name: ncodl-if
                 replicas: 1
                 containers:
                 - name: iducforward
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 10m
+                    memory: 128Mi
               - name: ncodl-ir
                 replicas: 1
                 containers:
                 - name: iducrelay
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 10m
+                    memory: 128Mi
               - name: ncodl-jobmgr
                 replicas: 1
                 containers:
                 - name: jobmgr
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 10m
+                    memory: 128Mi
               - name: ncodl-std
                 replicas: 1
                 containers:
                 - name: standard
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 20m
+                    memory: 128Mi
               - name: logstash
                 replicas: 1
                 containers:
                 - name: logstash
                   limits:
-                    cpu: "150m"
-                    memory: "1792Mi"
+                    cpu: 1000m
+                    memory: 1792Mi
                   requests:
-                    cpu: "30m"
-                    memory: "512Mi"
+                    cpu: 20m
+                    memory: 512Mi
             statefulSets:
               - name: ncobackup
                 replicas: 1
                 containers:
                 - name: agg-gate
                   limits:
-                    cpu: "100m"
-                    memory: "512Mi"
+                    cpu: 500m
+                    memory: 512Mi
                   requests:
-                    cpu: "10m"
-                    memory: "64Mi"
+                    cpu: 10m
+                    memory: 64Mi
                 - name: objserv
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"
+                    cpu: 500m
+                    memory: 1024Mi
                   requests:
-                    cpu: "10m"
-                    memory: "64Mi"
+                    cpu: 10m
+                    memory: 64Mi
               - name: ncoprimary
                 replicas: 1
                 containers:
                 - name: objserv
                   limits:
-                    cpu: "100m"
-                    memory: "1024Mi"  
+                    cpu: 500m
+                    memory: 1024Mi  
                   requests:
-                    cpu: "10m"
-                    memory: "128Mi"
+                    cpu: 10m
+                    memory: 50Mi
 ---
 apiVersion: redhatcop.redhat.io/v1alpha1
 kind: ResourceLocker
@@ -369,27 +412,69 @@ spec:
           changeRisk:
             resources:
               limits:
-                cpu: "750m"
-                memory: "1400Mi"
+                cpu: 750m
+                memory: 1400Mi
               requests:
-                cpu: "500m"
-                memory: "1000Mi"
+                cpu: 50m
+                memory: 500Mi
           logAnomaly:
             resources:
               limits:
-                cpu: "500m"
-                memory: "2048Mi"
+                cpu: 500m
+                memory: 2048Mi
               requests:
-                cpu: "250m"
-                memory: "128Mi"
+                cpu: 250m
+                memory: 128Mi
           aiPlatformApiServer:
             resources:
               limits:
-                cpu: "200m"
-                memory: "2Gi"
+                cpu: 200m
+                memory: 2Gi
               requests:
-                cpu: "100m"
-                memory: "128Mi"
+                cpu: 10m
+                memory: 50Mi
+          controller:
+            resources:
+              limits:
+                cpu: 1000m               
+                memory: 1Gi
+              requests:
+                cpu: 50m
+                memory: 100Mi
+
+          similarIncidents:
+            resources:
+              limits:
+                memory: 2Gi
+                cpu: 800m                  
+              requests:
+                cpu: 40m
+                memory: 256Mi
+          chatopsSlackIntegrator:
+            resources:
+              limits:
+                cpu: 300m
+                memory: 512Mi
+              requests:
+                cpu: 20m
+                memory: 128Mi        
+          chatopsTeamsIntegrator:
+            resources:
+              limits:
+                cpu: 300m
+                memory: 512Mi                  
+              requests:
+                cpu: 20m
+                memory: 128Mi        
+          chatopsOrchestrator:
+            resources:
+              limits:
+                cpu: 200m
+                memory: 1Gi
+              requests:
+                cpu: 20m
+                memory: 88Mi        
+
           global:
             logAnomaly:
               replicas: 1
@@ -457,27 +542,27 @@ spec:
             tlsSidecar:
               resources:
                 limits:
-                  cpu: "500m"
-                  memory: "128Mi"
+                  cpu: 500m
+                  memory: 128Mi
                 requests:
-                  cpu: "100m"
-                  memory: "64Mi"
+                  cpu: 10m
+                  memory: 16Mi
             topicOperator:
               resources:
                 limits:
-                  cpu: "500m"
-                  memory: "256Mi"
+                  cpu: 500m
+                  memory: 256Mi
                 requests:
-                  cpu: "100m"
-                  memory: "256Mi"
+                  cpu: 10m
+                  memory: 100Mi
             userOperator:
               resources:
                 limits:
-                  cpu: "500m"
-                  memory: "256Mi"
+                  cpu: 500m
+                  memory: 256Mi
                 requests:
-                  cpu: "100m"
-                  memory: "256Mi"
+                  cpu: 10m
+                  memory: 100Mi
     patchType: application/merge-patch+json
     targetObjectRef:
       apiVersion: base.automation.ibm.com/v1beta1
@@ -506,4 +591,5 @@ spec:
       namespace: {{.Values.aiManager.namespace}}
   serviceAccountRef:
     name: resource-locker-operator-controller-manager
+
 {{- end }}

@@ -1,3 +1,4 @@
+
 # -----------------------------------------------------------------------------
 # Argo CD parameters
 # -----------------------------------------------------------------------------
@@ -72,6 +73,8 @@ cp4waiops:
   # for official installation, use profile such as small or large instead.
   profile: small
 
+  # isSNO: false
+  
   # The storage class for CP4WAIOps to use.
   # storageClass: rook-cephfs
 

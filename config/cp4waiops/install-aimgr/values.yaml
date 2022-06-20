@@ -28,6 +28,9 @@ spec:
   ##
   storageClass: rook-cephfs
 
+  ## is ocp SNO? if yes, will adjust redis 
+  # isSNO: false
+
   ## If the storage provider for your deployment is Red Hat OpenShift Data Foundation, 
   ## previously called Red Hat OpenShift Container Storage, then set this to ocs-storagecluster-ceph-rbd
   storageClassLargeBlock: rook-cephfs

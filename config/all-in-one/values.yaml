@@ -92,6 +92,7 @@ cp4waiops:
     instanceName: aiops-installation
     # The namespace where AI Manager is installed.
     namespace: cp4waiops
+    # channel: v3.3
 
   eventManager:
     # Specify whether or not to install Event Manager.

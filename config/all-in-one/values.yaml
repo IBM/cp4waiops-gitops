@@ -81,7 +81,7 @@ cp4waiops:
   # The storage class for large block for CP4WAIOps to use.
   # storageClassLargeBlock: rook-cephfs
 
-  # imageCatalog of cp-shared, override if custom build
+  # imageCatalog for cp-shared, ai-manager and event-manager, override if custom build is used
   # imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
 
   # AIManager specific configuration

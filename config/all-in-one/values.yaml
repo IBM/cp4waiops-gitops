@@ -81,7 +81,6 @@ cp4waiops:
   # The storage class for large block for CP4WAIOps to use.
   # storageClassLargeBlock: rook-cephfs
 
-
   # AIManager specific configuration
   aiManager:
     # Specify whether or not to install AI Manager.

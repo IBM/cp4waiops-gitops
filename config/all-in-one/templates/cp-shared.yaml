@@ -11,8 +11,14 @@ spec:
   project: default
   source:
     path: config/cp-shared/operators
-    repoURL: https://github.com/IBM/cp4waiops-gitops
-    targetRevision: release-3.4
+    repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
+    targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
+    helm:
+      parameters:
+        {{- if .Values.cp4waiops.imageCatalog }}
+        - name: spec.imageCatalog
+          value: '{{ .Values.cp4waiops.imageCatalog }}'
+        {{- end }}
   syncPolicy:
     automated:
       prune: true

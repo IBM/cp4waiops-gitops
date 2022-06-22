@@ -40,9 +40,9 @@ spec:
             - name: spec.aiManager.size
               value: '{{ .Values.cp4waiops.profile }}'
             {{- end }}
-            {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+            {{- if .Values.cp4waiops.imageCatalog }}
             - name: spec.imageCatalog
-              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
+              value: '{{ .Values.cp4waiops.imageCatalog }}'
             {{- end }}
             {{- if .Values.cp4waiops.aiManager.channel }}
             - name: spec.aiManager.channel

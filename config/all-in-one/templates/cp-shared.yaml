@@ -15,9 +15,9 @@ spec:
     targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
     helm:
       parameters:
-        {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+        {{- if .Values.cp4waiops.imageCatalog }}
         - name: spec.imageCatalog
-          value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
+          value: '{{ .Values.cp4waiops.imageCatalog }}'
         {{- end }}
   syncPolicy:
     automated:

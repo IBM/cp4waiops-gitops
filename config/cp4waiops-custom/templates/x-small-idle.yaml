@@ -474,6 +474,14 @@ spec:
               requests:
                 cpu: 20m
                 memory: 88Mi        
+          oobRecommendedActions:
+            resources:
+              limits:
+                memory: 2Gi
+                cpu: 200m
+              requests:
+                cpu: 50m
+                memory: 256Mi       
 
           global:
             logAnomaly:

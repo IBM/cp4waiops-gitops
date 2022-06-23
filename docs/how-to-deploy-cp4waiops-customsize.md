@@ -15,6 +15,7 @@
       - [Install *x-small* custom sizing CP4WAIOps](#install-x-small-custom-sizing-cp4waiops)
       - [Install *x-small-idle* custom sizing CP4WAIOps](#install-x-small-idle-custom-sizing-cp4waiops)
       - [Install *x-small-custom* custom sizing CP4WAIOps](#install-x-small-custom-custom-sizing-cp4waiops)
+      - [Install custom sizing CP4WAIOps in SNO](#install-custom-sizing-cp4waiops-in-sno)
       - [Install custom sizing CP4WAIOps using *Custom Build*](#install-custom-sizing-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
     - [Access CP4WAIOps](#access-cp4waiops)
@@ -212,9 +213,24 @@ globalImagePullSecrets:
 | cp4waiops.eventManager.enabled |false          | not install eventmanager |
 
 
+#### Install custom sizing CP4WAIOps in SNO
+
+| Field                          | Value         |  
+| ------------------------------ | ------------- | 
+| cp4waiops.profile              | x-small or x-small-idle  | 
+| cp4waiops.eventManager.enabled |false          |  
+
+And adding following YAML snippet to `HELM` > `VALUES` field will install AI Manager and Event Manager using custom imageCatalog and channel:
+
+```yaml
+cp4waiops:
+  isSNO:true
+```
+
+
 #### Install custom sizing CP4WAIOps using *Custom Build*
 
-The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel for your custom build.
+The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
 
 Just use the install parameters listed in following table when you create the Argo CD App:
 

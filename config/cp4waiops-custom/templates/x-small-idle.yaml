@@ -415,15 +415,15 @@ spec:
                 cpu: 750m
                 memory: 1400Mi
               requests:
-                cpu: 20m
-                memory: 300Mi
+                cpu: 50m
+                memory: 500Mi
           logAnomaly:
             resources:
               limits:
                 cpu: 500m
                 memory: 2048Mi
               requests:
-                cpu: 50m
+                cpu: 250m
                 memory: 128Mi
           aiPlatformApiServer:
             resources:
@@ -439,7 +439,7 @@ spec:
                 cpu: 1000m               
                 memory: 1Gi
               requests:
-                cpu: 30m
+                cpu: 50m
                 memory: 100Mi
 
           similarIncidents:

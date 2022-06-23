@@ -219,6 +219,8 @@ Just use the install parameters listed in following table when you create the Ar
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
 | cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
 | cp4waiops.aiManager.channel         | string | v3.4                                      | The subscription channel for AI Manager.
+
+
 These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in `HELM` > `VALUES` field.
 
 For example, adding following YAML snippet to `HELM` > `VALUES` field will install AI Manager and Event Manager using custom imageCatalog and channel:
@@ -241,8 +243,6 @@ After both Ceph and CP4WAIOps are ready, you will be able to see those Apps from
 You can check the topology of CP4WAIOps using Argo CD UI as follows:
 
 ![w](images/aimanager-33.png)
-
-![w](images/eventmanager-33.png)
 
 You can also check from command line as follows, and make sure there are no error pods. If there are some pods in error state, you can check logs either from Argo CD UI or using `kubectl logs` from command line.
 

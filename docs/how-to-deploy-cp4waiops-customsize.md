@@ -12,7 +12,10 @@
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Install custom sizing CP4WAIOps Using All-in-One Configuration](#install-custom-sizing-cp4waiops-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install custom sizing CP4WAIOps using Custom Build](#install-custom-sizing-cp4waiops-using-custom-build)
+      - [Install *x-small* custom sizing CP4WAIOps](#install-x-small-custom-sizing-cp4waiops)
+      - [Install *x-small-idle* custom sizing CP4WAIOps](#install-x-small-idle-custom-sizing-cp4waiops)
+      - [Install *x-small-custom* custom sizing CP4WAIOps](#install-x-small-custom-custom-sizing-cp4waiops)
+      - [Install custom sizing CP4WAIOps using *Custom Build*](#install-custom-sizing-cp4waiops-using-custom-build)
     - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
     - [Access CP4WAIOps](#access-cp4waiops)
 

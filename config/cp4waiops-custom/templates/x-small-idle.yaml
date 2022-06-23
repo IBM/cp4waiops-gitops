@@ -99,20 +99,6 @@ data:
                     value: 600M
                   - name: CASSANDRA_HEAP_NEWSIZE
                     value: 150M
-
-          topology:
-            specs:
-              replicas: 1
-            containers:
-              topology:
-                resources:
-                  limits:
-                    cpu: 800m
-                    memory: 888Mi
-                  requests:
-                    cpu: 288m
-                    memory: 588Mi
-
     operandconfigs:
     - name: aimanager-operator
       spec:
@@ -488,14 +474,6 @@ spec:
               requests:
                 cpu: 20m
                 memory: 88Mi        
-          oobRecommendedActions:
-            resources:
-              limits:
-                memory: 2Gi
-                cpu: 200m
-              requests:
-                cpu: 50m
-                memory: 256Mi
 
           global:
             logAnomaly:

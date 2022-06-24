@@ -4,8 +4,8 @@ repo_url: https://github.com/IBM/cp4waiops-gitops
 nav:
     - GitOps Install:
       - Introduction: README.md
-      - v3.4:
-        - Online Install: how-to-deploy-cp4waiops.md
+      - v3.3 Tech Preview:
+        - Online Install: how-to-deploy-cp4waiops-33.md
       - Advanced Install Options:
         - Customize CP4WAIOps Install: cp4waiops-custom-install.md
         - Deploy Demo Environment: deploy-cloudpak-with-sample-apps.md

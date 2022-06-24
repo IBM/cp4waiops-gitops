@@ -480,8 +480,8 @@ spec:
                 memory: 2Gi
                 cpu: 200m
               requests:
-                cpu: 50m
-                memory: 256Mi       
+                cpu: 20m
+                memory: 56Mi       
 
           global:
             logAnomaly:

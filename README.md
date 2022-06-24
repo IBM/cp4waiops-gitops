@@ -18,7 +18,6 @@ This repository is about using OpenShift GitOps to deployCloud Pak for Watson AI
 - [3.1](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.1.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
 - [3.2](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0) - NON OFFICIAL GITOPS RELEASE, NO OFFICIAL SUPPORT
 - [3.3](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0) - TECHNICAL PREVIEW FEATURE
-- [3.4](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0) - OFFICIAL SUPPORT
 
 ## Install CP4WAIOps using GitOps
 
@@ -28,8 +27,6 @@ Please refer to the following documents and decide how you want to deploy CP4WAI
 - [NON OFFICIAL - CP4WAIOps 3.2 Online Install](./docs/how-to-deploy-cp4waiops-32.md)
 - [NON OFFICIAL - CP4WAIOps 3.2 Airgap Install](./docs/how-to-deploy-airgap-32.md)
 - [CP4WAIOps 3.3 Tech Preview Online Install](./docs/how-to-deploy-cp4waiops-33.md)
-- [CP4WAIOps 3.4 Online Install](./docs/how-to-deploy-cp4waiops.md)
-- [CP4WAIOps 3.4 Online Upgrade from Previous Version](./docs/how-to-deploy-cp4waiops-upgrade-from-previous.md)
 
 ## More Install Options for CP4WAIOps using GitOps
 

@@ -77,7 +77,7 @@ In Helm PARAMETERS, you can also update the following install parameters that ar
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
 | rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
 | cp4waiops.version                     | string | v3.4               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3, v3.4.
-| **cp4waiops.profile**                 | string | small              | The CP4WAIOps deployment profile, e.g.: large, small and x-small, x-small-idle, x-small-custom for custom sizing.
+| **cp4waiops.profile**                 | string | small              | The CP4WAIOps deployment profile, e.g.: large, small and ***x-small, x-small-idle, x-small-custom for custom sizing***.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
 | cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.

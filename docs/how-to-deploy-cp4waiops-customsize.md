@@ -91,7 +91,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small, x-small-idle, x-small-custom` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-To install custom sizing CP4WAIOps using *Custom Build*, please refer [Install CP4WAIOps using Custom Build](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md#install-cp4waiops-using-custom-build)
+To install custom sizing CP4WAIOps using **Custom Build**, please refer [Install CP4WAIOps using Custom Build](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md#install-cp4waiops-using-custom-build)
 
 ### Verify CP4WAIOps Installation
 

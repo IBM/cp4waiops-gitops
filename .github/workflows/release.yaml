@@ -3,9 +3,10 @@ name: Release Charts
 on:
   push:
     branches:
-      - release-3.4
+      - br_r34_versions_updates
     paths:
-      - 'config/**'
+      - 'config/cp4waiops/**'
+      - 'config/cp-shared/**'
 
   workflow_dispatch:
 

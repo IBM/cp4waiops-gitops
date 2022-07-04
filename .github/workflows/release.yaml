@@ -28,15 +28,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config/cp4waiops/install-aimgr'
-        env:
-          CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-
-      - name: Run Event Manager chart-releaser for CP4WAIOps 3.4
-        uses: helm/chart-releaser-action@v1.3.0
-        with:
-          version: v1.3.0
-          charts_dir: 'config/cp4waiops/install-emgr'
+          charts_dir: 'config/cp4waiops'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
@@ -44,6 +36,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config/cp-shared/operators'
+          charts_dir: 'config/cp-shared'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

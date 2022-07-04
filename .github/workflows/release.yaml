@@ -24,10 +24,26 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser for CP4WAIOps 3.4
+      - name: Run AI Manager chart-releaser for CP4WAIOps 3.4
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config'
+          charts_dir: 'config/cp4waiops/install-aimgr'
+        env:
+          CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Run Event Manager chart-releaser for CP4WAIOps 3.4
+        uses: helm/chart-releaser-action@v1.3.0
+        with:
+          version: v1.3.0
+          charts_dir: 'config/cp4waiops/install-emgr'
+        env:
+          CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Run Shared Components chart-releaser for CP4WAIOps 3.4
+        uses: helm/chart-releaser-action@v1.3.0
+        with:
+          version: v1.3.0
+          charts_dir: 'config/cp-shared/operators'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

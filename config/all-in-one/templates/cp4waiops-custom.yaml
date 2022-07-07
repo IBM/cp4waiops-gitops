@@ -1,4 +1,4 @@
-{{- if eq .Values.cp4waiops.profile "x-small" }}
+{{- if hasPrefix "x-small" .Values.cp4waiops.profile }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -26,11 +26,11 @@ spec:
       source:
         path: config/cp4waiops-custom
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
+        targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
         helm:
           valueFiles:
             - values.yaml
-          {{- if eq .Values.cp4waiops.profile "x-small" }}
+          {{- if eq .Values.cp4waiops.profile "x-small-custom" }}
             - values.x-small.yaml
           {{- end }}
           parameters:

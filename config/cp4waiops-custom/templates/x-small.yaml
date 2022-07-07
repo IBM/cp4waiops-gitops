@@ -1,0 +1,509 @@
+{{- if eq .Values.profile "x-small" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: aiops-custom-size-profile
+data:
+  profiles: |
+    generatedFor: "NonHA"
+    automationbase:
+      kafka:
+        replicas: 1
+        config:
+          default.replication.factor: 1
+          min.insync.replicas: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1280Mi
+          requests:
+            cpu: 250m
+            memory: 500Mi
+      zookeeper:
+        replicas: 1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+      elasticsearch:
+        env:
+          - name: ES_JAVA_OPTS
+            value: -Xms512M -Xmx512M
+        replicas: 1
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1536Mi
+          requests:
+            cpu: 250m
+            memory: 1Gi
+        tls-proxy:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+    cp4waiops-eventprocessor:
+      flink:
+        # Settings for the jobmanager statefulSet
+        jobmanager:
+          replicas: 1
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
+        # Settings for the taskmanager statefulSet
+        taskmanager:
+          replicas: 1
+          resources:
+            limits:
+              cpu: 1600m
+              memory: 5888Mi
+            requests:
+              cpu: 500m
+              memory: 2048Mi
+        properties:
+          jobmanager.memory.heap.size: 512mb
+          jobmanager.memory.jvm-metaspace.size: 128mb
+          taskmanager.memory.heap.size: 4gb
+          taskmanager.memory.managed.size: 512mb
+          taskmanager.numberOfTaskSlots: 8
+    configmaps:
+    - name: aiops-topology-sizing
+      data: 
+        asm: |
+          cassandra:
+            specs:
+              replicas: 1
+            containers:
+              cassandra:
+                resources:
+                  limits:
+                    cpu: 600m
+                    memory: 1500Mi
+                  requests:
+                    cpu: 200m
+                    memory: 1500Mi
+                env:
+                  - name: CASSANDRA_HEAP_SIZE
+                    value: 600M
+                  - name: CASSANDRA_HEAP_NEWSIZE
+                    value: 150M
+    operandconfigs:
+    - name: aimanager-operator
+      spec:
+        aimanager:
+          modelTrain:
+            maxLearners: 1
+    - name: ibm-management-kong
+      spec:
+        kong:
+          replicaCount: 1
+    - name: couchdb
+      spec:
+        couchdbcluster:
+          size: 1
+          resources:
+            db:
+              limits:
+                cpu: 700m
+                memory: 768Mi
+              requests:
+                cpu: 250m
+                memory: 768Mi
+            search:
+              limits:
+                cpu: 500m
+                memory: 250Mi
+              requests:
+                cpu: 250m
+                memory: 250Mi
+            mgmt:
+              limits:
+                cpu: 500m
+                memory: 128Mi
+              requests:
+                cpu: 250m
+                memory: 64Mi
+    - name: redis
+      spec:
+        redissentinel:
+          resources:
+            member:
+              db:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 60m
+                  memory: 256Mi
+              mgmt:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+              proxy:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+              proxylog:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+            sentinel:
+              db:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 60m
+                  memory: 256Mi
+              mgmt:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+              proxy:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+              proxylog:
+                limits:
+                  cpu: 500m
+                  memory: 150Mi
+                requests:
+                  cpu: 60m
+                  memory: 100Mi
+    - name: ir-lifecycle-operator
+      spec:
+        lifecycleservice:
+          customSizing:
+            logstash:
+              resourceLimitsCPU: 625m
+              resourceLimitsMemory: 1536Mi
+              resourceRequestsCPU: 250m
+              resourceRequestsMemory: 600Mi
+            taskManager:
+              resourceLimitsCPU: 500m
+              resourceLimitsMemory: 1280Mi
+              resourceRequestsCPU: 250m
+              resourceRequestsMemory: 1280Mi
+            jobManager:
+              resourceLimitsCPU: 600m
+              resourceLimitsMemory: 768Mi
+              resourceRequestsCPU: 100m
+              resourceRequestsMemory: 512Mi
+    - name: ir-ai-operator
+      spec:
+        aiopsanalyticsorchestrator:
+          customSizing:
+            deployments:
+              - name: probablecause
+                replicas: 1
+                containers:
+                - name: probablecause
+                  limits:
+                    cpu: 1000m
+                    memory: 1Gi
+                  requests:
+                    cpu: 400m
+                    memory: 750Mi
+              - name: classifier
+                replicas: 1
+                containers:
+                - name: classifier
+                  limits:
+                    cpu: 1
+                    memory: 2048Mi
+                  requests:
+                    cpu: 400m
+                    memory: 750Mi
+              - name: spark-worker
+                replicas: 1
+                containers:
+                - name: spark-worker
+                  limits:
+                    cpu: 1
+                    memory: 1000Mi
+                  requests:
+                    cpu: 350m
+                    memory: 1000Mi
+              - name: spark-pipeline-composer
+                replicas: 1
+                containers:
+                - name: spark-pipeline-composer
+                  limits:
+                    cpu: 250m
+                    memory: 896Mi
+                  requests:
+                    cpu: 250m
+                    memory: 600Mi
+    - name: ir-core-operator
+      spec:
+        issueresolutioncore:
+          customSizing:
+            deployments:
+              - name: ncodl-api
+                replicas: 1
+                containers:
+                - name: api
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 100m
+                    memory: 512Mi
+              - name: ncodl-if
+                replicas: 1
+                containers:
+                - name: iducforward
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 100m
+                    memory: 512Mi
+              - name: ncodl-ir
+                replicas: 1
+                containers:
+                - name: iducrelay
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 50m
+                    memory: 512Mi
+              - name: ncodl-jobmgr
+                replicas: 1
+                containers:
+                - name: jobmgr
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 50m
+                    memory: 512Mi
+              - name: ncodl-std
+                replicas: 1
+                containers:
+                - name: standard
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 50m
+                    memory: 512Mi
+              - name: logstash
+                replicas: 1
+                containers:
+                - name: logstash
+                  limits:
+                    cpu: 1000m
+                    memory: 1792Mi
+                  requests:
+                    cpu: 100m
+                    memory: 700Mi
+            statefulsets:
+              - name: ncobackup
+                replicas: 1
+                containers:
+                - name: agg-gate
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+                  requests:
+                    cpu: 50m
+                    memory: 256Mi
+                - name: objserv
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi
+                  requests:
+                    cpu: 100m
+                    memory: 512Mi
+              - name: ncoprimary
+                replicas: 1
+                containers:
+                - name: objserv
+                  limits:
+                    cpu: 500m
+                    memory: 1024Mi  
+                  requests:
+                    cpu: 125m
+                    memory: 512Mi
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: aimanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aimanagermainprod-locker
+    patchTemplate: |
+      spec:
+        helmValues:
+          changeRisk:
+            resources:
+              limits:
+                cpu: 750m
+                memory: 1400Mi
+              requests:
+                cpu: 500m
+                memory: 1000Mi
+          logAnomaly:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 2048Mi
+              requests:
+                cpu: 250m
+                memory: 256Mi
+          aiPlatformApiServer:
+            resources:
+              limits:
+                cpu: 200m
+                memory: 2Gi
+              requests:
+                cpu: 100m
+                memory: 512Mi
+          global:
+            logAnomaly:
+              replicas: 1
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: ai-manager.watson-aiops.ibm.com/v1beta1
+      kind: AIManagerMainProd
+      name: aimanager
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: iaf-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: nginx-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: ibm-nginx
+      namespace: cp4waiops
+  - id: usermgmt-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: usermgmt
+      namespace: cp4waiops
+  - id: zen-core-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core
+      namespace: cp4waiops
+  - id: zen-core-api-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: zen-core-api
+      namespace: cp4waiops
+  - id: automationbase-locker
+    patchTemplate: |
+      spec:
+        kafka:
+          entityOperator:
+            tlsSidecar:
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+            topicOperator:
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+            userOperator:
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+    patchType: application/merge-patch+json
+    targetObjectRef:
+      apiVersion: base.automation.ibm.com/v1beta1
+      kind: AutomationBase
+      name: automationbase-sample
+      namespace: cp4waiops
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: ResourceLocker
+metadata:
+  name: appmanager-resource-locker
+  namespace: resource-locker-operator
+spec:
+  patches:
+  - id: aiopsedge-operator-controller-manager-locker
+    patchTemplate: |
+      spec:
+        replicas: 1
+    patchType: application/strategic-merge-patch+json
+    targetObjectRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: aiopsedge-operator-controller-manager
+      namespace: {{.Values.aiManager.namespace}}
+  serviceAccountRef:
+    name: resource-locker-operator-controller-manager
+{{- end }}

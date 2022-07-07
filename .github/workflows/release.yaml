@@ -5,7 +5,8 @@ on:
     branches:
       - release-3.4
     paths:
-      - 'config/**'
+      - 'config/cp4waiops/**'
+      - 'config/cp-shared/**'
 
   workflow_dispatch:
 
@@ -23,10 +24,18 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      - name: Run chart-releaser for CP4WAIOps 3.4
+      - name: Run AI Manager chart-releaser for CP4WAIOps 3.4
         uses: helm/chart-releaser-action@v1.3.0
         with:
           version: v1.3.0
-          charts_dir: 'config'
+          charts_dir: 'config/cp4waiops'
+        env:
+          CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Run Shared Components chart-releaser for CP4WAIOps 3.4
+        uses: helm/chart-releaser-action@v1.3.0
+        with:
+          version: v1.3.0
+          charts_dir: 'config/cp-shared'
         env:
           CR_TOKEN: '${{ secrets.GITHUB_TOKEN }}'

@@ -26,31 +26,31 @@ spec:
       source:
         path: {{ template "cp4waiops.aimanager.configPath" . }}
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "HEAD" .Values.cp4waiops.targetRevision }}
+        targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
-            - name: spec.dockerUsername
-              value: '{{ .Values.cp4waiops.dockerUsername }}'
-            - name: spec.dockerPassword
-              value: '{{ .Values.cp4waiops.dockerPassword }}'
             - name: spec.aiManager.instanceName
               value: '{{ .Values.cp4waiops.aiManager.instanceName }}'
             - name: spec.aiManager.namespace
               value: '{{ .Values.cp4waiops.aiManager.namespace }}'
-            {{- if eq .Values.cp4waiops.profile "x-small" }}
+            {{- if hasPrefix "x-small" .Values.cp4waiops.profile }}
             - name: spec.aiManager.size
               value: 'small'
             {{- else }}
             - name: spec.aiManager.size
               value: '{{ .Values.cp4waiops.profile }}'
             {{- end }}
-            {{- if .Values.cp4waiops.aiManager.imageCatalog }}
+            {{- if .Values.cp4waiops.imageCatalog }}
             - name: spec.imageCatalog
-              value: '{{ .Values.cp4waiops.aiManager.imageCatalog }}'
+              value: '{{ .Values.cp4waiops.imageCatalog }}'
             {{- end }}
             {{- if .Values.cp4waiops.aiManager.channel }}
             - name: spec.aiManager.channel
               value: '{{ .Values.cp4waiops.aiManager.channel }}'
+            {{- end }}
+            {{- if .Values.cp4waiops.isSNO}}
+            - name: spec.isSNO
+              value: '{{ .Values.cp4waiops.isSNO }}'
             {{- end }}
             {{- if .Values.cp4waiops.storageClass }}
             - name: spec.storageClass

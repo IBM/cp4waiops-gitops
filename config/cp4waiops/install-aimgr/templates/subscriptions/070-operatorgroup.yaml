@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: cp4waiops-operator-group
+  namespace: {{.Values.spec.aiManager.namespace}}
+  annotations:
+    argocd.argoproj.io/sync-wave: "70"
+spec:
+  targetNamespaces:
+    - {{.Values.spec.aiManager.namespace}}

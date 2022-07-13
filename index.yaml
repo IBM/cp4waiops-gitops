@@ -11,17 +11,6 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/aimanager-3.4.0/aimanager-3.4.0.tgz
     version: 3.4.0
-  aimanager32:
-  - apiVersion: v1
-    appVersion: "3.2"
-    created: "2022-03-24T13:30:29.55903463Z"
-    description: AIManager 3.2 Chart
-    digest: c1028feb6fe9830acce1fe1530071910da207b9b1d252696f9bcc32bfc2c39ce
-    name: aimanager32
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/aimanager32-0.0.1/aimanager32-0.0.1.tgz
-    version: 0.0.1
   aimanager33:
   - apiVersion: v1
     appVersion: "3.3"
@@ -32,50 +21,6 @@ entries:
     type: application
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/aimanager33-0.0.1/aimanager33-0.0.1.tgz
-    version: 0.0.1
-  aimanager34:
-  - apiVersion: v1
-    appVersion: "3.4"
-    created: "2022-07-04T09:03:05.638057735Z"
-    description: AIManager 3.4 Chart
-    digest: aab3df3ec9db4ced2845bd84fa083268bb66f86b0bfe8d9496ec3ba056a7ab87
-    name: aimanager34
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/aimanager34-0.0.2/aimanager34-0.0.2.tgz
-    version: 0.0.2
-  ceph:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-06-07T08:02:01.694427985Z"
-    description: Sample chart for rookceph
-    digest: ade00f5e7902871019bd318b798c1b96b85e12dee044f693376c7ec5d011b90c
-    name: ceph
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/ceph-1/ceph-1.tgz
-    version: "1"
-  cp4waiops-aio:
-  - apiVersion: v1
-    appVersion: "1.0"
-    created: "2022-06-07T08:02:01.963792776Z"
-    description: CP4WAIOps All In One Instance
-    digest: 81ddc3a49e773bf0c869c52c9d4bef6d07a0d235b609ce599f94c5e59068b489
-    name: cp4waiops-aio
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/cp4waiops-aio-1/cp4waiops-aio-1.tgz
-    version: "1"
-  cp4waiops-custom:
-  - apiVersion: v1
-    appVersion: 0.0.1
-    created: "2022-06-07T08:02:02.184101872Z"
-    description: The CP4WAIOps Customized Instance
-    digest: 161aebe9d64f254e4b674ab92874ad9f9ee239908878c71a2613085d4aaac722
-    name: cp4waiops-custom
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/cp4waiops-custom-0.0.1/cp4waiops-custom-0.0.1.tgz
     version: 0.0.1
   eventmanager:
   - apiVersion: v1
@@ -88,17 +33,6 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager-3.4.0/eventmanager-3.4.0.tgz
     version: 3.4.0
-  eventmanager32:
-  - apiVersion: v1
-    appVersion: "3.2"
-    created: "2022-03-24T13:30:29.801156936Z"
-    description: EventManager 3.2 Chart
-    digest: 082b62dcbfcb3e6ac12f3a194dd96c9658c59f9793c29348da642a84de0e3c65
-    name: eventmanager32
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager32-0.0.1/eventmanager32-0.0.1.tgz
-    version: 0.0.1
   eventmanager33:
   - apiVersion: v1
     appVersion: "3.3"
@@ -110,15 +44,4 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager33-0.0.1/eventmanager33-0.0.1.tgz
     version: 0.0.1
-  eventmanager34:
-  - apiVersion: v1
-    appVersion: "3.4"
-    created: "2022-07-04T09:03:05.92469469Z"
-    description: EventManager 3.4 Chart
-    digest: 0a58f052aa6cbb300a8b7879fbd099eca7336277c82dab571b21d7882921a5c3
-    name: eventmanager34
-    type: application
-    urls:
-    - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager34-0.0.2/eventmanager34-0.0.2.tgz
-    version: 0.0.2
 generated: "2022-07-12T05:42:08.77025371Z"

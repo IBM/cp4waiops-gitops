@@ -69,6 +69,23 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
   - Subject namespace: openshift-gitops
   - Subject name: openshift-gitops-argocd-application-controller
 
+### Configure Argo CD
+From Argo CD UI, click `NEW APP` and input parameters as follows and then click `CREATE` button.
+
+- GENERAL
+  - Application Name: argocd
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: release-3.4
+  - path: config/argocd/openshift
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: openshift-gitops
+  
+After Argo CD App `argocd` is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.
+
 ### Storage Considerations
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).

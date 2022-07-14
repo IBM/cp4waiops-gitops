@@ -426,6 +426,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-argo-cd" class="md-nav__link">
+    Configure Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#storage-considerations" class="md-nav__link">
     Storage Considerations
   </a>
@@ -810,6 +817,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#configure-argo-cd" class="md-nav__link">
+    Configure Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#storage-considerations" class="md-nav__link">
     Storage Considerations
   </a>
@@ -1052,6 +1066,7 @@
 <li><a href="#install-cp4waiops-from-ui">Install CP4WAIOps from UI</a><ul>
 <li><a href="#login-to-argo-cd">Login to Argo CD</a></li>
 <li><a href="#grant-argo-cd-cluster-admin-permission">Grant Argo CD Cluster Admin Permission</a></li>
+<li><a href="#configure-argo-cd">Configure Argo CD</a></li>
 <li><a href="#storage-considerations">Storage Considerations</a></li>
 <li><a href="#obtain-an-entitlement-key">Obtain an entitlement key</a></li>
 <li><a href="#update-the-ocp-global-pull-secret">Update the OCP global pull secret</a></li>
@@ -1112,6 +1127,22 @@
 <li>Subject namespace: openshift-gitops</li>
 <li>Subject name: openshift-gitops-argocd-application-controller</li>
 </ul>
+<h3 id="configure-argo-cd">Configure Argo CD<a class="headerlink" href="#configure-argo-cd" title="Permanent link">&para;</a></h3>
+<p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows and then click <code>CREATE</code> button.</p>
+<ul>
+<li>GENERAL</li>
+<li>Application Name: argocd</li>
+<li>Project: default</li>
+<li>SYNC POLICY: Automatic</li>
+<li>SOURCE</li>
+<li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
+<li>Revision: release-3.4</li>
+<li>path: config/argocd/openshift</li>
+<li>DESTINATION</li>
+<li>Cluster URL: https://kubernetes.default.svc</li>
+<li>Namespace: openshift-gitops</li>
+</ul>
+<p>After Argo CD App <code>argocd</code> is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.</p>
 <h3 id="storage-considerations">Storage Considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
 <p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
 <p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>

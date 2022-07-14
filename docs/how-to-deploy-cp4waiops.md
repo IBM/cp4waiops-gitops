@@ -7,6 +7,7 @@
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+    - [Configure Argo CD](#configure-argo-cd)
     - [Storage Considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)

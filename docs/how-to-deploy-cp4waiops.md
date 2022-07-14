@@ -7,6 +7,7 @@
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+    - [Configure Argo CD](#configure-argo-cd)
     - [Storage Considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
@@ -68,6 +69,23 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
   - ServiceAccount: check it
   - Subject namespace: openshift-gitops
   - Subject name: openshift-gitops-argocd-application-controller
+
+### Configure Argo CD
+From Argo CD UI, click `NEW APP` and input parameters as follows and then click `CREATE` button.
+
+- GENERAL
+  - Application Name: argocd
+  - Project: default
+  - SYNC POLICY: Automatic
+- SOURCE
+  - Repository URL : https://github.com/IBM/cp4waiops-gitops
+  - Revision: release-3.4
+  - path: config/argocd/openshift
+- DESTINATION
+  - Cluster URL: https://kubernetes.default.svc
+  - Namespace: openshift-gitops
+  
+After Argo CD App `argocd` is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.
 
 ### Storage Considerations
 

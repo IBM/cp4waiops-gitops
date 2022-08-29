@@ -1,8 +1,8 @@
 apiVersion: operators.coreos.com/v1alpha1
 kind: CatalogSource
 metadata:
-  name: ibm-operator-catalog
-  namespace: openshift-marketplace
+  name: {{.Values.spec.catalogName}}
+  namespace: {{.Values.spec.catalogNamespace}}
   annotations:
     argocd.argoproj.io/sync-wave: "60"
 spec:

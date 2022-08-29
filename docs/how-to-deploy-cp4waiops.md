@@ -238,8 +238,8 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
   - Namespace: openshift-marketplace
 - PARAMETERS
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.argocd_application_controller: openshift-gitops-argocd-application-controller
-  - spec.argocd_namespace: openshift-gitops
+  - spec.catalogName: ibm-operator-catalog
+  - spec.catalogNamespace: openshift-marketplace
 
 
 #### Install AI Manager
@@ -679,8 +679,8 @@ argocd app create cp-shared \
       --dest-namespace openshift-marketplace \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
-      --helm-set spec.argocd_application_controller=openshift-gitops-argocd-application-controller \
-      --helm-set spec.argocd_namespace=openshift-gitops
+      --helm-set spec.catalogName=ibm-operator-catalog \
+      --helm-set spec.catalogNamespace=openshift-marketplace
 ```
 
 #### Install AI Manager (Cli)

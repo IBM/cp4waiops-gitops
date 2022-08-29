@@ -1,7 +1,5 @@
 ---
-metadata:
-  argocd_namespace: openshift-gitops
-serviceaccount:
-  argocd_application_controller: openshift-gitops-argocd-application-controller
 spec:
   imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  catalogNamespace: openshift-marketplace
+  catalogName: ibm-operator-catalog

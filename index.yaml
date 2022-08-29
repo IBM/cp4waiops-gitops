@@ -22,6 +22,17 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/aimanager33-0.0.1/aimanager33-0.0.1.tgz
     version: 0.0.1
+  cp-shared-operators:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-08-29T07:09:45.715358839Z"
+    description: Shared resources for Cloud Pak operators
+    digest: 2d07ed8cc2e0eef4d48d9cbd47fb7147d2a84d243e6ec8d87f3128bb8d7f21a9
+    name: cp-shared-operators
+    type: application
+    urls:
+    - https://github.com/IBM/cp4waiops-gitops/releases/download/cp-shared-operators-0.0.2/cp-shared-operators-0.0.2.tgz
+    version: 0.0.2
   eventmanager:
   - apiVersion: v1
     appVersion: "3.4"
@@ -44,4 +55,4 @@ entries:
     urls:
     - https://github.com/IBM/cp4waiops-gitops/releases/download/eventmanager33-0.0.1/eventmanager33-0.0.1.tgz
     version: 0.0.1
-generated: "2022-07-12T05:42:08.77025371Z"
+generated: "2022-08-29T07:09:45.715364139Z"

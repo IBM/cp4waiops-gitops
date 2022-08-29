@@ -1290,8 +1290,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>Namespace: openshift-marketplace</li>
 <li>PARAMETERS</li>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
-<li>spec.argocd_application_controller: openshift-gitops-argocd-application-controller</li>
-<li>spec.argocd_namespace: openshift-gitops</li>
+<li>spec.catalogName: ibm-operator-catalog</li>
+<li>spec.catalogNamespace: openshift-marketplace</li>
 </ul>
 <h4 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h4>
 <p>You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:</p>
@@ -1799,8 +1799,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --dest-namespace openshift-marketplace <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.imageCatalog<span class="o">=</span>icr.io/cpopen/ibm-operator-catalog:latest <span class="se">\</span>
-      --helm-set spec.argocd_application_controller<span class="o">=</span>openshift-gitops-argocd-application-controller <span class="se">\</span>
-      --helm-set spec.argocd_namespace<span class="o">=</span>openshift-gitops
+      --helm-set spec.catalogName<span class="o">=</span>ibm-operator-catalog <span class="se">\</span>
+      --helm-set spec.catalogNamespace<span class="o">=</span>openshift-marketplace
 </code></pre></div>
 <h4 id="install-ai-manager-cli">Install AI Manager (Cli)<a class="headerlink" href="#install-ai-manager-cli" title="Permanent link">&para;</a></h4>
 <p>To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:</p>

@@ -213,10 +213,10 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: cp4waiops
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+  - spec.imageCatalog: check daily build [instruction here](https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70) for Catalog link
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: v3.3
+  - spec.aiManager.channel: check daily build [instruction here](https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70) for channel setting
   - spec.aiManager.size: small
   - spec.aiManager.namespace: cp4waiops
   - spec.aiManager.pakModules.aiopsFoundation.enabled: true

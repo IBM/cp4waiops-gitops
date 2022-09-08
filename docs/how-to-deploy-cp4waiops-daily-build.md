@@ -187,7 +187,7 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
    - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
 
 5. Add another credentials for daily build repo, you can find the [build repository info here](https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70)
-   - "Registry Server Address" <build repository>
+   - "Registry Server Address": [build repository] 
    - "Username": [Your Email address]
    - "Password": paste the api token of the account above
    - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration

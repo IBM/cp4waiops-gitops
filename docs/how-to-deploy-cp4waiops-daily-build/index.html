@@ -902,9 +902,9 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <p>"Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration</p>
 </li>
 <li>
-<p>Add another credentials for daily build repo <code>hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com</code></p>
+<p>Add another credentials for daily build repo, you can find the <a href="https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70">build repository info here</a></p>
 </li>
-<li>"Registry Server Address" hyc-katamari-cicd-team-docker-local.artifactory.swg-devops.com</li>
+<li>"Registry Server Address" <build repository></li>
 <li>"Username": [Your Email address]</li>
 <li>"Password": paste the api token of the account above</li>
 <li>
@@ -930,10 +930,10 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: cp4waiops</li>
 <li>PARAMETERS</li>
-<li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
+<li>spec.imageCatalog: check daily build <a href="https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70">instruction here</a> for Catalog link</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
-<li>spec.aiManager.channel: v3.3</li>
+<li>spec.aiManager.channel: check daily build <a href="https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70">instruction here</a> for channel setting</li>
 <li>spec.aiManager.size: small</li>
 <li>spec.aiManager.namespace: cp4waiops</li>
 <li>spec.aiManager.pakModules.aiopsFoundation.enabled: true</li>

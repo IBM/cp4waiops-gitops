@@ -18,7 +18,7 @@ spec:
   source:
     path: config/argocd/{{ .Values.argocd.cluster }}
     repoURL: https://github.com/IBM/cp4waiops-gitops
-    targetRevision: release-3.4
+    targetRevision: release-3.5
   syncPolicy:
     automated:
       prune: true

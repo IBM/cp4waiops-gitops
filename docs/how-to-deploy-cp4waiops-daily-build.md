@@ -2,7 +2,7 @@
 
 ## 
 The procedure for deploying CP4WAIOps with daily build is very similar compare to deploying with GAed build, you can follow the [Deploy Cloud Pak for Watson AIOps using GitOps guide](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md) to deploy CP4WAIOps with daily build, the only differences are in 3 places.
-- First, in the [update the OCP global pull secret instruction here](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md#update-the-global-pull-secret-using-the-openshift-console), need to add build repository credential. you can find the [build repository info here](https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70)
+- First, in the [update the OCP global pull secret instruction here](https://github.com/IBM/cp4waiops-gitops/blob/docs/docs/how-to-deploy-cp4waiops.md#update-the-global-pull-secret-using-the-openshift-console), need to add build repository credential. you can find the [build repository and catalog image info here](https://ibm.box.com/s/xn3epa3a11jlryo0t1mwt0xxkmwv7o70)
    - "Registry Server Address": [build repository] 
    - "Username": [Your Email address]
    - "Password": paste the api token of the account above

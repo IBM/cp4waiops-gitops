@@ -12,7 +12,7 @@ spec:
   source:
     path: config/cp-shared/operators
     repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-    targetRevision: {{ default "release-3.4" .Values.cp4waiops.targetRevision }}
+    targetRevision: {{ default "release-3.5" .Values.cp4waiops.targetRevision }}
     helm:
       parameters:
         {{- if .Values.cp4waiops.imageCatalog }}

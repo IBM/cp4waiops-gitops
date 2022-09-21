@@ -79,7 +79,7 @@ From Argo CD UI, click `NEW APP` and input parameters as follows and then click 
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
+  - Revision: release-3.5
   - path: config/argocd/openshift
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -104,7 +104,7 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
+  - Revision: release-3.5
   - path: config/ceph
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -231,7 +231,7 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
+  - Revision: release-3.5
   - path: config/cp-shared/operators
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -252,7 +252,7 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
+  - Revision: release-3.5
   - path: config/cp4waiops/install-aimgr
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -260,7 +260,7 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
 - PARAMETERS
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: v3.4
+  - spec.aiManager.channel: v3.5
   - spec.aiManager.size: small
   - spec.aiManager.namespace: cp4waiops
   - spec.aiManager.pakModules.aiopsFoundation.enabled: true
@@ -282,7 +282,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - SYNC POLICY: Automatic
 - SOURCE
   - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
+  - Revision: release-3.5
   - path: config/cp4waiops/install-emgr
 - DESTINATION
   - Cluster URL: https://kubernetes.default.svc
@@ -291,9 +291,9 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.eventManager.version: 1.6.4
+  - spec.eventManager.version: 1.6.6
   - spec.eventManager.clusterDomain: REPLACE_IT
-  - spec.eventManager.channel: v1.7
+  - spec.eventManager.channel: v1.10
   - spec.eventManager.deploymentType: trial
   - spec.eventManager.namespace: noi
 
@@ -325,7 +325,7 @@ Just fill in the form using the suggested field values listed in following table
 | Project               | default                                               |
 | Sync Policy           | Automatic                                             |
 | Repository URL        | https://github.com/IBM/cp4waiops-gitops               |
-| Revision              | release-3.4                                                  |
+| Revision              | release-3.5                                                  |
 | Path                  | config/all-in-one                                     |
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
@@ -337,7 +337,7 @@ Besides the basic information, when filling in the form, you can also update the
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
 | rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
-| cp4waiops.version                     | string | v3.4               | Specify the version of CP4WAIOps, e.g.: v3.2, v3.3, v3.4.
+| cp4waiops.version                     | string | v3.5               | Specify the version of CP4WAIOps v3.5.
 | cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
@@ -361,9 +361,9 @@ Just use the install parameters listed in following table when you create the Ar
 | Parameter                           | Type   | Default Value                             | Description 
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
 | cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
-| cp4waiops.aiManager.channel         | string | v3.4                                      | The subscription channel for AI Manager.
+| cp4waiops.aiManager.channel         | string | v3.5                                      | The subscription channel for AI Manager.
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
-| cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
+| cp4waiops.eventManager.channel      | string | v1.10                                     | The subscription channel for Event Manager.
 
 These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in `HELM` > `VALUES` field.
 
@@ -385,7 +385,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | ------------------------------------- |--------|---------------|-----------------------------------
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.
+| cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
@@ -642,7 +642,7 @@ argocd app create ceph \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/ceph \
-      --revision release-3.4 \
+      --revision release-3.5 \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
@@ -675,7 +675,7 @@ argocd app create cp-shared \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp-shared/operators \
-      --revision release-3.4 \
+      --revision release-3.5 \
       --dest-namespace openshift-marketplace \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
@@ -693,13 +693,13 @@ argocd app create aimanager-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp4waiops/install-aimgr \
-      --revision release-3.4 \
+      --revision release-3.5 \
       --dest-namespace cp4waiops \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=cp4waiops \
-      --helm-set spec.aiManager.channel=v3.4 \
+      --helm-set spec.aiManager.channel=v3.5 \
       --helm-set spec.aiManager.size=small \
       --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled=true \
       --helm-set spec.aiManager.pakModules.applicationManager.enabled=true \
@@ -717,15 +717,15 @@ argocd app create eventmanager-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp4waiops/event-manager \
-      --revision release-3.4 \
+      --revision release-3.5 \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
-      --helm-set spec.eventManager.channel=v1.7 \
-      --helm-set spec.eventManager.version=1.6.4 \
+      --helm-set spec.eventManager.channel=v1.10 \
+      --helm-set spec.eventManager.version=1.6.6 \
       --helm-set spec.eventManager.clusterDomain=REPLACE_IT \
       --helm-set spec.eventManager.deploymentType=trial
 ```
@@ -750,13 +750,13 @@ argocd app create cp4waiops-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/all-in-one \
-      --revision release-3.4 \
+      --revision release-3.5 \
       --dest-namespace openshift-gitops \
       --dest-server https://kubernetes.default.svc \
       --helm-set argocd.cluster=openshift \
       --helm-set argocd.allowLocalDeploy=true \
       --helm-set rookceph.enabled=true \
-      --helm-set cp4waiops.version=v3.4 \
+      --helm-set cp4waiops.version=v3.5 \
       --helm-set cp4waiops.profile=small \
       --helm-set cp4waiops.aiManager.enabled=true \
       --helm-set cp4waiops.aiManager.namespace=cp4waiops \

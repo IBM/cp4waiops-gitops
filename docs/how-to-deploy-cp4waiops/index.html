@@ -331,6 +331,339 @@
               
   
   
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_3">
+          v3.4 Tech Preview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="v3.4 Tech Preview" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          v3.4 Tech Preview
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Online Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Online Install
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisite" class="md-nav__link">
+    Prerequisite
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-cp4waiops-from-ui" class="md-nav__link">
+    Install CP4WAIOps from UI
+  </a>
+  
+    <nav class="md-nav" aria-label="Install CP4WAIOps from UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd" class="md-nav__link">
+    Login to Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grant-argo-cd-cluster-admin-permission" class="md-nav__link">
+    Grant Argo CD Cluster Admin Permission
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-argo-cd" class="md-nav__link">
+    Configure Argo CD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-considerations" class="md-nav__link">
+    Storage Considerations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtain-an-entitlement-key" class="md-nav__link">
+    Obtain an entitlement key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-the-ocp-global-pull-secret" class="md-nav__link">
+    Update the OCP global pull secret
+  </a>
+  
+    <nav class="md-nav" aria-label="Update the OCP global pull secret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-the-global-pull-secret-using-the-openshift-console" class="md-nav__link">
+    Update the global pull secret using the OpenShift console
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-1-install-ai-manager-and-event-manager-separately" class="md-nav__link">
+    Option 1: Install AI Manager and Event Manager Separately
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: Install AI Manager and Event Manager Separately">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-shared-components" class="md-nav__link">
+    Install shared components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-ai-manager" class="md-nav__link">
+    Install AI Manager
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-event-manager" class="md-nav__link">
+    Install Event Manager
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-experimental-install-using-all-in-one-configuration" class="md-nav__link">
+    Option 2: (Experimental) Install Using All-in-One Configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: (Experimental) Install Using All-in-One Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-ai-manager-and-event-manager-in-one-go" class="md-nav__link">
+    Install AI Manager and Event Manager in One Go
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-cp4waiops-using-custom-build" class="md-nav__link">
+    Install CP4WAIOps using Custom Build
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-cp4waiops-installation" class="md-nav__link">
+    Verify CP4WAIOps Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-cp4waiops" class="md-nav__link">
+    Access CP4WAIOps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-cp4waiops-from-command-line" class="md-nav__link">
+    Install CP4WAIOps from Command Line
+  </a>
+  
+    <nav class="md-nav" aria-label="Install CP4WAIOps from Command Line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#login-to-argo-cd-cli" class="md-nav__link">
+    Login to Argo CD (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-considerations-cli" class="md-nav__link">
+    Storage Considerations (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-1-install-ai-manager-and-event-manager-separately-cli" class="md-nav__link">
+    Option 1: Install AI Manager and Event Manager Separately (Cli)
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 1: Install AI Manager and Event Manager Separately (Cli)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grant-argo-cd-cluster-admin-permission-cli" class="md-nav__link">
+    Grant Argo CD Cluster Admin Permission (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-shared-components-cli" class="md-nav__link">
+    Install shared components (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-ai-manager-cli" class="md-nav__link">
+    Install AI Manager (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-event-manager-cli" class="md-nav__link">
+    Install Event Manager (Cli)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-experimentalinstall-using-all-in-one-configuration-cli" class="md-nav__link">
+    Option 2: (Experimental)Install Using All-in-One Configuration (Cli)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-cp4waiops-installation-cli" class="md-nav__link">
+    Verify CP4WAIOps Installation (Cli)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trouble-shooting" class="md-nav__link">
+    Trouble Shooting
+  </a>
+  
+    <nav class="md-nav" aria-label="Trouble Shooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    Storage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -340,20 +673,20 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_3" type="checkbox" id="__nav_1_3" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" checked>
       
       
       
       
-        <label class="md-nav__link" for="__nav_1_3">
-          v3.4 TBD
+        <label class="md-nav__link" for="__nav_1_4">
+          v3.5 Official Support
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="v3.4 TBD" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_3">
+      <nav class="md-nav" aria-label="v3.5 Official Support" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
           <span class="md-nav__icon md-icon"></span>
-          v3.4 TBD
+          v3.5 Official Support
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -675,18 +1008,18 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_1_4">
+        <label class="md-nav__link" for="__nav_1_5">
           Advanced Install Options
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Advanced Install Options" data-md-level="2">
-        <label class="md-nav__title" for="__nav_1_4">
+        <label class="md-nav__title" for="__nav_1_5">
           <span class="md-nav__icon md-icon"></span>
           Advanced Install Options
         </label>
@@ -1104,7 +1437,7 @@
 <h1 id="deploy-cp4waiops-using-gitops">Deploy CP4WAIOps using GitOps<a class="headerlink" href="#deploy-cp4waiops-using-gitops" title="Permanent link">&para;</a></h1>
 <h2 id="prerequisite">Prerequisite<a class="headerlink" href="#prerequisite" title="Permanent link">&para;</a></h2>
 <ul>
-<li>To learn CP4WAIOps system requirement, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps</a>.</li>
+<li>To learn CP4WAIOps system requirement, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements">System requirements for Cloud Pak for Watson AIOps</a>.</li>
 <li>To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing OpenShift GitOps</a>.</li>
 </ul>
 <h2 id="install-cp4waiops-from-ui">Install CP4WAIOps from UI<a class="headerlink" href="#install-cp4waiops-from-ui" title="Permanent link">&para;</a></h2>
@@ -1136,7 +1469,7 @@
 <li>SYNC POLICY: Automatic</li>
 <li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.4</li>
+<li>Revision: release-3.5</li>
 <li>path: config/argocd/openshift</li>
 <li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
@@ -1144,8 +1477,8 @@
 </ul>
 <p>After Argo CD App <code>argocd</code> is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.</p>
 <h3 id="storage-considerations">Storage Considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
-<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
-<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
 <p>For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">AWS EFS guide</a> for details.
 You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS configuration instruction</a></p>
 <p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then click <code>CREATE</code> button.</p>
@@ -1156,7 +1489,7 @@ You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS 
 <li>SYNC POLICY: Automatic</li>
 <li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.4</li>
+<li>Revision: release-3.5</li>
 <li>path: config/ceph</li>
 <li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
@@ -1283,7 +1616,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>SYNC POLICY: Automatic</li>
 <li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.4</li>
+<li>Revision: release-3.5</li>
 <li>path: config/cp-shared/operators</li>
 <li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
@@ -1302,7 +1635,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>SYNC POLICY: Automatic</li>
 <li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.4</li>
+<li>Revision: release-3.5</li>
 <li>path: config/cp4waiops/install-aimgr</li>
 <li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
@@ -1310,7 +1643,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>PARAMETERS</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
-<li>spec.aiManager.channel: v3.4</li>
+<li>spec.aiManager.channel: v3.5</li>
 <li>spec.aiManager.size: small</li>
 <li>spec.aiManager.namespace: cp4waiops</li>
 <li>spec.aiManager.pakModules.aiopsFoundation.enabled: true</li>
@@ -1331,7 +1664,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>SYNC POLICY: Automatic</li>
 <li>SOURCE</li>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.4</li>
+<li>Revision: release-3.5</li>
 <li>path: config/cp4waiops/install-emgr</li>
 <li>DESTINATION</li>
 <li>Cluster URL: https://kubernetes.default.svc</li>
@@ -1340,9 +1673,9 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
-<li>spec.eventManager.version: 1.6.4</li>
+<li>spec.eventManager.version: 1.6.6</li>
 <li>spec.eventManager.clusterDomain: REPLACE_IT</li>
-<li>spec.eventManager.channel: v1.7</li>
+<li>spec.eventManager.channel: v1.10</li>
 <li>spec.eventManager.deploymentType: trial</li>
 <li>spec.eventManager.namespace: noi</li>
 </ul>
@@ -1390,7 +1723,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </tr>
 <tr>
 <td>Revision</td>
-<td>release-3.4</td>
+<td>release-3.5</td>
 </tr>
 <tr>
 <td>Path</td>
@@ -1438,8 +1771,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <tr>
 <td>cp4waiops.version</td>
 <td>string</td>
-<td>v3.4</td>
-<td>Specify the version of CP4WAIOps, e.g.: v3.2, v3.3, v3.4.</td>
+<td>v3.5</td>
+<td>Specify the version of CP4WAIOps v3.5.</td>
 </tr>
 <tr>
 <td>cp4waiops.profile</td>
@@ -1513,7 +1846,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <tr>
 <td>cp4waiops.aiManager.channel</td>
 <td>string</td>
-<td>v3.4</td>
+<td>v3.5</td>
 <td>The subscription channel for AI Manager.</td>
 </tr>
 <tr>
@@ -1525,7 +1858,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <tr>
 <td>cp4waiops.eventManager.channel</td>
 <td>string</td>
-<td>v1.7</td>
+<td>v1.10</td>
 <td>The subscription channel for Event Manager.</td>
 </tr>
 </tbody>
@@ -1547,7 +1880,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <span class="p p-Indicator">|</span><span class="err"> ------------------------------------- |--------|---------------|-----------------------------------</span><span class="w"></span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.</span><span class="w"></span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.</span><span class="w"></span>
-<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.</span><span class="w"></span>
+<span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.</span><span class="w"></span>
 <span class="p p-Indicator">|</span><span class="err"> cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.</span><span class="w"></span>
 <span class="p p-Indicator">|</span><span class="err"> globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.</span><span class="w"></span>
 
@@ -1761,15 +2094,15 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --insecure
 </code></pre></div>
 <h3 id="storage-considerations-cli">Storage Considerations (Cli)<a class="headerlink" href="#storage-considerations-cli" title="Permanent link">&para;</a></h3>
-<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
-<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
 <p>To create Argo CD App for Ceph storage from command line, run following command:</p>
 <div class="highlight"><pre><span></span><code>argocd app create ceph <span class="se">\</span>
       --sync-policy automatic <span class="se">\</span>
       --project default <span class="se">\</span>
       --repo https://github.com/IBM/cp4waiops-gitops.git <span class="se">\</span>
       --path config/ceph <span class="se">\</span>
-      --revision release-3.4 <span class="se">\</span>
+      --revision release-3.5 <span class="se">\</span>
       --dest-namespace rook-ceph <span class="se">\</span>
       --dest-server https://kubernetes.default.svc
 </code></pre></div>
@@ -1795,7 +2128,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --project default <span class="se">\</span>
       --repo https://github.com/IBM/cp4waiops-gitops.git <span class="se">\</span>
       --path config/cp-shared/operators <span class="se">\</span>
-      --revision release-3.4 <span class="se">\</span>
+      --revision release-3.5 <span class="se">\</span>
       --dest-namespace openshift-marketplace <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.imageCatalog<span class="o">=</span>icr.io/cpopen/ibm-operator-catalog:latest <span class="se">\</span>
@@ -1809,13 +2142,13 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --project default <span class="se">\</span>
       --repo https://github.com/IBM/cp4waiops-gitops.git <span class="se">\</span>
       --path config/cp4waiops/install-aimgr <span class="se">\</span>
-      --revision release-3.4 <span class="se">\</span>
+      --revision release-3.5 <span class="se">\</span>
       --dest-namespace cp4waiops <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.storageClass<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.storageClassLargeBlock<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.aiManager.namespace<span class="o">=</span>cp4waiops <span class="se">\</span>
-      --helm-set spec.aiManager.channel<span class="o">=</span>v3.4 <span class="se">\</span>
+      --helm-set spec.aiManager.channel<span class="o">=</span>v3.5 <span class="se">\</span>
       --helm-set spec.aiManager.size<span class="o">=</span>small <span class="se">\</span>
       --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set spec.aiManager.pakModules.applicationManager.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
@@ -1829,15 +2162,15 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --project default <span class="se">\</span>
       --repo https://github.com/IBM/cp4waiops-gitops.git <span class="se">\</span>
       --path config/cp4waiops/event-manager <span class="se">\</span>
-      --revision release-3.4 <span class="se">\</span>
+      --revision release-3.5 <span class="se">\</span>
       --dest-namespace noi <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set spec.imageCatalog<span class="o">=</span>icr.io/cpopen/ibm-operator-catalog:latest <span class="se">\</span>
       --helm-set spec.storageClass<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.storageClassLargeBlock<span class="o">=</span>rook-cephfs <span class="se">\</span>
       --helm-set spec.eventManager.namespace<span class="o">=</span>noi <span class="se">\</span>
-      --helm-set spec.eventManager.channel<span class="o">=</span>v1.7 <span class="se">\</span>
-      --helm-set spec.eventManager.version<span class="o">=</span><span class="m">1</span>.6.4 <span class="se">\</span>
+      --helm-set spec.eventManager.channel<span class="o">=</span>v1.10 <span class="se">\</span>
+      --helm-set spec.eventManager.version<span class="o">=</span><span class="m">1</span>.6.6 <span class="se">\</span>
       --helm-set spec.eventManager.clusterDomain<span class="o">=</span>REPLACE_IT <span class="se">\</span>
       --helm-set spec.eventManager.deploymentType<span class="o">=</span>trial
 </code></pre></div>
@@ -1856,13 +2189,13 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
       --project default <span class="se">\</span>
       --repo https://github.com/IBM/cp4waiops-gitops.git <span class="se">\</span>
       --path config/all-in-one <span class="se">\</span>
-      --revision release-3.4 <span class="se">\</span>
+      --revision release-3.5 <span class="se">\</span>
       --dest-namespace openshift-gitops <span class="se">\</span>
       --dest-server https://kubernetes.default.svc <span class="se">\</span>
       --helm-set argocd.cluster<span class="o">=</span>openshift <span class="se">\</span>
       --helm-set argocd.allowLocalDeploy<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set rookceph.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
-      --helm-set cp4waiops.version<span class="o">=</span>v3.4 <span class="se">\</span>
+      --helm-set cp4waiops.version<span class="o">=</span>v3.5 <span class="se">\</span>
       --helm-set cp4waiops.profile<span class="o">=</span>small <span class="se">\</span>
       --helm-set cp4waiops.aiManager.enabled<span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
       --helm-set cp4waiops.aiManager.namespace<span class="o">=</span>cp4waiops <span class="se">\</span>
@@ -1921,7 +2254,7 @@ kubectl get pod -n noi
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../how-to-deploy-cp4waiops-33/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Online Install" rel="prev">
+        <a href="./" class="md-footer__link md-footer__link--prev" aria-label="Previous: Online Install" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>

@@ -6,7 +6,9 @@ nav:
       - Introduction: README.md
       - v3.3 Tech Preview:
         - Online Install: how-to-deploy-cp4waiops-33.md
-      - v3.4 TBD:
+      - v3.4 Tech Preview:
+        - Online Install: how-to-deploy-cp4waiops.md
+      - v3.5 Official Support:
         - Online Install: how-to-deploy-cp4waiops.md
       - Advanced Install Options:
         - Customize CP4WAIOps Install: cp4waiops-custom-install.md

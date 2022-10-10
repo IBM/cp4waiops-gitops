@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps using GitOps](#deploy-cp4waiops-using-gitops)
+- [Deploy CP4WAIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
   - [Prerequisite](#prerequisite)
   - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
@@ -36,7 +36,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps using GitOps
+# Deploy CP4WAIOps 3.5 using GitOps
+
+**:tada::tada::tada: Using GitOps to Install CP4WAIOps is a GA feature for 3.5 release! :tada::tada::tada:**
 
 ## Prerequisite
 

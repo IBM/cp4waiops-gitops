@@ -40,7 +40,7 @@
 
 ## Prerequisite
 
-- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=planning-system-requirements).
+- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
 - To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
 ## Install CP4WAIOps from UI
@@ -89,9 +89,9 @@ After Argo CD App `argocd` is created, you can click the App from Argo CD UI to 
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
 For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
 You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
@@ -630,9 +630,9 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### Storage Considerations (Cli)
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
 To create Argo CD App for Ceph storage from command line, run following command:
 

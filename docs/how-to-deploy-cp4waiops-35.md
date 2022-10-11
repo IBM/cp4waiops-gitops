@@ -38,28 +38,37 @@
 
 # Deploy Cloud Pak for Watson AIOps 3.5 using GitOps
 
-**:tada::tada::tada: Using GitOps to Install Cloud Pak for Watson AIOps is a GA feature for 3.5 release! :tada::tada::tada:**
+**Using GitOps to Install Cloud Pak for Watson AIOps is a GA feature for 3.5 release!**
 
-## Prerequisite
+## Introduction
 
-- To learn Cloud Pak for Watson AIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
-- To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
+The use of GitOps enables you to easily deploy IBM Cloud Pak for Watson AIOps on a Red Hat Openshift Container Platform cluster from a Git repository, using the ArgoCD tool.
 
-## Install Cloud Pak for Watson AIOps from UI
+For more information about GitOps, see [Understanding Openshift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat Openshift documentation.
+For more information about Argo, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/).
+
+You can install Cloud Pak for Watson AIOps using the Argo CD user interface (UI), or with the Argo CD command line (CLI).
+
+## Prerequisites
+
+- Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
+- You must have OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html) in the Red Hat Openshift documentation.
+
+## Install Cloud Pak for Watson AIOps with the Argo CD UI
 
 ### Login to Argo CD
 
-You can now login to Argo CD UI as follows by clicking the drop down menu on top right.
+From your Red Hat Openshift console, click the menu on the upper right, and select `Cluster Argo CD`.
 
 ![w](images/gitops-menu.png)
 
-Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
+The Argo CD UI is displayed. Click `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
 
 ### Grant Argo CD Cluster Admin Permission
 
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with the following values and then click the `Create` button.
 
 - Binding type
   - Cluster-wide role binding (ClusterRoleBinding)
@@ -73,7 +82,8 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
   - Subject name: openshift-gitops-argocd-application-controller
 
 ### Configure Argo CD
-From Argo CD UI, click `NEW APP` and input parameters as follows and then click `CREATE` button.
+
+From the Argo CD UI, click `NEW APP`, input the following parameters, and then click the `CREATE` button.
 
 - GENERAL
   - Application Name: argocd
@@ -87,13 +97,13 @@ From Argo CD UI, click `NEW APP` and input parameters as follows and then click 
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-gitops
   
-After Argo CD App `argocd` is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.
+After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the toplogy of all of the resources.
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for Cloud Pak for Watson AIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already has a supported default storageclass configured then skip this step.
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+In this tutorial, we are using Ceph just for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
 For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
 You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)

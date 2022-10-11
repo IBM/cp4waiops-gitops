@@ -3,12 +3,12 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Deploy Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
-  - [Prerequisite](#prerequisite)
+  - [Prerequisites](#prerequisite)
   - [Install Cloud Pak for Watson AIOps from UI](#install-cp4waiops-from-ui)
-    - [Login to Argo CD](#login-to-argo-cd)
+    - [Log in to Argo CD](#login-to-argo-cd)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Configure Argo CD](#configure-argo-cd)
-    - [Storage Considerations](#storage-considerations)
+    - [Storage considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
       - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
@@ -16,22 +16,22 @@
       - [Install shared components](#install-shared-components)
       - [Install AI Manager](#install-ai-manager)
       - [Install Event Manager](#install-event-manager)
-    - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
-      - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install Cloud Pak for Watson AIOps using Custom Build](#install-cp4waiops-using-custom-build)
-    - [Verify Cloud Pak for Watson AIOps Installation](#verify-cp4waiops-installation)
+    - [Option 2: (**Experimental**) Installing using an all-in-One configuration](#option-2-experimental-install-using-all-in-one-configuration)
+      - [Install AI Manager and Event Manager in one Go](#install-ai-manager-and-event-manager-in-one-go)
+      - [Install Cloud Pak for Watson AIOps using a custom build](#install-cp4waiops-using-custom-build)
+    - [Verify Cloud Pak for Watson AIOps installation](#verify-cp4waiops-installation)
     - [Access Cloud Pak for Watson AIOps](#access-cp4waiops)
-  - [Install Cloud Pak for Watson AIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
-    - [Storage Considerations (Cli)](#storage-considerations-cli)
-    - [Option 1: Install AI Manager and Event Manager Separately (Cli)](#option-1-install-ai-manager-and-event-manager-separately-cli)
-      - [Grant Argo CD Cluster Admin Permission (Cli)](#grant-argo-cd-cluster-admin-permission-cli)
-      - [Install shared components (Cli)](#install-shared-components-cli)
-      - [Install AI Manager (Cli)](#install-ai-manager-cli)
-      - [Install Event Manager (Cli)](#install-event-manager-cli)
-    - [Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
-    - [Verify Cloud Pak for Watson AIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
-  - [Trouble Shooting](#trouble-shooting)
+  - [Install Cloud Pak for Watson AIOps from the CLI](#install-cp4waiops-from-command-line)
+    - [Log in to Argo CD (CLI)](#login-to-argo-cd-cli)
+    - [Storage Considerations (CLI)](#storage-considerations-cli)
+    - [Option 1: Install AI Manager and Event Manager Separately (CLI)](#option-1-install-ai-manager-and-event-manager-separately-cli)
+      - [Grant Argo CD Cluster Admin Permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
+      - [Install shared components (CLI)](#install-shared-components-cli)
+      - [Install AI Manager (CLI)](#install-ai-manager-cli)
+      - [Install Event Manager (CLI)](#install-event-manager-cli)
+    - [Option 2: (**Experimental**) Installing using all-in-one configuration (CLI)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
+    - [Verify Cloud Pak for Watson AIOps installation (CLI)](#verify-cp4waiops-installation-cli)
+  - [Troubleshooting](#trouble-shooting)
     - [Storage](#storage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -42,9 +42,9 @@
 
 ## Introduction
 
-The use of GitOps enables you to easily deploy IBM Cloud Pak for Watson AIOps on a Red Hat Openshift Container Platform cluster from a Git repository, using the ArgoCD tool.
+The use of GitOps enables you to easily deploy IBM Cloud Pak for Watson AIOps on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool.
 
-For more information about GitOps, see [Understanding Openshift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat Openshift documentation.
+For more information about GitOps, see [Understanding OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat OpenShift documentation.
 For more information about Argo, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/).
 
 You can install Cloud Pak for Watson AIOps using the Argo CD user interface (UI), or with the Argo CD command line (CLI).
@@ -52,13 +52,13 @@ You can install Cloud Pak for Watson AIOps using the Argo CD user interface (UI)
 ## Prerequisites
 
 - Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
-- You must have OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html) in the Red Hat Openshift documentation.
+- You must have OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
 
 ## Install Cloud Pak for Watson AIOps with the Argo CD UI
 
-### Login to Argo CD
+### Log in to Argo CD
 
-From your Red Hat Openshift console, click the menu on the upper right, and select `Cluster Argo CD`.
+From your Red Hat OpenShift console, click the menu on the upper right, and select `Cluster Argo CD`.
 
 ![w](images/gitops-menu.png)
 
@@ -97,18 +97,17 @@ From the Argo CD UI, click `NEW APP`, input the following parameters, and then c
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-gitops
   
-After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the toplogy of all of the resources.
+After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the topology of all of the resources.
 
 ### Storage Considerations
 
-If your OpenShift cluster already has a supported default storageclass configured then skip this step.
+If your Red Hat OpenShift cluster already has a supported default storageclass configured then skip this step.
 
-In this tutorial, we are using Ceph just for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+In this tutorial, we are using Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
-You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
+For deploying on AWS, EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
 
-From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
+From the Argo CD UI, click `NEW APP`, input the following parameters for Ceph, and then click the `CREATE` button.
 
 - GENERAL
   - Application Name: ceph
@@ -124,7 +123,7 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
 
 ![w](images/ceph-gitops.png)
 
-After Argo CD App `ceph` is created, you can click the App from Argo CD UI to view the toplogy of all Ceph resources as follows:
+After the Argo CD App `ceph` is created, you can click the App from the Argo CD UI to view the topology of all Ceph resources as follows:
 
 ![w](images/ceph-topo.png)
 
@@ -132,7 +131,7 @@ You can use the filters on the left to filter out the resources, and click the r
 
 ![w](images/res-logs.png)
 
-You can also check all Ceph pods from command line as follows to make sure there is no pod in error state. If there are some pods in error state, you can check logs using `kubectl logs`.
+Run the following command from the command line to check that there are not any pods with an error state.
 
 ```console
 [root@api.body.cp.fyre.ibm.com ~]# kubectl get po -n rook-ceph
@@ -179,61 +178,71 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
+
+If there are some pods in an error state, you can check the logs by using `kubectl logs`.
+
 NOTE:
 
-- In some cases, there're multiple storageclasse been set to default, and this will causes issue, to avoid that, you can check the cluster sc with follwoing command:  
+- Multiple default storage classes cause deployment problems. Run the following command to check your cluster's storage class.
+
 ```bash
 oc get sc
 ```
-  In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.  
-  To remove the default setting from a sc, 
-  - use `oc edit sc [STORAGE-CLASS-NAME]` command.
-  - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
+
+If your cluster has multiple default storage classes, then you must edit your storage classes to leave only one storage class as the default. To remove the default setting from a storage class, run the following command.
+
+```
+oc edit sc [STORAGE-CLASS-NAME]
+```
+
+Remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations` from the storage class that you do not want to be a default.
 
 ### Obtain an entitlement key
 
-If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
 
-1. Go to the [Container software library](https://myibm.ibm.com/products-services/containerlibrary).
+Obtain your IBM Entitled Registry key to enable your deployment to pull images from the IBM Entitled Registry.
 
-1. Click "Copy key."
+1. Obtain the entitlement key that is assigned to your IBMid. Log in to [MyIBM Container Software Library ![Opens in a new tab](../images/launch-glyph.svg "Opens in a new tab")](https://myibm.ibm.com/products-services/containerlibrary) with the IBMid and password details that are associated with the entitled software.
 
-1. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
+2. In the *Entitlement key* section, select "Copy key" to copy the entitlement key to the clipboard.
 
-1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:  
-   Depending on what contianer system you are using, you might need to use `docker login` instead of `podman login` for following commands.
+3. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
+
+4. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry by using a container tool.
+
+   Depending on the container system that you are using, you might need to use `docker login` instead of `podman login` for the following command.
 
    ```sh
    export IBM_ENTITLEMENT_KEY=the key from the previous steps
    podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
    ```
 
-### Update the OCP global pull secret
+### Update the OpenShift Container Platform global pull secret
 
-[Update the OCP global pull secret](https://docs.openshift.com/container-platform/4.7/openshift_images/managing_images/using-image-pull-secrets.html) with the entitlement key.
+[Update the OpenShift Container Platform global pull secret](https://docs.openshift.com/container-platform/4.10/openshift_images/managing_images/using-image-pull-secrets.html) with the entitlement key.
 
-Keep in mind that the registry user for that secret is "cp". A common mistakes is to assume the registry user is the name or email of the user owning the entitlement key.
+NOTE: The registry user for this secret is "cp". A common mistake is to assume the registry user is the name or email of the user owning the entitlement key.
 
 #### Update the global pull secret using the OpenShift console
 
-1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
+1. From the "Administrator" perspective, navigate to the "Workloads > Secrets".
 
-1. Select the project "openshift-config".
+2. Select the project "openshift-config".
  
-1. Select the object "pull-secret".
+3. Select the object "pull-secret".
 
-1. Click on "Actions -> Edit secret".
+4. Click on "Actions -> Edit secret".
 
-1. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
+5. Scroll to the bottom of the page and click on "Add credentials". Use the following values:
 
    - "Registry Server Address" cp.icr.io
    - "Username": cp
    - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
    - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
 
-1. Click on "Save"
+6. CLIck on "Save"
 
-### Option 1: Install AI Manager and Event Manager Separately
+### Option 1: Install AI Manager and Event Manager separately
 
 #### Install shared components
 
@@ -256,7 +265,7 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 #### Install AI Manager
 
-You can install Cloud Pak for Watson AIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
+You can install AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "aimanager-app")
@@ -282,11 +291,11 @@ You can install Cloud Pak for Watson AIOps - AI Manager using GitOps by creating
 
 NOTE:
 
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
+- For the `Repository URL` and `Revision` fields, if you use a repository forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please update these parameters using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed accordingly.
 
 #### Install Event Manager
 
-You can install Cloud Pak for Watson AIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
+You can install Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "eventmanager-app")
@@ -311,25 +320,28 @@ You can install Cloud Pak for Watson AIOps - Event Manager using GitOps by creat
 
 NOTE:
 
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+- For the `Repository URL` and `Revision` fields, if you use a repository forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please update these parameters using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed accordingly.
+- `spec.eventManager.clusterDomain` is the domain name of the cluster where Event Manager is installed. You must use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can retrieve the FQDN by running the following command:
+
 ```bash
 INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
 appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
 echo ${appDomain}
 ```
 
-### Option 2: (**Experimental**) Install Using All-in-One Configuration 
+### Option 2: (**Experimental**) Install Using all-in-one configuration 
 
-#### Install AI Manager and Event Manager in One Go
+**NOTE:** This is a technology preview option.
 
-The all-in-one configuration allows you to install following components in one go:
+#### Install AI Manager and Event Manager together
+
+The all-in-one configuration allows you to install the following components in one go:
 
 - Ceph storage (optional)
 - AI Manager
 - Event Manager
 
-Just fill in the form using the suggested field values listed in following table when you create the Argo CD App:
+Fill in the form using the following values when you create the Argo CD App:
 
 | Field                 | Value                                                 |
 | --------------------- | ----------------------------------------------------- |
@@ -342,7 +354,7 @@ Just fill in the form using the suggested field values listed in following table
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
 
-Besides the basic information, when filling in the form, you can also update the following install parameters that are commonly used to customize the install behavior.
+You can also update the following parameters to customize the install behavior.
 
 | Parameter                             | Type   | Default Value      | Description 
 | ------------------------------------- |--------|--------------------|-------------
@@ -360,9 +372,9 @@ Besides the basic information, when filling in the form, you can also update the
 
 NOTE:
 
-- For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
-- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
-- For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- For `cp4waiops.profile`, the profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
+- `cp4waiops.eventManager.enabled` must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for AI Manager, not AI Manager and Event Manager.
+- `cp4waiops.eventManager.clusterDomain` is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 
 #### Install Cloud Pak for Watson AIOps using Custom Build
 
@@ -599,7 +611,7 @@ Login to Red Hat OpenShift Console, click the drop down menu on top right.
 
 ![w](images/ocp-hub.png)
 
-Click the link to `IBM Cloud Pak for Administration` and login via `OpenShift authentication`.
+CLIck the link to `IBM Cloud Pak for Administration` and login via `OpenShift authentication`.
 
 ![w](images/cpk-hub.png)
 
@@ -619,7 +631,7 @@ Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
 
 ## Install Cloud Pak for Watson AIOps from Command Line
 
-### Login to Argo CD (Cli)
+### Login to Argo CD (CLI)
 
 Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
 
@@ -640,7 +652,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### Storage Considerations (Cli)
+### Storage Considerations (CLI)
 
 If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for Cloud Pak for Watson AIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
@@ -658,9 +670,9 @@ argocd app create ceph \
       --dest-namespace rook-ceph \
       --dest-server https://kubernetes.default.svc
 ```
-### Option 1: Install AI Manager and Event Manager Separately (Cli)
+### Option 1: Install AI Manager and Event Manager Separately (CLI)
 
-#### Grant Argo CD Cluster Admin Permission (Cli)
+#### Grant Argo CD Cluster Admin Permission (CLI)
 
 Apply the following YAML manifest to the cluster where Argo CD runs:
 
@@ -679,7 +691,7 @@ roleRef:
   name: cluster-admin
 ```
 
-#### Install shared components (Cli)
+#### Install shared components (CLI)
 
 ```sh
 argocd app create cp-shared \
@@ -695,7 +707,7 @@ argocd app create cp-shared \
       --helm-set spec.catalogNamespace=openshift-marketplace
 ```
 
-#### Install AI Manager (Cli)
+#### Install AI Manager (CLI)
 
 To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
 
@@ -719,7 +731,7 @@ argocd app create aimanager-app \
       --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
 
-#### Install Event Manager (Cli)
+#### Install Event Manager (CLI)
 
 To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
 
@@ -752,7 +764,7 @@ appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers defau
 echo ${appDomain}
 ```
 
-### Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)
+### Option 2: (**Experimental**)Install Using All-in-One Configuration (CLI)
 
 To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
 
@@ -783,7 +795,7 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Verify Cloud Pak for Watson AIOps Installation (Cli)
+### Verify Cloud Pak for Watson AIOps Installation (CLI)
 
 To verify the Cloud Pak for Watson AIOps installation, run following command:
 

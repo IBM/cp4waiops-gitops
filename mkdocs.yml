@@ -7,9 +7,9 @@ nav:
       - v3.3 Tech Preview:
         - Online Install: how-to-deploy-cp4waiops-33.md
       - v3.4 Tech Preview:
-        - Online Install: how-to-deploy-cp4waiops.md
+        - Online Install: how-to-deploy-cp4waiops-34.md
       - v3.5 Official Support:
-        - Online Install: how-to-deploy-cp4waiops.md
+        - Online Install: how-to-deploy-cp4waiops-35.md
       - Advanced Install Options:
         - Customize CP4WAIOps Install: cp4waiops-custom-install.md
         - Deploy Demo Environment: deploy-cloudpak-with-sample-apps.md

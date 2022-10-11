@@ -293,9 +293,9 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
   - spec.storageClass: rook-cephfs
   - spec.storageClassLargeBlock: rook-cephfs
-  - spec.eventManager.version: 1.6.6
+  - spec.eventManager.version: 1.6.4
   - spec.eventManager.clusterDomain: REPLACE_IT
-  - spec.eventManager.channel: v1.10
+  - spec.eventManager.channel: v1.7
   - spec.eventManager.deploymentType: trial
   - spec.eventManager.namespace: noi
 
@@ -365,7 +365,7 @@ Just use the install parameters listed in following table when you create the Ar
 | cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
 | cp4waiops.aiManager.channel         | string | v3.4                                      | The subscription channel for AI Manager.
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
-| cp4waiops.eventManager.channel      | string | v1.10                                     | The subscription channel for Event Manager.
+| cp4waiops.eventManager.channel      | string | v1.7                                      | The subscription channel for Event Manager.
 
 These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in `HELM` > `VALUES` field.
 
@@ -387,7 +387,7 @@ Besides that, the all-in-one configuration exposes a few more install parameters
 | ------------------------------------- |--------|---------------|-----------------------------------
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.
+| cp4waiops.eventManager.version        | string | 1.6.4         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
 
@@ -726,8 +726,8 @@ argocd app create eventmanager-app \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
-      --helm-set spec.eventManager.channel=v1.10 \
-      --helm-set spec.eventManager.version=1.6.6 \
+      --helm-set spec.eventManager.channel=v1.7 \
+      --helm-set spec.eventManager.version=1.6.4 \
       --helm-set spec.eventManager.clusterDomain=REPLACE_IT \
       --helm-set spec.eventManager.deploymentType=trial
 ```

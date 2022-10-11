@@ -2,9 +2,9 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
+- [Deploy Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
   - [Prerequisite](#prerequisite)
-  - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
+  - [Install Cloud Pak for Watson AIOps from UI](#install-cp4waiops-from-ui)
     - [Login to Argo CD](#login-to-argo-cd)
     - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
     - [Configure Argo CD](#configure-argo-cd)
@@ -18,10 +18,10 @@
       - [Install Event Manager](#install-event-manager)
     - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
       - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
-    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
-    - [Access CP4WAIOps](#access-cp4waiops)
-  - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
+      - [Install Cloud Pak for Watson AIOps using Custom Build](#install-cp4waiops-using-custom-build)
+    - [Verify Cloud Pak for Watson AIOps Installation](#verify-cp4waiops-installation)
+    - [Access Cloud Pak for Watson AIOps](#access-cp4waiops)
+  - [Install Cloud Pak for Watson AIOps from Command Line](#install-cp4waiops-from-command-line)
     - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
     - [Storage Considerations (Cli)](#storage-considerations-cli)
     - [Option 1: Install AI Manager and Event Manager Separately (Cli)](#option-1-install-ai-manager-and-event-manager-separately-cli)
@@ -30,22 +30,22 @@
       - [Install AI Manager (Cli)](#install-ai-manager-cli)
       - [Install Event Manager (Cli)](#install-event-manager-cli)
     - [Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
-    - [Verify CP4WAIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
+    - [Verify Cloud Pak for Watson AIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
   - [Trouble Shooting](#trouble-shooting)
     - [Storage](#storage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps 3.5 using GitOps
+# Deploy Cloud Pak for Watson AIOps 3.5 using GitOps
 
-**:tada::tada::tada: Using GitOps to Install CP4WAIOps is a GA feature for 3.5 release! :tada::tada::tada:**
+**:tada::tada::tada: Using GitOps to Install Cloud Pak for Watson AIOps is a GA feature for 3.5 release! :tada::tada::tada:**
 
 ## Prerequisite
 
-- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
+- To learn Cloud Pak for Watson AIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
 - To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
 
-## Install CP4WAIOps from UI
+## Install Cloud Pak for Watson AIOps from UI
 
 ### Login to Argo CD
 
@@ -91,7 +91,7 @@ After Argo CD App `argocd` is created, you can click the App from Argo CD UI to 
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for Cloud Pak for Watson AIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
 In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
@@ -246,7 +246,7 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 #### Install AI Manager
 
-You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
+You can install Cloud Pak for Watson AIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "aimanager-app")
@@ -272,11 +272,11 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
 
 NOTE:
 
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
+- For `Repository URL` and `Revision` field, if you use a repository forked from [the official Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 
 #### Install Event Manager
 
-You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
+You can install Cloud Pak for Watson AIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
 - GENERAL
   - Application Name: anyname (e.g.: "eventmanager-app")
@@ -301,7 +301,7 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
 
 NOTE:
 
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
+- For `Repository URL` and `Revision` field, if you use a repository forked from [the official Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
 - For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
 ```bash
 INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
@@ -338,9 +338,9 @@ Besides the basic information, when filling in the form, you can also update the
 | ------------------------------------- |--------|--------------------|-------------
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
-| rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
-| cp4waiops.version                     | string | v3.5               | Specify the version of CP4WAIOps v3.5.
-| cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
+| rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by Cloud Pak for Watson AIOps.
+| cp4waiops.version                     | string | v3.5               | Specify the version of Cloud Pak for Watson AIOps v3.5.
+| cp4waiops.profile                     | string | small              | The Cloud Pak for Watson AIOps deployment profile, e.g.: x-small, small, large.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
 | cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
@@ -354,9 +354,9 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-#### Install CP4WAIOps using Custom Build
+#### Install Cloud Pak for Watson AIOps using Custom Build
 
-The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
+The all-in-one configuration also allows you to install Cloud Pak for Watson AIOps using custom build by providing specific image catalog and channel.
 
 Just use the install parameters listed in following table when you create the Argo CD App:
 
@@ -381,12 +381,12 @@ cp4waiops:
     channel: <my_custom_channel_for_event_manager>
 ````
 
-Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
+Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [Cloud Pak for Watson AIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
 
 | Parameter                             | Type   | Default Value | Description 
 | ------------------------------------- |--------|---------------|-----------------------------------
-| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
-| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
+| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.
+| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.
 | cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
 | globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
@@ -405,15 +405,15 @@ globalImagePullSecrets:
   password: <password_to_registry_2>
 ```
 
-### Verify CP4WAIOps Installation
+### Verify Cloud Pak for Watson AIOps Installation
 
-After both Ceph and CP4WAIOps are ready, you will be able to see those Apps from Argo CD UI as follows with status as `Healthy` and `Synced`.
+After both Ceph and Cloud Pak for Watson AIOps are ready, you will be able to see those Apps from Argo CD UI as follows with status as `Healthy` and `Synced`.
 
 ![w](images/all-in-one-apps.png)
 
 ![w](images/application-sets.png)
 
-You can check the topology of CP4WAIOps using Argo CD UI as follows:
+You can check the topology of Cloud Pak for Watson AIOps using Argo CD UI as follows:
 
 ![w](images/aimanager-33.png)
 
@@ -581,9 +581,9 @@ zen-pre-requisite-job-2klrt                                       0/1     Comple
 zen-watcher-d8b795b46-2q6zx                                       1/1     Running     0          47h
 ```
 
-### Access CP4WAIOps
+### Access Cloud Pak for Watson AIOps
 
-If all pods for CP4WAIOps are up and running, you can login to CP4WAIOps UI as follows:
+If all pods for Cloud Pak for Watson AIOps are up and running, you can login to Cloud Pak for Watson AIOps UI as follows:
 
 Login to Red Hat OpenShift Console, click the drop down menu on top right.
 
@@ -597,17 +597,17 @@ Login to `IBM Cloud Pak for Administration` and click the drop down menu on top 
 
 ![w](images/cpk-hub-ui.png)
 
-Login to CP4WAIOps UI via `OpenShift authentication`.
+Login to Cloud Pak for Watson AIOps UI via `OpenShift authentication`.
 
 ![w](images/cp4waiops.png)
 
-You will be navigated to CP4WAIOps UI.
+You will be navigated to Cloud Pak for Watson AIOps UI.
 
 ![w](images/cp4waiops-ui.png)
 
-Congratulations! You are ready to play with CP4WAIOps!
+Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
 
-## Install CP4WAIOps from Command Line
+## Install Cloud Pak for Watson AIOps from Command Line
 
 ### Login to Argo CD (Cli)
 
@@ -632,7 +632,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### Storage Considerations (Cli)
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for Cloud Pak for Watson AIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
 In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
@@ -773,9 +773,9 @@ NOTE:
 - For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
 - For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
 
-### Verify CP4WAIOps Installation (Cli)
+### Verify Cloud Pak for Watson AIOps Installation (Cli)
 
-To verify the CP4WAIOps installation, run following command:
+To verify the Cloud Pak for Watson AIOps installation, run following command:
 
 ```sh
 kubectl get application -A

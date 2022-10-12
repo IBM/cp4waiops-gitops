@@ -718,7 +718,7 @@ argocd app create eventmanager-app \
       --sync-policy automatic \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/cp4waiops/event-manager \
+      --path config/cp4waiops/install-emgr \
       --revision release-3.4 \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \

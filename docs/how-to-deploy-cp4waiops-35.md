@@ -4,7 +4,7 @@
 
 - [Deploy Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
   - [Prerequisites](#prerequisite)
-  - [Installing Cloud Pak for Watson AIOps from UI](#install-cp4waiops-from-ui)
+  - [Installing Cloud Pak for Watson AIOps from the UI](#install-cp4waiops-from-ui)
     - [Log in to Argo CD](#login-to-argo-cd)
     - [Grant Argo CD cluster admin permission](#grant-argo-cd-cluster-admin-permission)
     - [Configure Argo CD](#configure-argo-cd)
@@ -39,17 +39,17 @@
 
 **Using GitOps to install Cloud Pak for Watson AIOps 3.5 is a GA feature!**
 
-The use of GitOps enables the deployment of IBM Cloud Pak for Watson AIOps on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool.
+The use of GitOps enables IBM Cloud Pak for Watson AIOps to be deployed on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool.
 
 For more information about GitOps, see [Understanding OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat OpenShift documentation.
 
 For more information about Argo, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/).
 
-Cloud Pak for Watson AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line. You can choose from two deployment options:
+Cloud Pak for Watson AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line (CLI). You can choose from two deployment options:
 
 Option 1: Install AI Manager and Event Manager separately
 
-Option 2: Install AI Manager and Event Manager with an all-in-one configuration (** technology preview **)
+Option 2: Install AI Manager and Event Manager with an all-in-one configuration (**Technology preview**)
 
 ## Prerequisites
 
@@ -107,7 +107,7 @@ If your Red Hat OpenShift cluster already has a default supported storage class,
 
 This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
+If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)
 
 From the Argo CD UI, click `NEW APP`, input the following parameters for Ceph, and then click `CREATE`.
 
@@ -216,7 +216,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 
 ### Update the OpenShift Container Platform global pull secret
 
-1. From the Red Hat OpenShift console, select the "Administrator" perspective, go to "Workloads > Secrets".
+1. From the Red Hat OpenShift console, select the "Administrator" perspective, and then "Workloads > Secrets".
 
 2. Select the project "openshift-config".
  
@@ -284,7 +284,7 @@ Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The 
   - spec.aiManager.pakModules.aiManager.enabled: true
   - spec.aiManager.pakModules.connection.enabled: true
 
-NOTE: If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` fields to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
+NOTE: If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
 #### Install Event Manager
 
@@ -312,7 +312,7 @@ Install Event Manager by using GitOps to create an Argo CD App for Event Manager
   - spec.eventManager.namespace: noi
 
 NOTE:
-- If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` fields to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
+- If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 - `spec.eventManager.clusterDomain` is the domain name of the cluster where Event Manager is installed. You must use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can retrieve the FQDN by running the following command:
 
   ```bash
@@ -625,7 +625,9 @@ Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
 
 ### Log in to Argo CD (CLI)
 
-Make sure that the Argo CD CLI (`argocd` command) is installed, then run following commands to log in to Argo CD:
+Make sure that the Argo CD CLI (`argocd` command) is installed. For more information, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/cli_installation/).
+
+Then run following commands to log in to Argo CD:
 
 ```sh
 argo_route=openshift-gitops-server

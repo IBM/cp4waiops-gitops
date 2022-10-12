@@ -1,65 +1,76 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy CP4WAIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
-  - [Prerequisite](#prerequisite)
-  - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
-    - [Login to Argo CD](#login-to-argo-cd)
-    - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+- [Deploy Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cp4waiops-35-using-gitops)
+  - [Prerequisites](#prerequisite)
+  - [Installing Cloud Pak for Watson AIOps from the UI](#install-cp4waiops-from-ui)
+    - [Log in to Argo CD](#login-to-argo-cd)
+    - [Grant Argo CD cluster admin permission](#grant-argo-cd-cluster-admin-permission)
     - [Configure Argo CD](#configure-argo-cd)
-    - [Storage Considerations](#storage-considerations)
+    - [Storage considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
-      - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
-    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
+    - [Option 1: Installing AI Manager and Event Manager separately](#option-1-install-ai-manager-and-event-manager-separately)
       - [Install shared components](#install-shared-components)
       - [Install AI Manager](#install-ai-manager)
       - [Install Event Manager](#install-event-manager)
-    - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
-      - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
-    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
-    - [Access CP4WAIOps](#access-cp4waiops)
-  - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
-    - [Storage Considerations (Cli)](#storage-considerations-cli)
-    - [Option 1: Install AI Manager and Event Manager Separately (Cli)](#option-1-install-ai-manager-and-event-manager-separately-cli)
-      - [Grant Argo CD Cluster Admin Permission (Cli)](#grant-argo-cd-cluster-admin-permission-cli)
-      - [Install shared components (Cli)](#install-shared-components-cli)
-      - [Install AI Manager (Cli)](#install-ai-manager-cli)
-      - [Install Event Manager (Cli)](#install-event-manager-cli)
-    - [Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
-    - [Verify CP4WAIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
-  - [Trouble Shooting](#trouble-shooting)
+    - [Option 2: (**Technology preview**) Installing with an all-in-one configuration](#option-2-experimental-install-using-all-in-one-configuration)
+      - [Install AI Manager and Event Manager in one go](#install-ai-manager-and-event-manager-in-one-go)
+      - [Install Cloud Pak for Watson AIOps using a custom build](#install-cp4waiops-using-custom-build)
+    - [Verify the Cloud Pak for Watson AIOps installation](#verify-cp4waiops-installation)
+    - [Access Cloud Pak for Watson AIOps](#access-cp4waiops)
+  - [Installing Cloud Pak for Watson AIOps from the command line](#install-cp4waiops-from-command-line)
+    - [Log in to Argo CD (CLI)](#login-to-argo-cd-cli)
+    - [Storage Considerations (CLI)](#storage-considerations-cli)
+    - [Option 1: Installing AI Manager and Event Manager separately (CLI)](#option-1-install-ai-manager-and-event-manager-separately-cli)
+      - [Grant Argo CD Cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
+      - [Install shared components (CLI)](#install-shared-components-cli)
+      - [Install AI Manager (CLI)](#install-ai-manager-cli)
+      - [Install Event Manager (CLI)](#install-event-manager-cli)
+    - [Option 2: (**Technology preview**) Installing with an all-in-one configuration (CLI)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
+    - [Verify the Cloud Pak for Watson AIOps installation (CLI)](#verify-cp4waiops-installation-cli)
+  - [Troubleshooting](#trouble-shooting)
     - [Storage](#storage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy CP4WAIOps 3.5 using GitOps
+# Deploy Cloud Pak for Watson AIOps 3.5 using GitOps
 
-**:tada::tada::tada: Using GitOps to Install CP4WAIOps is a GA feature for 3.5 release! :tada::tada::tada:**
+**Using GitOps to install Cloud Pak for Watson AIOps 3.5 is a GA feature!**
 
-## Prerequisite
+The use of GitOps enables IBM Cloud Pak for Watson AIOps to be deployed on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool.
 
-- To learn CP4WAIOps system requirement, please refer to [System requirements for Cloud Pak for Watson AIOps](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
-- To install OpenShift GitOps (Argo CD) on OpenShift cluster, please refer to [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html).
+For more information about GitOps, see [Understanding OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat OpenShift documentation.
 
-## Install CP4WAIOps from UI
+For more information about Argo, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/).
 
-### Login to Argo CD
+Cloud Pak for Watson AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line (CLI). You can choose from two deployment options:
 
-You can now login to Argo CD UI as follows by clicking the drop down menu on top right.
+Option 1: Install AI Manager and Event Manager separately
+
+Option 2: Install AI Manager and Event Manager with an all-in-one configuration (**Technology preview**)
+
+## Prerequisites
+
+- Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=planning-system-requirements).
+- You must have Red Hat OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
+
+## Installing Cloud Pak for Watson AIOps with the Argo CD UI
+
+### Log in to Argo CD
+
+From your Red Hat OpenShift console, click the menu on the upper right, and select `Cluster Argo CD`.
 
 ![w](images/gitops-menu.png)
 
-Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
+The Argo CD UI is displayed. Click `LOG IN VIA OPENSHIFT`.
 
 ![w](images/gitops-login.png)
 
-### Grant Argo CD Cluster Admin Permission
+### Grant Argo CD cluster admin permission
 
-From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
+From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with the following values and then click `Create`.
 
 - Binding type
   - Cluster-wide role binding (ClusterRoleBinding)
@@ -73,7 +84,8 @@ From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Crea
   - Subject name: openshift-gitops-argocd-application-controller
 
 ### Configure Argo CD
-From Argo CD UI, click `NEW APP` and input parameters as follows and then click `CREATE` button.
+
+From the Argo CD UI, click `NEW APP`, input the following parameters, and then click `CREATE`.
 
 - GENERAL
   - Application Name: argocd
@@ -87,18 +99,17 @@ From Argo CD UI, click `NEW APP` and input parameters as follows and then click 
   - Cluster URL: https://kubernetes.default.svc
   - Namespace: openshift-gitops
   
-After Argo CD App `argocd` is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.
+After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the topology of all of the resources.
 
-### Storage Considerations
+### Storage considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-For deploying on AWS, the EFS(Amazon Elastic File System) can be used for persistant storage. Please refer to [AWS EFS guide](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) for details.
-You can also follow the [example of AWS EFS configuration instruction](aws-efs-config-example.md)
+If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)
 
-From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
+From the Argo CD UI, click `NEW APP`, input the following parameters for Ceph, and then click `CREATE`.
 
 - GENERAL
   - Application Name: ceph
@@ -114,18 +125,18 @@ From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and th
 
 ![w](images/ceph-gitops.png)
 
-After Argo CD App `ceph` is created, you can click the App from Argo CD UI to view the toplogy of all Ceph resources as follows:
+After the Argo CD App `ceph` is created, you can click the App from the Argo CD UI to view the topology of the Ceph resources as follows:
 
 ![w](images/ceph-topo.png)
 
-You can use the filters on the left to filter out the resources, and click the resource to check logs and events.
+The filters on the left can be used to filter out resources. Click a resource to check its logs and events.
 
 ![w](images/res-logs.png)
 
-You can also check all Ceph pods from command line as follows to make sure there is no pod in error state. If there are some pods in error state, you can check logs using `kubectl logs`.
+Run the following command from the command line to check that none of the pods have an error status.
 
 ```console
-[root@api.body.cp.fyre.ibm.com ~]# kubectl get po -n rook-ceph
+[root@xyz.test.cp.fyre.ibm.com ~]# kubectl get po -n rook-ceph
 NAME                                                              READY   STATUS      RESTARTS   AGE
 csi-cephfsplugin-7b6jk                                            3/3     Running     0          2d
 csi-cephfsplugin-l7mvz                                            3/3     Running     0          2d
@@ -169,66 +180,69 @@ rook-ceph-osd-prepare-worker3.body.cp.fyre.ibm.com-m488b          0/1     Comple
 rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Completed   0          4h16m
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
-NOTE:
 
-- In some cases, there're multiple storageclasse been set to default, and this will causes issue, to avoid that, you can check the cluster sc with follwoing command:  
+If any of the pods are in an error state, you can check the logs by using `kubectl logs`.
+
+NOTE: Multiple default storage classes cause deployment problems. Run the following command to check your cluster's storage class.
+
 ```bash
 oc get sc
 ```
-  In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.  
-  To remove the default setting from a sc, 
-  - use `oc edit sc [STORAGE-CLASS-NAME]` command.
-  - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
+
+If your cluster has multiple default storage classes, then you must edit your storage classes to leave only one storage class as the default. To remove the default setting from a storage class, run the following command to edit the storage class, and then delete the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`.
+
+```
+oc edit sc [STORAGE-CLASS-NAME]
+```
 
 ### Obtain an entitlement key
 
-If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:
+Obtain your IBM Entitled Registry key to enable your deployment to pull images from the IBM Entitled Registry.
 
-1. Go to the [Container software library](https://myibm.ibm.com/products-services/containerlibrary).
+1. Obtain the entitlement key that is assigned to your IBMid. Log in to [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary) with the IBMid and password details that are associated with the entitled software.
 
-1. Click "Copy key."
+2. In the "Entitlement key" section, select "Copy key" to copy the entitlement key to the clipboard.
 
-1. Copy the entitlement key to a safe place so you can use it when updating the global pull secret for the cluster.
+3. Copy the entitlement key to a safe place so that you can use it later when you update the global pull secret for the cluster.
 
-1. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry using a container tool:  
-   Depending on what contianer system you are using, you might need to use `docker login` instead of `podman login` for following commands.
+4. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry.
+
+   Depending on the container system that you are using, you might need to use `docker login` instead of `podman login` for the following command.
 
    ```sh
    export IBM_ENTITLEMENT_KEY=the key from the previous steps
    podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
    ```
 
-### Update the OCP global pull secret
+### Update the OpenShift Container Platform global pull secret
 
-[Update the OCP global pull secret](https://docs.openshift.com/container-platform/4.7/openshift_images/managing_images/using-image-pull-secrets.html) with the entitlement key.
+1. From the Red Hat OpenShift console, select the "Administrator" perspective, and then "Workloads > Secrets".
 
-Keep in mind that the registry user for that secret is "cp". A common mistakes is to assume the registry user is the name or email of the user owning the entitlement key.
-
-#### Update the global pull secret using the OpenShift console
-
-1. Navigate to the "Workloads > Secrets" page in the "Administrator" perspective.
-
-1. Select the project "openshift-config".
+2. Select the project "openshift-config".
  
-1. Select the object "pull-secret".
+3. Select the object "pull-secret".
 
-1. Click on "Actions -> Edit secret".
+4. Click "Actions > Edit secret".
 
-1. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
+5. Scroll to the end of the page and click "Add credentials". Use the following values:
 
    - "Registry Server Address" cp.icr.io
    - "Username": cp
-   - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
-   - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
+   - "Password": paste the entitlement key that you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) step
+   - "Email": email address. This field is mostly a hint to other people who might see the entry in the configuration.
 
-1. Click on "Save"
+   NOTE: The registry user for this secret is "cp", not the name or email of the user who owns the entitlement key.
 
-### Option 1: Install AI Manager and Event Manager Separately
+6. Click "Save".
+
+For more information, see [Update the OpenShift Container Platform global pull secret](https://docs.openshift.com/container-platform/4.10/openshift_images/managing_images/using-image-pull-secrets.html) in the Red Hat OpenShift documentation.
+
+### Option 1: Installing AI Manager and Event Manager separately
 
 #### Install shared components
 
 - GENERAL
-  - Application Name: anyname (e.g.: "cp-shared")
+  - Application Name: anyname (for example: "cp-shared")
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
@@ -246,10 +260,10 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 #### Install AI Manager
 
-You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
+Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The parameters for AI Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "aimanager-app")
+  - Application Name: anyname (for example: "aimanager-app")
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
@@ -270,16 +284,14 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
   - spec.aiManager.pakModules.aiManager.enabled: true
   - spec.aiManager.pakModules.connection.enabled: true
 
-NOTE:
-
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
+NOTE: If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
 #### Install Event Manager
 
-You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
+Install Event Manager by using GitOps to create an Argo CD App for Event Manager. The parameters for Event Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "eventmanager-app")
+  - Application Name: anyname (for example: "eventmanager-app")
   - Project: default
   - SYNC POLICY: Automatic
 - SOURCE
@@ -300,30 +312,32 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
   - spec.eventManager.namespace: noi
 
 NOTE:
+- If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
+- `spec.eventManager.clusterDomain` is the domain name of the cluster where Event Manager is installed. You must use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can retrieve the FQDN by running the following command:
 
-- For `Repository URL` and `Revision` field, if you use a repository forked from [the official CP4WAIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) and/or on a different branch, please fill these fields using your own values. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, the two fields need to be changed accordingly.
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
-```bash
-INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
-echo ${appDomain}
-```
+  ```bash
+  INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+  appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  echo ${appDomain}
+  ```
 
-### Option 2: (**Experimental**) Install Using All-in-One Configuration 
+### Option 2: (**Technology preview**) Installing AI Manager and Event Manager with an all-in-one configuration 
 
-#### Install AI Manager and Event Manager in One Go
+**NOTE:** This option is a technology preview, and must not be used for production systems.
 
-The all-in-one configuration allows you to install following components in one go:
+#### Installing AI Manager and Event Manager together
+
+The all-in-one configuration enables the installation of the following components in one go.
 
 - Ceph storage (optional)
 - AI Manager
 - Event Manager
 
-Just fill in the form using the suggested field values listed in following table when you create the Argo CD App:
+When you create the Argo CD app, complete the form with the following values.
 
 | Field                 | Value                                                 |
 | --------------------- | ----------------------------------------------------- |
-| Application Name      | anyname (e.g. cp4waiops-app)                          |
+| Application Name      | anyname (for example cp4waiops-app)                          |
 | Project               | default                                               |
 | Sync Policy           | Automatic                                             |
 | Repository URL        | https://github.com/IBM/cp4waiops-gitops               |
@@ -332,33 +346,33 @@ Just fill in the form using the suggested field values listed in following table
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
 
-Besides the basic information, when filling in the form, you can also update the following install parameters that are commonly used to customize the install behavior.
+You can also update the following parameters to customize the installation.
 
 | Parameter                             | Type   | Default Value      | Description 
 | ------------------------------------- |--------|--------------------|-------------
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on, valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
-| rookceph.enabled                      | bool   | true               | Specify whether or not to install Ceph as storage used by CP4WAIOps.
-| cp4waiops.version                     | string | v3.5               | Specify the version of CP4WAIOps v3.5.
-| cp4waiops.profile                     | string | small              | The CP4WAIOps deployment profile, e.g.: x-small, small, large.
-| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether or not to install AI Manager.
+| rookceph.enabled                      | bool   | true               | Specify whether to install Ceph as storage used by Cloud Pak for Watson AIOps.
+| cp4waiops.version                     | string | v3.5               | Specify the version of Cloud Pak for Watson AIOps v3.5.
+| cp4waiops.profile                     | string | small              | The Cloud Pak for Watson AIOps deployment profile: x-small, small, or large.
+| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install AI Manager.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
 | cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
-| cp4waiops.eventManager.enabled        | bool   | true               | Specify whether or not to install Event Manager.
+| cp4waiops.eventManager.enabled        | bool   | true               | Specify whether to install Event Manager.
 | cp4waiops.eventManager.namespace      | string | noi                | The namespace where Event Manager is installed.
 | cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where Event Manager is installed.
 
 NOTE:
 
-- For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
-- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
-- For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- `cp4waiops.profile` The profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
+- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.
+- `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 
-#### Install CP4WAIOps using Custom Build
+#### Installing Cloud Pak for Watson AIOps using a custom build
 
-The all-in-one configuration also allows you to install CP4WAIOps using custom build by providing specific image catalog and channel.
+The all-in-one configuration enables a custom build of Cloud Pak for Watson AIOps to be installed by providing a specific image catalog and channel.
 
-Just use the install parameters listed in following table when you create the Argo CD App:
+Use the installation parameters listed in following table when you create the Argo CD App.
 
 | Parameter                           | Type   | Default Value                             | Description 
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------
@@ -367,9 +381,9 @@ Just use the install parameters listed in following table when you create the Ar
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
 | cp4waiops.eventManager.channel      | string | v1.10                                     | The subscription channel for Event Manager.
 
-These parameters are invisible when you create the Argo CD App from UI, but you can add them when filling in the form in `HELM` > `VALUES` field.
+These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form.
 
-For example, adding following YAML snippet to `HELM` > `VALUES` field will install AI Manager and Event Manager using custom imageCatalog and channel:
+For example, adding the following YAML snippet to the `HELM` > `VALUES` field installs AI Manager and Event Manager with a custom `imageCatalog` and `channel`:
 
 ```yaml
 cp4waiops:
@@ -379,21 +393,21 @@ cp4waiops:
   eventManager:
     imageCatalog: <my_custom_image_catalog_for_event_manager>
     channel: <my_custom_channel_for_event_manager>
-````
+```
 
-Besides that, the all-in-one configuration exposes a few more install parameters invisible from UI that allows you to customize the install behavior in a more fine-grained manner. Below is just a list of some available parameters. To learn more on the usage of such parameters, please refer to [CP4WAIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
+The all-in-one configuration also exposes some more installation parameters that are not visible from the UI that enable further customization of the installation. The following table lists some of these parameters. To find out more about the usage of these parameters, see [Cloud Pak for Watson AIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
 
 | Parameter                             | Type   | Default Value | Description 
 | ------------------------------------- |--------|---------------|-----------------------------------
-| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for CP4WAIOps to use.
-| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for CP4WAIOps to use.
+| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.
+| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.
 | cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
-| globalImagePullSecrets                | array  | n/a           | A list of registries for image pull when needed during the install.
+| globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.
 
-For example, if the custom build to be installed includes images from registries other than the official IBM entitled registry, you can use `globalImagePullSecrets` to specify all necessary information for these registries including registry URLs, as well as username and password to access these registries.
+For example, if the custom build to be installed includes images from registries other than the official IBM Entitled Registry, you can use `globalImagePullSecrets` to specify all the necessary information to access these registries, such as registry URL, username, and password.
 
-Again, since these parameters are invisible, you can add them when filling in the form in `HELM` > `VALUES` field:
+These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form. For example,
 
 ```yaml
 globalImagePullSecrets:
@@ -405,23 +419,21 @@ globalImagePullSecrets:
   password: <password_to_registry_2>
 ```
 
-### Verify CP4WAIOps Installation
+### Verify the Cloud Pak for Watson AIOps installation
 
-After both Ceph and CP4WAIOps are ready, you will be able to see those Apps from Argo CD UI as follows with status as `Healthy` and `Synced`.
+When Ceph and Cloud Pak for Watson AIOps are ready, you can see these Apps with a status of `Healthy` and `Synced` in the Argo CD UI.
 
 ![w](images/all-in-one-apps.png)
 
 ![w](images/application-sets.png)
 
-You can check the topology of CP4WAIOps using Argo CD UI as follows:
+You can check the topology of Cloud Pak for Watson AIOps from the Argo CD UI as follows:
 
 ![w](images/aimanager-33.png)
 
 ![w](images/eventmanager-33.png)
 
-You can also check from command line as follows, and make sure there are no error pods. If there are some pods in error state, you can check logs either from Argo CD UI or using `kubectl logs` from command line.
-
-For example, to check pods of AI Manager:
+You can also check your Cloud Pak for Watson AIOps installation from the command line. For example, to check the AI Manager pods, run the following command:
 
 ```console
 [root@api.body.cp.fyre.ibm.com ~]# kubectl get po -n cp4waiops
@@ -581,37 +593,41 @@ zen-pre-requisite-job-2klrt                                       0/1     Comple
 zen-watcher-d8b795b46-2q6zx                                       1/1     Running     0          47h
 ```
 
-### Access CP4WAIOps
+If any pods are in an error state, you can check the logs from the Argo CD UI, or you can run `kubectl logs` from the command line.
 
-If all pods for CP4WAIOps are up and running, you can login to CP4WAIOps UI as follows:
+### Access Cloud Pak for Watson AIOps
 
-Login to Red Hat OpenShift Console, click the drop down menu on top right.
+If all of the pods for Cloud Pak for Watson AIOps are up and running, then you can log in to Cloud Pak for Watson AIOps UI as follows.
+
+Log in to Red Hat OpenShift console, and then click the drop-down menu on the upper right.
 
 ![w](images/ocp-hub.png)
 
-Click the link to `IBM Cloud Pak for Administration` and login via `OpenShift authentication`.
+Click the link to `IBM Cloud Pak for Administration` and select `OpenShift authentication`.
 
 ![w](images/cpk-hub.png)
 
-Login to `IBM Cloud Pak for Administration` and click the drop down menu on top right, then select `IBM Automation (cp4waiops)`.
+Log in to `IBM Cloud Pak for Administration`, click the drop-down menu on the upper right, and then select `IBM Automation (cp4waiops)`.
 
 ![w](images/cpk-hub-ui.png)
 
-Login to CP4WAIOps UI via `OpenShift authentication`.
+Log in to the Cloud Pak for Watson AIOps UI and then select `OpenShift authentication`.
 
 ![w](images/cp4waiops.png)
 
-You will be navigated to CP4WAIOps UI.
+The Cloud Pak for Watson AIOps user interface is displayed.
 
 ![w](images/cp4waiops-ui.png)
 
-Congratulations! You are ready to play with CP4WAIOps!
+Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
 
-## Install CP4WAIOps from Command Line
+## Install Cloud Pak for Watson AIOps from the command line
 
-### Login to Argo CD (Cli)
+### Log in to Argo CD (CLI)
 
-Make sure you have installed Argo CD CLI, i.e.: the `argocd` command, then run following commands to login to Argo CD:
+Make sure that the Argo CD CLI (`argocd` command) is installed. For more information, see the [Argo documentation](https://argo-cd.readthedocs.io/en/stable/cli_installation/).
+
+Then run following commands to log in to Argo CD:
 
 ```sh
 argo_route=openshift-gitops-server
@@ -630,27 +646,27 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
       --insecure
 ```
 
-### Storage Considerations (Cli)
+### Storage considerations (CLI)
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
+This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations).
 
-To create Argo CD App for Ceph storage from command line, run following command:
+To create an Argo CD App for Ceph storage, run the following command:
 
 ```sh
 argocd app create ceph \
-      --sync-policy automatic \
-      --project default \
-      --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/ceph \
-      --revision release-3.5 \
-      --dest-namespace rook-ceph \
-      --dest-server https://kubernetes.default.svc
+  --sync-policy automatic \
+  --project default \
+  --repo https://github.com/IBM/cp4waiops-gitops.git \
+  --path config/ceph \
+  --revision release-3.5 \
+  --dest-namespace rook-ceph \
+  --dest-server https://kubernetes.default.svc
 ```
-### Option 1: Install AI Manager and Event Manager Separately (Cli)
+### Option 1: Install AI Manager and Event Manager Separately (CLI)
 
-#### Grant Argo CD Cluster Admin Permission (Cli)
+#### Grant Argo CD cluster admin permission (CLI)
 
 Apply the following YAML manifest to the cluster where Argo CD runs:
 
@@ -669,7 +685,7 @@ roleRef:
   name: cluster-admin
 ```
 
-#### Install shared components (Cli)
+#### Install shared components (CLI)
 
 ```sh
 argocd app create cp-shared \
@@ -685,9 +701,9 @@ argocd app create cp-shared \
       --helm-set spec.catalogNamespace=openshift-marketplace
 ```
 
-#### Install AI Manager (Cli)
+#### Install AI Manager (CLI)
 
-To create Argo CD App for AI Manager to install AI Manager using GitOps, run following command:
+Run the following command to install AI Manager by using GitOps to create an Argo CD App for AI Manager.
 
 ```sh
 argocd app create aimanager-app \
@@ -709,9 +725,9 @@ argocd app create aimanager-app \
       --helm-set spec.aiManager.pakModules.connection.enabled=true
 ```
 
-#### Install Event Manager (Cli)
+#### Install Event Manager (CLI)
 
-To create Argo CD App for Event Manager to install Event Manager using GitOps, run following command:
+Run the following command to install Event Manager by using GitOps to create an Argo CD App for Event Manager.
 
 ```sh
 argocd app create eventmanager-app \
@@ -732,19 +748,20 @@ argocd app create eventmanager-app \
       --helm-set spec.eventManager.deploymentType=trial
 ```
 
-NOTE:
+NOTE: 
+- `cp4waiops.eventManager.clusterDomain` is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can also retrieve the FDQN by running the following command:
 
-- For `spec.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com. You can also get it by running command below:  
+  ```bash
+  INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
+  appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  echo ${appDomain}
+  ```
 
-```bash
-INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
-echo ${appDomain}
-```
+### Option 2: (**Technology preview**) Installing AI Manager and Event Manager with an all-in-one configuration (CLI)
 
-### Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)
+**NOTE:** This option is a technology preview, and must not be used for production systems.
 
-To install Ceph, AI Manager, and Event Manager in one go using all-in-one configuration, run following command:
+To install Ceph, AI Manager, and Event Manager in one go with an all-in-one configuration, run the following command.
 
 ```sh
 argocd app create cp4waiops-app \
@@ -769,19 +786,19 @@ argocd app create cp4waiops-app \
 ```
 NOTE:
 
-- For `cp4waiops.profile`, the profile `x-small` is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as `small` or `large` instead.
-- For `cp4waiops.eventManager.enabled`, it needs to be false if you use `x-small` profile as it only covers AI Manager, not including Event Manager.
-- For `cp4waiops.eventManager.clusterDomain`, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.
+- `cp4waiops.profile` The profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
+- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.
+- `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 
-### Verify CP4WAIOps Installation (Cli)
+### Verify Cloud Pak for Watson AIOps installation (CLI)
 
-To verify the CP4WAIOps installation, run following command:
+Run the following command to verify that the Cloud Pak for Watson AIOps installation was successful:
 
 ```sh
 kubectl get application -A
 ```
 
-The output will be something similar as follows:
+Example output from a successful installation:
 
 ```console
 # kubectl get application -A
@@ -792,17 +809,27 @@ openshift-gitops   in-cluster-eventmanager   Synced        Healthy
 openshift-gitops   in-cluster-rook-ceph      Synced        Healthy
 ```
 
-Wait for a while and check if all pods under namespace `cp4waiops` and `noi` are up and running without any crash:
+Wait for a while and then run the following commands to verify that all of the pods in the `cp4waiops` and `noi` namespaces are running.
 
 ```
 kubectl get pod -n cp4waiops
 kubectl get pod -n noi
 ```
 
-## Trouble Shooting
+## Troubleshooting
 
 ### Storage
-- ceph pod reporting `cephosd: failed to lookup binary path "/rootfs/usr/sbin/lvm" on the host rootfs` error.  
-  Solution:  
-  This is due to missing lvm2 support, refer to known issue [6705](https://github.com/rook/rook/issues/6057#issuecomment-681732903) here:   
-  Simply install lvm2 on all nodes will solve the problem.
+
+#### Problem
+
+Ceph pod reports the following error:
+
+`cephosd: failed to lookup binary path "/rootfs/usr/sbin/lvm" on the host rootfs`.
+
+#### Cause
+
+This problem is caused by missing lvm2 support. For more information, see [issue 6705](https://github.com/rook/rook/issues/6057#issuecomment-681732903).
+
+#### Solution
+
+Install lvm2 on all Red Hat OpenShift nodes.

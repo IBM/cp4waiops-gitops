@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning" class="md-skip">
+        <a href="#deploy-cloud-pak-for-watson-aiops-demo-environment-including-cluster-provisioning" class="md-skip">
           Skip to content
         </a>
       
@@ -537,8 +537,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOPs demo environment
   </a>
   
 </li>
@@ -592,8 +592,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOPs demo environment
   </a>
   
 </li>
@@ -620,20 +620,21 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning">Deploy CP4WAIOps Demo Environment Including Cluster Provisioning</a></li>
-<li><a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a></li>
+<li><a href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning">Deploy Cloud Pak for Watson AIOPs Demo Environment Including Cluster Provisioning</a></li>
+<li><a href="#install-cp4waiops-demo-environment">Install Cloud Pak for Watson AIOPs Demo Environment</a></li>
 </ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<h1 id="deploy-cp4waiops-demo-environment-including-cluster-provisioning">Deploy CP4WAIOps Demo Environment Including Cluster Provisioning<a class="headerlink" href="#deploy-cp4waiops-demo-environment-including-cluster-provisioning" title="Permanent link">&para;</a></h1>
-<p>In this tutorial, you will learn the steps to provision an OpenShift cluster, then use this cluster to deploy CP4WAIOps demo environment using GitOps. With this approach, you will get a fully automated experience of launching a CP4WAIOps demo environment, started from cluster provisioning, till to the demo environment deployment, and configuration, all driven by GitOps automatically.</p>
+<h1 id="deploy-cloud-pak-for-watson-aiops-demo-environment-including-cluster-provisioning">Deploy Cloud Pak for Watson AIOPs demo environment including cluster provisioning<a class="headerlink" href="#deploy-cloud-pak-for-watson-aiops-demo-environment-including-cluster-provisioning" title="Permanent link">&para;</a></h1>
+<p>Learn how to provision a Red Hat OpenShift cluster, and use this cluster to deploy an IBM Cloud Pak for Watson AIOPs demonstration environment using GitOps. With this approach you will get a fully automated experience of launching a Cloud Pak for Watson AIOPs demo environment, from cluster provisioning to the deployment and configuration of the demonstration environment, all driven by GitOps automatically.</p>
+<p><strong>IMPORTANT: Internal use only. <code>Fyre</code>, an IBM IaaS platform for internal use, is currently the only supported provider.</strong></p>
 <p><img alt="" src="../images/16-architecture-provision-cluster.png" /></p>
-<h2 id="install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment<a class="headerlink" href="#install-cp4waiops-demo-environment" title="Permanent link">&para;</a></h2>
-<p>After finish the install of Argo CD, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to <a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a>.</p>
+<h2 id="install-cloud-pak-for-watson-aiops-demo-environment">Install Cloud Pak for Watson AIOPs demo environment<a class="headerlink" href="#install-cloud-pak-for-watson-aiops-demo-environment" title="Permanent link">&para;</a></h2>
+<p>After installing Argo CD, you can deploy a Cloud Pak for Watson AIOPs demonstration environment via Argo CD UI. To install a Cloud Pak for Watson AIOPs demonstration environment, please refer to <a href="#install-cp4waiops-demo-environment">Install Cloud Pak for Watson AIOPs demo environment</a>.</p>
 <p>The only difference when you set the install parameters is that:</p>
 <ul>
-<li>For <code>argocd.allowLocalDeploy</code>, make sure it is <code>false</code>. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.</li>
-<li>You will be able to configure the OpenShift cluster provisioning using following install parameters.</li>
+<li><code>argocd.allowLocalDeploy</code> must be set to <code>false</code>. This is to avoid the Cloud Pak for Watson AIOps demonstration environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is dedicated to running Argo CD.</li>
+<li>You will be able to configure the Red Hat OpenShift cluster provisioning with the following installation parameters.</li>
 </ul>
 <table>
 <thead>
@@ -649,7 +650,7 @@
 <td>cluster.enabled</td>
 <td>bool</td>
 <td>false</td>
-<td>Specify whether or not to provision a cluster before install CP4WAIOps.</td>
+<td>Specify whether or not to provision a cluster before install Cloud Pak for Watson AIOPs.</td>
 </tr>
 <tr>
 <td>cluster.provider.type</td>
@@ -701,11 +702,8 @@
 </tr>
 </tbody>
 </table>
-<p>NOTE:</p>
-<ul>
-<li>For <code>cluster.provider.type</code>, <code>fyre</code> is currently the only supported provider. It is an IBM IaaS platform only for internal use.</li>
-</ul>
-<p>These parameters are invisible when you create the Argo CD App from UI. You can add them when filling in the form in <code>HELM</code> &gt; <code>VALUES</code> field as follows:</p>
+<p>NOTE: <code>cluster.provider.type</code>, <code>fyre</code> is currently the only supported provider. It is an IBM IaaS platform only for internal use.</p>
+<p>These parameters are invisible when you create the Argo CD App from the UI. You can add them when completing the form in <code>HELM</code> &gt; <code>VALUES</code> field as follows:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">cluster</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"></span>
@@ -723,13 +721,13 @@
 <p>There is a custom resource in type of <code>OpenShiftFyre</code> that "documents" the desired status for the OpenShift cluster to be requested. Also, there is a secret that includes the Fyre credentials that you input earlier when creating the Argo CD App using install parameters. The operator will use this information to communicate with Fyre API. You may also notice that the <code>OpenShiftFyre</code> resource is in <code>Processing</code> status. This means the operator has issued the request to Fyre successfully and Fyre has started to provision the cluster for you.</p>
 <p>If you go to the root level App, you will see that two new child level Apps are added:</p>
 <p><img alt="" src="../images/19-appsets-cluster-provision.png" /></p>
-<p>Because the cluster is still being provisioned and not available to deploy the CP4WAIOps demo environment yet, there is no actual App instance spawned for the demo environment. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added to Argo CD automatically by the operator. You can check it by going to <code>Settings</code> &gt; <code>Clusters</code> from Argo CD UI:</p>
+<p>Because the cluster is still being provisioned and not available to deploy the Cloud Pak for Watson AIOPs demo environment yet, there is no actual App instance spawned for the demo environment. Usually, it takes time to complete the cluster provisioning. Once it's completed, the new cluster will be added to Argo CD automatically by the operator. You can check it by going to <code>Settings</code> &gt; <code>Clusters</code> from Argo CD UI:</p>
 <p><img alt="" src="../images/20-cluster-auto-added.png" /></p>
 <p>When the new cluster is displayed in the list as above, Argo CD will then kick off the demo environment deployment on that cluster immediately without any manual intervention. You will see all child level Apps are now getting created from the <code>Applications</code> view as follows:</p>
 <p><img alt="" src="../images/21-deploy-appsets.png" /></p>
 <p>Specify the target cluster in the clusters filter box, then wait for all Apps turning into green.</p>
 <p><img alt="" src="../images/22-install-complete.png" /></p>
-<p>Now you should be able to use your fresh new CP4WAIOps demo environment!</p>
+<p>Now you should be able to use your fresh new Cloud Pak for Watson AIOPs demo environment!</p>
 
               
             </article>

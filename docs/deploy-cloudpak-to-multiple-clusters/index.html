@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deploy-cp4waiops-demo-environment-to-multiple-clusters" class="md-skip">
+        <a href="#deploy-cloud-pak-for-watson-aiops-demo-environment-to-multiple-clusters" class="md-skip">
           Skip to content
         </a>
       
@@ -524,35 +524,35 @@
       
         <li class="md-nav__item">
   <a href="#prepare-environments" class="md-nav__link">
-    Prepare Environments
+    Prepare environments
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-argocd-cli" class="md-nav__link">
-    Install Argocd CLI
+  <a href="#install-the-argo-cd-cli" class="md-nav__link">
+    Install the Argo CD CLI
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOps demo environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#add-cluster-into-argo-cd" class="md-nav__link">
-    Add Cluster Into Argo CD
+    Add cluster into Argo CD
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#add-more-clusters" class="md-nav__link">
-    Add More Clusters
+    Add more clusters
   </a>
   
 </li>
@@ -621,35 +621,35 @@
       
         <li class="md-nav__item">
   <a href="#prepare-environments" class="md-nav__link">
-    Prepare Environments
+    Prepare environments
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-argocd-cli" class="md-nav__link">
-    Install Argocd CLI
+  <a href="#install-the-argo-cd-cli" class="md-nav__link">
+    Install the Argo CD CLI
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOps demo environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#add-cluster-into-argo-cd" class="md-nav__link">
-    Add Cluster Into Argo CD
+    Add cluster into Argo CD
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#add-more-clusters" class="md-nav__link">
-    Add More Clusters
+    Add more clusters
   </a>
   
 </li>
@@ -674,64 +674,65 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
+<p><strong>Table of Contents</strong> <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-demo-environment-to-multiple-clusters">Deploy CP4WAIOps Demo Environment to Multiple Clusters</a></li>
+<li><a href="#deploy-cp4waiops-demo-environment-to-multiple-clusters">Deploy Cloud Pak for Watson AIOps Demo Environment to Multiple Clusters</a></li>
 <li><a href="#prepare-environments">Prepare Environments</a></li>
 <li><a href="#install-argocd-cli">Install Argocd CLI</a></li>
-<li><a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a></li>
+<li><a href="#install-cp4waiops-demo-environment">Install Cloud Pak for Watson AIOps Demo Environment</a></li>
 <li><a href="#add-cluster-into-argo-cd">Add Cluster Into Argo CD</a></li>
 <li><a href="#add-more-clusters">Add More Clusters</a></li>
 </ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<h1 id="deploy-cp4waiops-demo-environment-to-multiple-clusters">Deploy CP4WAIOps Demo Environment to Multiple Clusters<a class="headerlink" href="#deploy-cp4waiops-demo-environment-to-multiple-clusters" title="Permanent link">&para;</a></h1>
-<p>In this section, you will learn the steps to deploy the same CP4WAIOps demo environment to multiple clusters using GitOps with almost zero effort. You will see that to deploy CP4WAOps, sample application, and other dependencies to multiple clusters is extremely easy.</p>
-<h2 id="prepare-environments">Prepare Environments<a class="headerlink" href="#prepare-environments" title="Permanent link">&para;</a></h2>
-<p>To support this install scenario, you need at least one cluster to host Argo CD, and one or more clusters to deploy the CP4WAIOps demo environment, which is illustrated in following diagram:</p>
+<h1 id="deploy-cloud-pak-for-watson-aiops-demo-environment-to-multiple-clusters">Deploy Cloud Pak for Watson AIOps demo environment to multiple clusters<a class="headerlink" href="#deploy-cloud-pak-for-watson-aiops-demo-environment-to-multiple-clusters" title="Permanent link">&para;</a></h1>
+<p>Learn how to deploy the same IBM Cloud Pak for Watson AIOps demo environment to multiple clusters with GitOps.</p>
+<h2 id="prepare-environments">Prepare environments<a class="headerlink" href="#prepare-environments" title="Permanent link">&para;</a></h2>
+<p>You need at least one cluster to host Argo CD, and one or more clusters to deploy the Cloud Pak for Watson AIOps demonstration environment, which is illustrated in following diagram:</p>
 <p><img alt="" src="../images/07-deploy-to-multiple-clusters.png" /></p>
 <p>NOTE:</p>
 <ul>
-<li><code>cluster 0</code> is used to host the Argo CD instance. It can be an OpenShift cluster or a vanilla Kubernetes cluster which does not require too much resource since Argo CD is very lightweight and supports both OpenShift and vanilla Kubernetes.</li>
-<li><code>cluster 1</code> to <code>cluster x</code> are used to deploy CP4WAIOps demo environments. If you are looking for an extremely small CP4WAIOps deployment with all default components, sample application, and other dependencies run on the same cluster for demo or PoC purpose, it is recommended to prepare cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory. If you are looking for production deployment, please refer to the system requirement details from the official <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-ai-manager">product document</a>.</li>
+<li><code>cluster 0</code> is used to host the Argo CD instance. It can be a Red Hat OpenShift cluster or a vanilla Kubernetes cluster that does not require too much resource, since Argo CD is lightweight and supports both Red Hat OpenShift and vanilla Kubernetes.</li>
+<li><code>cluster 1</code> - <code>cluster x</code> are used to deploy Cloud Pak for Watson AIOps demonstration environments. If you are looking for an extremely small Cloud Pak for Watson AIOps deployment with all of the default components, sample applications, and other dependencies on the same cluster for a demonstration or proof-of-concept, then a cluster with three worker nodes where each node has 16 cores CPU and 32 GB memory is recommended. If you require a production deployment, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-ai-manager">System Requirements</a>.</li>
 </ul>
-<h2 id="install-argocd-cli">Install Argocd CLI<a class="headerlink" href="#install-argocd-cli" title="Permanent link">&para;</a></h2>
-<p>In this case, you will need Argo CD CLI, i.e.: the <code>argocd</code> command, to add clusters to Argo CD, so that Argo CD can deploy the CP4WAIOps demo environment to those clusters. To install Argo CD CLI, please refer to the <a href="https://argo-cd.readthedocs.io/en/stable/cli_installation/">Argo CD online document</a>. You can install and run Argo CD CLI on any machine such as your notebook, since it is just a client tool used to connect to the Argo CD server.</p>
-<h2 id="install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment<a class="headerlink" href="#install-cp4waiops-demo-environment" title="Permanent link">&para;</a></h2>
-<p>After finish the install of Argo CD and Argo CD CLI, you can deploy CP4WAIOps demo environment via Argo CD UI. To install CP4WAIOps demo environment, please refer to <a href="../deploy-cloudpak-with-sample-apps/">Install CP4WAIOps Demo Environment</a>.</p>
-<p>The only difference when you set the install parameters is that:</p>
+<h2 id="install-the-argo-cd-cli">Install the Argo CD CLI<a class="headerlink" href="#install-the-argo-cd-cli" title="Permanent link">&para;</a></h2>
+<p>The Argo CD CLI (the <code>argocd</code> command) is needed to add clusters to Argo CD so that Argo CD can deploy the Cloud Pak for Watson AIOps demo environment to those clusters.</p>
+<p>To install Argo CD CLI, see the <a href="https://argo-cd.readthedocs.io/en/stable/cli_installation/">Argo CD online document</a>. You can install and run Argo CD CLI on any machine such as your notebook, since it is just a client tool that is used to connect to the Argo CD server.</p>
+<h2 id="install-cloud-pak-for-watson-aiops-demo-environment">Install Cloud Pak for Watson AIOps demo environment<a class="headerlink" href="#install-cloud-pak-for-watson-aiops-demo-environment" title="Permanent link">&para;</a></h2>
+<p>After Argo CD and Argo CD CLI are installed, you can deploy a Cloud Pak for Watson AIOps demonstration environment from the Argo CD UI. To install a Cloud Pak for Watson AIOps demonstration environment, refer to <a href="../deploy-cloudpak-with-sample-apps/">Install Cloud Pak for Watson AIOps Demo Environment</a>.</p>
+<p>The only difference when you set the installation parameters is that:</p>
 <ul>
-<li>For <code>argocd.allowLocalDeploy</code>, make sure it is <code>false</code>. This is to avoid the CP4WAIOps demo environment from being deployed on the same cluster where Argo CD runs, since in this case, that cluster is used to run Argo CD dedicately.</li>
+<li><code>argocd.allowLocalDeploy</code> must be set to <code>false</code>. This is to avoid the Cloud Pak for Watson AIOps demonstration environment from being deployed on the same cluster where Argo CD runs, since in this case that cluster is dedicated to running Argo CD.</li>
 </ul>
-<p>After you create the Argo CD App, you will see something similar as follows from Argo CD UI:</p>
+<p>After you create the Argo CD App, you can see something similar to the following on the Argo CD UI:</p>
 <p><img alt="" src="../images/08-deploy-appsets.png" /></p>
-<p>You will only see the root level Argo CD App. There is no other child level Apps created for now. This is because there is no other cluter added into Argo CD to deploy the actual CP4WAIOps demo environment yet. But if you click the root level App and go into it, you will see all child level App definitions are listed as follows:</p>
+<p>You can only see the root level Argo CD App as no other child level Apps are created for now. This is because no other cluster has been added into Argo CD to deploy the actual Cloud Pak for Watson AIOps demonstration environment yet. If you click the root level App and go into it, then you can see all of the child level App definitions that are listed as follows:</p>
 <p><img alt="" src="../images/09-appsets.png" /></p>
-<p>Depends on the install parameters that you specified when you create the root level Argo CD App, you can enable or disable some of the Apps according to your specific needs. In this case, all available Apps are enabled indlucing CP4WAIOps, Robot Shop, Humio, Istio, etc. They will be deployed to the target cluster that is going to be added into Argo CD later.</p>
-<h2 id="add-cluster-into-argo-cd">Add Cluster Into Argo CD<a class="headerlink" href="#add-cluster-into-argo-cd" title="Permanent link">&para;</a></h2>
-<p>Suppose you use OpenShift cluster to host Argo CD. To add the cluster into Argo CD, you need to login to the cluster that runs Argo CD using <code>oc login</code> command, then run following commands to login to Argo CD using Argo CD CLI:</p>
+<p>Depending on the installation parameters that you specified when you created the root level Argo CD App, you can enable or disable some of the Apps according to your specific needs. In this case, all available Apps are enabled including Cloud Pak for Watson AIOps, Robot Shop, Humio, Istio, and so on. They are deployed to the target cluster that is going to be added into Argo CD later.</p>
+<h2 id="add-cluster-into-argo-cd">Add cluster into Argo CD<a class="headerlink" href="#add-cluster-into-argo-cd" title="Permanent link">&para;</a></h2>
+<p>If you use the Red Hat OpenShift cluster to host Argo CD, then to add the cluster into Argo CD, you need to log in to the cluster that runs Argo CD with the <code>oc login</code> command, and then run the following commands to log in to Argo CD with the Argo CD CLI:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">ARGO_HOST</span><span class="o">=</span><span class="k">$(</span>oc get route openshift-gitops-server -n openshift-gitops -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.host}&#39;</span><span class="k">)</span>
 <span class="nv">ARGO_PASSWORD</span><span class="o">=</span><span class="k">$(</span>oc get secret openshift-gitops-cluster -n openshift-gitops -o <span class="s2">&quot;jsonpath={.data[&#39;admin\.password&#39;]}&quot;</span> <span class="p">|</span> base64 -d<span class="k">)</span>
 argocd login --username admin --password <span class="nv">$ARGO_PASSWORD</span> <span class="nv">$ARGO_HOST</span> --insecure
 </code></pre></div>
-<p>Next, login to the target cluster that will be used to deploy the CP4WAIOps demo environment, again using <code>oc login</code> command. Then, run following commands to add that cluster into Argo CD using Argo CD CLI:</p>
+<p>Next, log in to the target cluster that will be used to deploy the Cloud Pak for Watson AIOps demonstration environment, again with the <code>oc login</code> command. Then, run the following commands to add that cluster into Argo CD with the Argo CD CLI:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">CLUSTER_NAME</span><span class="o">=</span>stocky
 <span class="nv">CURRENT_CONTEXT</span><span class="o">=</span><span class="k">$(</span>oc config current-context<span class="k">)</span>
 argocd cluster add <span class="nv">$CURRENT_CONTEXT</span> --name <span class="nv">$CLUSTER_NAME</span>
 </code></pre></div>
-<p>Here, a short name for the cluster is given using <code>CLUSTER_NAME</code> and is passed into Argo CD CLI via argument <code>--name</code>.</p>
-<p>Now, go to <code>Settings</code> &gt; <code>Clusters</code> from Argo CD UI, you will see the newly added cluster is listed as follows:</p>
+<p>Here, a short name for the cluster is given using <code>CLUSTER_NAME</code> and is passed into the Argo CD CLI by the argument <code>--name</code>.</p>
+<p>Next, go to <code>Settings</code> &gt; <code>Clusters</code> from the Argo CD UI. The newly added cluster is listed as follows.</p>
 <p><img alt="" src="../images/10-add-1st-cluster-to-argocd.png" /></p>
-<p>If you go to <code>Applications</code>, all of a sudden, you will see all child level Apps are getting created and that all happens automatically without any additional manual intervention.</p>
+<p>Go to <code>Applications</code> to see all the child level Apps being created automatically, without any additional manual intervention.</p>
 <p><img alt="" src="../images/11-apps-on-1st-cluster.png" /></p>
-<p>If you click the root level App and go into it, you will see for each child level App definition, there is a corresponding App instance linked to it and that is the actual application getting deployed to the target cluster that was added into Argo CD just now.</p>
+<p>Click the root level App and go into it to see that for each child level App definition there is a corresponding App instance that is linked to it. This is the actual application being deployed to the target cluster that was just added into Argo CD.</p>
 <p><img alt="" src="../images/12-deploy-to-1st-cluster.png" /></p>
-<p>Depends on the install parameters that you specified when creating the root level App, it usually takes 1 hour to finish the install of CP4WAIOps, and 10 minutes to finish all the other applications deployment including Ceph, Robot Shop, Humio, Istio, etc. When you see all Apps turning into green, i.e.: <code>Synced</code> and <code>Healthy</code>, that means the CP4WAIOps demo environment install is completed on the target cluster!</p>
+<p>Depending on the installation parameters that you specified when creating the root level App, it usually takes 1 hour to finish the installation of Cloud Pak for Watson AIOps, and 10 minutes to finish all of the other applications deployments including Ceph, Robot Shop, Humio, Istio, and so on. When you see all of the Apps turning green, (<code>Synced</code> and <code>Healthy</code>), then the installation of the Cloud Pak for Watson AIOps demonstration environment is complete on the target cluster.</p>
 <p><img alt="" src="../images/13-install-complete.png" /></p>
-<h2 id="add-more-clusters">Add More Clusters<a class="headerlink" href="#add-more-clusters" title="Permanent link">&para;</a></h2>
-<p>To add more clusters to deploy more CP4WAIOps demo environments is quite easy. Just repeat the above step to add clusters into Argo CD. Once detected by Argo CD, it will deploy applications to these clusters automatically. As an example, after you add the second cluster, you will see the newly added cluster will be added to the <code>Clusters</code> view from Argo CD UI:</p>
+<h2 id="add-more-clusters">Add more clusters<a class="headerlink" href="#add-more-clusters" title="Permanent link">&para;</a></h2>
+<p>To add more clusters to deploy more Cloud Pak for Watson AIOps demonstration environments, repeat these steps to add clusters into Argo CD. Argo CD detects these clusters and deploys applications to these clusters automatically. For example, after you add the second cluster, you can see that the newly added cluster is added to the <code>Clusters</code> view from Argo CD UI:</p>
 <p><img alt="" src="../images/14-add-2nd-cluster-to-argocd.png" /></p>
-<p>You will also see each child level App definition now maps to two App instances and each instance represents the actual application that is getting deployed to a separate cluster.</p>
+<p>You can also see that each child level App definition now maps to two App instances, and that each instance represents the actual application that is getting deployed to a separate cluster.</p>
 <p><img alt="" src="../images/15-deploy-to-2nd-cluster.png" /></p>
 
               

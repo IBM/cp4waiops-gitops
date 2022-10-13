@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#customize-cp4waiops-install" class="md-skip">
+        <a href="#customize-cloud-pak-for-watson-aiops-installation" class="md-skip">
           Skip to content
         </a>
       
@@ -503,14 +503,14 @@
       
         <li class="md-nav__item">
   <a href="#host-your-own-git-repository" class="md-nav__link">
-    Host Your Own Git Repository
+    Host your own Git repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#advanced-install" class="md-nav__link">
-    Advanced Install
+  <a href="#advanced-installation" class="md-nav__link">
+    Advanced installation
   </a>
   
 </li>
@@ -614,14 +614,14 @@
       
         <li class="md-nav__item">
   <a href="#host-your-own-git-repository" class="md-nav__link">
-    Host Your Own Git Repository
+    Host your own Git repository
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#advanced-install" class="md-nav__link">
-    Advanced Install
+  <a href="#advanced-installation" class="md-nav__link">
+    Advanced installation
   </a>
   
 </li>
@@ -648,35 +648,35 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#customize-cp4waiops-install">Customize CP4WAIOps Install</a></li>
+<li><a href="#customize-cp4waiops-install">Customize Cloud Pak for Watson AIOps installation</a></li>
 <li><a href="#background">Background</a></li>
 <li><a href="#host-your-own-git-repository">Host Your Own Git Repository</a></li>
 <li><a href="#advanced-install">Advanced Install</a></li>
 </ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<h1 id="customize-cp4waiops-install">Customize CP4WAIOps Install<a class="headerlink" href="#customize-cp4waiops-install" title="Permanent link">&para;</a></h1>
+<h1 id="customize-cloud-pak-for-watson-aiops-installation">Customize Cloud Pak for Watson AIOps installation<a class="headerlink" href="#customize-cloud-pak-for-watson-aiops-installation" title="Permanent link">&para;</a></h1>
 <h2 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
 <p>GitOps is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing applications across multiple clusters. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.</p>
-<p>GitOps is a set of practices that use git pull requests to manage infrastructure and application configurations. In GitOps, the git repository is the only source of truth for system and application configuration. This git repository contains declarative description for the applications you need in your specific environment and contains an automated process to make your environment match the described state. Also, it contains the entire state of the system so that the trail of changes to the system state are visible and auditable. By using GitOps, you solve the issues of application configuration sprawl.</p>
-<p>This document provides guidance for customers who want to host the GitOps repositories in their own git systems and customize CP4WAIOps install using their own repositories.</p>
-<h2 id="host-your-own-git-repository">Host Your Own Git Repository<a class="headerlink" href="#host-your-own-git-repository" title="Permanent link">&para;</a></h2>
-<p>To customize CP4WAIOps install using your own git repository, you need to follow the steps as below:</p>
+<p>GitOps is a set of practices that use Git pull requests to manage infrastructure and application configurations. In GitOps, the Git repository is the only source of truth for system and application configuration. This Git repository contains declarative description for the applications that you need in your specific environment and contains an automated process to make your environment match the described state. Also, it contains the entire state of the system so that the trail of changes to the system state is visible and auditable. With GitOps you can solve the problem of application configuration sprawl.</p>
+<p>This document provides guidance for users who want to host the GitOps repositories in their own Git systems and customize an IBM Cloud Pak for Watson AIOps installation from their own repositories.</p>
+<h2 id="host-your-own-git-repository">Host your own Git repository<a class="headerlink" href="#host-your-own-git-repository" title="Permanent link">&para;</a></h2>
+<p>To customize a Cloud Pak for Watson AIOps installation using your own Git repository, use the following steps.</p>
 <ul>
 <li>
 <p>Fork this repository to your own GitHub account.</p>
 </li>
 <li>
-<p>Modify parameters in <code>config/&lt;version&gt;/**/values.yaml</code> based on your specific install requirement. The <a href="https://github.com/IBM/cp4waiops-gitops">official CP4WAIOps GitOps repository</a> uses a set of <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/helm/">helm charts</a> to wrap all CP4WAIOps configuration YAML manifests in multiple helm templates. With helm chart, you can customize the CP4WAIOps install using parameters defined in a set of <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files"><code>values.yaml</code></a> files. For example, the values.yaml for all-in-one configuration provides a set of parameters with their default values that allow you to customize the CP4WAIOps install using all-in-one configuration.</p>
+<p>Modify the parameters in <code>config/&lt;version&gt;/**/values.yaml</code> based on your specific installation requirements. The <a href="https://github.com/IBM/cp4waiops-gitops">official Cloud Pak for Watson AIOps GitOps repository</a> uses a set of <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/helm/">helm charts</a> to wrap all Cloud Pak for Watson AIOps configuration YAML manifests in multiple helm templates. With a helm chart, you can customize the Cloud Pak for Watson AIOps installation parameters that are defined in a set of <a href="https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files"><code>values.yaml</code></a> files. For example, the <code>values.yaml</code> for the all-in-one configuration provides a set of parameters with default values that allow the customization of the Cloud Pak for Watson AIOps installation using all-in-one configuration.</p>
 </li>
 <li>
-<p>Other than modifying the existing <code>value.yaml</code> file, you can also define additional <code>values.yaml</code> files when needed. These <code>values.yaml</code> files along with the original <code>values.yaml</code> file can all be applied when you create Argo CD App to kick off the CP4WAIOps install either from UI or command line.</p>
+<p>You can also define more <code>values.yaml</code> files if needed. These <code>values.yaml</code> files along with the original <code>values.yaml</code> file can all be applied when you create an Argo CD App to start the Cloud Pak for Watson AIOps installation, either from the UI or command line.</p>
 </li>
 <li>
-<p>Follow the installation guide for a certain CP4WAIOps release that is provided in the <a href="https://github.com/IBM/cp4waiops-gitops">official CP4WAIOps GitOps repository</a> to install CP4WAIOps using GitOps. If you install CP4WAIOps from UI, then when you create the Argo CD App, in the Argo CD App form, change the <code>Repository URL</code> field to match the URL of your own repository, and set the <code>Revision</code> field to match the branch that you are working on. You can also apply the additional <code>values.yaml</code> files defined in previous step by adding them in <code>HELM</code> &gt; <code>VALUES FILES</code> field in the form.</p>
+<p>Follow the installation guide for a specific Cloud Pak for Watson AIOps release that is provided in the <a href="https://github.com/IBM/cp4waiops-gitops">official Cloud Pak for Watson AIOps GitOps repository</a> to install Cloud Pak for Watson AIOps using GitOps. If you install Cloud Pak for Watson AIOps from the UI, then when you create the Argo CD App, in the Argo CD App form, change the <code>Repository URL</code> field to match the URL of your own repository, and set the <code>Revision</code> field to match the branch that you are working on. You can also apply the additional <code>values.yaml</code> files defined in previous step by adding them in <code>HELM</code> &gt; <code>VALUES FILES</code> field in the form.</p>
 </li>
 <li>
-<p>If you install CP4WAIOps from command line using Argo CD CLI, you can set the repository and revision using argument <code>--repo</code> and <code>--revision</code>. For example, if you forked the <a href="https://github.com/IBM/cp4waiops-gitops">official CP4WAIOps GitOps repository</a> into repository <code>https://github.com/foo/cp4waiops-gitops</code>, and work on branch <code>production</code>, you would run the following command to create an Argo CD App and kick off the install of CP4WAIOps AI Manager:</p>
+<p>If you install Cloud Pak for Watson AIOps from the command line using the Argo CD CLI, you can set the repository and revision using argument <code>--repo</code> and <code>--revision</code>. For example, if you forked the <a href="https://github.com/IBM/cp4waiops-gitops">official Cloud Pak for Watson AIOps GitOps repository</a> into repository <code>https://github.com/foo/cp4waiops-gitops</code>, and work on branch <code>production</code>, you would run the following command to create an Argo CD App and start the installation of Cloud Pak for Watson AIOps AI Manager:</p>
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code>argocd app create cp4waiops-app <span class="se">\</span>
@@ -696,12 +696,12 @@
         --helm-set spec.storageClassLargeBlock<span class="o">=</span>rook-cephfs <span class="se">\</span>
         --helm-set spec.size<span class="o">=</span>small
 </code></pre></div>
-<h2 id="advanced-install">Advanced Install<a class="headerlink" href="#advanced-install" title="Permanent link">&para;</a></h2>
+<h2 id="advanced-installation">Advanced installation<a class="headerlink" href="#advanced-installation" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../deploy-cloudpak-to-multiple-clusters/">Deploy CP4WAIOps Demo Environment to Multiple Clusters</a></li>
-<li><a href="../deploy-cloudpak-with-sample-apps/">Deploy CP4WAIOps Demo Environment in One Click</a></li>
-<li><a href="../deploy-ocp-cloudpak-with-gitops/">Deploy CP4WAIOps Demo Environment Including Cluster Provisioning</a></li>
+<li><a href="../deploy-cloudpak-to-multiple-clusters/">Deploy Cloud Pak for Watson AIOps demo environment to multiple clusters</a></li>
+<li><a href="../deploy-cloudpak-with-sample-apps/">Deploy Cloud Pak for Watson AIOps demo environment in one click</a></li>
 </ul>
+<!-- [Deploy Cloud Pak for Watson AIOps Demo Environment Including Cluster Provisioning](./deploy-ocp-cloudpak-with-gitops.md)-->
 
               
             </article>

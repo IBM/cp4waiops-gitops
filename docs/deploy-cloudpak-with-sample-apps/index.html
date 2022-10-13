@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deploy-cp4waiops-demo-environment-in-one-click" class="md-skip">
+        <a href="#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click" class="md-skip">
           Skip to content
         </a>
       
@@ -510,21 +510,21 @@
       
         <li class="md-nav__item">
   <a href="#about-x-small-profile" class="md-nav__link">
-    About X-Small Profile
+    About x-small profile
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prepare-environment" class="md-nav__link">
-    Prepare Environment
+    Prepare environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOps Demo Environment
   </a>
   
 </li>
@@ -538,8 +538,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cp4waiops" class="md-nav__link">
-    CP4WAIOps
+  <a href="#cloud-pak-for-watson-aiops" class="md-nav__link">
+    Cloud Pak for Watson AIOps
   </a>
   
 </li>
@@ -641,21 +641,21 @@
       
         <li class="md-nav__item">
   <a href="#about-x-small-profile" class="md-nav__link">
-    About X-Small Profile
+    About x-small profile
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prepare-environment" class="md-nav__link">
-    Prepare Environment
+    Prepare environment
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-cp4waiops-demo-environment" class="md-nav__link">
-    Install CP4WAIOps Demo Environment
+  <a href="#install-cloud-pak-for-watson-aiops-demo-environment" class="md-nav__link">
+    Install Cloud Pak for Watson AIOps Demo Environment
   </a>
   
 </li>
@@ -669,8 +669,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cp4waiops" class="md-nav__link">
-    CP4WAIOps
+  <a href="#cloud-pak-for-watson-aiops" class="md-nav__link">
+    Cloud Pak for Watson AIOps
   </a>
   
 </li>
@@ -716,12 +716,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-demo-environment-in-one-click">Deploy CP4WAIOps Demo Environment in One Click</a></li>
+<li><a href="#deploy-cp4waiops-demo-environment-in-one-click">Deploy Cloud Pak for Watson AIOps Demo Environment in One click</a></li>
 <li><a href="#about-x-small-profile">About X-Small Profile</a></li>
 <li><a href="#prepare-environment">Prepare Environment</a></li>
-<li><a href="#install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment</a></li>
+<li><a href="#install-cp4waiops-demo-environment">Install Cloud Pak for Watson AIOps Demo Environment</a></li>
 <li><a href="#access-environment">Access Environment</a><ul>
-<li><a href="#cp4waiops">CP4WAIOps</a></li>
+<li><a href="#cp4waiops">Cloud Pak for Watson AIOps</a></li>
 <li><a href="#robot-shop">Robot Shop</a></li>
 <li><a href="#humio">Humio</a></li>
 </ul>
@@ -729,22 +729,22 @@
 </ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-<h1 id="deploy-cp4waiops-demo-environment-in-one-click">Deploy CP4WAIOps Demo Environment in One Click<a class="headerlink" href="#deploy-cp4waiops-demo-environment-in-one-click" title="Permanent link">&para;</a></h1>
-<p>In this section, you will learn the extremely easy steps to deploy CP4WAIOps demo environment using GitOps in one click. It allows you to:</p>
+<h1 id="deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click">Deploy Cloud Pak for Watson AIOps demo environment in one click<a class="headerlink" href="#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click" title="Permanent link">&para;</a></h1>
+<p>Learn how to deploy an IBM Cloud Pak for Watson AIOps demo environment using GitOps in one click.</p>
 <ul>
-<li>Deploy CP4WAIOps using custom profile <code>x-small</code> in a sandbox with restricted resource.</li>
-<li>Setup integration with Humio, Kafka, Kubernetes, etc. as post-install step automatically.</li>
-<li>Deploy Robot Shop as sample application and other dependencies on the same cluster where CP4WAIOps runs.</li>
+<li>Deploy Cloud Pak for Watson AIOps using custom profile <code>x-small</code> in a sandbox with restricted resources.</li>
+<li>Set up an integration with Humio, Kafka, Kubernetes, and more as postinstallation steps automatically.</li>
+<li>Deploy Robot Shop as a sample application, and other dependencies on the same cluster where Cloud Pak for Watson AIOps runs.</li>
 </ul>
-<p>This install scenario has been tested and verfied against CP4WAIOps 3.2 and 3.3.</p>
+<p>This installation scenario is tested and verified against Cloud Pak for Watson AIOps 3.2 and 3.3.</p>
 <p><img alt="" src="../images/00-demo-env.png" /></p>
-<h2 id="about-x-small-profile">About X-Small Profile<a class="headerlink" href="#about-x-small-profile" title="Permanent link">&para;</a></h2>
-<p>The <code>x-small</code> profile is not an official profile supported by CP4WAIOps at the moment. It only covers AI Manager and does not include Event Manager. As an experimental feature, you can use it to setup demo, PoC, or dev environment.</p>
-<p>Althougth in this install scenario, <code>x-small</code> profile is used, this approach also supports CP4WAIOps install in production environment using official profile such as <code>small</code> or <code>large</code>.</p>
-<h2 id="prepare-environment">Prepare Environment<a class="headerlink" href="#prepare-environment" title="Permanent link">&para;</a></h2>
-<p>Prepare an OpenShift cluster as your demo environment. If you use <code>x-small</code> profile, it is recommended to setup a cluster with 3 worker nodes where each node has 16 cores CPU and 32GB memory.</p>
-<p>Before you start to install demo environment, make sure you have installed OpenShift GitOps (Argo CD) on the cluster. To install OpenShift GitOps, please refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing OpenShift GitOps</a>.</p>
-<p>We will use Argo CD to install following applications in one go:</p>
+<h2 id="about-x-small-profile">About x-small profile<a class="headerlink" href="#about-x-small-profile" title="Permanent link">&para;</a></h2>
+<p>The <code>x-small</code> profile is not an official profile that is supported by Cloud Pak for Watson AIOps at the momentm as it only covers AI Manager and does not include Event Manager. As an experimental feature, you can use it to set up demonstrations, proof-of-concept deployments, or development environments.</p>
+<p>Although in this installation scenario the <code>x-small</code> profile is used, this approach also supports a Cloud Pak for Watson AIOps installation in a production environment using official profiles such as <code>small</code> or <code>large</code>.</p>
+<h2 id="prepare-environment">Prepare environment<a class="headerlink" href="#prepare-environment" title="Permanent link">&para;</a></h2>
+<p>Prepare a Red Hat Red Hat OpenShift cluster as your demonstration environment. If you use the <code>x-small</code> profile, it is recommended to set up a cluster with three worker nodes where each node has 16 cores CPU and 32 GB memory.</p>
+<p>Before you start to install the demonstration environment, make sure that you have installed Red Hat Red Hat OpenShift GitOps (Argo CD) on the cluster. To install Red Hat OpenShift GitOps, refer to <a href="https://docs.openshift.com/container-platform/4.8/cicd/gitops/installing-openshift-gitops.html">Installing OpenShift GitOps</a>.</p>
+<p>These instructions use Argo CD to install the following applications in one go:</p>
 <table>
 <thead>
 <tr>
@@ -757,22 +757,22 @@
 <tr>
 <td>Ceph</td>
 <td>No</td>
-<td>The storage used by CP4WAIOps and other applications. It can be skipped if you already have storage solution available on your target cluster.</td>
+<td>The storage that is used by Cloud Pak for Watson AIOps and other applications. It can be skipped if you already have storage solution available on your target cluster.</td>
 </tr>
 <tr>
-<td>CP4WAIOps</td>
+<td>Cloud Pak for Watson AIOps</td>
 <td>Yes</td>
 <td>IBM Cloud Pak for Watson AIOps.</td>
 </tr>
 <tr>
 <td>Robot Shop</td>
 <td>No</td>
-<td>The sample application used to demonstrate CP4WAIOps features.</td>
+<td>The sample application used to demonstrate Cloud Pak for Watson AIOps features.</td>
 </tr>
 <tr>
 <td>Humio &amp; Fluent Bit</td>
 <td>No</td>
-<td>The log collector used by CP4WAIOps for log anomaly detecting.</td>
+<td>The log collector that is used by Cloud Pak for Watson AIOps for log anomaly detecting.</td>
 </tr>
 <tr>
 <td>Istio</td>
@@ -781,9 +781,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="install-cp4waiops-demo-environment">Install CP4WAIOps Demo Environment<a class="headerlink" href="#install-cp4waiops-demo-environment" title="Permanent link">&para;</a></h2>
-<p>Login to Argo CD, then kick off the install by clicking the <code>NEW APP</code> button on top left to create an Argo CD App.</p>
-<p>Just fill in the form using the suggested field values listed in following table:</p>
+<p>NOTE: This example uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.5.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<h2 id="install-cloud-pak-for-watson-aiops-demo-environment">Install Cloud Pak for Watson AIOps Demo Environment<a class="headerlink" href="#install-cloud-pak-for-watson-aiops-demo-environment" title="Permanent link">&para;</a></h2>
+<p>Log in to Argo CD, then start the installation by clicking the <code>NEW APP</code> button on upper left to create an Argo CD App.</p>
+<p>Complete the form using the suggested field values listed in following table:</p>
 <table>
 <thead>
 <tr>
@@ -827,10 +828,8 @@
 </tbody>
 </table>
 <p>NOTE:</p>
-<ul>
-<li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
-</ul>
-<p>Besides the basic information, when filling in the form, you can also update the following install parameters that are commonly used to customize the install behavior.</p>
+<p>NOTE: If you use a repository that is forked from the official <a href="https://github.com/IBM/cp4waiops-gitops">Cloud Pak for Watson AIOps GitOps repository</a> or a different branch, then you must update the values of the <code>Repository URL</code> and <code>Revision</code> parameters to match your repository and branch. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, then these two parameters must be changed.</p>
+<p>You can also update the following parameters to customize the installation.</p>
 <table>
 <thead>
 <tr>
@@ -857,19 +856,19 @@
 <td>rookceph.enabled</td>
 <td>bool</td>
 <td>true</td>
-<td>Specify whether or not to install Ceph as storage used by CP4WAIOps.</td>
+<td>Specify whether or not to install Ceph as storage used by Cloud Pak for Watson AIOps.</td>
 </tr>
 <tr>
 <td>cp4waiops.version</td>
 <td>string</td>
 <td>v3.3</td>
-<td>Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.</td>
+<td>Specify the version of Cloud Pak for Watson AIOps, e.g.: v3.2, v3.3.</td>
 </tr>
 <tr>
 <td>cp4waiops.profile</td>
 <td>string</td>
 <td>small</td>
-<td>The CP4WAIOps deployment profile, e.g.: x-small, small, large.</td>
+<td>The Cloud Pak for Watson AIOps deployment profile, for example: x-small, small, large.</td>
 </tr>
 <tr>
 <td>cp4waiops.dockerUsername</td>
@@ -887,7 +886,7 @@
 <td>cp4waiops.aiManager.enabled</td>
 <td>bool</td>
 <td>true</td>
-<td>Specify whether or not to install AI Manager.</td>
+<td>Specify whether to install AI Manager.</td>
 </tr>
 <tr>
 <td>cp4waiops.aiManager.namespace</td>
@@ -905,7 +904,7 @@
 <td>cp4waiops.eventManager.enabled</td>
 <td>bool</td>
 <td>true</td>
-<td>Specify whether or not to install Event Manager.</td>
+<td>Specify whether to install Event Manager.</td>
 </tr>
 <tr>
 <td>cp4waiops.eventManager.namespace</td>
@@ -923,12 +922,12 @@
 </table>
 <p>NOTE:</p>
 <ul>
-<li>For <code>cp4waiops.dockerPassword</code>, it is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
-<li>For <code>cp4waiops.profile</code>, the profile <code>x-small</code> is only for demo, PoC, or dev environment. If you are looking for official installation, use profile such as <code>small</code> or <code>large</code> instead.</li>
-<li>For <code>cp4waiops.eventManager.enabled</code>, it needs to be false if you use <code>x-small</code> profile as it only covers AI Manager, not including Event Manager.</li>
-<li>For <code>cp4waiops.eventManager.clusterDomain</code>, it is the domain name of the cluster where Event Manager is installed. Use fully qualified domain name (FQDN), e.g.: apps.clustername.abc.xyz.com.</li>
+<li><code>cp4waiops.dockerPassword</code> This is the entitlement key that you can copy from <a href="https://myibm.ibm.com/products-services/containerlibrary">My IBM Container Software Library</a>.</li>
+<li><code>cp4waiops.profile</code> The profile <code>x-small</code> is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a <code>small</code> or <code>large</code> profile.</li>
+<li><code>cp4waiops.eventManager.enabled</code> This must be false if you have a value of <code>x-small</code> for <code>cp4waiops.profile</code>, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.</li>
+<li><code>cp4waiops.eventManager.clusterDomain</code> This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, <code>apps.clustername.abc.xyz.com</code>.</li>
 </ul>
-<p>The following install parameters are not commonly used, so they are invisible when you create the Argo CD App from UI. But you can add them when filling in the form in <code>HELM</code> &gt; <code>VALUES</code> field.</p>
+<p>The following installation parameters are not commonly used, so they are invisible when you create the Argo CD App from UI. But you can add them when completing the form in <code>HELM</code> &gt; <code>VALUES</code> field.</p>
 <table>
 <thead>
 <tr>
@@ -943,7 +942,7 @@
 <td>cp4waiops.setup.enabled</td>
 <td>bool</td>
 <td>false</td>
-<td>Setup CP4WAIOps after it is installed.</td>
+<td>Set up Cloud Pak for Watson AIOps after it is installed.</td>
 </tr>
 <tr>
 <td>cp4waiops.setup.humio.enabled</td>
@@ -967,23 +966,23 @@
 <td>robotshop.enabled</td>
 <td>bool</td>
 <td>false</td>
-<td>Specify whether or not to install Robot Shop.</td>
+<td>Specify whether to install Robot Shop.</td>
 </tr>
 <tr>
 <td>humio.enabled</td>
 <td>bool</td>
 <td>false</td>
-<td>Specify whether or not to install Humio.</td>
+<td>Specify whether to install Humio.</td>
 </tr>
 <tr>
 <td>istio.enabled</td>
 <td>bool</td>
 <td>false</td>
-<td>Specify whether or not to install Istio.</td>
+<td>Specify whether to install Istio.</td>
 </tr>
 </tbody>
 </table>
-<p>For example, adding following YAML snippet to <code>HELM</code> &gt; <code>VALUES</code> field will enable Robot Shop, Humio, and Istio: </p>
+<p>For example, adding the following YAML snippet to <code>HELM</code> &gt; <code>VALUES</code> field enables Robot Shop, Humio, and Istio: </p>
 <div class="highlight"><pre><span></span><code><span class="nt">robotshop</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 <span class="nt">humio</span><span class="p">:</span><span class="w"></span>
@@ -991,37 +990,37 @@
 <span class="nt">istio</span><span class="p">:</span><span class="w"></span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
 </code></pre></div>
-<p>After you finish filling up the form, just click the <code>CREATE</code> button to kick off the install, then you are done! During the time when waiting for the install to complete, you will see more Apps being rolled out gradually from Argo CD UI. Each App represents a specific application to be deployed and is managed by the root level App defined as above.</p>
+<p>When the form is completed, click <code>CREATE</code> to start the installation. Whilst waiting for the install to complete, you will see more Apps being rolled out gradually from the Argo CD UI. Each App represents a specific application to be deployed and is managed by the root level App.</p>
 <p><img alt="" src="../images/01-apps.png" /></p>
-<p>Depends on the install parameters that you specified, it usually takes 1 hour to finish the install of CP4WAIOps, and 10 minutes to finish all other applications deployment including Ceph, Robot Shop, Humio, Istio, etc. When you see all Argo CD Apps turning into green, i.e.: <code>Synced</code> and <code>Healthy</code>, that means CP4WAIOps demo environment install is completed!</p>
+<p>Depending on the installation parameters that you specified, it usually takes one hour to finish the installation of Cloud Pak for Watson AIOps, and ten minutes to finish all other application deployments, including Ceph, Robot Shop, Humio, Istio, and more. When the Argo CD Apps turn green, (<code>Synced</code> and <code>Healthy</code>) then the installation of the Cloud Pak for Watson AIOps demonstration environment is finished.</p>
 <p><img alt="" src="../images/02-install-complete.png" /></p>
 <h2 id="access-environment">Access Environment<a class="headerlink" href="#access-environment" title="Permanent link">&para;</a></h2>
-<h3 id="cp4waiops">CP4WAIOps<a class="headerlink" href="#cp4waiops" title="Permanent link">&para;</a></h3>
-<p>To access CP4WAIOps, you can run following command to get the URL. Here <code>aiops-installation</code> is the CP4WAIOps instance name that you specified using the install parameter <code>cp4waiops.instanceName</code> when creating the Argo CD App.</p>
+<h3 id="cloud-pak-for-watson-aiops">Cloud Pak for Watson AIOps<a class="headerlink" href="#cloud-pak-for-watson-aiops" title="Permanent link">&para;</a></h3>
+<p>To access Cloud Pak for Watson AIOps, you can run following command to get the URL. Here <code>aiops-installation</code> is the Cloud Pak for Watson AIOps instance name that you specified using the installation parameter <code>cp4waiops.instanceName</code> when creating the Argo CD App.</p>
 <div class="highlight"><pre><span></span><code>kubectl -n cp4waiops get installation aiops-installation -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.status.locations.cloudPakUiUrl}{&quot;\n&quot;}&#39;</span>
 </code></pre></div>
 <p>To get the password for user <code>admin</code>, run following command:</p>
 <div class="highlight"><pre><span></span><code>kubectl -n ibm-common-services get secret platform-auth-idp-credentials -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.admin_password}&#39;</span> <span class="p">|</span> base64 -d
 </code></pre></div>
-<p>Then use these information to login CP4WAIOps UI:</p>
+<p>Use this information to log in to the Cloud Pak for Watson AIOps UI.</p>
 <p><img alt="" src="../images/waiops-dashbord.png" /></p>
-<p>If you set the install parameter <code>cp4waiops.setup</code> to <code>true</code>, then you will have pre-configured integration with Humio, Kafka, Kubernetes in place. To verify this, navigate to <code>define</code> &gt; <code>Data and tool connections</code> after you login, you will see all integrations displayed as follows:</p>
+<p>If you set the installation parameter <code>cp4waiops.setup</code> to <code>true</code>, then you have pre-configured an integration with Humio, Kafka, and Kubernetes in. To verify this, go to <code>Define</code> &gt; <code>Data and tool connections</code> to see these integrations displayed as follows:</p>
 <p><img alt="" src="../images/03-pre-configured-connections.png" /></p>
 <h3 id="robot-shop">Robot Shop<a class="headerlink" href="#robot-shop" title="Permanent link">&para;</a></h3>
-<p>To access Robot Shop, you can run following command to get the URL:</p>
+<p>To access Robot Shop, run the following command to get the URL:</p>
 <div class="highlight"><pre><span></span><code>kubectl -n istio-system get route istio-ingressgateway -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{&quot;http://&quot;}{.spec.host}{&quot;\n&quot;}&#39;</span>
 </code></pre></div>
 <p><img alt="" src="../images/04-robotshop.png" /></p>
 <h3 id="humio">Humio<a class="headerlink" href="#humio" title="Permanent link">&para;</a></h3>
-<p>To access Humio, you can run following command to get the URL:</p>
+<p>To access Humio, run the following command to get the URL:</p>
 <div class="highlight"><pre><span></span><code>kubectl -n humio-logging get route humio-humio-core -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{&quot;http://&quot;}{.spec.host}{&quot;\n&quot;}&#39;</span>
 </code></pre></div>
 <p>To get the password for user <code>developer</code>, run following command:</p>
 <div class="highlight"><pre><span></span><code>kubectl -n humio-logging get secret developer-user-password -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.password}&quot;</span> <span class="p">|</span> base64 -d
 </code></pre></div>
-<p>Then use these information to login Humio UI. After login, you will see the pre-defined repo named <code>robot-shop</code> for Robot Shop:</p>
+<p>Use this information to log in to the Humio UI. After logging in, you can see a pre-defined repository named <code>robot-shop</code> for Robot Shop:</p>
 <p><img alt="" src="../images/05-humio-repo.png" /></p>
-<p>Click the repo, you will see the live logs captured by Humio from Robot Shop:</p>
+<p>Click the repository to see the live logs captured by Humio from Robot Shop:</p>
 <p><img alt="" src="../images/06-humio-logs.png" /></p>
 
               

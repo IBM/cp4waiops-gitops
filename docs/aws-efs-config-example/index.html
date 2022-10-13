@@ -567,7 +567,7 @@
       
         <li class="md-nav__item">
   <a href="#deploying-efs-provisioner-in-the-aws-cluster" class="md-nav__link">
-    deploying EFS provisioner in the AWS cluster
+    Deploying EFS provisioner in the AWS cluster
   </a>
   
 </li>
@@ -593,34 +593,34 @@
 <h1 id="aws-efs-storage-configuration-example">AWS EFS Storage Configuration Example<a class="headerlink" href="#aws-efs-storage-configuration-example" title="Permanent link">&para;</a></h1>
 <h2 id="prerequisite">Prerequisite<a class="headerlink" href="#prerequisite" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Please refer to <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">AWS EFS guide</a> for details.</li>
-<li>EFS storage configuration will need some cluster configuration data as following:</li>
+<li>Refer to the <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">AWS EFS guide</a> for details.</li>
+<li>EFS storage configuration requires the following cluster configuration data:</li>
 <li>cluster node VPC ID
   <img alt="" src="../images/aws-efs-get-vpc-id.png" /></li>
-<li>VPC security group IDs for master node and worker node as well as the default security group
+<li>VPC security group IDs for the master node and worker nodes as well as the default security group
   <img alt="" src="../images/aws-efs-get-security-group-ids.png" /></li>
 </ul>
 <h2 id="update-default-security-group-to-enable-efs-access">Update default security group to enable EFS access<a class="headerlink" href="#update-default-security-group-to-enable-efs-access" title="Permanent link">&para;</a></h2>
 <ul>
-<li>edit cluster default security group inbound rules</li>
+<li>Edit the cluster default security group inbound rules</li>
 <li>Add NFS rule for master node security group</li>
 <li>Add NFS rule for worker node security group
   <img alt="" src="../images/aws-efs-edit-sg-add-inbound-nfs-rules.png" /></li>
 </ul>
 <h2 id="creating-efs-storage">Creating EFS Storage<a class="headerlink" href="#creating-efs-storage" title="Permanent link">&para;</a></h2>
 <ul>
-<li>From AWS UI console goto Services-&gt;EFS</li>
+<li>From the AWS UI console, go to Services-&gt;EFS</li>
 <li>Create file system</li>
-<li>select Customize
+<li>Select Customize
   <img alt="" src="../images/aws-efs-create-efs-customize.png" /></li>
-<li>from Virtual Private Cloud (VPC) panel select the VPC associated with the cluster master node.
+<li>From the Virtual Private Cloud (VPC) panel, select the VPC associated with the cluster master node.
   <img alt="" src="../images/aws-efs-create-efs-select-vpc.png" /></li>
-<li>use default settings for other options</li>
+<li>Use default settings for the other options</li>
 </ul>
-<h2 id="deploying-efs-provisioner-in-the-aws-cluster">deploying EFS provisioner in the AWS cluster<a class="headerlink" href="#deploying-efs-provisioner-in-the-aws-cluster" title="Permanent link">&para;</a></h2>
+<h2 id="deploying-efs-provisioner-in-the-aws-cluster">Deploying EFS provisioner in the AWS cluster<a class="headerlink" href="#deploying-efs-provisioner-in-the-aws-cluster" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Login AWS cluster</li>
-<li>Create script efs-helm.sh using below code:<br />
+<li>Log in to the AWS cluster</li>
+<li>Create a script called efs-helm.sh with the following code:<br />
 <div class="highlight"><pre><span></span><code><span class="nv">FSID</span><span class="o">=</span>&lt;EFS File system ID&gt;  <span class="c1"># Get from Amazon EFS File systems list</span>
 <span class="nv">REGION</span><span class="o">=</span>&lt;EFS Region&gt;        <span class="c1"># for example, use `us-east-2` for region us-east-2a/b/c</span>
 
@@ -630,10 +630,10 @@ helm install efs-provisioner <span class="se">\</span>
     --set efsProvisioner.awsRegion<span class="o">=</span><span class="si">${</span><span class="nv">REGION</span><span class="si">}</span> <span class="se">\</span>
     efs-provisioner-0.13.2.tgz
 </code></pre></div></li>
-<li>Run efs-helm.sh script to deploy efs provisioner</li>
-<li>Update efs storage class as default storage</li>
+<li>Run efs-helm.sh script to deploy the efs provisioner</li>
+<li>Update the efs storage class as default storage</li>
 <li>remove the current default storage class from gp2</li>
-<li>edit sc <code>aws-efs</code> add the following settings in yaml to set it as the default storage class.
+<li>edit sc <code>aws-efs</code> and add the following settings in the YAML to set it as the default storage class.
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w"></span>
 <span class="w">    </span><span class="nt">storageclass.kubernetes.io/is-default-class</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="w"></span>
 </code></pre></div></li>

@@ -1138,40 +1138,43 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong> <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-35-using-gitops">Deploy Cloud Pak for Watson AIOps 3.5 using GitOps</a></li>
-<li><a href="#prerequisite">Prerequisites</a></li>
-<li><a href="#install-cp4waiops-from-ui">Installing Cloud Pak for Watson AIOps from the UI</a><ul>
-<li><a href="#login-to-argo-cd">Log in to Argo CD</a></li>
+<li><a href="#deploy-cloud-pak-for-watson-aiops-35-using-gitops">Deploy Cloud Pak for Watson AIOps 3.5 using GitOps</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installing-cloud-pak-for-watson-aiops-with-the-argo-cd-ui">Installing Cloud Pak for Watson AIOps with the Argo CD UI</a><ul>
+<li><a href="#log-in-to-argo-cd">Log in to Argo CD</a></li>
 <li><a href="#grant-argo-cd-cluster-admin-permission">Grant Argo CD cluster admin permission</a></li>
 <li><a href="#configure-argo-cd">Configure Argo CD</a></li>
 <li><a href="#storage-considerations">Storage considerations</a></li>
 <li><a href="#obtain-an-entitlement-key">Obtain an entitlement key</a></li>
-<li><a href="#update-the-ocp-global-pull-secret">Update the OCP global pull secret</a></li>
-<li><a href="#option-1-install-ai-manager-and-event-manager-separately">Option 1: Installing AI Manager and Event Manager separately</a></li>
+<li><a href="#update-the-openshift-container-platform-global-pull-secret">Update the OpenShift Container Platform global pull secret</a></li>
+<li><a href="#option-1-installing-ai-manager-and-event-manager-separately">Option 1: Installing AI Manager and Event Manager separately</a></li>
 <li><a href="#install-shared-components">Install shared components</a></li>
 <li><a href="#install-ai-manager">Install AI Manager</a></li>
 <li><a href="#install-event-manager">Install Event Manager</a></li>
-<li><a href="#option-2-experimental-install-using-all-in-one-configuration">Option 2: (<strong>Technology preview</strong>) Installing with an all-in-one configuration</a></li>
-<li><a href="#install-ai-manager-and-event-manager-in-one-go">Install AI Manager and Event Manager in one go</a></li>
-<li><a href="#install-cp4waiops-using-custom-build">Install Cloud Pak for Watson AIOps using a custom build</a></li>
-<li><a href="#verify-cp4waiops-installation">Verify the Cloud Pak for Watson AIOps installation</a></li>
-<li><a href="#access-cp4waiops">Access Cloud Pak for Watson AIOps</a></li>
+<li><a href="#option-2-technology-preview-installing-ai-manager-and-event-manager-with-an-all-in-one-configuration">Option 2: (<strong>Technology preview</strong>) Installing AI Manager and Event Manager with an all-in-one configuration</a></li>
+<li><a href="#installing-ai-manager-and-event-manager-together">Installing AI Manager and Event Manager together</a></li>
+<li><a href="#installing-cloud-pak-for-watson-aiops-using-a-custom-build">Installing Cloud Pak for Watson AIOps using a custom build</a></li>
+<li><a href="#verify-the-cloud-pak-for-watson-aiops-installation">Verify the Cloud Pak for Watson AIOps installation</a></li>
+<li><a href="#access-cloud-pak-for-watson-aiops">Access Cloud Pak for Watson AIOps</a></li>
 </ul>
 </li>
-<li><a href="#install-cp4waiops-from-command-line">Installing Cloud Pak for Watson AIOps from the command line</a><ul>
-<li><a href="#login-to-argo-cd-cli">Log in to Argo CD (CLI)</a></li>
-<li><a href="#storage-considerations-cli">Storage Considerations (CLI)</a></li>
-<li><a href="#option-1-install-ai-manager-and-event-manager-separately-cli">Option 1: Installing AI Manager and Event Manager separately (CLI)</a></li>
-<li><a href="#grant-argo-cd-cluster-admin-permission-cli">Grant Argo CD Cluster admin permission (CLI)</a></li>
+<li><a href="#install-cloud-pak-for-watson-aiops-from-the-command-line">Install Cloud Pak for Watson AIOps from the command line</a><ul>
+<li><a href="#log-in-to-argo-cd-cli">Log in to Argo CD (CLI)</a></li>
+<li><a href="#storage-considerations-cli">Storage considerations (CLI)</a></li>
+<li><a href="#option-1-install-ai-manager-and-event-manager-separately-cli">Option 1: Install AI Manager and Event Manager Separately (CLI)</a></li>
+<li><a href="#grant-argo-cd-cluster-admin-permission-cli">Grant Argo CD cluster admin permission (CLI)</a></li>
 <li><a href="#install-shared-components-cli">Install shared components (CLI)</a></li>
 <li><a href="#install-ai-manager-cli">Install AI Manager (CLI)</a></li>
 <li><a href="#install-event-manager-cli">Install Event Manager (CLI)</a></li>
-<li><a href="#option-2-experimentalinstall-using-all-in-one-configuration-cli">Option 2: (<strong>Technology preview</strong>) Installing with an all-in-one configuration (CLI)</a></li>
-<li><a href="#verify-cp4waiops-installation-cli">Verify the Cloud Pak for Watson AIOps installation (CLI)</a></li>
+<li><a href="#option-2-technology-preview-installing-ai-manager-and-event-manager-with-an-all-in-one-configuration-cli">Option 2: (<strong>Technology preview</strong>) Installing AI Manager and Event Manager with an all-in-one configuration (CLI)</a></li>
+<li><a href="#verify-cloud-pak-for-watson-aiops-installation-cli">Verify Cloud Pak for Watson AIOps installation (CLI)</a></li>
 </ul>
 </li>
-<li><a href="#trouble-shooting">Troubleshooting</a><ul>
+<li><a href="#troubleshooting">Troubleshooting</a><ul>
 <li><a href="#storage">Storage</a></li>
+<li><a href="#problem">Problem</a></li>
+<li><a href="#cause">Cause</a></li>
+<li><a href="#solution">Solution</a></li>
 </ul>
 </li>
 </ul>

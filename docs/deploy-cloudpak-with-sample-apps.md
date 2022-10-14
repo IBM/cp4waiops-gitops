@@ -2,12 +2,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy Cloud Pak for Watson AIOps Demo Environment in One click](#deploy-cp4waiops-demo-environment-in-one-click)
-  - [About X-Small Profile](#about-x-small-profile)
-  - [Prepare Environment](#prepare-environment)
-  - [Install Cloud Pak for Watson AIOps Demo Environment](#install-cp4waiops-demo-environment)
+- [Deploy Cloud Pak for Watson AIOps demo environment in one click](#deploy-cloud-pak-for-watson-aiops-demo-environment-in-one-click)
+  - [About x-small profile](#about-x-small-profile)
+  - [Prepare environment](#prepare-environment)
+  - [Install Cloud Pak for Watson AIOps Demo Environment](#install-cloud-pak-for-watson-aiops-demo-environment)
   - [Access Environment](#access-environment)
-    - [Cloud Pak for Watson AIOps](#cp4waiops)
+    - [Cloud Pak for Watson AIOps](#cloud-pak-for-watson-aiops)
     - [Robot Shop](#robot-shop)
     - [Humio](#humio)
 

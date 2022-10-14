@@ -2,10 +2,10 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Customize Cloud Pak for Watson AIOps installation](#customize-cp4waiops-install)
+- [Customize Cloud Pak for Watson AIOps installation](#customize-cloud-pak-for-watson-aiops-installation)
   - [Background](#background)
-  - [Host Your Own Git Repository](#host-your-own-git-repository)
-  - [Advanced Install](#advanced-install)
+  - [Host your own Git repository](#host-your-own-git-repository)
+  - [Advanced installation](#advanced-installation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

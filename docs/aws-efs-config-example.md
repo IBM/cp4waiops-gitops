@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [AWS EFS Storage Configuration Example](#aws-efs-storage-configuration-example)
+  - [Prerequisite](#prerequisite)
+  - [Update default security group to enable EFS access](#update-default-security-group-to-enable-efs-access)
+  - [Creating EFS Storage](#creating-efs-storage)
+  - [Deploying EFS provisioner in the AWS cluster](#deploying-efs-provisioner-in-the-aws-cluster)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # AWS EFS Storage Configuration Example
 
 ## Prerequisite

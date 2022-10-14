@@ -2,12 +2,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy Cloud Pak for Watson AIOps Demo Environment to Multiple Clusters](#deploy-cp4waiops-demo-environment-to-multiple-clusters)
-  - [Prepare Environments](#prepare-environments)
-  - [Install Argocd CLI](#install-argocd-cli)
-  - [Install Cloud Pak for Watson AIOps Demo Environment](#install-cp4waiops-demo-environment)
-  - [Add Cluster Into Argo CD](#add-cluster-into-argo-cd)
-  - [Add More Clusters](#add-more-clusters)
+- [Deploy Cloud Pak for Watson AIOps demo environment to multiple clusters](#deploy-cloud-pak-for-watson-aiops-demo-environment-to-multiple-clusters)
+  - [Prepare environments](#prepare-environments)
+  - [Install the Argo CD CLI](#install-the-argo-cd-cli)
+  - [Install Cloud Pak for Watson AIOps demo environment](#install-cloud-pak-for-watson-aiops-demo-environment)
+  - [Add cluster into Argo CD](#add-cluster-into-argo-cd)
+  - [Add more clusters](#add-more-clusters)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

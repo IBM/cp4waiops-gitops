@@ -2,8 +2,8 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy Cloud Pak for Watson AIOPs Demo Environment Including Cluster Provisioning](#deploy-cp4waiops-demo-environment-including-cluster-provisioning)
-  - [Install Cloud Pak for Watson AIOPs Demo Environment](#install-cp4waiops-demo-environment)
+- [Deploy Cloud Pak for Watson AIOPs demo environment including cluster provisioning](#deploy-cloud-pak-for-watson-aiops-demo-environment-including-cluster-provisioning)
+  - [Install Cloud Pak for Watson AIOPs demo environment](#install-cloud-pak-for-watson-aiops-demo-environment)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

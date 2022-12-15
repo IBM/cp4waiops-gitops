@@ -35,6 +35,7 @@ Please refer to the following documents and decide how you want to deploy CP4WAI
 - [TECHNICAL PREVIEW FEATURE - CP4WAIOps 3.3 Tech Preview Online Install](how-to-deploy-cp4waiops-33.md)
 - [TECHNICAL PREVIEW FEATURE - CP4WAIOps 3.4 Tech Preview Online Install](how-to-deploy-cp4waiops-34.md)
 - [:tada::tada::tada:GA FEATURE - CP4WAIOps 3.5 Online Install:tada::tada::tada:](how-to-deploy-cp4waiops-35.md)
+- [:tada::tada::tada:GA FEATURE - CP4WAIOps 3.6 Online Install:tada::tada::tada:](how-to-deploy-cp4waiops-36.md)
 
 ## More Install Options for CP4WAIOps using GitOps
 

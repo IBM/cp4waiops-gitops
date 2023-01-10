@@ -75,16 +75,16 @@ The Argo CD UI is displayed. Click `LOG IN VIA OPENSHIFT`.
 
 From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with the following values and then click `Create`.
 
-Binding type  
-- Cluster-wide role binding (ClusterRoleBinding)  
-RoleBinding  
-- Name: argocd-admin  
-Role  
-- Role Name: cluster-admin  
-Subject  
-- ServiceAccount: check it  
-- Subject namespace: openshift-gitops  
-- Subject name: openshift-gitops-argocd-application-controller  
+- Binding type  
+    - Cluster-wide role binding (ClusterRoleBinding)  
+- RoleBinding  
+    - Name: argocd-admin  
+- Role  
+    - Role Name: cluster-admin  
+- Subject  
+    - ServiceAccount: check it  
+    - Subject namespace: openshift-gitops  
+    - Subject name: openshift-gitops-argocd-application-controller  
 
 ### Configure Argo CD
 

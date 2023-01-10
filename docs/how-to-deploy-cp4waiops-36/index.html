@@ -1298,17 +1298,23 @@
 <p>If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">Getting started with Amazon Elastic File System</a> in the AWS documentation. You can also refer to the <a href="../aws-efs-config-example/">AWS EFS storage configuration example</a></p>
 <p>From the Argo CD UI, click <code>NEW APP</code>, input the following parameters for Ceph, and then click <code>CREATE</code>.</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: ceph</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.6</li>
 <li>path: config/ceph</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: rook-ceph</li>
+</ul>
+</li>
 </ul>
 <p><img alt="w" src="../images/ceph-gitops.png" /></p>
 <p>After the Argo CD App <code>ceph</code> is created, you can click the App from the Argo CD UI to view the topology of the Ceph resources as follows:</p>
@@ -1403,13 +1409,13 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </li>
 <li>
 <p>Scroll to the end of the page and click "Add credentials". Use the following values:</p>
-</li>
-<li>
-<p>"Registry Server Address" cp.icr.io</p>
-</li>
+<ul>
+<li>"Registry Server Address" cp.icr.io</li>
 <li>"Username": cp</li>
 <li>"Password": paste the entitlement key that you copied from the <a href="#obtain-an-entitlement-key">Obtain an entitlement key</a> step</li>
 <li>"Email": email address. This field is mostly a hint to other people who might see the entry in the configuration.</li>
+</ul>
+</li>
 </ol>
 <p>NOTE: The registry user for this secret is "cp", not the name or email of the user who owns the entitlement key.</p>
 <ol>
@@ -1419,37 +1425,51 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <h3 id="option-1-installing-ai-manager-and-event-manager-separately">Option 1: Installing AI Manager and Event Manager separately<a class="headerlink" href="#option-1-installing-ai-manager-and-event-manager-separately" title="Permanent link">&para;</a></h3>
 <h4 id="install-shared-components">Install shared components<a class="headerlink" href="#install-shared-components" title="Permanent link">&para;</a></h4>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (for example: "cp-shared")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.6</li>
 <li>path: config/cp-shared/operators</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: openshift-marketplace</li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.catalogName: ibm-operator-catalog</li>
 <li>spec.catalogNamespace: openshift-marketplace</li>
 </ul>
+</li>
+</ul>
 <h4 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h4>
 <p>Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The parameters for AI Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (for example: "aimanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.6</li>
 <li>path: config/cp4waiops/install-aimgr</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: cp4waiops</li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
 <li>spec.aiManager.channel: v3.6</li>
@@ -1460,22 +1480,30 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>spec.aiManager.pakModules.aiManager.enabled: true</li>
 <li>spec.aiManager.pakModules.connection.enabled: true</li>
 </ul>
+</li>
+</ul>
 <p>NOTE: If you use a repository that is forked from the official <a href="https://github.com/IBM/cp4waiops-gitops">Cloud Pak for Watson AIOps GitOps repository</a> or a different branch, then you must update the values of the <code>Repository URL</code> and <code>Revision</code> parameters to match your repository and branch. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, then these two parameters must be changed.</p>
 <h4 id="install-event-manager">Install Event Manager<a class="headerlink" href="#install-event-manager" title="Permanent link">&para;</a></h4>
 <p>Install Event Manager by using GitOps to create an Argo CD App for Event Manager. The parameters for Event Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (for example: "eventmanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.6</li>
 <li>path: config/cp4waiops/install-emgr</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: noi </li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
@@ -1484,6 +1512,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>spec.eventManager.channel: v1.10</li>
 <li>spec.eventManager.deploymentType: trial</li>
 <li>spec.eventManager.namespace: noi</li>
+</ul>
+</li>
 </ul>
 <p>NOTE:
 - If you use a repository that is forked from the official <a href="https://github.com/IBM/cp4waiops-gitops">Cloud Pak for Watson AIOps GitOps repository</a> or a different branch, then you must update the values of the <code>Repository URL</code> and <code>Revision</code> parameters to match your repository and branch. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, then these two parameters must be changed.

@@ -1250,33 +1250,29 @@
 <p><img alt="w" src="../images/gitops-login.png" /></p>
 <h3 id="grant-argo-cd-cluster-admin-permission">Grant Argo CD cluster admin permission<a class="headerlink" href="#grant-argo-cd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
 <p>From the Red Hat OpenShift console, go to <code>User Management</code> &gt; <code>RoleBindings</code> &gt; <code>Create binding</code>. Use the form view to configure the properties for the <code>ClusterRoleBinding</code> with the following values and then click <code>Create</code>.</p>
-<ul>
-<li>Binding type</li>
-<li>Cluster-wide role binding (ClusterRoleBinding)</li>
-<li>RoleBinding</li>
-<li>Name: argocd-admin</li>
-<li>Role</li>
-<li>Role Name: cluster-admin</li>
-<li>Subject</li>
-<li>ServiceAccount: check it</li>
-<li>Subject namespace: openshift-gitops</li>
-<li>Subject name: openshift-gitops-argocd-application-controller</li>
-</ul>
+<p>Binding type<br />
+    - Cluster-wide role binding (ClusterRoleBinding)<br />
+RoleBinding<br />
+    - Name: argocd-admin<br />
+Role<br />
+    - Role Name: cluster-admin<br />
+Subject<br />
+    - ServiceAccount: check it<br />
+    - Subject namespace: openshift-gitops<br />
+    - Subject name: openshift-gitops-argocd-application-controller  </p>
 <h3 id="configure-argo-cd">Configure Argo CD<a class="headerlink" href="#configure-argo-cd" title="Permanent link">&para;</a></h3>
 <p>From the Argo CD UI, click <code>NEW APP</code>, input the following parameters, and then click <code>CREATE</code>.</p>
-<ul>
-<li>GENERAL</li>
-<li>Application Name: argocd</li>
-<li>Project: default</li>
-<li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
-<li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
-<li>Revision: release-3.6</li>
-<li>path: config/argocd/openshift</li>
-<li>DESTINATION</li>
-<li>Cluster URL: https://kubernetes.default.svc</li>
-<li>Namespace: openshift-gitops</li>
-</ul>
+<p>GENERAL<br />
+    - Application Name: argocd<br />
+    - Project: default<br />
+    - SYNC POLICY: Automatic<br />
+SOURCE<br />
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops<br />
+    - Revision: release-3.6<br />
+    - path: config/argocd/openshift<br />
+DESTINATION <br />
+    - Cluster URL: https://kubernetes.default.svc<br />
+    - Namespace: openshift-gitops  </p>
 <p>After the Argo CD App <code>argocd</code> is created, select the App from the Argo CD UI to view the topology of all of the resources.</p>
 <h3 id="storage-considerations">Storage considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
 <p>If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.</p>

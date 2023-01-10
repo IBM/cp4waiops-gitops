@@ -75,13 +75,13 @@ The Argo CD UI is displayed. Click `LOG IN VIA OPENSHIFT`.
 
 From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with the following values and then click `Create`.
 
-- Binding type  
+Binding type  
     - Cluster-wide role binding (ClusterRoleBinding)  
-- RoleBinding  
+RoleBinding  
     - Name: argocd-admin  
-- Role  
+Role  
     - Role Name: cluster-admin  
-- Subject  
+Subject  
     - ServiceAccount: check it  
     - Subject namespace: openshift-gitops  
     - Subject name: openshift-gitops-argocd-application-controller  
@@ -91,16 +91,16 @@ From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `
 From the Argo CD UI, click `NEW APP`, input the following parameters, and then click `CREATE`.
 
 GENERAL  
-  - Application Name: argocd  
-  - Project: default  
-  - SYNC POLICY: Automatic  
+    - Application Name: argocd  
+    - Project: default  
+    - SYNC POLICY: Automatic  
 SOURCE  
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops  
-  - Revision: release-3.6  
-  - path: config/argocd/openshift  
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops  
+    - Revision: release-3.6  
+    - path: config/argocd/openshift  
 DESTINATION   
-  - Cluster URL: https://kubernetes.default.svc  
-  - Namespace: openshift-gitops  
+    - Cluster URL: https://kubernetes.default.svc  
+    - Namespace: openshift-gitops  
   
 After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the topology of all of the resources.
 

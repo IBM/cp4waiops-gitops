@@ -1304,7 +1304,7 @@
 <p>After the Argo CD App <code>argocd</code> is created, select the App from the Argo CD UI to view the topology of all of the resources.</p>
 <h3 id="storage-considerations">Storage considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
 <p>If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.</p>
-<p>This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage">Storage Considerations</a>.</p>
 <p>If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/getting-started.html">Getting started with Amazon Elastic File System</a> in the AWS documentation. You can also refer to the <a href="../aws-efs-config-example/">AWS EFS storage configuration example</a></p>
 <p>From the Argo CD UI, click <code>NEW APP</code>, input the following parameters for Ceph, and then click <code>CREATE</code>.</p>
 <ul>
@@ -1409,7 +1409,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <p>From the Red Hat OpenShift console, select the "Administrator" perspective, and then "Workloads &gt; Secrets".</p>
 </li>
 <li>
-<p>Select the project "openshift-config".</p>
+<p>Select the project "openshift-config". (for latest version ocp, the <code>Show default projects</code> switch under <code>Project:</code> need to be enabled before selecting project.)</p>
 </li>
 <li>
 <p>Select the object "pull-secret".</p>
@@ -1480,8 +1480,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </ul>
 </li>
 <li>PARAMETERS<ul>
-<li>spec.storageClass: rook-cephfs</li>
-<li>spec.storageClassLargeBlock: rook-cephfs</li>
+<li>spec.storageClass: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
+<li>spec.storageClassLargeBlock: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
 <li>spec.aiManager.channel: v3.6</li>
 <li>spec.aiManager.size: small</li>
 <li>spec.aiManager.namespace: cp4waiops</li>
@@ -1515,8 +1515,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </li>
 <li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
-<li>spec.storageClass: rook-cephfs</li>
-<li>spec.storageClassLargeBlock: rook-cephfs</li>
+<li>spec.storageClass: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
+<li>spec.storageClassLargeBlock: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
 <li>spec.eventManager.version: 1.6.6</li>
 <li>spec.eventManager.clusterDomain: REPLACE_IT</li>
 <li>spec.eventManager.channel: v1.10</li>
@@ -1970,7 +1970,7 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </code></pre></div>
 <h3 id="storage-considerations-cli">Storage considerations (CLI)<a class="headerlink" href="#storage-considerations-cli" title="Permanent link">&para;</a></h3>
 <p>If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.</p>
-<p>This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage">Storage Considerations</a>.</p>
 <p>To create an Argo CD App for Ceph storage, run the following command:</p>
 <div class="highlight"><pre><span></span><code>argocd app create ceph <span class="se">\</span>
   --sync-policy automatic <span class="se">\</span>

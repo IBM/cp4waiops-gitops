@@ -1075,8 +1075,8 @@
 <p>Argo CD UI will be popped up and you can login using <code>LOG IN VIA OPENSHIFT</code>.</p>
 <p><img alt="w" src="../images/gitops-login.png" /></p>
 <h3 id="storage-considerations">Storage Considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
-<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
-<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html">Storage Considerations</a>.</p>
+<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html">Storage Considerations</a>.</p>
 <p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then click <code>CREATE</code> button.</p>
 <ul>
 <li>GENERAL<ul>
@@ -1194,8 +1194,8 @@
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
-<li>spec.storageClass: rook-cephfs</li>
-<li>spec.storageClassLargeBlock: rook-cephfs</li>
+<li>spec.storageClass: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
+<li>spec.storageClassLargeBlock: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
 <li>spec.aiManager.channel: v3.3</li>
 <li>spec.aiManager.size: small</li>
 <li>spec.aiManager.namespace: cp4waiops</li>
@@ -1235,8 +1235,8 @@
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.dockerUsername: cp</li>
 <li>spec.dockerPassword: REPLACE_IT</li>
-<li>spec.storageClass: rook-cephfs</li>
-<li>spec.storageClassLargeBlock: rook-cephfs</li>
+<li>spec.storageClass: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
+<li>spec.storageClassLargeBlock: rook-cephfs  <em>(need to update the storage class to what is being used in your environment, check it with <code>oc get sc</code> command.)</em></li>
 <li>spec.eventManager.version: 1.6.4</li>
 <li>spec.eventManager.clusterDomain: REPLACE_IT</li>
 <li>spec.eventManager.channel: v1.7</li>
@@ -1670,8 +1670,8 @@
       --insecure
 </code></pre></div>
 <h3 id="storage-considerations_1">Storage Considerations<a class="headerlink" href="#storage-considerations_1" title="Permanent link">&para;</a></h3>
-<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
-<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations">Storage Considerations</a>.</p>
+<p>If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to <a href="https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html">Storage Considerations</a>.</p>
+<p>In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at <a href="https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html">Storage Considerations</a>.</p>
 <p>To create Argo CD App for Ceph storage from command line, run following command:</p>
 <div class="highlight"><pre><span></span><code>argocd app create ceph <span class="se">\</span>
       --sync-policy automatic <span class="se">\</span>

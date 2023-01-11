@@ -51,9 +51,9 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html).
 
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
@@ -162,8 +162,8 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.dockerUsername: cp
     - spec.dockerPassword: REPLACE_IT
-    - spec.storageClass: rook-cephfs
-    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.storageClass: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
     - spec.aiManager.channel: v3.3
     - spec.aiManager.size: small
     - spec.aiManager.namespace: cp4waiops
@@ -196,8 +196,8 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.dockerUsername: cp
     - spec.dockerPassword: REPLACE_IT
-    - spec.storageClass: rook-cephfs
-    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.storageClass: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
     - spec.eventManager.version: 1.6.4
     - spec.eventManager.clusterDomain: REPLACE_IT
     - spec.eventManager.channel: v1.7
@@ -536,9 +536,9 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 ### Storage Considerations
 
-If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+If your OpenShift cluster already have default storageclass configured, you can ignore this step. To learn more on storage considerations for CP4WAIOps, please refer to [Storage Considerations](https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html).
 
-In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.3.0?topic=requirements-storage-considerations).
+In this tutorial, we are using use Ceph just for PoC purpose, but NOT for production. You should always follow storage based on CP4WAIOPS requirements at [Storage Considerations](https://www.ibm.com/docs/en/SSJGDOB_3.3.0/planning/considerations_storage.html).
 
 To create Argo CD App for Ceph storage from command line, run following command:
 

@@ -162,8 +162,8 @@ You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. 
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.dockerUsername: cp
     - spec.dockerPassword: REPLACE_IT
-    - spec.storageClass: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
-    - spec.storageClassLargeBlock: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
+    - spec.storageClass: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
     - spec.aiManager.channel: v3.3
     - spec.aiManager.size: small
     - spec.aiManager.namespace: cp4waiops
@@ -196,8 +196,8 @@ You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD Ap
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.dockerUsername: cp
     - spec.dockerPassword: REPLACE_IT
-    - spec.storageClass: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
-    - spec.storageClassLargeBlock: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
+    - spec.storageClass: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update the storage class to what is being used in your environment, check it with `oc get sc` command.)
     - spec.eventManager.version: 1.6.4
     - spec.eventManager.clusterDomain: REPLACE_IT
     - spec.eventManager.channel: v1.7

@@ -221,7 +221,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 
 1. From the Red Hat OpenShift console, select the "Administrator" perspective, and then "Workloads > Secrets".
 
-2. Select the project "openshift-config".
+2. Select the project "openshift-config". (for latest version ocp, the `Show default projects` switch under `Project:` need to be enabled before selecting project.)
  
 3. Select the object "pull-secret".
 
@@ -277,8 +277,8 @@ Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The 
     - Cluster URL: https://kubernetes.default.svc
     - Namespace: cp4waiops
 - PARAMETERS
-    - spec.storageClass: rook-cephfs
-    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.storageClass: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command. )
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
     - spec.aiManager.channel: v3.6
     - spec.aiManager.size: small
     - spec.aiManager.namespace: cp4waiops
@@ -306,8 +306,8 @@ Install Event Manager by using GitOps to create an Argo CD App for Event Manager
     - Namespace: noi 
 - PARAMETERS
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-    - spec.storageClass: rook-cephfs
-    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.storageClass: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
+    - spec.storageClassLargeBlock: rook-cephfs  (need to update to the storage class in your environment, check it with `oc get sc` command.)
     - spec.eventManager.version: 1.6.6
     - spec.eventManager.clusterDomain: REPLACE_IT
     - spec.eventManager.channel: v1.10
@@ -653,7 +653,7 @@ argo_pwd=$(kubectl get secret ${argo_secret} \
 
 If your Red Hat OpenShift cluster already has a default supported storage class, then skip this step.
 
-This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage-considerations).
+This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage).
 
 To create an Argo CD App for Ceph storage, run the following command:
 

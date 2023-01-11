@@ -1159,7 +1159,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <p><strong>Table of Contents</strong>  <em>generated with <a href="https://github.com/thlorenz/doctoc">DocToc</a></em></p>
 <ul>
-<li><a href="#deploy-cp4waiops-34-using-gitops">Deploy CP4WAIOps 3.4 using GitOps</a></li>
+<li><a href="#deploy-cp4waiops-34-using-gitops">Deploy CP4WAIOps 3.4 using GitOps</a><ul>
 <li><a href="#prerequisite">Prerequisite</a></li>
 <li><a href="#install-cp4waiops-from-ui">Install CP4WAIOps from UI</a><ul>
 <li><a href="#login-to-argo-cd">Login to Argo CD</a></li>
@@ -1167,15 +1167,21 @@
 <li><a href="#configure-argo-cd">Configure Argo CD</a></li>
 <li><a href="#storage-considerations">Storage Considerations</a></li>
 <li><a href="#obtain-an-entitlement-key">Obtain an entitlement key</a></li>
-<li><a href="#update-the-ocp-global-pull-secret">Update the OCP global pull secret</a></li>
+<li><a href="#update-the-ocp-global-pull-secret">Update the OCP global pull secret</a><ul>
 <li><a href="#update-the-global-pull-secret-using-the-openshift-console">Update the global pull secret using the OpenShift console</a></li>
-<li><a href="#option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately</a></li>
+</ul>
+</li>
+<li><a href="#option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately</a><ul>
 <li><a href="#install-shared-components">Install shared components</a></li>
 <li><a href="#install-ai-manager">Install AI Manager</a></li>
 <li><a href="#install-event-manager">Install Event Manager</a></li>
-<li><a href="#option-2-experimental-install-using-all-in-one-configuration">Option 2: (<strong>Experimental</strong>) Install Using All-in-One Configuration</a></li>
+</ul>
+</li>
+<li><a href="#option-2-experimental-install-using-all-in-one-configuration">Option 2: (<strong>Experimental</strong>) Install Using All-in-One Configuration</a><ul>
 <li><a href="#install-ai-manager-and-event-manager-in-one-go">Install AI Manager and Event Manager in One Go</a></li>
 <li><a href="#install-cp4waiops-using-custom-build">Install CP4WAIOps using Custom Build</a></li>
+</ul>
+</li>
 <li><a href="#verify-cp4waiops-installation">Verify CP4WAIOps Installation</a></li>
 <li><a href="#access-cp4waiops">Access CP4WAIOps</a></li>
 </ul>
@@ -1183,17 +1189,21 @@
 <li><a href="#install-cp4waiops-from-command-line">Install CP4WAIOps from Command Line</a><ul>
 <li><a href="#login-to-argo-cd-cli">Login to Argo CD (Cli)</a></li>
 <li><a href="#storage-considerations-cli">Storage Considerations (Cli)</a></li>
-<li><a href="#option-1-install-ai-manager-and-event-manager-separately-cli">Option 1: Install AI Manager and Event Manager Separately (Cli)</a></li>
+<li><a href="#option-1-install-ai-manager-and-event-manager-separately-cli">Option 1: Install AI Manager and Event Manager Separately (Cli)</a><ul>
 <li><a href="#grant-argo-cd-cluster-admin-permission-cli">Grant Argo CD Cluster Admin Permission (Cli)</a></li>
 <li><a href="#install-shared-components-cli">Install shared components (Cli)</a></li>
 <li><a href="#install-ai-manager-cli">Install AI Manager (Cli)</a></li>
 <li><a href="#install-event-manager-cli">Install Event Manager (Cli)</a></li>
+</ul>
+</li>
 <li><a href="#option-2-experimentalinstall-using-all-in-one-configuration-cli">Option 2: (<strong>Experimental</strong>)Install Using All-in-One Configuration (Cli)</a></li>
 <li><a href="#verify-cp4waiops-installation-cli">Verify CP4WAIOps Installation (Cli)</a></li>
 </ul>
 </li>
 <li><a href="#trouble-shooting">Trouble Shooting</a><ul>
 <li><a href="#storage">Storage</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1215,31 +1225,45 @@
 <h3 id="grant-argo-cd-cluster-admin-permission">Grant Argo CD Cluster Admin Permission<a class="headerlink" href="#grant-argo-cd-cluster-admin-permission" title="Permanent link">&para;</a></h3>
 <p>From Red Hat OpenShift Console, go to <code>User Management</code> &gt; <code>RoleBindings</code> &gt; <code>Create binding</code>. Use the form view to configure the properties for the <code>ClusterRoleBinding</code> with values as follows, and click the <code>Create</code> button.</p>
 <ul>
-<li>Binding type</li>
+<li>Binding type<ul>
 <li>Cluster-wide role binding (ClusterRoleBinding)</li>
-<li>RoleBinding</li>
+</ul>
+</li>
+<li>RoleBinding<ul>
 <li>Name: argocd-admin</li>
-<li>Role</li>
+</ul>
+</li>
+<li>Role<ul>
 <li>Role Name: cluster-admin</li>
-<li>Subject</li>
+</ul>
+</li>
+<li>Subject<ul>
 <li>ServiceAccount: check it</li>
 <li>Subject namespace: openshift-gitops</li>
 <li>Subject name: openshift-gitops-argocd-application-controller</li>
 </ul>
+</li>
+</ul>
 <h3 id="configure-argo-cd">Configure Argo CD<a class="headerlink" href="#configure-argo-cd" title="Permanent link">&para;</a></h3>
 <p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows and then click <code>CREATE</code> button.</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: argocd</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.4</li>
 <li>path: config/argocd/openshift</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: openshift-gitops</li>
+</ul>
+</li>
 </ul>
 <p>After Argo CD App <code>argocd</code> is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.</p>
 <h3 id="storage-considerations">Storage Considerations<a class="headerlink" href="#storage-considerations" title="Permanent link">&para;</a></h3>
@@ -1249,17 +1273,23 @@
 You can also follow the <a href="../aws-efs-config-example/">example of AWS EFS configuration instruction</a></p>
 <p>From Argo CD UI, click <code>NEW APP</code> and input parameters as follows for Ceph and then click <code>CREATE</code> button.</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: ceph</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.4</li>
 <li>path: config/ceph</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: rook-ceph</li>
+</ul>
+</li>
 </ul>
 <p><img alt="w" src="../images/ceph-gitops.png" /></p>
 <p>After Argo CD App <code>ceph</code> is created, you can click the App from Argo CD UI to view the toplogy of all Ceph resources as follows:</p>
@@ -1317,9 +1347,11 @@ NOTE:</p>
 <div class="highlight"><pre><span></span><code>oc get sc
 </code></pre></div>
   In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.<br />
-  To remove the default setting from a sc, </li>
+  To remove the default setting from a sc, <ul>
 <li>use <code>oc edit sc [STORAGE-CLASS-NAME]</code> command.</li>
 <li>remove the <code>storageclass.kubernetes.io/is-default-class: "true"</code> line under <code>annotations</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="obtain-an-entitlement-key">Obtain an entitlement key<a class="headerlink" href="#obtain-an-entitlement-key" title="Permanent link">&para;</a></h3>
 <p>If you don't already have an entitlement key to the IBM Entitled Registry, obtain your key using the following instructions:</p>
@@ -1360,14 +1392,12 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 </li>
 <li>
 <p>Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:</p>
-</li>
-<li>
-<p>"Registry Server Address" cp.icr.io</p>
-</li>
+<ul>
+<li>"Registry Server Address" cp.icr.io</li>
 <li>"Username": cp</li>
 <li>"Password": paste the entitlement key you copied from the <a href="#obtain-an-entitlement-key">Obtain an entitlement key</a> setp</li>
-<li>
-<p>"Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration</p>
+<li>"Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration</li>
+</ul>
 </li>
 <li>
 <p>Click on "Save"</p>
@@ -1376,37 +1406,51 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <h3 id="option-1-install-ai-manager-and-event-manager-separately">Option 1: Install AI Manager and Event Manager Separately<a class="headerlink" href="#option-1-install-ai-manager-and-event-manager-separately" title="Permanent link">&para;</a></h3>
 <h4 id="install-shared-components">Install shared components<a class="headerlink" href="#install-shared-components" title="Permanent link">&para;</a></h4>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (e.g.: "cp-shared")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.4</li>
 <li>path: config/cp-shared/operators</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: openshift-marketplace</li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.catalogName: ibm-operator-catalog</li>
 <li>spec.catalogNamespace: openshift-marketplace</li>
 </ul>
+</li>
+</ul>
 <h4 id="install-ai-manager">Install AI Manager<a class="headerlink" href="#install-ai-manager" title="Permanent link">&para;</a></h4>
 <p>You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (e.g.: "aimanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.4</li>
 <li>path: config/cp4waiops/install-aimgr</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: cp4waiops</li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
 <li>spec.aiManager.channel: v3.4</li>
@@ -1417,6 +1461,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>spec.aiManager.pakModules.aiManager.enabled: true</li>
 <li>spec.aiManager.pakModules.connection.enabled: true</li>
 </ul>
+</li>
+</ul>
 <p>NOTE:</p>
 <ul>
 <li>For <code>Repository URL</code> and <code>Revision</code> field, if you use a repository forked from <a href="https://github.com/IBM/cp4waiops-gitops">the official CP4WAIOps GitOps repository</a> and/or on a different branch, please fill these fields using your own values. For example, if you use <code>https://github.com/&lt;myaccount&gt;/cp4waiops-gitops</code> and <code>dev</code> branch, the two fields need to be changed accordingly.</li>
@@ -1424,18 +1470,24 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <h4 id="install-event-manager">Install Event Manager<a class="headerlink" href="#install-event-manager" title="Permanent link">&para;</a></h4>
 <p>You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:</p>
 <ul>
-<li>GENERAL</li>
+<li>GENERAL<ul>
 <li>Application Name: anyname (e.g.: "eventmanager-app")</li>
 <li>Project: default</li>
 <li>SYNC POLICY: Automatic</li>
-<li>SOURCE</li>
+</ul>
+</li>
+<li>SOURCE<ul>
 <li>Repository URL : https://github.com/IBM/cp4waiops-gitops</li>
 <li>Revision: release-3.4</li>
 <li>path: config/cp4waiops/install-emgr</li>
-<li>DESTINATION</li>
+</ul>
+</li>
+<li>DESTINATION<ul>
 <li>Cluster URL: https://kubernetes.default.svc</li>
 <li>Namespace: noi </li>
-<li>PARAMETERS</li>
+</ul>
+</li>
+<li>PARAMETERS<ul>
 <li>spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest</li>
 <li>spec.storageClass: rook-cephfs</li>
 <li>spec.storageClassLargeBlock: rook-cephfs</li>
@@ -1444,6 +1496,8 @@ podman login cp.icr.io --username cp --password <span class="s2">&quot;</span><s
 <li>spec.eventManager.channel: v1.7</li>
 <li>spec.eventManager.deploymentType: trial</li>
 <li>spec.eventManager.namespace: noi</li>
+</ul>
+</li>
 </ul>
 <p>NOTE:</p>
 <ul>

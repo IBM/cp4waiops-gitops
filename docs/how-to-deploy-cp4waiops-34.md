@@ -3,36 +3,36 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Deploy CP4WAIOps 3.4 using GitOps](#deploy-cp4waiops-34-using-gitops)
-  - [Prerequisite](#prerequisite)
-  - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
-    - [Login to Argo CD](#login-to-argo-cd)
-    - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
-    - [Configure Argo CD](#configure-argo-cd)
-    - [Storage Considerations](#storage-considerations)
-    - [Obtain an entitlement key](#obtain-an-entitlement-key)
-    - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
-      - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
-    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
-      - [Install shared components](#install-shared-components)
-      - [Install AI Manager](#install-ai-manager)
-      - [Install Event Manager](#install-event-manager)
-    - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
-      - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
-    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
-    - [Access CP4WAIOps](#access-cp4waiops)
-  - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
-    - [Storage Considerations (Cli)](#storage-considerations-cli)
-    - [Option 1: Install AI Manager and Event Manager Separately (Cli)](#option-1-install-ai-manager-and-event-manager-separately-cli)
-      - [Grant Argo CD Cluster Admin Permission (Cli)](#grant-argo-cd-cluster-admin-permission-cli)
-      - [Install shared components (Cli)](#install-shared-components-cli)
-      - [Install AI Manager (Cli)](#install-ai-manager-cli)
-      - [Install Event Manager (Cli)](#install-event-manager-cli)
-    - [Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
-    - [Verify CP4WAIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
-  - [Trouble Shooting](#trouble-shooting)
-    - [Storage](#storage)
+    - [Prerequisite](#prerequisite)
+    - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
+      - [Login to Argo CD](#login-to-argo-cd)
+      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+      - [Configure Argo CD](#configure-argo-cd)
+      - [Storage Considerations](#storage-considerations)
+      - [Obtain an entitlement key](#obtain-an-entitlement-key)
+      - [Update the OCP global pull secret](#update-the-ocp-global-pull-secret)
+        - [Update the global pull secret using the OpenShift console](#update-the-global-pull-secret-using-the-openshift-console)
+      - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
+        - [Install shared components](#install-shared-components)
+        - [Install AI Manager](#install-ai-manager)
+        - [Install Event Manager](#install-event-manager)
+      - [Option 2: (**Experimental**) Install Using All-in-One Configuration](#option-2-experimental-install-using-all-in-one-configuration)
+        - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
+        - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
+      - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
+      - [Access CP4WAIOps](#access-cp4waiops)
+    - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
+      - [Login to Argo CD (Cli)](#login-to-argo-cd-cli)
+      - [Storage Considerations (Cli)](#storage-considerations-cli)
+      - [Option 1: Install AI Manager and Event Manager Separately (Cli)](#option-1-install-ai-manager-and-event-manager-separately-cli)
+        - [Grant Argo CD Cluster Admin Permission (Cli)](#grant-argo-cd-cluster-admin-permission-cli)
+        - [Install shared components (Cli)](#install-shared-components-cli)
+        - [Install AI Manager (Cli)](#install-ai-manager-cli)
+        - [Install Event Manager (Cli)](#install-event-manager-cli)
+      - [Option 2: (**Experimental**)Install Using All-in-One Configuration (Cli)](#option-2-experimentalinstall-using-all-in-one-configuration-cli)
+      - [Verify CP4WAIOps Installation (Cli)](#verify-cp4waiops-installation-cli)
+    - [Trouble Shooting](#trouble-shooting)
+      - [Storage](#storage)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -62,30 +62,30 @@ Argo CD UI will be popped up and you can login using `LOG IN VIA OPENSHIFT`.
 From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
 
 - Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
+    - Cluster-wide role binding (ClusterRoleBinding)
 - RoleBinding
-  - Name: argocd-admin
+    - Name: argocd-admin
 - Role
-  - Role Name: cluster-admin
+    - Role Name: cluster-admin
 - Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
+    - ServiceAccount: check it
+    - Subject namespace: openshift-gitops
+    - Subject name: openshift-gitops-argocd-application-controller
 
 ### Configure Argo CD
 From Argo CD UI, click `NEW APP` and input parameters as follows and then click `CREATE` button.
 
 - GENERAL
-  - Application Name: argocd
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: argocd
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
-  - path: config/argocd/openshift
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: release-3.4
+    - path: config/argocd/openshift
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: openshift-gitops
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: openshift-gitops
   
 After Argo CD App `argocd` is created, you can click the App from Argo CD UI to view the toplogy of all of the resources.
 
@@ -101,16 +101,16 @@ You can also follow the [example of AWS EFS configuration instruction](aws-efs-c
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
 - GENERAL
-  - Application Name: ceph
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: ceph
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
-  - path: config/ceph
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: release-3.4
+    - path: config/ceph
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: rook-ceph
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: rook-ceph
 
 ![w](images/ceph-gitops.png)
 
@@ -177,8 +177,8 @@ oc get sc
 ```
   In cases of multiple default storageclass appears in the list, you will need to remove all of the other default setting and only leave one storageclass set as the default storageclasse.  
   To remove the default setting from a sc, 
-  - use `oc edit sc [STORAGE-CLASS-NAME]` command.
-  - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
+    - use `oc edit sc [STORAGE-CLASS-NAME]` command.
+    - remove the `storageclass.kubernetes.io/is-default-class: "true"` line under `annotations`
 
 ### Obtain an entitlement key
 
@@ -216,10 +216,10 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 
 1. Scroll to the bottom of that page and click on "Add credentials", using the following values for each field:
 
-   - "Registry Server Address" cp.icr.io
-   - "Username": cp
-   - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
-   - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
+     - "Registry Server Address" cp.icr.io
+     - "Username": cp
+     - "Password": paste the entitlement key you copied from the [Obtain an entitlement key](#obtain-an-entitlement-key) setp
+     - "Email": any email, valid or not, will work. This fields is mostly a hint to other people who may see the entry in the configuration
 
 1. Click on "Save"
 
@@ -228,20 +228,20 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 #### Install shared components
 
 - GENERAL
-  - Application Name: anyname (e.g.: "cp-shared")
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: anyname (e.g.: "cp-shared")
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
-  - path: config/cp-shared/operators
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: release-3.4
+    - path: config/cp-shared/operators
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: openshift-marketplace
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: openshift-marketplace
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.catalogName: ibm-operator-catalog
-  - spec.catalogNamespace: openshift-marketplace
+    - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+    - spec.catalogName: ibm-operator-catalog
+    - spec.catalogNamespace: openshift-marketplace
 
 
 #### Install AI Manager
@@ -249,26 +249,26 @@ Keep in mind that the registry user for that secret is "cp". A common mistakes i
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "aimanager-app")
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: anyname (e.g.: "aimanager-app")
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
-  - path: config/cp4waiops/install-aimgr
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: release-3.4
+    - path: config/cp4waiops/install-aimgr
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: cp4waiops
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: cp4waiops
 - PARAMETERS
-  - spec.storageClass: rook-cephfs
-  - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: v3.4
-  - spec.aiManager.size: small
-  - spec.aiManager.namespace: cp4waiops
-  - spec.aiManager.pakModules.aiopsFoundation.enabled: true
-  - spec.aiManager.pakModules.applicationManager.enabled: true
-  - spec.aiManager.pakModules.aiManager.enabled: true
-  - spec.aiManager.pakModules.connection.enabled: true
+    - spec.storageClass: rook-cephfs
+    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.aiManager.channel: v3.4
+    - spec.aiManager.size: small
+    - spec.aiManager.namespace: cp4waiops
+    - spec.aiManager.pakModules.aiopsFoundation.enabled: true
+    - spec.aiManager.pakModules.applicationManager.enabled: true
+    - spec.aiManager.pakModules.aiManager.enabled: true
+    - spec.aiManager.pakModules.connection.enabled: true
 
 NOTE:
 
@@ -279,25 +279,25 @@ NOTE:
 You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "eventmanager-app")
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: anyname (e.g.: "eventmanager-app")
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: release-3.4
-  - path: config/cp4waiops/install-emgr
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: release-3.4
+    - path: config/cp4waiops/install-emgr
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: noi 
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: noi 
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.storageClass: rook-cephfs
-  - spec.storageClassLargeBlock: rook-cephfs
-  - spec.eventManager.version: 1.6.4
-  - spec.eventManager.clusterDomain: REPLACE_IT
-  - spec.eventManager.channel: v1.7
-  - spec.eventManager.deploymentType: trial
-  - spec.eventManager.namespace: noi
+    - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+    - spec.storageClass: rook-cephfs
+    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.eventManager.version: 1.6.4
+    - spec.eventManager.clusterDomain: REPLACE_IT
+    - spec.eventManager.channel: v1.7
+    - spec.eventManager.deploymentType: trial
+    - spec.eventManager.namespace: noi
 
 NOTE:
 

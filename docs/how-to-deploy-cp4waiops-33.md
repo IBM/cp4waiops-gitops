@@ -3,28 +3,28 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Deploy CP4WAIOps 3.3 using GitOps](#deploy-cp4waiops-33-using-gitops)
-  - [Prerequisite](#prerequisite)
-  - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
-    - [Login to Argo CD](#login-to-argo-cd)
-    - [Storage Considerations](#storage-considerations)
-    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
-      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
-      - [Install AI Manager](#install-ai-manager)
-      - [Install Event Manager](#install-event-manager)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
-      - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
-      - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
-    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
-    - [Access CP4WAIOps](#access-cp4waiops)
-  - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
-    - [Login to Argo CD](#login-to-argo-cd-1)
-    - [Storage Considerations](#storage-considerations-1)
-    - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
-      - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
-      - [Install AI Manager](#install-ai-manager-1)
-      - [Install Event Manager](#install-event-manager-1)
-    - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
-    - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
+    - [Prerequisite](#prerequisite)
+    - [Install CP4WAIOps from UI](#install-cp4waiops-from-ui)
+      - [Login to Argo CD](#login-to-argo-cd)
+      - [Storage Considerations](#storage-considerations)
+      - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately)
+        - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission)
+        - [Install AI Manager](#install-ai-manager)
+        - [Install Event Manager](#install-event-manager)
+      - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration)
+        - [Install AI Manager and Event Manager in One Go](#install-ai-manager-and-event-manager-in-one-go)
+        - [Install CP4WAIOps using Custom Build](#install-cp4waiops-using-custom-build)
+      - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation)
+      - [Access CP4WAIOps](#access-cp4waiops)
+    - [Install CP4WAIOps from Command Line](#install-cp4waiops-from-command-line)
+      - [Login to Argo CD](#login-to-argo-cd-1)
+      - [Storage Considerations](#storage-considerations-1)
+      - [Option 1: Install AI Manager and Event Manager Separately](#option-1-install-ai-manager-and-event-manager-separately-1)
+        - [Grant Argo CD Cluster Admin Permission](#grant-argo-cd-cluster-admin-permission-1)
+        - [Install AI Manager](#install-ai-manager-1)
+        - [Install Event Manager](#install-event-manager-1)
+      - [Option 2: Install Using All-in-One Configuration](#option-2-install-using-all-in-one-configuration-1)
+      - [Verify CP4WAIOps Installation](#verify-cp4waiops-installation-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -58,16 +58,16 @@ In this tutorial, we are using use Ceph just for PoC purpose, but NOT for produc
 From Argo CD UI, click `NEW APP` and input parameters as follows for Ceph and then click `CREATE` button.
 
 - GENERAL
-  - Application Name: ceph
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: ceph
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
-  - path: config/ceph
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: HEAD
+    - path: config/ceph
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: rook-ceph
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: rook-ceph
 
 ![w](images/ceph-gitops.png)
 
@@ -133,44 +133,44 @@ rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Comple
 From Red Hat OpenShift Console, go to `User Management` > `RoleBindings` > `Create binding`. Use the form view to configure the properties for the `ClusterRoleBinding` with values as follows, and click the `Create` button.
 
 - Binding type
-  - Cluster-wide role binding (ClusterRoleBinding)
+    - Cluster-wide role binding (ClusterRoleBinding)
 - RoleBinding
-  - Name: argocd-admin
+    - Name: argocd-admin
 - Role
-  - Role Name: cluster-admin
+    - Role Name: cluster-admin
 - Subject
-  - ServiceAccount: check it
-  - Subject namespace: openshift-gitops
-  - Subject name: openshift-gitops-argocd-application-controller
+    - ServiceAccount: check it
+    - Subject namespace: openshift-gitops
+    - Subject name: openshift-gitops-argocd-application-controller
 
 #### Install AI Manager
 
 You can install CP4WAIOps - AI Manager using GitOps by creating an Argo CD App. The parameters for AI Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "aimanager-app")
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: anyname (e.g.: "aimanager-app")
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
-  - path: config/3.3/ai-manager
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: HEAD
+    - path: config/3.3/ai-manager
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: cp4waiops
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: cp4waiops
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.dockerUsername: cp
-  - spec.dockerPassword: REPLACE_IT
-  - spec.storageClass: rook-cephfs
-  - spec.storageClassLargeBlock: rook-cephfs
-  - spec.aiManager.channel: v3.3
-  - spec.aiManager.size: small
-  - spec.aiManager.namespace: cp4waiops
-  - spec.aiManager.pakModules.aiopsFoundation.enabled: true
-  - spec.aiManager.pakModules.applicationManager.enabled: true
-  - spec.aiManager.pakModules.aiManager.enabled: true
-  - spec.aiManager.pakModules.connection.enabled: true
+    - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+    - spec.dockerUsername: cp
+    - spec.dockerPassword: REPLACE_IT
+    - spec.storageClass: rook-cephfs
+    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.aiManager.channel: v3.3
+    - spec.aiManager.size: small
+    - spec.aiManager.namespace: cp4waiops
+    - spec.aiManager.pakModules.aiopsFoundation.enabled: true
+    - spec.aiManager.pakModules.applicationManager.enabled: true
+    - spec.aiManager.pakModules.aiManager.enabled: true
+    - spec.aiManager.pakModules.connection.enabled: true
 
 NOTE:
 
@@ -182,27 +182,27 @@ NOTE:
 You can install CP4WAIOps - Event Manager using GitOps by creating an Argo CD App. The parameters for Event Manager are as follows:
 
 - GENERAL
-  - Application Name: anyname (e.g.: "eventmanager-app")
-  - Project: default
-  - SYNC POLICY: Automatic
+    - Application Name: anyname (e.g.: "eventmanager-app")
+    - Project: default
+    - SYNC POLICY: Automatic
 - SOURCE
-  - Repository URL : https://github.com/IBM/cp4waiops-gitops
-  - Revision: HEAD
-  - path: config/3.3/event-manager
+    - Repository URL : https://github.com/IBM/cp4waiops-gitops
+    - Revision: HEAD
+    - path: config/3.3/event-manager
 - DESTINATION
-  - Cluster URL: https://kubernetes.default.svc
-  - Namespace: noi 
+    - Cluster URL: https://kubernetes.default.svc
+    - Namespace: noi 
 - PARAMETERS
-  - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
-  - spec.dockerUsername: cp
-  - spec.dockerPassword: REPLACE_IT
-  - spec.storageClass: rook-cephfs
-  - spec.storageClassLargeBlock: rook-cephfs
-  - spec.eventManager.version: 1.6.4
-  - spec.eventManager.clusterDomain: REPLACE_IT
-  - spec.eventManager.channel: v1.7
-  - spec.eventManager.deploymentType: trial
-  - spec.eventManager.namespace: noi
+    - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
+    - spec.dockerUsername: cp
+    - spec.dockerPassword: REPLACE_IT
+    - spec.storageClass: rook-cephfs
+    - spec.storageClassLargeBlock: rook-cephfs
+    - spec.eventManager.version: 1.6.4
+    - spec.eventManager.clusterDomain: REPLACE_IT
+    - spec.eventManager.channel: v1.7
+    - spec.eventManager.deploymentType: trial
+    - spec.eventManager.namespace: noi
 
 NOTE:
 

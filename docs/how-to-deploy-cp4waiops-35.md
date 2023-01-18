@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy IBM Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cloud-pak-for-watson-aiops-35-using-gitops)
+- [Deploy Cloud Pak for Watson AIOps 3.5 using GitOps](#deploy-cloud-pak-for-watson-aiops-35-using-gitops)
   - [Prerequisites](#prerequisites)
   - [Installing Cloud Pak for Watson AIOps with the Argo CD UI](#installing-cloud-pak-for-watson-aiops-with-the-argo-cd-ui)
     - [Log in to Argo CD](#log-in-to-argo-cd)

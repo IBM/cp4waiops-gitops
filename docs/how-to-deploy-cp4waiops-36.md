@@ -17,7 +17,7 @@
             - [Install Event Manager](#install-event-manager)
         - [Verify the Cloud Pak for Watson AIOps installation](#verify-the-cloud-pak-for-watson-aiops-installation)
         - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
-    - [Installing Cloud Pak for Watson AIOps from the command line](#install-cloud-pak-for-watson-aiops-from-the-command-line)
+    - [Installing Cloud Pak for Watson AIOps from the command line](#installing-cloud-pak-for-watson-aiops-from-the-command-line)
         - [Log in to Argo CD (CLI)](#log-in-to-argo-cd-cli)
         - [Grant Argo CD cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
         - [Storage considerations (CLI)](#storage-considerations-cli)
@@ -213,7 +213,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
    podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
    ```
 
-### Update the Red Hat OpenShift Container Platform global pull secret
+### Update the OpenShift Container Platform global pull secret
 
 1. From the Red Hat OpenShift console, select the "Administrator" perspective, and then select "Workloads > Secrets".
 
@@ -808,7 +808,7 @@ NOTE:
 - `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.
 - `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 -->
-### Verify Cloud Pak for Watson AIOps installation (CLI)
+### Verify the Cloud Pak for Watson AIOps installation (CLI)
 
 Run the following command to verify that the Cloud Pak for Watson AIOps installation was successful:
 

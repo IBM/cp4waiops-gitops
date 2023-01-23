@@ -81,8 +81,7 @@ From the Red Hat OpenShift console, go to `User Management` > `RoleBindings` > `
     - Name: argocd-admin  
 - Role  
     - Role Name: cluster-admin  
-- Subject  
-    - ServiceAccount: check it  
+- Subject > ServiceAccount
     - Subject namespace: openshift-gitops  
     - Subject name: openshift-gitops-argocd-application-controller  
 
@@ -110,7 +109,7 @@ If your Red Hat OpenShift cluster already has a default supported storage class,
 
 This tutorial uses Ceph storage for demonstration purpose. You must use a supported storage. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage).
 
-If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)
+<!--If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)-->
 
 **Note**: Multiple default storage classes cause deployment problems. Run the following command to check your cluster's storage class.
 
@@ -151,7 +150,7 @@ The filters on the left can be used to filter out resources. Click a resource to
 Run the following command from the command line to check that none of the pods have an error status.
 
 ```console
-[root@xyz.test.cp.fyre.ibm.com ~]# kubectl get po -n rook-ceph
+[root@xyz.test.cp.fyre.ibm.com ~]# oc get po -n rook-ceph
 NAME                                                              READY   STATUS      RESTARTS   AGE
 csi-cephfsplugin-7b6jk                                            3/3     Running     0          2d
 csi-cephfsplugin-l7mvz                                            3/3     Running     0          2d
@@ -196,7 +195,7 @@ rook-ceph-osd-prepare-worker4.body.cp.fyre.ibm.com-dxcm5          0/1     Comple
 rook-ceph-osd-prepare-worker5.body.cp.fyre.ibm.com-jclnq          0/1     Completed   0          4h16m
 ```
 
-If any of the pods are in an error state, you can check the logs by using `kubectl logs`.
+If any of the pods are in an error state, you can check the logs by using `oc logs`.
 
 ### Obtain an entitlement key
 
@@ -318,7 +317,7 @@ Where `<domain_name>` is the domain name of the cluster where Event Manager is i
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-  appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
   echo ${appDomain}
   ```
 
@@ -440,7 +439,7 @@ You can check the topology of Cloud Pak for Watson AIOps from the Argo CD UI as 
 You can also check your Cloud Pak for Watson AIOps installation from the command line. For example, to check the AI Manager pods, run the following command:
 
 ```console
-[root@api.body.cp.fyre.ibm.com ~]# kubectl get po -n cp4waiops
+[root@api.body.cp.fyre.ibm.com ~]# oc get po -n cp4waiops
 NAME                                                              READY   STATUS      RESTARTS   AGE
 aimanager-aio-ai-platform-api-server-7c877989d6-7jh55             1/1     Running     0          47h
 aimanager-aio-change-risk-654884bd8c-6xpxw                        1/1     Running     0          47h
@@ -597,7 +596,7 @@ zen-pre-requisite-job-2klrt                                       0/1     Comple
 zen-watcher-d8b795b46-2q6zx                                       1/1     Running     0          47h
 ```
 
-If any pods are in an error state, you can check the logs from the Argo CD UI, or you can run `kubectl logs` from the command line.
+If any pods are in an error state, you can check the logs from the Argo CD UI, or you can run `oc logs` from the command line.
 
 ### Access Cloud Pak for Watson AIOps
 
@@ -638,10 +637,10 @@ argo_route=openshift-gitops-server
 argo_secret=openshift-gitops-cluster
 sa_account=openshift-gitops-argocd-application-controller
 
-argo_pwd=$(kubectl get secret ${argo_secret} \
+argo_pwd=$(oc get secret ${argo_secret} \
             -n openshift-gitops \
             -o jsonpath='{.data.admin\.password}' | base64 -d ; echo ) \
-&& argo_url=$(kubectl get route ${argo_route} \
+&& argo_url=$(oc get route ${argo_route} \
                -n openshift-gitops \
                -o jsonpath='{.spec.host}') \
 && argocd login "${argo_url}" \
@@ -760,7 +759,7 @@ argocd app create eventmanager-app \
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-  appDomain=`kubectl -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
   echo ${appDomain}
   ```
 
@@ -802,13 +801,13 @@ NOTE:
 Run the following command to verify that the Cloud Pak for Watson AIOps installation was successful:
 
 ```sh
-kubectl get application -A
+oc get application -A
 ```
 
 Example output from a successful installation:
 
 ```console
-# kubectl get application -A
+# oc get application -A
 NAMESPACE          NAME                      SYNC STATUS   HEALTH STATUS
 openshift-gitops   cp4waiops                 Synced        Healthy
 openshift-gitops   in-cluster-aimanager      Synced        Healthy
@@ -819,8 +818,8 @@ openshift-gitops   in-cluster-rook-ceph      Synced        Healthy
 Wait for a while and then run the following commands to verify that all of the pods in the `cp4waiops` and `noi` namespaces are running.
 
 ```
-kubectl get pod -n cp4waiops
-kubectl get pod -n noi
+oc get pod -n cp4waiops
+oc get pod -n noi
 ```
 
 ## Troubleshooting

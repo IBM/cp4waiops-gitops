@@ -732,7 +732,7 @@ oc create secret docker-registry ibm-entitlement-key \
     --namespace=cp4waiops
 ```
 
-Where <entitlement-key> is the entitlement key that you copied in the previous step.
+Where `<entitlement-key>` is the entitlement key that you copied in the previous step.
 
 ### Installing AI Manager and Event Manager separately (CLI)
 

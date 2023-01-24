@@ -21,6 +21,8 @@
         - [Log in to Argo CD (CLI)](#log-in-to-argo-cd-cli)
         - [Grant Argo CD cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
         - [Storage considerations (CLI)](#storage-considerations-cli)
+        - [Obtain an entitlement key (CLI)](#obtain-an-entitlement-key-cli)
+        - [Update the OpenShift Container Platform global pull secret (CLI)](#update-the-openshift-container-platform-global-pull-secret-cli)
         - [Installing AI Manager and Event Manager separately (CLI)](#installing-ai-manager-and-event-manager-separately-cli)
             - [Install shared components (CLI)](#install-shared-components-cli)
             - [Install AI Manager (CLI)](#install-ai-manager-cli)
@@ -698,6 +700,40 @@ argocd app create ceph \
   --dest-namespace rook-ceph \
   --dest-server https://kubernetes.default.svc
 ```
+
+### Obtain an entitlement key (CLI)
+
+Obtain your IBM Entitled Registry key to enable your deployment to pull images from the IBM Entitled Registry.
+
+1. Obtain the entitlement key that is assigned to your IBMid. Log in to [MyIBM Container Software Library](https://myibm.ibm.com/products-services/containerlibrary) with the IBMid and password details that are associated with the entitled software.
+
+2. In the "Entitlement key" section, select "Copy key" to copy the entitlement key to the clipboard.
+
+3. Copy the entitlement key to a safe place so that you can use it later when you update the global pull secret for the cluster.
+
+4. (Optional) Verify the validity of the key by logging in to the IBM Entitled Registry.
+
+   Depending on the container system that you are using, you might need to use `docker login` instead of `podman login` for the following command.
+
+   ```sh
+   export IBM_ENTITLEMENT_KEY=the key from the previous steps
+   podman login cp.icr.io --username cp --password "${IBM_ENTITLEMENT_KEY:?}"
+   ```
+
+### Update the OpenShift Container Platform global pull secret (CLI)
+
+Run the following command to create the entitlement key pull secret:
+
+```
+oc create secret docker-registry ibm-entitlement-key \
+    --docker-username=cp \
+    --docker-password=<entitlement-key> \
+    --docker-server=cp.icr.io \
+    --namespace=cp4waiops
+```
+
+Where <entitlement-key> is the entitlement key that you copied in the previous step.
+
 ### Installing AI Manager and Event Manager separately (CLI)
 
 #### Install shared components (CLI)

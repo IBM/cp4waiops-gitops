@@ -23,11 +23,11 @@ This repository facilitates the use of OpenShift GitOps to deploy IBM Cloud Pak 
 - As an Application Developer, I want to deploy applications to IBM Cloud Paks via GitOps. (Application Deployment)
 -->
 
-![IBM Cloud Pak GitOps](./images/cpk-gitops.png)
+<!-- ![IBM Cloud Pak GitOps](./images/cpk-gitops.png) -->
 
 ## Install Cloud Pak for Watson AIOps using GitOps
 
-Please refer to the following documents and decide how you want to deploy CP4WAIOps:
+<!-- Please refer to the following documents and decide how you want to deploy CP4WAIOps:-->
 
 <!-- - [NON OFFICIA - CP4WAIOps 3.1 Online Install](how-to-deploy-cp4waiops-31.md)
 - [NON OFFICIA - CP4WAIOps 3.2 Online Install](how-to-deploy-cp4waiops-32.md)

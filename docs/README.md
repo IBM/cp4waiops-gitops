@@ -1,6 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Deploy IBM Cloud Pak for Watson AIOps using GitOps](#deploy-ibm-cloud-pak-for-watson-aiops-using-gitops)
   - [Use Cases](#use-cases)
@@ -10,7 +10,7 @@
 
 # Deploy IBM Cloud Pak for Watson AIOps using GitOps
 
-This repository facilitates the use of OpenShift GitOps to deploy IBM Cloud Pak for Watson AIOps on a Red Hat OpenShift Cluster.
+This repository facilitates the use of Red Hat OpenShift GitOps to deploy Cloud Pak for Watson AIOps on a Red Hat OpenShift cluster.
 
 ## Use Cases
 
@@ -25,7 +25,7 @@ This repository facilitates the use of OpenShift GitOps to deploy IBM Cloud Pak 
 
 <!-- ![IBM Cloud Pak GitOps](./images/cpk-gitops.png) -->
 
-## Install Cloud Pak for Watson AIOps using GitOps
+## Installing Cloud Pak for Watson AIOps using GitOps
 
 <!-- Please refer to the following documents and decide how you want to deploy CP4WAIOps:-->
 
@@ -36,7 +36,7 @@ This repository facilitates the use of OpenShift GitOps to deploy IBM Cloud Pak 
 - [TECHNICAL PREVIEW FEATURE - CP4WAIOps 3.4 Tech Preview Online Install](how-to-deploy-cp4waiops-34.md)
 - [:tada::tada::tada:GA FEATURE - CP4WAIOps 3.5 Online Install:tada::tada::tada:](how-to-deploy-cp4waiops-35.md)
 -->
-- [:tada::tada::tada:GA FEATURE - CP4WAIOps 3.6 Online Install:tada::tada::tada:](how-to-deploy-cp4waiops-36.md)
+- [:tada::tada::tada: Cloud Pak for Watson AIOps 3.6 online installation :tada::tada::tada:](how-to-deploy-cp4waiops-36.md)
 
 <!--## More Install Options for CP4WAIOps using GitOps
 

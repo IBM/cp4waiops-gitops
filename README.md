@@ -1,6 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Deploy Cloud Pak for Watson AIOps using GitOps](#deploy-cloud-pak-for-watson-aiops-using-gitops)
   - [Install CP4WAIOps using GitOps](#install-cp4waiops-using-gitops)

@@ -672,8 +672,6 @@ roleRef:
 
 You must use a supported storage provider. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.6.0?topic=requirements-storage). If your Red Hat OpenShift cluster already has a single default supported storage class, then skip this step.
 
-<!--If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)-->
-
 **Note**: Multiple default storage classes cause deployment problems. Run the following command to check your cluster's storage class.
 
 ```bash
@@ -810,40 +808,7 @@ argocd app create eventmanager-app \
   appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
   echo ${appDomain}
   ```
-<!--
-### Option 2: (**Technology preview**) Installing AI Manager and Event Manager with an all-in-one configuration (CLI)
 
-**NOTE:** This option is a technology preview, and must not be used for production systems.
-
-To install Ceph, AI Manager, and Event Manager in one go with an all-in-one configuration, run the following command.
-
-```sh
-argocd app create cp4waiops-app \
-      --sync-policy automatic \
-      --project default \
-      --repo https://github.com/IBM/cp4waiops-gitops.git \
-      --path config/all-in-one \
-      --revision release-3.6 \
-      --dest-namespace openshift-gitops \
-      --dest-server https://kubernetes.default.svc \
-      --helm-set argocd.cluster=openshift \
-      --helm-set argocd.allowLocalDeploy=true \
-      --helm-set rookceph.enabled=true \
-      --helm-set cp4waiops.version=v3.6 \
-      --helm-set cp4waiops.profile=small \
-      --helm-set cp4waiops.aiManager.enabled=true \
-      --helm-set cp4waiops.aiManager.namespace=cp4waiops \
-      --helm-set cp4waiops.aiManager.instanceName=aiops-installation \
-      --helm-set cp4waiops.eventManager.enabled=true \
-      --helm-set cp4waiops.eventManager.clusterDomain=REPLACE_IT \
-      --helm-set cp4waiops.eventManager.namespace=noi
-```
-NOTE:
-
-- `cp4waiops.profile` The profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
-- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.
-- `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
--->
 ### Verify the Cloud Pak for Watson AIOps installation (CLI)
 
 Run the following command to verify that the Cloud Pak for Watson AIOps installation was successful:

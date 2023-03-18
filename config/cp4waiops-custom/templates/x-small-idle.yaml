@@ -5,6 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
   name: aiops-custom-size-profile
+  namespace: {{ .Values.aiManager.namespace }} 
 data:
   profiles: |
     generatedFor: "NonHA"

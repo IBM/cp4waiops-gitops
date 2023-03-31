@@ -43,7 +43,7 @@ spec:
     ## A channel defines a stream of updates for an Operator and is used to roll out updates for subscribers.
     ## For example, if you want to install AI Manager 3.2, the channel should be v3.2
     ##
-    channel: v3.6
+    channel: v3.7
 
     ## size is the size that you require for your AI Manager installation. It can be small or large.
     ## More information: https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/3.2.0?topic=requirements-ai-manager

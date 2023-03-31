@@ -26,7 +26,7 @@ spec:
       source:
         path: "config/cp4waiops/install-aimgr"
         repoURL: {{ default "https://github.com/IBM/cp4waiops-gitops" .Values.cp4waiops.repoURL }}
-        targetRevision: {{ default "release-3.6" .Values.cp4waiops.targetRevision }}
+        targetRevision: {{ default "release-3.7" .Values.cp4waiops.targetRevision }}
         helm:
           parameters:
             - name: spec.aiManager.instanceName

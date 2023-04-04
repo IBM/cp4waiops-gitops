@@ -3,15 +3,15 @@
 # -----------------------------------------------------------------------------
 cephCluster:
   mon:
-    count: 3
-    allowMultiplePerNode: false
+    count: 1
+    allowMultiplePerNode: true
 
 cephFilesystem:
   metadataPool:
     replicated:
-      size: 3
-      requireSafeReplicaSize: true
+      size: 1
+      requireSafeReplicaSize: false
   dataPools:
     replicated:
-      size: 3
-      requireSafeReplicaSize: true
+      size: 1
+      requireSafeReplicaSize: false

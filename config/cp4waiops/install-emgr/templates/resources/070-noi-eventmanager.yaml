@@ -13,9 +13,6 @@ spec:
     antiAffinity: false
     imagePullPolicy: IfNotPresent
     imagePullRepository: cp.icr.io/cp/noi
-  zen:
-    serviceInstanceName: iaf-zen-cpdservice
-    serviceNamespace: ''
   serviceContinuity:
     continuousAnalyticsCorrelation: false
     isBackupDeployment: false

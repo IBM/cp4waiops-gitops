@@ -306,9 +306,9 @@ Install Event Manager by using GitOps to create an Argo CD App for Event Manager
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.storageClass: rook-cephfs  *(you must update this value to be the RWX storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
     - spec.storageClassLargeBlock: rook-cephfs  *(you must update this value to be the RWO storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
-    - spec.eventManager.version: 1.6.6
+    - spec.eventManager.version: 1.6.8
     - spec.eventManager.clusterDomain: <domain_name>
-    - spec.eventManager.channel: v1.10
+    - spec.eventManager.channel: v1.12
     - spec.eventManager.deploymentType: trial
     - spec.eventManager.namespace: noi
 
@@ -316,7 +316,7 @@ Where `<domain_name>` is the domain name of the cluster where Event Manager is i
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o yaml | yq .status.domain`
   echo ${appDomain}
   ```
 
@@ -802,8 +802,8 @@ argocd app create eventmanager-app \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
-      --helm-set spec.eventManager.channel=v1.10 \
-      --helm-set spec.eventManager.version=1.6.6 \
+      --helm-set spec.eventManager.channel=v1.12 \
+      --helm-set spec.eventManager.version=1.6.8 \
       --helm-set spec.eventManager.clusterDomain=<domain_name> \
       --helm-set spec.eventManager.deploymentType=trial
 ```
@@ -814,7 +814,7 @@ argocd app create eventmanager-app \
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
-  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o json | python -c "import json,sys;obj=json.load(sys.stdin);print obj['status']['domain'];"`
+  appDomain=`oc -n ${INGRESS_OPERATOR_NAMESPACE} get ingresscontrollers default -o yaml | yq .status.domain`
   echo ${appDomain}
   ```
 

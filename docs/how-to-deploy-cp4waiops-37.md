@@ -99,7 +99,7 @@ From the Argo CD UI, click `NEW APP`, input the following parameters, and then c
 - DESTINATION   
     - Cluster URL: https://kubernetes.default.svc  
     - Namespace: openshift-gitops  
-  
+
 After the Argo CD App `argocd` is created, select the App from the Argo CD UI to view the topology of all of the resources.
 
 ### Storage considerations
@@ -136,11 +136,11 @@ From the Argo CD UI, click `NEW APP`, input the following parameters for Ceph, a
     - Cluster URL: https://kubernetes.default.svc
     - Namespace: rook-ceph
 
-![w](images/ceph-gitops.png)
+![w](images/app-ceph.png)
 
 After the Argo CD App `ceph` is created, you can click the App from the Argo CD UI to view the topology of the Ceph resources as follows:
 
-![w](images/ceph-topo.png)
+![w](images/app-ceph2.png)
 
 The filters on the left can be used to filter out resources. Click a resource to check its logs and events.
 
@@ -220,7 +220,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 1. From the Red Hat OpenShift console, select the "Administrator" perspective, and then select "Workloads > Secrets".
 
 2. Select the project "openshift-config". <!--(for latest version ocp, the `Show default projects` switch under `Project:` need to be enabled before selecting project.)-->
- 
+
 3. Select the object "pull-secret".
 
 4. Click "Actions > Edit secret".

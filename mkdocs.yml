@@ -6,6 +6,8 @@ nav:
       - Introduction: README.md
       - v3.6 Official Support:
         - Online Install: how-to-deploy-cp4waiops-36.md
+      - v3.7 Official Support:
+        - Online Install: how-to-deploy-cp4waiops-37.md
         
 theme:
     name: material

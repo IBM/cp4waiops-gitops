@@ -8,6 +8,8 @@ nav:
         - Online Install: how-to-deploy-cp4waiops-36.md
       - v3.7 Official Support:
         - Online Install: how-to-deploy-cp4waiops-37.md
+      - v4.1 Official Support:
+        - Online Install: how-to-deploy-cp4waiops-41.md
         
 theme:
     name: material

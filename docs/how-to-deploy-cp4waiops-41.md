@@ -306,9 +306,9 @@ Install Event Manager by using GitOps to create an Argo CD App for Event Manager
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.storageClass: rook-cephfs  *(you must update this value to be the RWX storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
     - spec.storageClassLargeBlock: rook-cephfs  *(you must update this value to be the RWO storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
-    - spec.eventManager.version: 1.6.8
+    - spec.eventManager.version: 1.6.9
     - spec.eventManager.clusterDomain: <domain_name>
-    - spec.eventManager.channel: v1.12
+    - spec.eventManager.channel: v1.13
     - spec.eventManager.deploymentType: trial
     - spec.eventManager.namespace: noi
 
@@ -377,12 +377,12 @@ The all-in-one configuration enables a custom build of Cloud Pak for Watson AIOp
 
 Use the installation parameters listed in following table when you create the Argo CD App.
 
-| Parameter                           | Type   | Default Value                             | Description 
-| ----------------------------------- |--------|-------------------------------------------|-----------------------------------
-| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.
-| cp4waiops.aiManager.channel         | string | v4.1                                      | The subscription channel for AI Manager.
-| cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.
-| cp4waiops.eventManager.channel      | string | v1.10                                     | The subscription channel for Event Manager.
+| Parameter                           | Type   | Default Value                             | Description |
+| ----------------------------------- |--------|-------------------------------------------|-----------------------------------|
+| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.|
+| cp4waiops.aiManager.channel         | string | v4.1                                      | The subscription channel for AI Manager.|
+| cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.|
+| cp4waiops.eventManager.channel      | string | v1.13                                     | The subscription channel for Event Manager.|
 
 These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form.
 
@@ -400,13 +400,13 @@ cp4waiops:
 
 The all-in-one configuration also exposes some more installation parameters that are not visible from the UI that enable further customization of the installation. The following table lists some of these parameters. To find out more about the usage of these parameters, see [Cloud Pak for Watson AIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
 
-| Parameter                             | Type   | Default Value | Description 
-| ------------------------------------- |--------|---------------|-----------------------------------
-| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.
-| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.
-| cp4waiops.eventManager.version        | string | 1.6.6         | The version of Event Manager.
-| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.
-| globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.
+| Parameter                             | Type   | Default Value | Description |
+| ------------------------------------- |--------|---------------|-----------------------------------|
+| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.|
+| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.|
+| cp4waiops.eventManager.version        | string | 1.6.9         | The version of Event Manager.|
+| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.|
+| globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.|
 
 For example, if the custom build to be installed includes images from registries other than the official IBM Entitled Registry, you can use `globalImagePullSecrets` to specify all the necessary information to access these registries, such as registry URL, username, and password.
 
@@ -802,8 +802,8 @@ argocd app create eventmanager-app \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
-      --helm-set spec.eventManager.channel=v1.12 \
-      --helm-set spec.eventManager.version=1.6.8 \
+      --helm-set spec.eventManager.channel=v1.13 \
+      --helm-set spec.eventManager.version=1.6.9 \
       --helm-set spec.eventManager.clusterDomain=<domain_name> \
       --helm-set spec.eventManager.deploymentType=trial
 ```

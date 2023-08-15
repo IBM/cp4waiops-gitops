@@ -2,38 +2,38 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy IBM Cloud Pak for Watson AIOps 4.1 using GitOps](#deploy-cloud-pak-for-watson-aiops-36-using-gitops)
-    - [Prerequisites](#prerequisites)
-    - [Installing Cloud Pak for Watson AIOps with the Argo CD UI](#installing-cloud-pak-for-watson-aiops-with-the-argo-cd-ui)
-        - [Log in to Argo CD](#log-in-to-argo-cd)
-        - [Grant Argo CD cluster admin permission](#grant-argo-cd-cluster-admin-permission)
-        - [Configure Argo CD](#configure-argo-cd)
-        - [Storage considerations](#storage-considerations)
-        - [Obtain an entitlement key](#obtain-an-entitlement-key)
-        - [Update the OpenShift Container Platform global pull secret](#update-the-openshift-container-platform-global-pull-secret)
-        - [Installing AI Manager and Event Manager separately](#installing-ai-manager-and-event-manager-separately)
-            - [Install shared components](#install-shared-components)
-            - [Install AI Manager](#install-ai-manager)
-            - [Install Event Manager](#install-event-manager)
-        - [Verify the Cloud Pak for Watson AIOps installation](#verify-the-cloud-pak-for-watson-aiops-installation)
-        - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
-    - [Installing Cloud Pak for Watson AIOps from the command line](#installing-cloud-pak-for-watson-aiops-from-the-command-line)
-        - [Log in to Argo CD (CLI)](#log-in-to-argo-cd-cli)
-        - [Grant Argo CD cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
-        - [Storage considerations (CLI)](#storage-considerations-cli)
-        - [Obtain an entitlement key (CLI)](#obtain-an-entitlement-key-cli)
-        - [Update the OpenShift Container Platform global pull secret (CLI)](#update-the-openshift-container-platform-global-pull-secret-cli)
-        - [Installing AI Manager and Event Manager separately (CLI)](#installing-ai-manager-and-event-manager-separately-cli)
-            - [Install shared components (CLI)](#install-shared-components-cli)
-            - [Install AI Manager (CLI)](#install-ai-manager-cli)
-            - [Install Event Manager (CLI)](#install-event-manager-cli)
-        - [Verify the Cloud Pak for Watson AIOps installation (CLI)](#verify-the-cloud-pak-for-watson-aiops-installation-cli)
-        - [Access Cloud Pak for Watson AIOps (CLI)](#access-cloud-pak-for-watson-aiops-cli)
-    - [Troubleshooting](#troubleshooting)
-        - [Storage](#storage)
-            - [Problem](#problem)
-            - [Cause](#cause)
-            - [Solution](#solution)
+- [Deploy IBM Cloud Pak for Watson AIOps 4.1 using GitOps](#deploy-ibm-cloud-pak-for-watson-aiops-41-using-gitops)
+  - [Prerequisites](#prerequisites)
+  - [Installing Cloud Pak for Watson AIOps with the Argo CD UI](#installing-cloud-pak-for-watson-aiops-with-the-argo-cd-ui)
+    - [Log in to Argo CD](#log-in-to-argo-cd)
+    - [Grant Argo CD cluster admin permission](#grant-argo-cd-cluster-admin-permission)
+    - [Configure Argo CD](#configure-argo-cd)
+    - [Storage considerations](#storage-considerations)
+    - [Obtain an entitlement key](#obtain-an-entitlement-key)
+    - [Update the OpenShift Container Platform global pull secret](#update-the-openshift-container-platform-global-pull-secret)
+    - [Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately](#installing-ibm-cloud-pak-for-watson-aiops-and-ibm-netcool-operations-insight-separately)
+      - [Install shared components](#install-shared-components)
+      - [Install IBM Cloud Pak for Watson AIOps](#install-ibm-cloud-pak-for-watson-aiops)
+      - [Install IBM Netcool Operations Insight](#install-ibm-netcool-operations-insight)
+    - [Verify the Cloud Pak for Watson AIOps installation](#verify-the-cloud-pak-for-watson-aiops-installation)
+    - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
+  - [Installing Cloud Pak for Watson AIOps from the command line](#installing-cloud-pak-for-watson-aiops-from-the-command-line)
+    - [Log in to Argo CD (CLI)](#log-in-to-argo-cd-cli)
+      - [Grant Argo CD cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
+    - [Storage considerations (CLI)](#storage-considerations-cli)
+    - [Obtain an entitlement key (CLI)](#obtain-an-entitlement-key-cli)
+    - [Update the OpenShift Container Platform global pull secret (CLI)](#update-the-openshift-container-platform-global-pull-secret-cli)
+    - [Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately (CLI)](#installing-ibm-cloud-pak-for-watson-aiops-and-ibm-netcool-operations-insight-separately-cli)
+      - [Install shared components (CLI)](#install-shared-components-cli)
+      - [Install IBM Cloud Pak for Watson AIOps (CLI)](#install-ibm-cloud-pak-for-watson-aiops-cli)
+      - [Install IBM Netcool Operations Insight (CLI)](#install-ibm-netcool-operations-insight-cli)
+    - [Verify the Cloud Pak for Watson AIOps installation (CLI)](#verify-the-cloud-pak-for-watson-aiops-installation-cli)
+    - [Access Cloud Pak for Watson AIOps (CLI)](#access-cloud-pak-for-watson-aiops-cli)
+  - [Troubleshooting](#troubleshooting)
+    - [Storage](#storage)
+      - [Problem](#problem)
+      - [Cause](#cause)
+      - [Solution](#solution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,9 +49,9 @@ For more information about Argo, see the [Argo documentation](https://argo-cd.re
 
 <!--You can choose from two deployment options:
 
-Option 1: Install AI Manager and Event Manager separately
+Option 1: Install IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately
 
-Option 2: Install AI Manager and Event Manager with an all-in-one configuration (**Technology preview**) -->
+Option 2: Install IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with an all-in-one configuration (**Technology preview**) -->
 
 ## Prerequisites
 
@@ -238,7 +238,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 
 For more information, see [Update the OpenShift Container Platform global pull secret](https://docs.openshift.com/container-platform/4.10/openshift_images/managing_images/using-image-pull-secrets.html) in the Red Hat OpenShift documentation.
 
-### Installing AI Manager and Event Manager separately
+### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately
 
 #### Install shared components
 
@@ -259,9 +259,9 @@ For more information, see [Update the OpenShift Container Platform global pull s
     - spec.catalogNamespace: openshift-marketplace
 
 
-#### Install AI Manager
+#### Install IBM Cloud Pak for Watson AIOps
 
-Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The parameters for AI Manager are as follows:
+Install IBM Cloud Pak for Watson AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for Watson AIOps. The parameters for IBM Cloud Pak for Watson AIOps are as follows:
 
 - GENERAL
     - Application Name: anyname (for example: "aimanager-app")
@@ -287,9 +287,9 @@ Install AI Manager by using GitOps to create an Argo CD App for AI Manager. The 
 
 NOTE: If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
-#### Install Event Manager
+#### Install IBM Netcool Operations Insight
 
-Install Event Manager by using GitOps to create an Argo CD App for Event Manager. The parameters for Event Manager are as follows:
+Install IBM Netcool Operations Insight by using GitOps to create an Argo CD App for IBM Netcool Operations Insight. The parameters for IBM Netcool Operations Insight are as follows:
 
 - GENERAL
     - Application Name: anyname (for example: "eventmanager-app")
@@ -312,7 +312,7 @@ Install Event Manager by using GitOps to create an Argo CD App for Event Manager
     - spec.eventManager.deploymentType: trial
     - spec.eventManager.namespace: noi
 
-Where `<domain_name>` is the domain name of the cluster where Event Manager is installed. You must use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can retrieve the FQDN by running the following command:
+Where `<domain_name>` is the domain name of the cluster where IBM Netcool Operations Insight is installed. You must use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can retrieve the FQDN by running the following command:
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator
@@ -323,17 +323,17 @@ Where `<domain_name>` is the domain name of the cluster where Event Manager is i
 **Note**:
 - If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
-<!--### Option 2: (**Technology preview**) Installing AI Manager and Event Manager with an all-in-one configuration 
+<!--### Option 2: (**Technology preview**) Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with an all-in-one configuration 
 
 **NOTE:** This option is a technology preview, and must not be used for production systems.
 
-#### Installing AI Manager and Event Manager together
+#### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight together
 
 The all-in-one configuration enables the installation of the following components in one go.
 
 - Ceph storage (optional)
-- AI Manager
-- Event Manager
+- IBM Cloud Pak for Watson AIOps
+- IBM Netcool Operations Insight
 
 When you create the Argo CD app, complete the form with the following values.
 
@@ -357,18 +357,18 @@ You can also update the following parameters to customize the installation.
 | rookceph.enabled                      | bool   | true               | Specify whether to install Ceph as storage used by Cloud Pak for Watson AIOps.
 | cp4waiops.version                     | string | v4.1               | Specify the version of Cloud Pak for Watson AIOps v4.1.
 | cp4waiops.profile                     | string | small              | The Cloud Pak for Watson AIOps deployment profile: x-small, small, or large.
-| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install AI Manager.
-| cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where AI Manager is installed.
-| cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of AI Manager.
-| cp4waiops.eventManager.enabled        | bool   | true               | Specify whether to install Event Manager.
-| cp4waiops.eventManager.namespace      | string | noi                | The namespace where Event Manager is installed.
-| cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where Event Manager is installed.
+| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install IBM Cloud Pak for Watson AIOps.
+| cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where IBM Cloud Pak for Watson AIOps is installed.
+| cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of IBM Cloud Pak for Watson AIOps.
+| cp4waiops.eventManager.enabled        | bool   | true               | Specify whether to install IBM Netcool Operations Insight.
+| cp4waiops.eventManager.namespace      | string | noi                | The namespace where IBM Netcool Operations Insight is installed.
+| cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where IBM Netcool Operations Insight is installed.
 
 NOTE:
 
 - `cp4waiops.profile` The profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
-- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of AI Manager, and not for deployments of AI Manager and Event Manager.
-- `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
+- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of IBM Cloud Pak for Watson AIOps, and not for deployments of IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight.
+- `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where IBM Netcool Operations Insight is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 -->
 <!--
 #### Installing Cloud Pak for Watson AIOps using a custom build
@@ -379,14 +379,14 @@ Use the installation parameters listed in following table when you create the Ar
 
 | Parameter                           | Type   | Default Value                             | Description |
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------|
-| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for AI Manager.|
-| cp4waiops.aiManager.channel         | string | v4.1                                      | The subscription channel for AI Manager.|
-| cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for Event Manager.|
-| cp4waiops.eventManager.channel      | string | v1.13                                     | The subscription channel for Event Manager.|
+| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Cloud Pak for Watson AIOps.|
+| cp4waiops.aiManager.channel         | string | v4.1                                      | The subscription channel for IBM Cloud Pak for Watson AIOps.|
+| cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Netcool Operations Insight.|
+| cp4waiops.eventManager.channel      | string | v1.13                                     | The subscription channel for IBM Netcool Operations Insight.|
 
 These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form.
 
-For example, adding the following YAML snippet to the `HELM` > `VALUES` field installs AI Manager and Event Manager with a custom `imageCatalog` and `channel`:
+For example, adding the following YAML snippet to the `HELM` > `VALUES` field installs IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with a custom `imageCatalog` and `channel`:
 
 ```yaml
 cp4waiops:
@@ -404,8 +404,8 @@ The all-in-one configuration also exposes some more installation parameters that
 | ------------------------------------- |--------|---------------|-----------------------------------|
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.|
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.|
-| cp4waiops.eventManager.version        | string | 1.6.9         | The version of Event Manager.|
-| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of Event Manager, valid values include: trial, production.|
+| cp4waiops.eventManager.version        | string | 1.6.9         | The version of IBM Netcool Operations Insight.|
+| cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of IBM Netcool Operations Insight, valid values include: trial, production.|
 | globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.|
 
 For example, if the custom build to be installed includes images from registries other than the official IBM Entitled Registry, you can use `globalImagePullSecrets` to specify all the necessary information to access these registries, such as registry URL, username, and password.
@@ -436,7 +436,7 @@ You can check the topology of Cloud Pak for Watson AIOps from the Argo CD UI as 
 
 ![w](images/eventmanager-33.png)
 
-You can also check your Cloud Pak for Watson AIOps installation from the command line. For example, to check the AI Manager pods, run the following command:
+You can also check your Cloud Pak for Watson AIOps installation from the command line. For example, to check the IBM Cloud Pak for Watson AIOps pods, run the following command:
 
 ```console
 # oc get po -n cp4waiops
@@ -741,7 +741,7 @@ oc create secret docker-registry ibm-entitlement-key \
 
 Where `<entitlement-key>` is the entitlement key that you copied in the previous step.
 
-### Installing AI Manager and Event Manager separately (CLI)
+### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately (CLI)
 
 #### Install shared components (CLI)
 
@@ -759,9 +759,9 @@ argocd app create cp-shared \
       --helm-set spec.catalogNamespace=openshift-marketplace
 ```
 
-#### Install AI Manager (CLI)
+#### Install IBM Cloud Pak for Watson AIOps (CLI)
 
-Run the following command to install AI Manager by using GitOps to create an Argo CD App for AI Manager.
+Run the following command to install IBM Cloud Pak for Watson AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for Watson AIOps.
 
 ```sh
 argocd app create aimanager-app \
@@ -785,9 +785,9 @@ argocd app create aimanager-app \
 
 **Important**: You must update the values of spec.storageClass and storageClassLargeBlock to be the RWX and RWO storage classes that are being used in your environment. You can find this by running the command `oc get sc`.
 
-#### Install Event Manager (CLI)
+#### Install IBM Netcool Operations Insight (CLI)
 
-Run the following command to install Event Manager by using GitOps to create an Argo CD App for Event Manager.
+Run the following command to install IBM Netcool Operations Insight by using GitOps to create an Argo CD App for IBM Netcool Operations Insight.
 
 ```sh
 argocd app create eventmanager-app \
@@ -810,7 +810,7 @@ argocd app create eventmanager-app \
 
 **Important**:
 - You must update the values of spec.storageClass and storageClassLargeBlock to be the RWX and RWO storage classes that are being used in your environment. You can find this by running the command `oc get sc`.
-- `<domain_name>` must be the domain name of the cluster where Event Manager is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can also retrieve the FDQN by running the following command:
+- `<domain_name>` must be the domain name of the cluster where IBM Netcool Operations Insight is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`. You can also retrieve the FDQN by running the following command:
 
   ```bash
   INGRESS_OPERATOR_NAMESPACE=openshift-ingress-operator

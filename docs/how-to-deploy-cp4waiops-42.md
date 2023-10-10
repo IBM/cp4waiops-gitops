@@ -306,9 +306,9 @@ Install IBM Netcool Operations Insight by using GitOps to create an Argo CD App 
     - spec.imageCatalog: icr.io/cpopen/ibm-operator-catalog:latest
     - spec.storageClass: rook-cephfs  *(you must update this value to be the RWX storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
     - spec.storageClassLargeBlock: rook-cephfs  *(you must update this value to be the RWO storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
-    - spec.eventManager.version: 1.6.9
+    - spec.eventManager.version: 1.6.10
     - spec.eventManager.clusterDomain: <domain_name>
-    - spec.eventManager.channel: v1.13
+    - spec.eventManager.channel: v1.14
     - spec.eventManager.deploymentType: trial
     - spec.eventManager.namespace: noi
 
@@ -382,7 +382,7 @@ Use the installation parameters listed in following table when you create the Ar
 | cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Cloud Pak for Watson AIOps.|
 | cp4waiops.aiManager.channel         | string | v4.2                                      | The subscription channel for IBM Cloud Pak for Watson AIOps.|
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Netcool Operations Insight.|
-| cp4waiops.eventManager.channel      | string | v1.13                                     | The subscription channel for IBM Netcool Operations Insight.|
+| cp4waiops.eventManager.channel      | string | v1.14                                     | The subscription channel for IBM Netcool Operations Insight.|
 
 These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form.
 
@@ -404,7 +404,7 @@ The all-in-one configuration also exposes some more installation parameters that
 | ------------------------------------- |--------|---------------|-----------------------------------|
 | cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.|
 | cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.|
-| cp4waiops.eventManager.version        | string | 1.6.9         | The version of IBM Netcool Operations Insight.|
+| cp4waiops.eventManager.version        | string | 1.6.10         | The version of IBM Netcool Operations Insight.|
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of IBM Netcool Operations Insight, valid values include: trial, production.|
 | globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.|
 
@@ -802,8 +802,8 @@ argocd app create eventmanager-app \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.eventManager.namespace=noi \
-      --helm-set spec.eventManager.channel=v1.13 \
-      --helm-set spec.eventManager.version=1.6.9 \
+      --helm-set spec.eventManager.channel=v1.14 \
+      --helm-set spec.eventManager.version=1.6.10 \
       --helm-set spec.eventManager.clusterDomain=<domain_name> \
       --helm-set spec.eventManager.deploymentType=trial
 ```

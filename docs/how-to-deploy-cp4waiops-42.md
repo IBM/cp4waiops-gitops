@@ -56,7 +56,7 @@ Option 2: Install IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insi
 ## Prerequisites
 
 - Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.2.0?topic=planning-system-requirements).
-- You must have Red Hat OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
+- You must have Red Hat OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.12/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
 
 ## Installing Cloud Pak for Watson AIOps with the Argo CD UI
 

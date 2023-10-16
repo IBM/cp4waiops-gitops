@@ -2,33 +2,33 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy IBM Cloud Pak for Watson AIOps 4.2 using GitOps](#deploy-ibm-cloud-pak-for-watson-aiops-42-using-gitops)
+- [Deploy IBM Cloud Pak for AIOps 4.2 using GitOps](#deploy-ibm-cloud-pak-for-aiops-42-using-gitops)
   - [Prerequisites](#prerequisites)
-  - [Installing Cloud Pak for Watson AIOps with the Argo CD UI](#installing-cloud-pak-for-watson-aiops-with-the-argo-cd-ui)
+  - [Installing Cloud Pak for AIOps with the Argo CD UI](#installing-cloud-pak-for-aiops-with-the-argo-cd-ui)
     - [Log in to Argo CD](#log-in-to-argo-cd)
     - [Grant Argo CD cluster admin permission](#grant-argo-cd-cluster-admin-permission)
     - [Configure Argo CD](#configure-argo-cd)
     - [Storage considerations](#storage-considerations)
     - [Obtain an entitlement key](#obtain-an-entitlement-key)
     - [Update the OpenShift Container Platform global pull secret](#update-the-openshift-container-platform-global-pull-secret)
-    - [Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately](#installing-ibm-cloud-pak-for-watson-aiops-and-ibm-netcool-operations-insight-separately)
+    - [Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately](#installing-ibm-cloud-pak-for-aiops-and-ibm-netcool-operations-insight-separately)
       - [Install shared components](#install-shared-components)
-      - [Install IBM Cloud Pak for Watson AIOps](#install-ibm-cloud-pak-for-watson-aiops)
+      - [Install IBM Cloud Pak for AIOps](#install-ibm-cloud-pak-for-aiops)
       - [Install IBM Netcool Operations Insight](#install-ibm-netcool-operations-insight)
-    - [Verify the Cloud Pak for Watson AIOps installation](#verify-the-cloud-pak-for-watson-aiops-installation)
-    - [Access Cloud Pak for Watson AIOps](#access-cloud-pak-for-watson-aiops)
-  - [Installing Cloud Pak for Watson AIOps from the command line](#installing-cloud-pak-for-watson-aiops-from-the-command-line)
+    - [Verify the Cloud Pak for AIOps installation](#verify-the-cloud-pak-for-aiops-installation)
+    - [Access Cloud Pak for AIOps](#access-cloud-pak-for-aiops)
+  - [Installing Cloud Pak for AIOps from the command line](#installing-cloud-pak-for-aiops-from-the-command-line)
     - [Log in to Argo CD (CLI)](#log-in-to-argo-cd-cli)
       - [Grant Argo CD cluster admin permission (CLI)](#grant-argo-cd-cluster-admin-permission-cli)
     - [Storage considerations (CLI)](#storage-considerations-cli)
     - [Obtain an entitlement key (CLI)](#obtain-an-entitlement-key-cli)
     - [Update the OpenShift Container Platform global pull secret (CLI)](#update-the-openshift-container-platform-global-pull-secret-cli)
-    - [Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately (CLI)](#installing-ibm-cloud-pak-for-watson-aiops-and-ibm-netcool-operations-insight-separately-cli)
+    - [Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately (CLI)](#installing-ibm-cloud-pak-for-aiops-and-ibm-netcool-operations-insight-separately-cli)
       - [Install shared components (CLI)](#install-shared-components-cli)
-      - [Install IBM Cloud Pak for Watson AIOps (CLI)](#install-ibm-cloud-pak-for-watson-aiops-cli)
+      - [Install IBM Cloud Pak for AIOps (CLI)](#install-ibm-cloud-pak-for-aiops-cli)
       - [Install IBM Netcool Operations Insight (CLI)](#install-ibm-netcool-operations-insight-cli)
-    - [Verify the Cloud Pak for Watson AIOps installation (CLI)](#verify-the-cloud-pak-for-watson-aiops-installation-cli)
-    - [Access Cloud Pak for Watson AIOps (CLI)](#access-cloud-pak-for-watson-aiops-cli)
+    - [Verify the Cloud Pak for AIOps installation (CLI)](#verify-the-cloud-pak-for-aiops-installation-cli)
+    - [Access Cloud Pak for AIOps (CLI)](#access-cloud-pak-for-aiops-cli)
   - [Troubleshooting](#troubleshooting)
     - [Storage](#storage)
       - [Problem](#problem)
@@ -37,11 +37,11 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy IBM Cloud Pak for Watson AIOps 4.2 using GitOps
+# Deploy IBM Cloud Pak for AIOps 4.2 using GitOps
 
-**Using GitOps to install Cloud Pak for Watson AIOps 4.2 is a GA feature!**
+**Using GitOps to install Cloud Pak for AIOps 4.2 is a GA feature!**
 
-The use of GitOps enables IBM Cloud Pak for Watson AIOps to be deployed on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool. Cloud Pak for Watson AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line (CLI).
+The use of GitOps enables IBM Cloud Pak for AIOps to be deployed on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool. Cloud Pak for AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line (CLI).
 
 For more information about GitOps, see [Understanding OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html#understanding-openshift-gitops) in the Red Hat OpenShift documentation.
 
@@ -49,16 +49,16 @@ For more information about Argo, see the [Argo documentation](https://argo-cd.re
 
 <!--You can choose from two deployment options:
 
-Option 1: Install IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately
+Option 1: Install IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately
 
-Option 2: Install IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with an all-in-one configuration (**Technology preview**) -->
+Option 2: Install IBM Cloud Pak for AIOps and IBM Netcool Operations Insight with an all-in-one configuration (**Technology preview**) -->
 
 ## Prerequisites
 
 - Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.2.0?topic=planning-system-requirements).
 - You must have Red Hat OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.12/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
 
-## Installing Cloud Pak for Watson AIOps with the Argo CD UI
+## Installing Cloud Pak for AIOps with the Argo CD UI
 
 ### Log in to Argo CD
 
@@ -238,7 +238,7 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 
 For more information, see [Update the OpenShift Container Platform global pull secret](https://docs.openshift.com/container-platform/4.10/openshift_images/managing_images/using-image-pull-secrets.html) in the Red Hat OpenShift documentation.
 
-### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately
+### Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately
 
 #### Install shared components
 
@@ -259,9 +259,9 @@ For more information, see [Update the OpenShift Container Platform global pull s
     - spec.catalogNamespace: openshift-marketplace
 
 
-#### Install IBM Cloud Pak for Watson AIOps
+#### Install IBM Cloud Pak for AIOps
 
-Install IBM Cloud Pak for Watson AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for Watson AIOps. The parameters for IBM Cloud Pak for Watson AIOps are as follows:
+Install IBM Cloud Pak for AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for AIOps. The parameters for IBM Cloud Pak for AIOps are as follows:
 
 - GENERAL
     - Application Name: anyname (for example: "aimanager-app")
@@ -285,7 +285,7 @@ Install IBM Cloud Pak for Watson AIOps by using GitOps to create an Argo CD App 
     - spec.aiManager.pakModules.aiManager.enabled: true
     - spec.aiManager.pakModules.connection.enabled: true
 
-NOTE: If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
+NOTE: If you use a repository that is forked from the official [Cloud Pak for AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
 #### Install IBM Netcool Operations Insight
 
@@ -321,18 +321,18 @@ Where `<domain_name>` is the domain name of the cluster where IBM Netcool Operat
   ```
 
 **Note**:
-- If you use a repository that is forked from the official [Cloud Pak for Watson AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
+- If you use a repository that is forked from the official [Cloud Pak for AIOps GitOps repository](https://github.com/IBM/cp4waiops-gitops) or a different branch, then you must update the values of the `Repository URL` and `Revision` parameters to match your repository and branch. For example, if you use `https://github.com/<myaccount>/cp4waiops-gitops` and `dev` branch, then these two parameters must be changed.
 
-<!--### Option 2: (**Technology preview**) Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with an all-in-one configuration 
+<!--### Option 2: (**Technology preview**) Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight with an all-in-one configuration 
 
 **NOTE:** This option is a technology preview, and must not be used for production systems.
 
-#### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight together
+#### Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight together
 
 The all-in-one configuration enables the installation of the following components in one go.
 
 - Ceph storage (optional)
-- IBM Cloud Pak for Watson AIOps
+- IBM Cloud Pak for AIOps
 - IBM Netcool Operations Insight
 
 When you create the Argo CD app, complete the form with the following values.
@@ -354,12 +354,12 @@ You can also update the following parameters to customize the installation.
 | ------------------------------------- |--------|--------------------|-------------
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on.Valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
-| rookceph.enabled                      | bool   | true               | Specify whether to install Ceph as storage used by Cloud Pak for Watson AIOps.
-| cp4waiops.version                     | string | v4.2               | Specify the version of Cloud Pak for Watson AIOps v4.2.
-| cp4waiops.profile                     | string | small              | The Cloud Pak for Watson AIOps deployment profile: x-small, small, or large.
-| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install IBM Cloud Pak for Watson AIOps.
-| cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where IBM Cloud Pak for Watson AIOps is installed.
-| cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of IBM Cloud Pak for Watson AIOps.
+| rookceph.enabled                      | bool   | true               | Specify whether to install Ceph as storage used by Cloud Pak for AIOps.
+| cp4waiops.version                     | string | v4.2               | Specify the version of Cloud Pak for AIOps v4.2.
+| cp4waiops.profile                     | string | small              | The Cloud Pak for AIOps deployment profile: x-small, small, or large.
+| cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install IBM Cloud Pak for AIOps.
+| cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where IBM Cloud Pak for AIOps is installed.
+| cp4waiops.aiManager.instanceName      | string | aiops-installation | The instance name of IBM Cloud Pak for AIOps.
 | cp4waiops.eventManager.enabled        | bool   | true               | Specify whether to install IBM Netcool Operations Insight.
 | cp4waiops.eventManager.namespace      | string | noi                | The namespace where IBM Netcool Operations Insight is installed.
 | cp4waiops.eventManager.clusterDomain  | string | REPLACE_IT         | The domain name of the cluster where IBM Netcool Operations Insight is installed.
@@ -367,26 +367,26 @@ You can also update the following parameters to customize the installation.
 NOTE:
 
 - `cp4waiops.profile` The profile `x-small` is only suitable for demonstrations and proof-of-concept deployments. Production environments must use a `small` or `large` profile.
-- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of IBM Cloud Pak for Watson AIOps, and not for deployments of IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight.
+- `cp4waiops.eventManager.enabled` This must be false if you have a value of `x-small` for `cp4waiops.profile`, as this profile size is only suitable for deployments of IBM Cloud Pak for AIOps, and not for deployments of IBM Cloud Pak for AIOps and IBM Netcool Operations Insight.
 - `cp4waiops.eventManager.clusterDomain` This is the domain name of the cluster where IBM Netcool Operations Insight is installed. Use a fully qualified domain name (FQDN). For example, `apps.clustername.abc.xyz.com`.
 -->
 <!--
-#### Installing Cloud Pak for Watson AIOps using a custom build
+#### Installing Cloud Pak for AIOps using a custom build
 
-The all-in-one configuration enables a custom build of Cloud Pak for Watson AIOps to be installed by providing a specific image catalog and channel.
+The all-in-one configuration enables a custom build of Cloud Pak for AIOps to be installed by providing a specific image catalog and channel.
 
 Use the installation parameters listed in following table when you create the Argo CD App.
 
 | Parameter                           | Type   | Default Value                             | Description |
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------|
-| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Cloud Pak for Watson AIOps.|
-| cp4waiops.aiManager.channel         | string | v4.2                                      | The subscription channel for IBM Cloud Pak for Watson AIOps.|
+| cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Cloud Pak for AIOps.|
+| cp4waiops.aiManager.channel         | string | v4.2                                      | The subscription channel for IBM Cloud Pak for AIOps.|
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Netcool Operations Insight.|
 | cp4waiops.eventManager.channel      | string | v1.14                                     | The subscription channel for IBM Netcool Operations Insight.|
 
 These parameters are invisible when you create the Argo CD App from the UI, but you can add them in the `HELM` > `VALUES` field when you are completing the form.
 
-For example, adding the following YAML snippet to the `HELM` > `VALUES` field installs IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight with a custom `imageCatalog` and `channel`:
+For example, adding the following YAML snippet to the `HELM` > `VALUES` field installs IBM Cloud Pak for AIOps and IBM Netcool Operations Insight with a custom `imageCatalog` and `channel`:
 
 ```yaml
 cp4waiops:
@@ -398,12 +398,12 @@ cp4waiops:
     channel: <my_custom_channel_for_event_manager>
 ```
 
-The all-in-one configuration also exposes some more installation parameters that are not visible from the UI that enable further customization of the installation. The following table lists some of these parameters. To find out more about the usage of these parameters, see [Cloud Pak for Watson AIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
+The all-in-one configuration also exposes some more installation parameters that are not visible from the UI that enable further customization of the installation. The following table lists some of these parameters. To find out more about the usage of these parameters, see [Cloud Pak for AIOps Customized Install Options Using GitOps](./cp4waiops-custom-install.md).
 
 | Parameter                             | Type   | Default Value | Description |
 | ------------------------------------- |--------|---------------|-----------------------------------|
-| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for Watson AIOps to use.|
-| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for Watson AIOps to use.|
+| cp4waiops.storageClass                | string | rook-cephfs   | The storage class for Cloud Pak for AIOps to use.|
+| cp4waiops.storageClassLargeBlock      | string | rook-cephfs   | The storage class for large block for Cloud Pak for AIOps to use.|
 | cp4waiops.eventManager.version        | string | 1.6.10         | The version of IBM Netcool Operations Insight.|
 | cp4waiops.eventManager.deploymentType | string | trial         | The deployment type of IBM Netcool Operations Insight, valid values include: trial, production.|
 | globalImagePullSecrets                | array  | n/a           | A list of registry secrets that are needed for pulling images during the installation.|
@@ -422,21 +422,21 @@ globalImagePullSecrets:
   password: <password_to_registry_2>
 ```
 -->
-### Verify the Cloud Pak for Watson AIOps installation
+### Verify the Cloud Pak for AIOps installation
 
-When Ceph and Cloud Pak for Watson AIOps are ready, you can see these Apps with a status of `Healthy` and `Synced` in the Argo CD UI.
+When Ceph and Cloud Pak for AIOps are ready, you can see these Apps with a status of `Healthy` and `Synced` in the Argo CD UI.
 
 ![w](images/all-in-one-apps.png)
 
 ![w](images/application-sets.png)
 
-You can check the topology of Cloud Pak for Watson AIOps from the Argo CD UI as follows:
+You can check the topology of Cloud Pak for AIOps from the Argo CD UI as follows:
 
 ![w](images/aimanager-33.png)
 
 ![w](images/eventmanager-33.png)
 
-You can also check your Cloud Pak for Watson AIOps installation from the command line. For example, to check the IBM Cloud Pak for Watson AIOps pods, run the following command:
+You can also check your Cloud Pak for AIOps installation from the command line. For example, to check the IBM Cloud Pak for AIOps pods, run the following command:
 
 ```console
 # oc get po -n cp4waiops
@@ -607,9 +607,9 @@ zen-watcher-9f8b6c975-tlvcc                                       1/1     Runnin
 
 If any pods are in an error state, you can check the logs from the Argo CD UI, or you can run `oc logs` from the command line.
 
-### Access Cloud Pak for Watson AIOps
+### Access Cloud Pak for AIOps
 
-If all of the pods for Cloud Pak for Watson AIOps are up and running, then you can log in to the Cloud Pak for Watson AIOps UI as follows.
+If all of the pods for Cloud Pak for AIOps are up and running, then you can log in to the Cloud Pak for AIOps UI as follows.
 
 Log in to the Red Hat OpenShift console, and then click the drop-down menu on the upper right.
 
@@ -623,17 +623,17 @@ Log in to `IBM Cloud Pak for Administration`, click the drop-down menu on the up
 
 ![w](images/cpk-hub-ui.png)
 
-Log in to the Cloud Pak for Watson AIOps UI and then select `OpenShift authentication`.
+Log in to the Cloud Pak for AIOps UI and then select `OpenShift authentication`.
 
 ![w](images/cp4waiops.png)
 
-The Cloud Pak for Watson AIOps user interface is displayed.
+The Cloud Pak for AIOps user interface is displayed.
 
 ![w](images/cp4waiops-ui.png)
 
-Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
+Congratulations! You are ready to play with Cloud Pak for AIOps!
 
-## Installing Cloud Pak for Watson AIOps from the command line
+## Installing Cloud Pak for AIOps from the command line
 
 ### Log in to Argo CD (CLI)
 
@@ -741,7 +741,7 @@ oc create secret docker-registry ibm-entitlement-key \
 
 Where `<entitlement-key>` is the entitlement key that you copied in the previous step.
 
-### Installing IBM Cloud Pak for Watson AIOps and IBM Netcool Operations Insight separately (CLI)
+### Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately (CLI)
 
 #### Install shared components (CLI)
 
@@ -759,9 +759,9 @@ argocd app create cp-shared \
       --helm-set spec.catalogNamespace=openshift-marketplace
 ```
 
-#### Install IBM Cloud Pak for Watson AIOps (CLI)
+#### Install IBM Cloud Pak for AIOps (CLI)
 
-Run the following command to install IBM Cloud Pak for Watson AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for Watson AIOps.
+Run the following command to install IBM Cloud Pak for AIOps by using GitOps to create an Argo CD App for IBM Cloud Pak for AIOps.
 
 ```sh
 argocd app create aimanager-app \
@@ -818,9 +818,9 @@ argocd app create eventmanager-app \
   echo ${appDomain}
   ```
 
-### Verify the Cloud Pak for Watson AIOps installation (CLI)
+### Verify the Cloud Pak for AIOps installation (CLI)
 
-Run the following command to verify that the Cloud Pak for Watson AIOps installation was successful:
+Run the following command to verify that the Cloud Pak for AIOps installation was successful:
 
 ```sh
 oc get application -A
@@ -844,9 +844,9 @@ oc get pod -n cp4waiops
 oc get pod -n noi
 ```
 
-### Access Cloud Pak for Watson AIOps (CLI)
+### Access Cloud Pak for AIOps (CLI)
 
-If all of the pods for Cloud Pak for Watson AIOps are up and running, then you can log in to the Cloud Pak for Watson AIOps UI as follows.
+If all of the pods for Cloud Pak for AIOps are up and running, then you can log in to the Cloud Pak for AIOps UI as follows.
 
 Log in to the Red Hat OpenShift console, and then click the drop-down menu on the upper right.
 
@@ -860,15 +860,15 @@ Log in to `IBM Cloud Pak for Administration`, click the drop-down menu on the up
 
 ![w](images/cpk-hub-ui.png)
 
-Log in to the Cloud Pak for Watson AIOps UI and then select `OpenShift authentication`.
+Log in to the Cloud Pak for AIOps UI and then select `OpenShift authentication`.
 
 ![w](images/cp4waiops.png)
 
-The Cloud Pak for Watson AIOps user interface is displayed.
+The Cloud Pak for AIOps user interface is displayed.
 
 ![w](images/cp4waiops-ui.png)
 
-Congratulations! You are ready to play with Cloud Pak for Watson AIOps!
+Congratulations! You are ready to play with Cloud Pak for AIOps!
 
 ## Troubleshooting
 

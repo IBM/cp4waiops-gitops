@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy IBM Cloud Pak for AIOps 4.2 using GitOps](#deploy-ibm-cloud-pak-for-aiops-42-using-gitops)
+- [Deploy IBM Cloud Pak for AIOps 4.3 using GitOps](#deploy-ibm-cloud-pak-for-aiops-42-using-gitops)
   - [Prerequisites](#prerequisites)
   - [Installing Cloud Pak for AIOps with the Argo CD UI](#installing-cloud-pak-for-aiops-with-the-argo-cd-ui)
     - [Log in to Argo CD](#log-in-to-argo-cd)
@@ -37,9 +37,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Deploy IBM Cloud Pak for AIOps 4.2 using GitOps
+# Deploy IBM Cloud Pak for AIOps 4.3 using GitOps
 
-**Using GitOps to install Cloud Pak for AIOps 4.2 is a GA feature!**
+**Using GitOps to install Cloud Pak for AIOps 4.3 is a GA feature!**
 
 The use of GitOps enables IBM Cloud Pak for AIOps to be deployed on a Red Hat OpenShift Container Platform cluster from a Git repository, with the ArgoCD tool. Cloud Pak for AIOps can be installed with the Argo CD user interface (UI), or with the Argo CD command line (CLI).
 
@@ -55,7 +55,7 @@ Option 2: Install IBM Cloud Pak for AIOps and IBM Netcool Operations Insight wit
 
 ## Prerequisites
 
-- Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.2.0?topic=planning-system-requirements).
+- Ensure that you meet the supported platform, hardware, and storage requirements. For more information, see [System requirements](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.3.0?topic=planning-system-requirements).
 - You must have Red Hat OpenShift GitOps (Argo CD) installed on your Red Hat OpenShift cluster. For more information, see [Installing OpenShift GitOps](https://docs.openshift.com/container-platform/4.12/cicd/gitops/installing-openshift-gitops.html) in the Red Hat OpenShift documentation.
 
 ## Installing Cloud Pak for AIOps with the Argo CD UI
@@ -94,7 +94,7 @@ From the Argo CD UI, click `NEW APP`, input the following parameters, and then c
     - SYNC POLICY: Automatic  
 - SOURCE  
     - Repository URL : https://github.com/IBM/cp4waiops-gitops  
-    - Revision: release-4.2  
+    - Revision: release-4.3  
     - path: config/argocd/openshift  
 - DESTINATION   
     - Cluster URL: https://kubernetes.default.svc  
@@ -104,7 +104,7 @@ After the Argo CD App `argocd` is created, select the App from the Argo CD UI to
 
 ### Storage considerations
 
-You must use a supported storage provider. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.2.0?topic=requirements-storage). If your Red Hat OpenShift cluster already has a single default supported storage class, then skip this step.
+You must use a supported storage provider. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.3.0?topic=requirements-storage). If your Red Hat OpenShift cluster already has a single default supported storage class, then skip this step.
 
 <!--If you are deploying on AWS, then EFS (Amazon Elastic File System) can be used for persistent storage. For more information, see [Getting started with Amazon Elastic File System](https://docs.aws.amazon.com/efs/latest/ug/getting-started.html) in the AWS documentation. You can also refer to the [AWS EFS storage configuration example](aws-efs-config-example.md)-->
 
@@ -130,7 +130,7 @@ From the Argo CD UI, click `NEW APP`, input the following parameters for Ceph, a
     - SYNC POLICY: Automatic
 - SOURCE
     - Repository URL : https://github.com/IBM/cp4waiops-gitops
-    - Revision: release-4.2
+    - Revision: release-4.3
     - path: config/ceph
 - DESTINATION
     - Cluster URL: https://kubernetes.default.svc
@@ -248,7 +248,7 @@ For more information, see [Update the OpenShift Container Platform global pull s
     - SYNC POLICY: Automatic
 - SOURCE
     - Repository URL : https://github.com/IBM/cp4waiops-gitops
-    - Revision: release-4.2
+    - Revision: release-4.3
     - path: config/cp-shared/operators
 - DESTINATION
     - Cluster URL: https://kubernetes.default.svc
@@ -269,7 +269,7 @@ Install IBM Cloud Pak for AIOps by using GitOps to create an Argo CD App for IBM
     - SYNC POLICY: Automatic
 - SOURCE
     - Repository URL : https://github.com/IBM/cp4waiops-gitops
-    - Revision: release-4.2
+    - Revision: release-4.3
     - path: config/cp4waiops/install-aimgr
 - DESTINATION
     - Cluster URL: https://kubernetes.default.svc
@@ -277,7 +277,7 @@ Install IBM Cloud Pak for AIOps by using GitOps to create an Argo CD App for IBM
 - PARAMETERS
     - spec.storageClass: rook-cephfs  *(you must update this value to be the RWX storage class that is being used in your environment. You can find this by running the command `oc get sc`.)*
     - spec.storageClassLargeBlock: rook-cephfs  *(you must update this value to be the RWO storage that is being used in your environment. You can find this by running the command `oc get sc`.)*
-    - spec.aiManager.channel: v4.2
+    - spec.aiManager.channel: v4.3
     - spec.aiManager.size: small
     - spec.aiManager.namespace: cp4waiops
     - spec.aiManager.pakModules.aiopsFoundation.enabled: true
@@ -297,7 +297,7 @@ Install IBM Netcool Operations Insight by using GitOps to create an Argo CD App 
     - SYNC POLICY: Automatic
 - SOURCE
     - Repository URL : https://github.com/IBM/cp4waiops-gitops
-    - Revision: release-4.2
+    - Revision: release-4.3
     - path: config/cp4waiops/install-emgr
 - DESTINATION
     - Cluster URL: https://kubernetes.default.svc
@@ -343,7 +343,7 @@ When you create the Argo CD app, complete the form with the following values.
 | Project               | default                                               |
 | Sync Policy           | Automatic                                             |
 | Repository URL        | https://github.com/IBM/cp4waiops-gitops               |
-| Revision              | release-4.2                                                  |
+| Revision              | release-4.3                                                  |
 | Path                  | config/all-in-one                                     |
 | Cluster URL           | https://kubernetes.default.svc                        |
 | Namespace             | openshift-gitops                                      |
@@ -355,7 +355,7 @@ You can also update the following parameters to customize the installation.
 | argocd.cluster                        | string | openshift          | The type of the cluster that Argo CD runs on.Valid values include: openshift, kubernetes.
 | argocd.allowLocalDeploy               | bool   | true               | Allow apps to be deployed on the same cluster where Argo CD runs.
 | rookceph.enabled                      | bool   | true               | Specify whether to install Ceph as storage used by Cloud Pak for AIOps.
-| cp4waiops.version                     | string | v4.2               | Specify the version of Cloud Pak for AIOps v4.2.
+| cp4waiops.version                     | string | v4.3               | Specify the version of Cloud Pak for AIOps v4.3.
 | cp4waiops.profile                     | string | small              | The Cloud Pak for AIOps deployment profile: x-small, small, or large.
 | cp4waiops.aiManager.enabled           | bool   | true               | Specify whether to install IBM Cloud Pak for AIOps.
 | cp4waiops.aiManager.namespace         | string | cp4waiops          | The namespace where IBM Cloud Pak for AIOps is installed.
@@ -380,7 +380,7 @@ Use the installation parameters listed in following table when you create the Ar
 | Parameter                           | Type   | Default Value                             | Description |
 | ----------------------------------- |--------|-------------------------------------------|-----------------------------------|
 | cp4waiops.aiManager.imageCatalog    | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Cloud Pak for AIOps.|
-| cp4waiops.aiManager.channel         | string | v4.2                                      | The subscription channel for IBM Cloud Pak for AIOps.|
+| cp4waiops.aiManager.channel         | string | v4.3                                      | The subscription channel for IBM Cloud Pak for AIOps.|
 | cp4waiops.eventManager.imageCatalog | string | icr.io/cpopen/ibm-operator-catalog:latest | The image catalog for IBM Netcool Operations Insight.|
 | cp4waiops.eventManager.channel      | string | v1.14                                     | The subscription channel for IBM Netcool Operations Insight.|
 
@@ -679,7 +679,7 @@ roleRef:
 
 ### Storage considerations (CLI)
 
-You must use a supported storage provider. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.2.0?topic=requirements-storage). If your Red Hat OpenShift cluster already has a single default supported storage class, then skip this step.
+You must use a supported storage provider. For more information about supported storage, see [Storage Considerations](https://www.ibm.com/docs/en/cloud-paks/cloud-pak-watson-aiops/4.3.0?topic=requirements-storage). If your Red Hat OpenShift cluster already has a single default supported storage class, then skip this step.
 
 **Note**: Multiple default storage classes cause deployment problems. Run the following command to check your cluster's storage class.
 
@@ -703,7 +703,7 @@ argocd app create ceph \
   --project default \
   --repo https://github.com/IBM/cp4waiops-gitops.git \
   --path config/ceph \
-  --revision release-4.2 \
+  --revision release-4.3 \
   --dest-namespace rook-ceph \
   --dest-server https://kubernetes.default.svc
 ```
@@ -751,7 +751,7 @@ argocd app create cp-shared \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp-shared/operators \
-      --revision release-4.2 \
+      --revision release-4.3 \
       --dest-namespace openshift-marketplace \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \
@@ -769,13 +769,13 @@ argocd app create aimanager-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp4waiops/install-aimgr \
-      --revision release-4.2 \
+      --revision release-4.3 \
       --dest-namespace cp4waiops \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.storageClass=rook-cephfs \
       --helm-set spec.storageClassLargeBlock=rook-cephfs \
       --helm-set spec.aiManager.namespace=cp4waiops \
-      --helm-set spec.aiManager.channel=v4.2 \
+      --helm-set spec.aiManager.channel=v4.3 \
       --helm-set spec.aiManager.size=small \
       --helm-set spec.aiManager.pakModules.aiopsFoundation.enabled=true \
       --helm-set spec.aiManager.pakModules.applicationManager.enabled=true \
@@ -795,7 +795,7 @@ argocd app create eventmanager-app \
       --project default \
       --repo https://github.com/IBM/cp4waiops-gitops.git \
       --path config/cp4waiops/install-emgr \
-      --revision release-4.2 \
+      --revision release-4.3 \
       --dest-namespace noi \
       --dest-server https://kubernetes.default.svc \
       --helm-set spec.imageCatalog=icr.io/cpopen/ibm-operator-catalog:latest \

@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents** *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Deploy IBM Cloud Pak for AIOps 4.3 using GitOps](#deploy-ibm-cloud-pak-for-aiops-42-using-gitops)
+- [Deploy IBM Cloud Pak for AIOps 4.3 using GitOps](#deploy-ibm-cloud-pak-for-aiops-43-using-gitops)
   - [Prerequisites](#prerequisites)
   - [Installing Cloud Pak for AIOps with the Argo CD UI](#installing-cloud-pak-for-aiops-with-the-argo-cd-ui)
     - [Log in to Argo CD](#log-in-to-argo-cd)

@@ -729,14 +729,16 @@ Obtain your IBM Entitled Registry key to enable your deployment to pull images f
 
 ### Update the OpenShift Container Platform global pull secret (CLI)
 
-Run the following command to create the entitlement key pull secret:
+Run the following commands to add your IBM Entitlement Key to the OCP global pull secret:
 
-```
-oc create secret docker-registry ibm-entitlement-key \
-    --docker-username=cp \
-    --docker-password=<entitlement-key> \
-    --docker-server=cp.icr.io \
-    --namespace=cp4waiops
+```sh
+TEMP_DIR=$(mktemp -d)
+oc get secret/pull-secret -n openshift-config --template='{{index .data ".dockerconfigjson" | base64decode}}' > "${TEMP_DIR}/.dockerconfigjson"
+oc registry login --registry="cp.icr.io" \
+  --auth-basic="cp:${IBM_ENTITLEMENT_KEY}" \
+  --to="${TEMP_DIR}/.dockerconfigjson"
+oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson="${TEMP_DIR}/.dockerconfigjson"
+rm -rf "${TEMP_DIR}"
 ```
 
 Where `<entitlement-key>` is the entitlement key that you copied in the previous step.

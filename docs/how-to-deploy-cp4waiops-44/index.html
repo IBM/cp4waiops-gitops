@@ -2160,12 +2160,14 @@ These parameters are invisible when you create the Argo CD App from the UI, but 
 podman<span class="w"> </span>login<span class="w"> </span>cp.icr.io<span class="w"> </span>--username<span class="w"> </span>cp<span class="w"> </span>--password<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">IBM_ENTITLEMENT_KEY</span><span class="p">:?</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
 <h3 id="update-the-openshift-container-platform-global-pull-secret-cli">Update the OpenShift Container Platform global pull secret (CLI)<a class="headerlink" href="#update-the-openshift-container-platform-global-pull-secret-cli" title="Permanent link">&para;</a></h3>
-<p>Run the following command to create the entitlement key pull secret:</p>
-<div class="highlight"><pre><span></span><code>oc create secret docker-registry ibm-entitlement-key \
-    --docker-username=cp \
-    --docker-password=&lt;entitlement-key&gt; \
-    --docker-server=cp.icr.io \
-    --namespace=cp4waiops
+<p>Run the following commands to add your IBM Entitlement Key to the OCP global pull secret:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">TEMP_DIR</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="w"> </span>-d<span class="k">)</span>
+oc<span class="w"> </span>get<span class="w"> </span>secret/pull-secret<span class="w"> </span>-n<span class="w"> </span>openshift-config<span class="w"> </span>--template<span class="o">=</span><span class="s1">&#39;{{index .data &quot;.dockerconfigjson&quot; | base64decode}}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TEMP_DIR</span><span class="si">}</span><span class="s2">/.dockerconfigjson&quot;</span>
+oc<span class="w"> </span>registry<span class="w"> </span>login<span class="w"> </span>--registry<span class="o">=</span><span class="s2">&quot;cp.icr.io&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--auth-basic<span class="o">=</span><span class="s2">&quot;cp:</span><span class="si">${</span><span class="nv">IBM_ENTITLEMENT_KEY</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--to<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TEMP_DIR</span><span class="si">}</span><span class="s2">/.dockerconfigjson&quot;</span>
+oc<span class="w"> </span><span class="nb">set</span><span class="w"> </span>data<span class="w"> </span>secret/pull-secret<span class="w"> </span>-n<span class="w"> </span>openshift-config<span class="w"> </span>--from-file<span class="o">=</span>.dockerconfigjson<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TEMP_DIR</span><span class="si">}</span><span class="s2">/.dockerconfigjson&quot;</span>
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">TEMP_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
 <p>Where <code>&lt;entitlement-key&gt;</code> is the entitlement key that you copied in the previous step.</p>
 <h3 id="installing-ibm-cloud-pak-for-aiops-and-ibm-netcool-operations-insight-separately-cli">Installing IBM Cloud Pak for AIOps and IBM Netcool Operations Insight separately (CLI)<a class="headerlink" href="#installing-ibm-cloud-pak-for-aiops-and-ibm-netcool-operations-insight-separately-cli" title="Permanent link">&para;</a></h3>

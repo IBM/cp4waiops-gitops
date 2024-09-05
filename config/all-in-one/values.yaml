@@ -60,7 +60,7 @@ rookceph:
 cp4waiops:
 
   # Specify the version of CP4WAIOps, e.g.: v3.2, v3.3.
-  version: v4.5
+  version: v4.6
 
   # The username of image registry used to pull CP4WAIOps images.
   #dockerUsername: cp
